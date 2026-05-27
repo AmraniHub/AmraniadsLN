@@ -120,14 +120,19 @@
       font-size:clamp(.92rem,1.8vw,1.1rem);
       color:var(--muted);margin-bottom:28px;max-width:460px;
     }
-    .trust-list{display:flex;flex-direction:column;gap:9px}
-    .trust-item{
-      font-size:.88rem;color:var(--light-green);
-      display:flex;align-items:center;gap:9px;
+    .drive-statement{
+      font-size:clamp(1.3rem,2.8vw,1.75rem);
+      font-weight:900;
+      color:var(--text);
+      background:rgba(37,211,102,.08);
+      border:1.5px solid rgba(37,211,102,.3);
+      border-radius:12px;
+      padding:16px 22px;
+      line-height:1.4;
     }
-    .trust-item::before{
-      content:'✓';color:var(--green);font-weight:900;font-size:.95rem;
-      flex-shrink:0;
+    .drive-statement span{
+      color:var(--gold);
+      font-size:1.1em;
     }
 
     /* ── FORM CARD ── */
@@ -306,12 +311,9 @@
       خدمات إعلانات ميتا، تحسين شوبيفاي، وبناء المواقع —
       مصممة خصيصاً لنماذج الدفع عند الاستلام في المغرب
     </p>
-    <ul class="trust-list" style="list-style:none">
-      <li class="trust-item">أكثر من 200 حملة إعلانية ناجحة</li>
-      <li class="trust-item">متوسط عائد على الإنفاق الإعلاني ×3</li>
-      <li class="trust-item">تحويل العملاء مباشرةً عبر واتساب</li>
-      <li class="trust-item">متخصصون في الدفع عند الاستلام بالمغرب</li>
-    </ul>
+    <div class="drive-statement">
+      🚀 ضاعف مبيعاتك <span>×100</span> — ابدأ اليوم
+    </div>
   </div>
 
   <!-- Right: form -->
