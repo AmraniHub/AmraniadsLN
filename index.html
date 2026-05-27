@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>AmraniAds — إعلانات تُحقق النتائج في المغرب</title>
+
+  <!-- ═══ META PIXEL ═══ replace PIXEL_ID with your real pixel ID -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1433989221062105');
+  fbq('track','PageView');
+  fbq('track','ViewContent',{
+    content_name:'AmraniAds Landing Page',
+    content_category:'Marketing Agency Morocco',
+    currency:'MAD'
+  });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1433989221062105&ev=PageView&noscript=1"/></noscript>
+
+  <!-- ═══ GOOGLE ANALYTICS 4 ═══ replace GA_ID with your measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-127KF5ZQCH',{send_page_view:true});
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --green:#25D366;
+      --dark-green:#075E54;
+      --light-green:#DCF8C6;
+      --gold:#FFD700;
+      --bg:#0a0a0a;
+      --surface:#111b21;
+      --surface2:#1a2a22;
+      --text:#f0f0f0;
+      --muted:#8a9e8a;
+      --radius:14px;
+    }
+
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'Cairo',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;width:100%;z-index:100;
+      background:rgba(7,94,84,0.93);
+      backdrop-filter:blur(14px);
+      padding:13px 32px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .logo{font-size:1.35rem;font-weight:900;color:var(--gold)}
+    .nav-cta{
+      background:var(--green);color:#000;
+      font-family:'Cairo',sans-serif;font-weight:700;font-size:.88rem;
+      border:none;border-radius:50px;padding:8px 22px;cursor:pointer;
+      text-decoration:none;transition:transform .15s,box-shadow .15s;
+    }
+    .nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(37,211,102,.4)}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      gap:48px;
+      padding:100px 64px 60px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(37,211,102,.12) 0%,transparent 70%),
+        var(--bg);
+    }
+    .hero::before,.hero::after{
+      content:'';position:absolute;border-radius:50%;pointer-events:none;
+      background:radial-gradient(circle,rgba(255,215,0,.07),transparent 70%);
+      animation:blob 7s ease-in-out infinite alternate;
+    }
+    .hero::before{width:500px;height:500px;top:-100px;right:-150px}
+    .hero::after{width:380px;height:380px;bottom:-80px;left:-100px;animation-delay:3.5s}
+    @keyframes blob{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.15) rotate(6deg)}}
+
+    .hero-text{flex:1.2;min-width:0}
+    .hero-form{flex:0.85;min-width:0}
+
+    .badge{
+      display:inline-block;
+      background:rgba(37,211,102,.14);border:1px solid var(--green);
+      color:var(--green);font-size:.77rem;font-weight:700;
+      padding:4px 16px;border-radius:50px;margin-bottom:20px;
+    }
+    .hero-text h1{
+      font-size:clamp(1.9rem,4.2vw,3.4rem);
+      font-weight:900;line-height:1.25;margin-bottom:16px;
+    }
+    .hero-text h1 .gr{color:var(--green)}
+    .hero-text h1 .gd{color:var(--gold)}
+    .hero-text > p{
+      font-size:clamp(.92rem,1.8vw,1.1rem);
+      color:var(--muted);margin-bottom:28px;max-width:460px;
+    }
+    .trust-list{display:flex;flex-direction:column;gap:9px}
+    .trust-item{
+      font-size:.88rem;color:var(--light-green);
+      display:flex;align-items:center;gap:9px;
+    }
+    .trust-item::before{
+      content:'✓';color:var(--green);font-weight:900;font-size:.95rem;
+      flex-shrink:0;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card{
+      background:var(--surface);
+      border:1.5px solid rgba(37,211,102,.28);
+      border-radius:20px;
+      padding:34px 30px;
+      box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(37,211,102,.07);
+      position:relative;
+    }
+    .form-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--green),var(--gold),var(--green));
+      border-radius:20px 20px 0 0;
+    }
+    .form-card-title{
+      font-size:1.2rem;font-weight:900;
+      text-align:center;margin-bottom:4px;
+    }
+    .form-card-title span{color:var(--green)}
+    .form-card-sub{
+      text-align:center;font-size:.8rem;color:var(--muted);
+      margin-bottom:22px;
+    }
+
+    .form-group{margin-bottom:15px}
+    .form-group label{
+      display:block;font-weight:700;font-size:.83rem;
+      margin-bottom:6px;color:var(--light-green);
+    }
+    .form-group input,
+    .form-group select{
+      width:100%;padding:13px 15px;
+      background:#0c1a15;border:1.5px solid rgba(37,211,102,.22);
+      border-radius:10px;color:var(--text);
+      font-family:'Cairo',sans-serif;
+      font-size:16px; /* 16px prevents iOS zoom */
+      outline:none;transition:border-color .2s,box-shadow .2s;
+      direction:rtl;
+      -webkit-appearance:none;
+    }
+    .form-group input::placeholder{color:#556655}
+    .form-group input:focus,
+    .form-group select:focus{
+      border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(37,211,102,.12);
+    }
+    .form-group select option{background:#111b21}
+
+    .submit-btn{
+      width:100%;padding:15px;
+      background:var(--green);color:#000;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;
+      border:none;border-radius:50px;cursor:pointer;
+      margin-top:6px;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      transition:transform .15s,box-shadow .15s,opacity .15s;
+    }
+    .submit-btn:hover:not(:disabled){
+      transform:translateY(-2px);
+      box-shadow:0 8px 28px rgba(37,211,102,.4);
+    }
+    .submit-btn:active:not(:disabled){transform:scale(.98)}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+
+    .success-toast{
+      display:none;
+      background:rgba(37,211,102,.12);border:1px solid var(--green);
+      color:var(--light-green);border-radius:10px;
+      padding:11px 14px;text-align:center;font-size:.87rem;
+      margin-top:12px;
+    }
+    .success-toast.show{display:block}
+
+    /* ── VISUALS STRIP ── */
+    .visuals{
+      display:flex;gap:14px;flex-wrap:wrap;
+      justify-content:center;padding:20px 24px 48px;
+    }
+    .vis-card{
+      background:var(--surface2);border:1px solid rgba(37,211,102,.16);
+      border-radius:var(--radius);padding:26px 18px;
+      text-align:center;min-width:148px;max-width:188px;flex:1;
+      transition:transform .2s,border-color .2s;
+    }
+    .vis-card:hover{transform:translateY(-4px);border-color:var(--green)}
+    .vis-icon{font-size:2.4rem;margin-bottom:8px}
+    .vis-card strong{font-size:.88rem}
+    .vis-card p{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+    /* ── SECTION ── */
+    .section{padding:80px 24px;max-width:960px;margin:0 auto}
+    .section-title{text-align:center;margin-bottom:48px}
+    .section-title h2{
+      font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;margin-bottom:10px;
+    }
+    .section-title h2 span{color:var(--green)}
+    .section-title p{color:var(--muted);font-size:.95rem}
+
+    /* ── STATS ── */
+    .stats-row{
+      display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
+      padding:56px 24px;
+      background:linear-gradient(135deg,var(--dark-green),#0d1f1a);
+    }
+    .stat{text-align:center;flex:1;min-width:130px}
+    .stat-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
+    .stat-label{color:var(--light-green);font-size:.83rem;margin-top:4px}
+
+    /* ── SERVICES ── */
+    .services-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+    }
+    .service-card{
+      background:var(--surface);border:1px solid rgba(37,211,102,.14);
+      border-radius:var(--radius);padding:28px 22px;
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+    }
+    .service-card:hover{
+      transform:translateY(-5px);border-color:var(--green);
+      box-shadow:0 8px 28px rgba(37,211,102,.15);
+    }
+    .service-icon{font-size:2.1rem;margin-bottom:12px}
+    .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+    .service-card p{color:var(--muted);font-size:.86rem}
+
+    /* ── FOOTER ── */
+    footer{
+      text-align:center;padding:32px 24px;
+      color:var(--muted);font-size:.84rem;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    footer span{color:var(--green)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      .hero{
+        flex-direction:column;
+        padding:88px 20px 40px;
+        gap:28px;
+        text-align:center;
+      }
+      .hero-text>p{margin-left:auto;margin-right:auto}
+      .trust-list{align-items:center}
+      .hero-form{width:100%}
+      nav{padding:12px 18px}
+    }
+    @media(max-width:480px){
+      .form-card{padding:24px 16px}
+      .hero-text h1{font-size:1.85rem}
+      .logo{font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">AmraniAds ✦</span>
+  <a href="#leadForm" class="nav-cta">ابدأ الآن →</a>
+</nav>
+
+<!-- ═══ HERO + FORM ═══ -->
+<section class="hero" id="hero">
+
+  <!-- Left: text -->
+  <div class="hero-text">
+    <div class="badge">🇲🇦 خصيصاً للمتاجر الإلكترونية في المغرب</div>
+    <h1>
+      إعلانات تُحقق المبيعات،<br/>
+      <span class="gr">نتائج تظهر</span> في <span class="gd">حسابك</span>
+    </h1>
+    <p>
+      خدمات إعلانات ميتا، تحسين شوبيفاي، وبناء المواقع —
+      مصممة خصيصاً لنماذج الدفع عند الاستلام في المغرب
+    </p>
+    <ul class="trust-list" style="list-style:none">
+      <li class="trust-item">أكثر من 200 حملة إعلانية ناجحة</li>
+      <li class="trust-item">متوسط عائد على الإنفاق الإعلاني ×3</li>
+      <li class="trust-item">تحويل العملاء مباشرةً عبر واتساب</li>
+      <li class="trust-item">متخصصون في الدفع عند الاستلام بالمغرب</li>
+    </ul>
+  </div>
+
+  <!-- Right: form -->
+  <div class="hero-form">
+    <div class="form-card">
+      <div class="form-card-title">📩 أرسل <span>طلبك</span> الآن</div>
+      <div class="form-card-sub">استشارة مجانية — بدون أي التزام</div>
+
+      <form id="leadForm" novalidate>
+        <div class="form-group">
+          <label for="name">الاسم الكريم</label>
+          <input
+            type="text" id="name"
+            placeholder="محمد، عبدالله، ..."
+            required autocomplete="name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">رقم واتساب</label>
+          <input
+            type="tel" id="phone"
+            placeholder="06XXXXXXXX"
+            required autocomplete="tel"
+          />
+        </div>
+        <div class="form-group">
+          <label for="service">الخدمة المطلوبة</label>
+          <select id="service" required>
+            <option value="" disabled selected>— اختر الخدمة —</option>
+            <option value="إعلانات ميتا (Meta Ads)">🎯 إعلانات ميتا (Meta Ads)</option>
+            <option value="تحسين شوبيفاي (Shopify)">🛍️ تحسين شوبيفاي (Shopify)</option>
+            <option value="بناء الموقع الإلكتروني">🌐 بناء الموقع الإلكتروني</option>
+            <option value="الباقة الكاملة">✨ الباقة الكاملة (كل الخدمات)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span id="btnText">إرسال عبر واتساب</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.534 5.856L.057 23.571a.75.75 0 0 0 .92.92l5.715-1.477A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.002-1.373l-.36-.213-3.727.977.993-3.635-.235-.375A9.818 9.818 0 1 1 12 21.818z"/>
+          </svg>
+        </button>
+
+        <div class="success-toast" id="successToast">
+          ✅ تم الإرسال بنجاح! ستفتح نافذة واتساب الآن...
+        </div>
+      </form>
+    </div>
+  </div>
+
+</section>
+
+<!-- VISUAL CARDS -->
+<div class="visuals">
+  <div class="vis-card">
+    <div class="vis-icon">💵</div>
+    <strong>عائد حقيقي بالدرهم</strong>
+    <p>عائد على الاستثمار واضح على كل درهم تُنفقه</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">📦</div>
+    <strong>الدفع عند الاستلام</strong>
+    <p>طلبيات للتسليم إلى باب العميل في أنحاء المغرب</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">💬</div>
+    <strong>عملاء عبر واتساب</strong>
+    <p>يصلك العميل مباشرةً عبر واتساب دون وسيط</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">📈</div>
+    <strong>نمو متسارع وحقيقي</strong>
+    <p>من أول طلبية إلى مئات الطلبيات شهرياً</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-num">+200</div>
+    <div class="stat-label">حملة إعلانية ناجحة</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3×</div>
+    <div class="stat-label">متوسط العائد على الإنفاق الإعلاني</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">تركيز على السوق المغربي</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">COD</div>
+    <div class="stat-label">متخصصون في نموذج الدفع عند الاستلام</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="section-title">
+    <h2>ما الذي <span>نقدمه</span> لك</h2>
+    <p>كل خدمة مصممة خصيصاً للتاجر الإلكتروني المغربي العامل بنظام الدفع عند الاستلام</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3>Meta Ads</h3>
+      <p>حملات إعلانية مستهدفة على فيسبوك وإنستغرام — تجلب عملاء عبر واتساب، لا نقرات فارغة</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <h3>Shopify Optimization</h3>
+      <p>تحسين شامل للمتجر لتحويل كل زائر إلى طلبية — سرعة التحميل، تجربة المستخدم، ومعدل التحويل</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>بناء المواقع</h3>
+      <p>صفحات هبوط سريعة ومصممة للتحويل — مع زر واتساب مباشر لإتمام الطلبية</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>AmraniAds</span> — تطوان، المغرب 🇲🇦</p>
+  <p style="margin-top:6px;font-size:.77rem">متخصصون في التجارة الإلكترونية المغربية — Meta Ads · Shopify · Web</p>
+</footer>
+
+<script>
+  // ══════════════════════════════════════════════
+  // CONFIG — update these 3 values
+  // ══════════════════════════════════════════════
+  const WA_NUMBER  = '212627716149';        // your WhatsApp: 212XXXXXXXXX
+  const SHEETS_URL = 'REPLACE_SHEETS_URL';  // Google Apps Script web-app URL
+  const CAPI_ON    = true;                  // flip to false to disable CAPI
+
+  // ── FORM SUBMIT ──────────────────────────────
+  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    if (!name || !phone || !service) return;
+
+    const btn     = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    btn.disabled  = true;
+    btnText.textContent = 'جارٍ الإرسال...';
+
+    // Unique ID shared by browser pixel + CAPI for deduplication
+    const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+
+    // 1 ── Meta Pixel (browser)
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', {
+        content_name:     service,
+        content_category: 'AmraniAds Morocco',
+        currency:         'MAD',
+        value:            0
+      }, { eventID: eventId });
+    }
+
+    // 2 ── Google Analytics 4
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'generate_lead', {
+        event_category: 'form_submission',
+        event_label:    service,
+        currency:       'MAD',
+        value:          0
+      });
+    }
+
+    // 3 ── Meta CAPI via Netlify function (server-side, bypasses ad blockers)
+    if (CAPI_ON) {
+      fetch('/api/meta-capi', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, phone, service, eventId,
+          userAgent:       navigator.userAgent,
+          eventSourceUrl:  location.href
+        })
+      }).catch(() => {/* silent — pixel already fired */});
+    }
+
+    // 4 ── Google Sheets via Apps Script
+    if (SHEETS_URL !== 'REPLACE_SHEETS_URL') {
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode:   'no-cors',   // Apps Script allows simple cross-origin POSTs
+        body:   JSON.stringify({
+          timestamp: new Date().toISOString(),
+          name, phone, service
+        })
+      }).catch(() => {});
+    }
+
+    // 5 ── Open WhatsApp
+    const msg = encodeURIComponent(
+      `السلام عليكم، اسمي ${name} 👋\n` +
+      `رقمي: ${phone}\n` +
+      `أرغب في الاستفسار عن: ${service}\n\n` +
+      `زرت موقع AmraniAds وأودّ معرفة المزيد 🚀`
+    );
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+
+    document.getElementById('successToast').classList.add('show');
+    btn.disabled = false;
+    btnText.textContent = 'إرسال عبر واتساب';
+  });
+</script>
+
+</body>
+</html>
