@@ -68,9 +68,9 @@ module.exports = async function handler(req, res) {
     });
 
     const msg =
-      `🆕 *طلب جديد — AmraniAds 🇲🇦*\n\n` +
+      `🆕 <b>طلب جديد — AmraniAds 🇲🇦</b>\n\n` +
       `👤 الاسم: ${name}\n` +
-      `📱 الواتساب: \`${phone}\`\n` +
+      `📱 الواتساب: <code>${phone}</code>\n` +
       `🎯 الخدمة: ${service}\n` +
       `🕐 ${now}`;
 
@@ -78,7 +78,7 @@ module.exports = async function handler(req, res) {
       const r = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: 'Markdown' })
+        body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: 'HTML' })
       });
       results.telegram = await r.json();
     } catch (e) { results.telegram = { error: e.message }; }
