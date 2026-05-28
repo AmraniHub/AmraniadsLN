@@ -41,15 +41,15 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
     :root{
-      --green:#25D366;
+      --green:#22c55e;
       --dark-green:#075E54;
-      --light-green:#DCF8C6;
-      --gold:#FFD700;
-      --bg:#0a0a0a;
-      --surface:#111b21;
-      --surface2:#1a2a22;
-      --text:#f0f0f0;
-      --muted:#8a9e8a;
+      --light-green:#dcfce7;
+      --gold:#d97706;
+      --bg:#f5f9f7;
+      --surface:#ffffff;
+      --surface2:#eef4f1;
+      --text:#0d1f1a;
+      --muted:#4a6555;
       --radius:14px;
     }
 
@@ -92,12 +92,12 @@
       position:relative;
       overflow:hidden;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(37,211,102,.12) 0%,transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(34,197,94,.1) 0%,transparent 70%),
         var(--bg);
     }
     .hero::before,.hero::after{
       content:'';position:absolute;border-radius:50%;pointer-events:none;
-      background:radial-gradient(circle,rgba(255,215,0,.07),transparent 70%);
+      background:radial-gradient(circle,rgba(7,94,84,.06),transparent 70%);
       animation:blob 7s ease-in-out infinite alternate;
     }
     .hero::before{width:500px;height:500px;top:-100px;right:-150px}
@@ -109,8 +109,8 @@
 
     .badge{
       display:inline-block;
-      background:rgba(37,211,102,.14);border:1px solid var(--green);
-      color:var(--green);font-size:.77rem;font-weight:700;
+      background:rgba(34,197,94,.12);border:1px solid var(--green);
+      color:var(--dark-green);font-size:.77rem;font-weight:700;
       padding:4px 16px;border-radius:50px;margin-bottom:20px;
     }
     .hero-text h1{
@@ -126,9 +126,9 @@
     .drive-statement{
       font-size:clamp(1.3rem,2.8vw,1.75rem);
       font-weight:900;
-      color:var(--text);
-      background:rgba(37,211,102,.08);
-      border:1.5px solid rgba(37,211,102,.3);
+      color:var(--dark-green);
+      background:rgba(34,197,94,.08);
+      border:1.5px solid rgba(34,197,94,.25);
       border-radius:12px;
       padding:16px 22px;
       line-height:1.4;
@@ -141,16 +141,16 @@
     /* ── FORM CARD ── */
     .form-card{
       background:var(--surface);
-      border:1.5px solid rgba(37,211,102,.28);
+      border:1.5px solid rgba(7,94,84,.15);
       border-radius:20px;
       padding:34px 30px;
-      box-shadow:0 24px 64px rgba(0,0,0,.6),0 0 40px rgba(37,211,102,.07);
+      box-shadow:0 8px 40px rgba(7,94,84,.1),0 2px 8px rgba(0,0,0,.06);
       position:relative;
     }
     .form-card::before{
       content:'';
       position:absolute;top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--green),var(--gold),var(--green));
+      background:linear-gradient(90deg,var(--green),var(--dark-green),var(--green));
       border-radius:20px 20px 0 0;
     }
     .form-card-title{
@@ -166,12 +166,12 @@
     .form-group{margin-bottom:15px}
     .form-group label{
       display:block;font-weight:700;font-size:.83rem;
-      margin-bottom:6px;color:var(--light-green);
+      margin-bottom:6px;color:var(--dark-green);
     }
     .form-group input,
     .form-group select{
       width:100%;padding:13px 15px;
-      background:#0c1a15;border:1.5px solid rgba(37,211,102,.22);
+      background:#fff;border:1.5px solid rgba(7,94,84,.18);
       border-radius:10px;color:var(--text);
       font-family:'Cairo',sans-serif;
       font-size:16px; /* 16px prevents iOS zoom */
@@ -179,13 +179,13 @@
       direction:rtl;
       -webkit-appearance:none;
     }
-    .form-group input::placeholder{color:#556655}
+    .form-group input::placeholder{color:#9ab8a8}
     .form-group input:focus,
     .form-group select:focus{
       border-color:var(--green);
-      box-shadow:0 0 0 3px rgba(37,211,102,.12);
+      box-shadow:0 0 0 3px rgba(34,197,94,.12);
     }
-    .form-group select option{background:#111b21}
+    .form-group select option{background:#fff;color:var(--text)}
 
     .submit-btn{
       width:100%;padding:15px;
@@ -205,8 +205,8 @@
 
     .success-toast{
       display:none;
-      background:rgba(37,211,102,.12);border:1px solid var(--green);
-      color:var(--light-green);border-radius:10px;
+      background:rgba(34,197,94,.1);border:1px solid var(--green);
+      color:var(--dark-green);border-radius:10px;
       padding:11px 14px;text-align:center;font-size:.87rem;
       margin-top:12px;
     }
@@ -218,12 +218,13 @@
       justify-content:center;padding:20px 24px 48px;
     }
     .vis-card{
-      background:var(--surface2);border:1px solid rgba(37,211,102,.16);
+      background:var(--surface);border:1px solid rgba(7,94,84,.12);
       border-radius:var(--radius);padding:26px 18px;
       text-align:center;min-width:148px;max-width:188px;flex:1;
-      transition:transform .2s,border-color .2s;
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
     }
-    .vis-card:hover{transform:translateY(-4px);border-color:var(--green)}
+    .vis-card:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 6px 24px rgba(34,197,94,.15)}
     .vis-icon{font-size:2.4rem;margin-bottom:8px}
     .vis-card strong{font-size:.88rem}
     .vis-card p{font-size:.78rem;color:var(--muted);margin-top:4px}
@@ -252,13 +253,14 @@
       display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
     }
     .service-card{
-      background:var(--surface);border:1px solid rgba(37,211,102,.14);
+      background:var(--surface);border:1px solid rgba(7,94,84,.1);
       border-radius:var(--radius);padding:28px 22px;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
       transition:transform .2s,border-color .2s,box-shadow .2s;
     }
     .service-card:hover{
       transform:translateY(-5px);border-color:var(--green);
-      box-shadow:0 8px 28px rgba(37,211,102,.15);
+      box-shadow:0 8px 28px rgba(34,197,94,.18);
     }
     .service-icon{font-size:2.1rem;margin-bottom:12px}
     .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
@@ -269,8 +271,8 @@
       margin-top:18px;display:flex;flex-direction:column;gap:12px;
     }
     .review-item{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(37,211,102,.15);
+      background:var(--surface2);
+      border:1px solid rgba(7,94,84,.1);
       border-radius:14px;
       padding:13px 14px;
       display:flex;align-items:flex-start;gap:12px;
@@ -284,7 +286,7 @@
     .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
     .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
     .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
-    .review-label{font-size:.72rem;color:rgba(37,211,102,.6);margin-top:4px}
+    .review-label{font-size:.72rem;color:var(--dark-green);opacity:.7;margin-top:4px}
 
     /* ── FLOATING WHATSAPP ── */
     .wa-float{
@@ -303,9 +305,10 @@
     footer{
       text-align:center;padding:32px 24px;
       color:var(--muted);font-size:.84rem;
-      border-top:1px solid rgba(255,255,255,.06);
+      border-top:1px solid rgba(7,94,84,.1);
+      background:var(--surface2);
     }
-    footer span{color:var(--green)}
+    footer span{color:var(--dark-green)}
 
     /* ── RESPONSIVE ── */
     @media(max-width:860px){
