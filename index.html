@@ -264,6 +264,28 @@
     .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
     .service-card p{color:var(--muted);font-size:.86rem}
 
+    /* ── REVIEWS ── */
+    .reviews-mini{
+      margin-top:18px;display:flex;flex-direction:column;gap:12px;
+    }
+    .review-item{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(37,211,102,.15);
+      border-radius:14px;
+      padding:13px 14px;
+      display:flex;align-items:flex-start;gap:12px;
+    }
+    .review-avatar{
+      width:46px;height:46px;border-radius:50%;
+      object-fit:cover;flex-shrink:0;
+      border:2px solid rgba(37,211,102,.35);
+    }
+    .review-body{flex:1;min-width:0}
+    .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
+    .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
+    .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
+    .review-label{font-size:.72rem;color:rgba(37,211,102,.6);margin-top:4px}
+
     /* ── FLOATING WHATSAPP ── */
     .wa-float{
       position:fixed;bottom:24px;left:24px;z-index:999;
@@ -378,6 +400,32 @@
           ✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.
         </div>
       </form>
+    </div>
+
+    <!-- Reviews -->
+    <div class="reviews-mini">
+      <div class="review-item">
+        <img class="review-avatar"
+             src="https://randomuser.me/api/portraits/women/44.jpg"
+             alt="سارة" loading="lazy"/>
+        <div class="review-body">
+          <div class="review-name">سارة المريني</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">شكران بزاف! كنت كنخسر فلوس على الإعلانات وماشي واصل ليا حتى حاجة. من بعد AmraniAds طلباتي تضاعفات 🔥</div>
+          <div class="review-label">متجر COD — تطوان</div>
+        </div>
+      </div>
+      <div class="review-item">
+        <img class="review-avatar"
+             src="https://randomuser.me/api/portraits/women/26.jpg"
+             alt="نادية" loading="lazy"/>
+        <div class="review-body">
+          <div class="review-name">نادية الحسيني</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">والله خدمة فوق الكلام! هوما كيديرو كولشي من A لـ Z، أنا غير كنتبع النتائج. نصح بيهم بجوج يدين 💯</div>
+          <div class="review-label">Dropshipping — كازابلانكا</div>
+        </div>
+      </div>
     </div>
   </div>
 
