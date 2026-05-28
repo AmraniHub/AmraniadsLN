@@ -32,6 +32,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css"/>
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -270,6 +271,39 @@
     .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
     .service-card p{color:var(--muted);font-size:.86rem}
 
+    /* PHONE PICKER */
+    .iti{width:100%}
+    .iti__flag-container{left:0}
+    .iti input,.iti input[type=tel]{
+      width:100%;padding:13px 15px 13px 90px;
+      background:#fff;border:1.5px solid rgba(7,94,84,.18);
+      border-radius:10px;color:var(--text);
+      font-family:'Inter',sans-serif;font-size:16px;
+      outline:none;transition:border-color .2s,box-shadow .2s;
+    }
+    .iti input:focus{
+      border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(34,197,94,.12);
+    }
+    .iti__selected-flag{
+      background:transparent;border-radius:9px 0 0 9px;
+      padding:0 8px 0 12px;
+    }
+    .iti__selected-flag:hover,.iti__selected-flag:focus{background:rgba(7,94,84,.06)}
+    .iti__country-list{
+      border:1.5px solid rgba(7,94,84,.18);border-radius:10px;
+      box-shadow:0 8px 24px rgba(7,94,84,.12);
+      font-family:'Inter',sans-serif;font-size:.88rem;
+      max-height:240px;
+    }
+    .iti__country.iti__highlight,.iti__country:hover{background:var(--light-green)}
+    .iti__search-input{
+      font-family:'Inter',sans-serif;font-size:.88rem;
+      border-bottom:1px solid rgba(7,94,84,.12);
+      padding:8px 12px;width:100%;outline:none;
+    }
+    .iti__dial-code{color:var(--muted)}
+
     /* FOOTER */
     footer{
       text-align:center;padding:32px 24px;
@@ -344,7 +378,6 @@
           <label for="phone">WhatsApp Number</label>
           <input
             type="tel" id="phone"
-            placeholder="06XXXXXXXX"
             required autocomplete="tel"
           />
         </div>
@@ -477,12 +510,28 @@
   <p style="margin-top:6px;font-size:.77rem">Specialists in Moroccan e-commerce — Meta Ads · Shopify · Web</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
+  // Init country picker — auto-detect by IP, prefer Morocco
+  const phoneEl = document.getElementById('phone');
+  const iti = window.intlTelInput(phoneEl, {
+    initialCountry: 'auto',
+    preferredCountries: ['ma', 'us', 'gb', 'fr', 'ae', 'sa', 'ca', 'de', 'es'],
+    separateDialCode: true,
+    geoIpLookup: function(cb) {
+      fetch('https://ipapi.co/json')
+        .then(r => r.json())
+        .then(d => cb(d.country_code))
+        .catch(() => cb('MA'));
+    },
+    utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js'
+  });
+
   document.getElementById('leadForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const name    = document.getElementById('name').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
+    const phone   = iti.getNumber(); // full international number e.g. +12125551234
     const service = document.getElementById('service').value;
     if (!name || !phone || !service) return;
 
