@@ -16,12 +16,17 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const { name, phone, service, eventId, userAgent, eventSourceUrl } = req.body || {};
+  const { name, phone, service, eventId, pixelId: clientPixelId, userAgent, eventSourceUrl } = req.body || {};
   const results = {};
 
   // ── 1. Meta CAPI ──────────────────────────────────────
-  const pixelId     = process.env.META_PIXEL_ID;
-  const accessToken = process.env.META_ACCESS_TOKEN;
+  // Route to the correct pixel + token based on which page submitted the form
+  const pixelId = clientPixelId === process.env.META_PIXEL_ID_EN
+    ? process.env.META_PIXEL_ID_EN
+    : process.env.META_PIXEL_ID;
+  const accessToken = clientPixelId === process.env.META_PIXEL_ID_EN
+    ? process.env.META_ACCESS_TOKEN_EN
+    : process.env.META_ACCESS_TOKEN;
 
   if (pixelId && accessToken) {
     const parts    = String(name || '').trim().split(/\s+/);
@@ -67,8 +72,9 @@ module.exports = async function handler(req, res) {
       hour: '2-digit', minute: '2-digit'
     });
 
+    const lang = clientPixelId === process.env.META_PIXEL_ID_EN ? '🇬🇧 EN' : '🇲🇦 AR';
     const msg =
-      `🆕 <b>طلب جديد — AmraniAds 🇲🇦</b>\n\n` +
+      `🆕 <b>طلب جديد — AmraniAds ${lang}</b>\n\n` +
       `👤 الاسم: ${name}\n` +
       `📱 الواتساب: <code>${phone}</code>\n` +
       `🎯 الخدمة: ${service}\n` +
