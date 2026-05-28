@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark green background -->
+  <rect width="100" height="100" rx="18" fill="#075E54"/>
+
+  <!-- A shape -->
+  <polygon points="50,12 78,82 65,82 50,48 35,82 22,82" fill="#25D366"/>
+  <!-- Crossbar -->
+  <rect x="34" y="60" width="32" height="7" fill="#075E54"/>
+
+  <!-- Arrow shaft -->
+  <line x1="62" y1="52" x2="82" y2="14" stroke="#FFD700" stroke-width="7" stroke-linecap="round"/>
+  <!-- Arrow head -->
+  <polygon points="82,14 70,22 80,28" fill="#FFD700"/>
+
+  <!-- Small accent triangles -->
+  <polygon points="18,30 26,30 22,38" fill="#25D366" opacity="0.6"/>
+  <polygon points="10,44 16,44 13,50" fill="#25D366" opacity="0.4"/>
+</svg>
