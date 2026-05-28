@@ -90,17 +90,25 @@ module.exports = async function handler(req, res) {
     } catch (e) { results.telegram = { error: e.message }; }
   }
 
-  // ── 3. Google Sheets via Apps Script ─────────────────
-  const sheetsUrl = process.env.SHEETS_URL;
+  // ── 3. CRM — Google Sheets via shared Apps Script ────
+  const scriptUrl = process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
-  if (sheetsUrl) {
+  if (scriptUrl) {
+    const lang = clientPixelId === process.env.META_PIXEL_ID_EN ? 'EN' : 'AR';
+    const waRaw = normalizePhone(phone);
     try {
-      await fetch(sheetsUrl, {
+      await fetch(scriptUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          name, phone, service
+          action:   'addLead',
+          source:   'AmraniAds',
+          name:     name || '—',
+          phone:    phone || '—',
+          business: service || '—',
+          city:     lang === 'EN' ? 'International' : 'Maroc',
+          sector:   service || '—',
+          notes:    `Service: ${service || '—'} | Langue: ${lang}`,
         })
       });
       results.sheets = 'sent';
