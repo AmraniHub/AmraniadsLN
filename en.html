@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>AmraniAds — Ads That Drive Real Results in Morocco</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- META PIXEL -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1433989221062105');
+  fbq('track','PageView');
+  fbq('track','ViewContent',{content_name:'AmraniAds EN Landing Page',content_category:'Marketing Agency Morocco',currency:'MAD'});
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1433989221062105&ev=PageView&noscript=1"/></noscript>
+
+  <!-- GOOGLE ANALYTICS 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-127KF5ZQCH',{send_page_view:true});
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --green:#22c55e;
+      --dark-green:#075E54;
+      --light-green:#dcfce7;
+      --gold:#d97706;
+      --bg:#f5f9f7;
+      --surface:#ffffff;
+      --surface2:#eef4f1;
+      --text:#0d1f1a;
+      --muted:#4a6555;
+      --radius:14px;
+    }
+
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;width:100%;z-index:100;
+      background:rgba(7,94,84,0.95);
+      backdrop-filter:blur(14px);
+      padding:13px 32px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .logo{font-size:1.35rem;font-weight:900;letter-spacing:-.5px}
+    .logo-a{color:#fff}
+    .logo-b{color:var(--green)}
+    .nav-cta{
+      background:var(--green);color:#000;
+      font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;
+      border:none;border-radius:50px;padding:8px 22px;cursor:pointer;
+      text-decoration:none;transition:transform .15s,box-shadow .15s;
+    }
+    .nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(37,211,102,.4)}
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      gap:48px;
+      padding:100px 64px 60px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(34,197,94,.1) 0%,transparent 70%),
+        var(--bg);
+    }
+    .hero::before,.hero::after{
+      content:'';position:absolute;border-radius:50%;pointer-events:none;
+      background:radial-gradient(circle,rgba(7,94,84,.06),transparent 70%);
+      animation:blob 7s ease-in-out infinite alternate;
+    }
+    .hero::before{width:500px;height:500px;top:-100px;left:-150px}
+    .hero::after{width:380px;height:380px;bottom:-80px;right:-100px;animation-delay:3.5s}
+    @keyframes blob{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.15) rotate(6deg)}}
+
+    .hero-text{flex:1.2;min-width:0}
+    .hero-form{flex:0.85;min-width:0}
+
+    .badge{
+      display:inline-block;
+      background:rgba(34,197,94,.12);border:1px solid var(--green);
+      color:var(--dark-green);font-size:.77rem;font-weight:700;
+      padding:4px 16px;border-radius:50px;margin-bottom:20px;
+    }
+    .hero-text h1{
+      font-size:clamp(1.9rem,4.2vw,3.2rem);
+      font-weight:900;line-height:1.2;margin-bottom:16px;
+    }
+    .hero-text h1 .gr{color:var(--green)}
+    .hero-text h1 .gd{color:var(--gold)}
+    .hero-text > p{
+      font-size:clamp(.92rem,1.8vw,1.05rem);
+      color:var(--muted);margin-bottom:28px;max-width:460px;
+    }
+    .drive-statement{
+      font-size:clamp(1.2rem,2.5vw,1.6rem);
+      font-weight:900;
+      color:var(--dark-green);
+      background:rgba(34,197,94,.08);
+      border:1.5px solid rgba(34,197,94,.25);
+      border-radius:12px;
+      padding:16px 22px;
+      line-height:1.4;
+    }
+    .drive-statement span{color:var(--gold);font-size:1.1em}
+
+    /* FORM CARD */
+    .form-card{
+      background:var(--surface);
+      border:1.5px solid rgba(7,94,84,.15);
+      border-radius:20px;
+      padding:34px 30px;
+      box-shadow:0 8px 40px rgba(7,94,84,.1),0 2px 8px rgba(0,0,0,.06);
+      position:relative;
+    }
+    .form-card::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--green),var(--dark-green),var(--green));
+      border-radius:20px 20px 0 0;
+    }
+    .form-card-title{
+      font-size:1.2rem;font-weight:900;
+      text-align:center;margin-bottom:4px;
+    }
+    .form-card-title span{color:var(--green)}
+    .form-card-sub{
+      text-align:center;font-size:.8rem;color:var(--muted);
+      margin-bottom:22px;
+    }
+
+    .form-group{margin-bottom:15px}
+    .form-group label{
+      display:block;font-weight:700;font-size:.83rem;
+      margin-bottom:6px;color:var(--dark-green);
+    }
+    .form-group input,
+    .form-group select{
+      width:100%;padding:13px 15px;
+      background:#fff;border:1.5px solid rgba(7,94,84,.18);
+      border-radius:10px;color:var(--text);
+      font-family:'Inter',sans-serif;
+      font-size:16px;
+      outline:none;transition:border-color .2s,box-shadow .2s;
+      -webkit-appearance:none;
+    }
+    .form-group input::placeholder{color:#9ab8a8}
+    .form-group input:focus,
+    .form-group select:focus{
+      border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(34,197,94,.12);
+    }
+    .form-group select option{background:#fff;color:var(--text)}
+
+    .submit-btn{
+      width:100%;padding:15px;
+      background:var(--green);color:#000;
+      font-family:'Inter',sans-serif;font-weight:900;font-size:1rem;
+      border:none;border-radius:50px;cursor:pointer;
+      margin-top:6px;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      transition:transform .15s,box-shadow .15s,opacity .15s;
+    }
+    .submit-btn:hover:not(:disabled){
+      transform:translateY(-2px);
+      box-shadow:0 8px 28px rgba(34,197,94,.4);
+    }
+    .submit-btn:active:not(:disabled){transform:scale(.98)}
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+
+    .success-toast{
+      display:none;
+      background:rgba(34,197,94,.1);border:1px solid var(--green);
+      color:var(--dark-green);border-radius:10px;
+      padding:11px 14px;text-align:center;font-size:.87rem;
+      margin-top:12px;
+    }
+    .success-toast.show{display:block}
+
+    /* REVIEWS */
+    .reviews-mini{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+    .review-item{
+      background:var(--surface2);
+      border:1px solid rgba(7,94,84,.1);
+      border-radius:14px;padding:13px 14px;
+      display:flex;align-items:flex-start;gap:12px;
+    }
+    .review-avatar{
+      width:46px;height:46px;border-radius:50%;
+      object-fit:cover;flex-shrink:0;
+      border:2px solid rgba(34,197,94,.35);
+    }
+    .review-body{flex:1;min-width:0}
+    .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
+    .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
+    .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
+    .review-label{font-size:.72rem;color:var(--dark-green);opacity:.7;margin-top:4px}
+
+    /* VISUALS STRIP */
+    .visuals{
+      display:flex;gap:14px;flex-wrap:wrap;
+      justify-content:center;padding:20px 24px 48px;
+    }
+    .vis-card{
+      background:var(--surface);border:1px solid rgba(7,94,84,.12);
+      border-radius:var(--radius);padding:26px 18px;
+      text-align:center;min-width:148px;max-width:188px;flex:1;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+    }
+    .vis-card:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 6px 24px rgba(34,197,94,.15)}
+    .vis-icon{font-size:2.4rem;margin-bottom:8px}
+    .vis-card strong{font-size:.88rem}
+    .vis-card p{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+    /* STATS */
+    .stats-row{
+      display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
+      padding:56px 24px;
+      background:linear-gradient(135deg,var(--dark-green),#0d1f1a);
+    }
+    .stat{text-align:center;flex:1;min-width:130px}
+    .stat-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
+    .stat-label{color:var(--light-green);font-size:.83rem;margin-top:4px}
+
+    /* SECTION */
+    .section{padding:80px 24px;max-width:960px;margin:0 auto}
+    .section-title{text-align:center;margin-bottom:48px}
+    .section-title h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;margin-bottom:10px}
+    .section-title h2 span{color:var(--green)}
+    .section-title p{color:var(--muted);font-size:.95rem}
+
+    /* SERVICES */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+    .service-card{
+      background:var(--surface);border:1px solid rgba(7,94,84,.1);
+      border-radius:var(--radius);padding:28px 22px;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+    }
+    .service-card:hover{transform:translateY(-5px);border-color:var(--green);box-shadow:0 8px 28px rgba(34,197,94,.18)}
+    .service-icon{font-size:2.1rem;margin-bottom:12px}
+    .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+    .service-card p{color:var(--muted);font-size:.86rem}
+
+    /* FOOTER */
+    footer{
+      text-align:center;padding:32px 24px;
+      color:var(--muted);font-size:.84rem;
+      border-top:1px solid rgba(7,94,84,.1);
+      background:var(--surface2);
+    }
+    footer span{color:var(--dark-green)}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      .hero{
+        flex-direction:column;
+        padding:88px 20px 40px;
+        gap:28px;
+        text-align:center;
+      }
+      .hero-text>p{margin-left:auto;margin-right:auto}
+      .hero-form{width:100%}
+      nav{padding:12px 18px}
+    }
+    @media(max-width:480px){
+      .form-card{padding:24px 16px}
+      .hero-text h1{font-size:1.75rem}
+      .logo{font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo"><span class="logo-a">Amrani</span><span class="logo-b">Ads</span></span>
+  <a href="#leadForm" class="nav-cta">Start Now →</a>
+</nav>
+
+<!-- HERO + FORM -->
+<section class="hero" id="hero">
+
+  <!-- Text -->
+  <div class="hero-text">
+    <div class="badge">🇲🇦 Built for Moroccan E-commerce Stores</div>
+    <h1>
+      Ads That Drive Sales,<br/>
+      <span class="gr">Results That Show</span> in Your <span class="gd">Account</span>
+    </h1>
+    <p>
+      Meta Ads management, Shopify optimization, and website builds —
+      built specifically for Morocco's COD e-commerce market.
+    </p>
+    <div class="drive-statement">
+      🚀 Multiply Your Sales <span>×100</span> — Start Today
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="hero-form">
+    <div class="form-card">
+      <div class="form-card-title">📩 Send Your <span>Request</span> Now</div>
+      <div class="form-card-sub">Free consultation — no commitment</div>
+
+      <form id="leadForm" novalidate>
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input
+            type="text" id="name"
+            placeholder="Mohammed, Adam, ..."
+            required autocomplete="name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">WhatsApp Number</label>
+          <input
+            type="tel" id="phone"
+            placeholder="06XXXXXXXX"
+            required autocomplete="tel"
+          />
+        </div>
+        <div class="form-group">
+          <label for="service">Service Needed</label>
+          <select id="service" required>
+            <option value="" disabled selected>— Choose a service —</option>
+            <option value="Meta Ads Management">🎯 Meta Ads Management</option>
+            <option value="Shopify Optimization">🛍️ Shopify Optimization</option>
+            <option value="Website Build">🌐 Website Build</option>
+            <option value="Full Package">✨ Full Package (All Services)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span id="btnText">Send Request</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+
+        <div class="success-toast" id="successToast">
+          ✅ Request sent! We'll get back to you shortly.
+        </div>
+      </form>
+    </div>
+
+    <!-- Reviews -->
+    <div class="reviews-mini">
+      <div class="review-item">
+        <img class="review-avatar"
+             src="https://randomuser.me/api/portraits/women/44.jpg"
+             alt="Sara" loading="lazy"/>
+        <div class="review-body">
+          <div class="review-name">Sara El Marini</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Thank you so much! I was wasting money on ads and getting nothing. After AmraniAds, my orders doubled! 🔥</div>
+          <div class="review-label">COD Store — Tetouan</div>
+        </div>
+      </div>
+      <div class="review-item">
+        <img class="review-avatar"
+             src="https://randomuser.me/api/portraits/women/26.jpg"
+             alt="Nadia" loading="lazy"/>
+        <div class="review-body">
+          <div class="review-name">Nadia El Houssaini</div>
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">Incredible service! They handle everything from A to Z, I just track the results. Highly recommend! 💯</div>
+          <div class="review-label">Dropshipping — Casablanca</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- VISUAL CARDS -->
+<div class="visuals">
+  <div class="vis-card">
+    <div class="vis-icon">💵</div>
+    <strong>Real ROI in Dirhams</strong>
+    <p>Clear return on every dirham you spend on ads</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">📦</div>
+    <strong>Cash on Delivery</strong>
+    <p>Orders delivered to your customer's door across Morocco</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">💬</div>
+    <strong>WhatsApp Leads</strong>
+    <p>Customers reach you directly on WhatsApp — no middleman</p>
+  </div>
+  <div class="vis-card">
+    <div class="vis-icon">📈</div>
+    <strong>Real Growth</strong>
+    <p>From your first order to hundreds of orders per month</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat">
+    <div class="stat-num">+200</div>
+    <div class="stat-label">Successful campaigns</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3×</div>
+    <div class="stat-label">Average ad spend return</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Focused on the Moroccan market</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">COD</div>
+    <div class="stat-label">Specialists in cash-on-delivery</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="section-title">
+    <h2>What We <span>Offer</span></h2>
+    <p>Every service is built for Moroccan e-commerce stores running on cash-on-delivery</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3>Meta Ads</h3>
+      <p>Targeted campaigns on Facebook and Instagram — bringing customers directly to your WhatsApp, not empty clicks</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <h3>Shopify Optimization</h3>
+      <p>Full store optimization to convert every visitor into an order — speed, UX, and conversion rate</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Website Builds</h3>
+      <p>Fast landing pages built to convert — with a direct WhatsApp button to close every order</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>AmraniAds</span> — Tetouan, Morocco 🇲🇦</p>
+  <p style="margin-top:6px;font-size:.77rem">Specialists in Moroccan e-commerce — Meta Ads · Shopify · Web</p>
+</footer>
+
+<script>
+  document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    if (!name || !phone || !service) return;
+
+    const btn     = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    btn.disabled  = true;
+    btnText.textContent = 'Sending...';
+
+    const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', {
+        content_name: service, content_category: 'AmraniAds Morocco EN', currency: 'MAD', value: 0
+      }, { eventID: eventId });
+    }
+
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'generate_lead', { event_category: 'form_submission', event_label: service, currency: 'MAD', value: 0 });
+    }
+
+    try {
+      await fetch('/api/submit', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, service, eventId, userAgent: navigator.userAgent, eventSourceUrl: location.href })
+      });
+    } catch (_) {}
+
+    window.location.href = '/en-success.html';
+  });
+</script>
+
+</body>
+</html>
