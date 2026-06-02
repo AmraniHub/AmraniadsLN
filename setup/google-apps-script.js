@@ -1,10 +1,11 @@
 // ─────────────────────────────────────────────────────────────
 //  AmraniAds — Google Apps Script
 //  Paste full content into: script.google.com → Code.gs
-//  Columns: # | الاسم | رقم الواتساب | رابط واتساب | الخدمة المطلوبة | الحالة | ملاحظات | تم الاتصال؟ | التاريخ
+//  Columns: # | Nom | WhatsApp | Lien WhatsApp | Service demandé | Statut | Notes | Contacté ? | Date
 // ─────────────────────────────────────────────────────────────
 
-var HEADERS = ['#', 'الاسم', 'رقم الواتساب', 'رابط واتساب', 'الخدمة المطلوبة', 'الحالة', 'ملاحظات', 'تم الاتصال؟', 'التاريخ'];
+var HEADERS = ['#', 'Nom', 'WhatsApp', 'Lien WhatsApp', 'Service demandé', 'Statut', 'Notes', 'Contacté ?', 'Date'];
+
 var COL_NUM       = 1;
 var COL_NAME      = 2;
 var COL_PHONE     = 3;
@@ -15,9 +16,8 @@ var COL_NOTES     = 7;
 var COL_CONTACTED = 8;
 var COL_DATE      = 9;
 
-// ── Dropdowns ─────────────────────────────────────────────────
-var STATUS_OPTIONS    = ['جديد', 'تم الاتصال', 'مهتم', 'غير متاح', 'مكرر', 'لم يرد'];
-var CONTACTED_OPTIONS = ['نعم', 'لا'];
+var STATUS_OPTIONS    = ['Nouveau', 'Contacté', 'Intéressé', 'Non disponible', 'Ne répond pas', 'Doublon'];
+var CONTACTED_OPTIONS = ['Oui', 'Non'];
 
 // ── Normalize Moroccan phone → 212XXXXXXXXX ───────────────────
 function normalizePhone(raw) {
@@ -27,11 +27,11 @@ function normalizePhone(raw) {
   return p;
 }
 
-// ── Strip leading emoji/symbols from service name ─────────────
+// ── Strip leading emoji / symbols from service name ───────────
 function cleanService(s) {
   return String(s || '').trim()
-    .replace(/^[\uD800-\uDFFF]{2}[\s]*/g, '')  // surrogate pairs (emoji)
-    .replace(/^[^؀-ۿa-zA-Z0-9(]+/, '') // non-Arabic/Latin prefix
+    .replace(/^[\uD800-\uDFFF]{2}[\s]*/g, '')
+    .replace(/^[^؀-ۿa-zA-Z0-9(]+/, '')
     .trim();
 }
 
@@ -44,44 +44,43 @@ function doPost(e) {
   var phone   = normalizePhone(data.phone);
   var waLink  = phone ? 'https://wa.me/' + phone : '';
   var service = cleanService(data.service);
-  var rowNum  = Math.max(sheet.getLastRow(), 1); // sequential #
+  var rowNum  = Math.max(sheet.getLastRow(), 1);
   var dateStr = Utilities.formatDate(new Date(), 'Africa/Casablanca', 'dd/MM/yyyy');
 
-  // Append row
   sheet.appendRow([
     rowNum,
     data.name || '',
     phone,
     waLink,
     service,
-    'جديد',   // default status
-    '',        // notes — filled manually
-    'لا',      // contacted? — default لا
-    dateStr    // date auto-filled DD/MM/YYYY
+    'Nouveau',
+    '',
+    'Non',
+    dateStr
   ]);
 
   var newRow = sheet.getLastRow();
 
-  // WhatsApp clickable link
+  // Clickable WhatsApp link
   if (waLink) {
     var cell = sheet.getRange(newRow, COL_WALINK);
-    cell.setFormula('=HYPERLINK("' + waLink + '","واتساب 💬")');
+    cell.setFormula('=HYPERLINK("' + waLink + '","WhatsApp 💬")');
     cell.setFontColor('#075E54').setFontWeight('bold');
   }
 
-  // Dropdown: الحالة
-  var statusRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(STATUS_OPTIONS, true)
-    .setAllowInvalid(false)
-    .build();
-  sheet.getRange(newRow, COL_STATUS).setDataValidation(statusRule);
+  // Dropdown: Statut
+  sheet.getRange(newRow, COL_STATUS).setDataValidation(
+    SpreadsheetApp.newDataValidation()
+      .requireValueInList(STATUS_OPTIONS, true)
+      .setAllowInvalid(false).build()
+  );
 
-  // Dropdown: تم الاتصال؟
-  var contactRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(CONTACTED_OPTIONS, true)
-    .setAllowInvalid(false)
-    .build();
-  sheet.getRange(newRow, COL_CONTACTED).setDataValidation(contactRule);
+  // Dropdown: Contacté ?
+  sheet.getRange(newRow, COL_CONTACTED).setDataValidation(
+    SpreadsheetApp.newDataValidation()
+      .requireValueInList(CONTACTED_OPTIONS, true)
+      .setAllowInvalid(false).build()
+  );
 
   // Alternate row shading
   if (newRow % 2 === 0) {
@@ -100,8 +99,7 @@ function doGet() {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// ── setup(): run ONCE to build the table structure ────────────
-// Select "setup" in the dropdown → click ▶ Run
+// ── setup(): run ONCE to build the table — select "setup" → ▶ Run
 function setup() {
   var ss    = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Leads');
@@ -109,39 +107,40 @@ function setup() {
 
   sheet.clear();
   sheet.clearFormats();
+  sheet.setRightToLeft(false);
 
-  // Headers
   sheet.appendRow(HEADERS);
+
   var hr = sheet.getRange(1, 1, 1, HEADERS.length);
   hr.setFontWeight('bold')
     .setBackground('#075E54')
     .setFontColor('#ffffff')
     .setHorizontalAlignment('center')
     .setFontSize(11);
-  sheet.setFrozenRows(1);
-  sheet.setRightToLeft(true);
 
-  // Column widths
+  sheet.setFrozenRows(1);
+
   sheet.setColumnWidth(COL_NUM,       45);
   sheet.setColumnWidth(COL_NAME,     180);
   sheet.setColumnWidth(COL_PHONE,    150);
   sheet.setColumnWidth(COL_WALINK,   160);
   sheet.setColumnWidth(COL_SERVICE,  220);
-  sheet.setColumnWidth(COL_STATUS,   130);
+  sheet.setColumnWidth(COL_STATUS,   140);
   sheet.setColumnWidth(COL_NOTES,    260);
   sheet.setColumnWidth(COL_CONTACTED,110);
-  sheet.setColumnWidth(COL_DATE,     120);
+  sheet.setColumnWidth(COL_DATE,     110);
 
   // Pre-apply dropdowns to rows 2–500
-  var statusRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(STATUS_OPTIONS, true)
-    .setAllowInvalid(false).build();
-  sheet.getRange(2, COL_STATUS, 499, 1).setDataValidation(statusRule);
+  sheet.getRange(2, COL_STATUS, 499, 1).setDataValidation(
+    SpreadsheetApp.newDataValidation()
+      .requireValueInList(STATUS_OPTIONS, true)
+      .setAllowInvalid(false).build()
+  );
+  sheet.getRange(2, COL_CONTACTED, 499, 1).setDataValidation(
+    SpreadsheetApp.newDataValidation()
+      .requireValueInList(CONTACTED_OPTIONS, true)
+      .setAllowInvalid(false).build()
+  );
 
-  var contactRule = SpreadsheetApp.newDataValidation()
-    .requireValueInList(CONTACTED_OPTIONS, true)
-    .setAllowInvalid(false).build();
-  sheet.getRange(2, COL_CONTACTED, 499, 1).setDataValidation(contactRule);
-
-  SpreadsheetApp.getUi().alert('✅ الجدول جاهز! الآن اضغط Deploy → New Deployment');
+  SpreadsheetApp.getUi().alert('✅ Table prête ! Cliquez Deploy → New Deployment');
 }
