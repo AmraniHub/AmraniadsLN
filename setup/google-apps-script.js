@@ -1,91 +1,91 @@
 // ─────────────────────────────────────────────────────────────
 //  AmraniAds — Google Apps Script
-//  Paste this into: script.google.com → your project → Code.gs
+//  Paste full content into: script.google.com → Code.gs
 //  Columns: # | الاسم | رقم الواتساب | رابط واتساب | الخدمة المطلوبة | الحالة | ملاحظات | تم الاتصال؟ | التاريخ
 // ─────────────────────────────────────────────────────────────
 
+var HEADERS = ['#', 'الاسم', 'رقم الواتساب', 'رابط واتساب', 'الخدمة المطلوبة', 'الحالة', 'ملاحظات', 'تم الاتصال؟', 'التاريخ'];
+var COL_NUM       = 1;
+var COL_NAME      = 2;
+var COL_PHONE     = 3;
+var COL_WALINK    = 4;
+var COL_SERVICE   = 5;
+var COL_STATUS    = 6;
+var COL_NOTES     = 7;
+var COL_CONTACTED = 8;
+var COL_DATE      = 9;
+
+// ── Dropdowns ─────────────────────────────────────────────────
+var STATUS_OPTIONS    = ['جديد', 'تم الاتصال', 'مهتم', 'غير متاح', 'مكرر', 'لم يرد'];
+var CONTACTED_OPTIONS = ['نعم', 'لا'];
+
+// ── Normalize Moroccan phone → 212XXXXXXXXX ───────────────────
+function normalizePhone(raw) {
+  var p = String(raw || '').replace(/\D/g, '');
+  if (p.startsWith('0') && p.length === 10) p = '212' + p.slice(1);
+  else if (!p.startsWith('212') && p.length === 9) p = '212' + p;
+  return p;
+}
+
+// ── Strip leading emoji/symbols from service name ─────────────
+function cleanService(s) {
+  return String(s || '').trim()
+    .replace(/^[\uD800-\uDFFF]{2}[\s]*/g, '')  // surrogate pairs (emoji)
+    .replace(/^[^؀-ۿa-zA-Z0-9(]+/, '') // non-Arabic/Latin prefix
+    .trim();
+}
+
+// ── doPost: called by Vercel on every form submission ─────────
 function doPost(e) {
-  const ss    = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName('Leads') || ss.getActiveSheet();
+  var ss    = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Leads') || ss.getActiveSheet();
 
-  // ── Create headers on first run ──────────────────────────
-  if (sheet.getLastRow() === 0) {
-    const headers = [
-      '#',
-      'الاسم',
-      'رقم الواتساب',
-      'رابط واتساب',
-      'الخدمة المطلوبة',
-      'الحالة',
-      'ملاحظات',
-      'تم الاتصال؟',
-      'التاريخ'
-    ];
-    sheet.appendRow(headers);
+  var data    = JSON.parse(e.postData.contents);
+  var phone   = normalizePhone(data.phone);
+  var waLink  = phone ? 'https://wa.me/' + phone : '';
+  var service = cleanService(data.service);
+  var rowNum  = Math.max(sheet.getLastRow(), 1); // sequential #
+  var dateStr = Utilities.formatDate(new Date(), 'Africa/Casablanca', 'dd/MM/yyyy');
 
-    const hr = sheet.getRange(1, 1, 1, headers.length);
-    hr.setFontWeight('bold')
-      .setBackground('#075E54')
-      .setFontColor('#ffffff')
-      .setHorizontalAlignment('center')
-      .setFontFamily('Cairo');
-
-    sheet.setFrozenRows(1);
-    sheet.setRightToLeft(true);
-
-    // Column widths
-    sheet.setColumnWidth(1, 45);   // #
-    sheet.setColumnWidth(2, 180);  // الاسم
-    sheet.setColumnWidth(3, 150);  // رقم الواتساب
-    sheet.setColumnWidth(4, 220);  // رابط واتساب
-    sheet.setColumnWidth(5, 220);  // الخدمة المطلوبة
-    sheet.setColumnWidth(6, 130);  // الحالة
-    sheet.setColumnWidth(7, 250);  // ملاحظات
-    sheet.setColumnWidth(8, 110);  // تم الاتصال؟
-    sheet.setColumnWidth(9, 120);  // التاريخ
-  }
-
-  // ── Parse incoming data ───────────────────────────────────
-  const data = JSON.parse(e.postData.contents);
-
-  // Normalize phone → 212XXXXXXXXX
-  let phone = String(data.phone || '').replace(/\D/g, '');
-  if (phone.startsWith('0') && phone.length === 10) phone = '212' + phone.slice(1);
-  else if (!phone.startsWith('212') && phone.length === 9) phone = '212' + phone;
-
-  const waLink = phone ? 'https://wa.me/' + phone : '';
-
-  // Clean service name (strip any stray emoji prefix like "🎯 ")
-  const service = String(data.service || '').trim().replace(/^[^؀-ۿa-zA-Z0-9(]+/, '');
-
-  // Row number = data rows so far
-  const rowNum = Math.max(sheet.getLastRow(), 1);
-
-  // ── Append row ────────────────────────────────────────────
+  // Append row
   sheet.appendRow([
-    rowNum,           // #
-    data.name  || '', // الاسم
-    phone,            // رقم الواتساب
-    waLink,           // placeholder — replaced with hyperlink below
-    service,          // الخدمة المطلوبة
-    '',               // الحالة         — filled manually
-    '',               // ملاحظات        — filled manually
-    '',               // تم الاتصال؟   — filled manually
-    ''                // التاريخ        — filled manually when contacted
+    rowNum,
+    data.name || '',
+    phone,
+    waLink,
+    service,
+    'جديد',   // default status
+    '',        // notes — filled manually
+    'لا',      // contacted? — default لا
+    dateStr    // date auto-filled DD/MM/YYYY
   ]);
 
-  // ── Make WhatsApp link clickable ──────────────────────────
+  var newRow = sheet.getLastRow();
+
+  // WhatsApp clickable link
   if (waLink) {
-    const newRow = sheet.getLastRow();
-    const waCell = sheet.getRange(newRow, 4);
-    waCell.setFormula('=HYPERLINK("' + waLink + '","واتساب 💬")');
-    waCell.setFontColor('#075E54').setFontWeight('bold');
+    var cell = sheet.getRange(newRow, COL_WALINK);
+    cell.setFormula('=HYPERLINK("' + waLink + '","واتساب 💬")');
+    cell.setFontColor('#075E54').setFontWeight('bold');
   }
 
-  // Alternate row shading for readability
-  const newRow = sheet.getLastRow();
+  // Dropdown: الحالة
+  var statusRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(STATUS_OPTIONS, true)
+    .setAllowInvalid(false)
+    .build();
+  sheet.getRange(newRow, COL_STATUS).setDataValidation(statusRule);
+
+  // Dropdown: تم الاتصال؟
+  var contactRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(CONTACTED_OPTIONS, true)
+    .setAllowInvalid(false)
+    .build();
+  sheet.getRange(newRow, COL_CONTACTED).setDataValidation(contactRule);
+
+  // Alternate row shading
   if (newRow % 2 === 0) {
-    sheet.getRange(newRow, 1, 1, 9).setBackground('#f0faf4');
+    sheet.getRange(newRow, 1, 1, HEADERS.length).setBackground('#f0faf4');
   }
 
   return ContentService
@@ -93,8 +93,55 @@ function doPost(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+// ── doGet: health check ───────────────────────────────────────
 function doGet() {
   return ContentService
-    .createTextOutput(JSON.stringify({ status: 'active', service: 'AmraniAds Leads Sheet' }))
+    .createTextOutput(JSON.stringify({ status: 'active' }))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// ── setup(): run ONCE to build the table structure ────────────
+// Select "setup" in the dropdown → click ▶ Run
+function setup() {
+  var ss    = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Leads');
+  if (!sheet) sheet = ss.insertSheet('Leads');
+
+  sheet.clear();
+  sheet.clearFormats();
+
+  // Headers
+  sheet.appendRow(HEADERS);
+  var hr = sheet.getRange(1, 1, 1, HEADERS.length);
+  hr.setFontWeight('bold')
+    .setBackground('#075E54')
+    .setFontColor('#ffffff')
+    .setHorizontalAlignment('center')
+    .setFontSize(11);
+  sheet.setFrozenRows(1);
+  sheet.setRightToLeft(true);
+
+  // Column widths
+  sheet.setColumnWidth(COL_NUM,       45);
+  sheet.setColumnWidth(COL_NAME,     180);
+  sheet.setColumnWidth(COL_PHONE,    150);
+  sheet.setColumnWidth(COL_WALINK,   160);
+  sheet.setColumnWidth(COL_SERVICE,  220);
+  sheet.setColumnWidth(COL_STATUS,   130);
+  sheet.setColumnWidth(COL_NOTES,    260);
+  sheet.setColumnWidth(COL_CONTACTED,110);
+  sheet.setColumnWidth(COL_DATE,     120);
+
+  // Pre-apply dropdowns to rows 2–500
+  var statusRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(STATUS_OPTIONS, true)
+    .setAllowInvalid(false).build();
+  sheet.getRange(2, COL_STATUS, 499, 1).setDataValidation(statusRule);
+
+  var contactRule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(CONTACTED_OPTIONS, true)
+    .setAllowInvalid(false).build();
+  sheet.getRange(2, COL_CONTACTED, 499, 1).setDataValidation(contactRule);
+
+  SpreadsheetApp.getUi().alert('✅ الجدول جاهز! الآن اضغط Deploy → New Deployment');
 }
