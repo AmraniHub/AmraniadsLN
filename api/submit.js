@@ -94,21 +94,15 @@ module.exports = async function handler(req, res) {
   const scriptUrl = process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
   if (scriptUrl) {
-    const lang = clientPixelId === process.env.META_PIXEL_ID_EN ? 'EN' : 'AR';
-    const waRaw = normalizePhone(phone);
     try {
       await fetch(scriptUrl, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
-          action:   'addLead',
-          source:   'AmraniAds',
-          name:     name || '—',
-          phone:    phone || '—',
-          business: service || '—',
-          city:     lang === 'EN' ? 'International' : 'Maroc',
-          sector:   service || '—',
-          notes:    `Service: ${service || '—'} | Langue: ${lang}`,
+          timestamp: new Date().toISOString(),
+          name:      name    || '',
+          phone:     phone   || '',
+          service:   service || '',
         })
       });
       results.sheets = 'sent';
