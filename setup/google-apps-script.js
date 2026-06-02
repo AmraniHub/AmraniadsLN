@@ -45,7 +45,7 @@ function doPost(e) {
   var waLink  = phone ? 'https://wa.me/' + phone : '';
   var service = cleanService(data.service);
   var rowNum  = Math.max(sheet.getLastRow(), 1);
-  var dateStr = Utilities.formatDate(new Date(), 'Africa/Casablanca', 'dd/MM/yyyy');
+  var dateStr = Utilities.formatDate(new Date(), 'Africa/Casablanca', 'dd/MM/yyyy HH:mm');
 
   sheet.appendRow([
     rowNum,
@@ -128,7 +128,7 @@ function setup() {
   sheet.setColumnWidth(COL_STATUS,   140);
   sheet.setColumnWidth(COL_NOTES,    260);
   sheet.setColumnWidth(COL_CONTACTED,110);
-  sheet.setColumnWidth(COL_DATE,     110);
+  sheet.setColumnWidth(COL_DATE,     145);
 
   // Pre-apply dropdowns to rows 2–500
   sheet.getRange(2, COL_STATUS, 499, 1).setDataValidation(
