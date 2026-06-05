@@ -68,6 +68,8 @@ form.addEventListener('submit', (e) => {
   btnLoading.style.display = 'inline';
   btn.disabled = true;
 
+  if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: 'novatech-contact' });
+
   setTimeout(() => {
     btn.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
