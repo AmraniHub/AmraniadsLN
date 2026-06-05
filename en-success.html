@@ -12,7 +12,16 @@
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','1433989221062105');fbq('track','PageView');
+  fbq('init','1659781648561847');fbq('track','PageView');
+  </script>
+  <!-- Lead confirmation event (deduplication via eid URL param) -->
+  <script>
+    window.addEventListener('load', function() {
+      if (typeof fbq === 'undefined') return;
+      var eid = new URLSearchParams(window.location.search).get('eid');
+      var opts = eid ? { eventID: eid } : {};
+      fbq('track', 'Lead', { content_name: 'confirmation-en', currency: 'MAD', value: 0 }, opts);
+    });
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>

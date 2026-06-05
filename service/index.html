@@ -559,7 +559,7 @@
     } catch (_) {}
 
     // Redirect to success page
-    window.location.href = '/service/success.html';
+    window.location.href = '/service/success.html?eid=' + encodeURIComponent(eventId);
   });
 </script>
 
