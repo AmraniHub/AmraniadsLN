@@ -7,6 +7,15 @@
   <title>AmraniAds — نظام رقمي لصالونات التجميل | المغرب</title>
   <meta name="description" content="نبني لصالونك نظام رقمي كامل يجلب عملاء جدد كل يوم — صفحة هبوط + إعلانات + تتبع. تسليم في 24 ساعة." />
   <link rel="icon" href="/logo.png" type="image/png"/>
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1433989221062105');fbq('track','PageView');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
 
@@ -904,6 +913,9 @@
     btn.disabled = true;
     btn.textContent = '⏳ يتم الإرسال...';
 
+    const eventId = genEventId();
+    if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: 'salon-agency' }, { eventID: eventId });
+
     try {
       await fetch('https://amraniads.com/api/submit', {
         method: 'POST',
@@ -911,7 +923,7 @@
         body: JSON.stringify({
           name, phone,
           service: 'عميل وكالة — مدينة: ' + city,
-          eventId: genEventId(),
+          eventId,
           userAgent: navigator.userAgent,
           eventSourceUrl: location.href,
           lang: 'AR'
