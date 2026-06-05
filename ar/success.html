@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تم إرسال طلبك — AmraniAds</title>
+  <link rel="icon" href="/logo.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+
+  <!-- GA4 — track success page view -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-127KF5ZQCH');
+  </script>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#25D366;--dark-green:#075E54;--gold:#FFD700;
+      --bg:#0a0a0a;--surface:#111b21;--text:#f0f0f0;--muted:#8a9e8a;
+    }
+    body{
+      font-family:'Cairo',sans-serif;
+      background:var(--bg);color:var(--text);
+      min-height:100vh;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 0%,rgba(37,211,102,.13) 0%,transparent 70%),
+        var(--bg);
+    }
+
+    .card{
+      background:var(--surface);
+      border:1.5px solid rgba(37,211,102,.28);
+      border-radius:24px;
+      padding:52px 44px;
+      max-width:480px;width:100%;
+      text-align:center;
+      box-shadow:0 24px 64px rgba(0,0,0,.6);
+      position:relative;
+    }
+    .card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--green),var(--gold),var(--green));
+      border-radius:24px 24px 0 0;
+    }
+
+    .check{
+      width:80px;height:80px;
+      background:rgba(37,211,102,.12);
+      border:2px solid var(--green);
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 28px;
+      font-size:2.2rem;
+    }
+
+    h1{font-size:1.9rem;font-weight:900;margin-bottom:12px}
+    h1 span{color:var(--green)}
+
+    .sub{color:var(--muted);font-size:1rem;margin-bottom:36px;line-height:1.8}
+
+    .wa-btn{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      background:var(--green);color:#000;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:1.05rem;
+      padding:16px 32px;border-radius:50px;text-decoration:none;
+      box-shadow:0 8px 28px rgba(37,211,102,.35);
+      transition:transform .15s,box-shadow .15s;
+      margin-bottom:20px;
+    }
+    .wa-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(37,211,102,.5)}
+
+    .back{
+      color:var(--muted);font-size:.88rem;text-decoration:none;
+      display:inline-block;margin-top:4px;
+      transition:color .15s;
+    }
+    .back:hover{color:var(--green)}
+
+    @media(max-width:480px){
+      .card{padding:36px 20px}
+      h1{font-size:1.6rem}
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="check">✅</div>
+
+  <h1>تم إرسال <span>طلبك</span> بنجاح!</h1>
+
+  <p class="sub">
+    شكراً لك — سيتواصل معك فريق AmraniAds في أقرب وقت ممكن.
+  </p>
+
+  <a href="/" class="back">← العودة إلى الصفحة الرئيسية</a>
+</div>
+
+</body>
+</html>

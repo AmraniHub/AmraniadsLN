@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <title>AmraniAds — Custom Websites, Shopify Optimization & AI Chatbots</title>
+  <base href="/ar/" />
+  <title>AmraniAds — إعلانات تُحقق النتائج في المغرب</title>
   <link rel="icon" href="/logo.png" type="image/png"/>
 
-  <!-- META PIXEL -->
+  <!-- ═══ META PIXEL ═══ replace PIXEL_ID with your real pixel ID -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','1659781648561847');
+  fbq('init','1433989221062105');
   fbq('track','PageView');
-  fbq('track','ViewContent',{content_name:'AmraniAds EN Landing Page',content_category:'Marketing Agency Morocco',currency:'MAD'});
+  fbq('track','ViewContent',{
+    content_name:'AmraniAds Landing Page',
+    content_category:'Marketing Agency Morocco',
+    currency:'MAD'
+  });
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1433989221062105&ev=PageView&noscript=1"/></noscript>
 
-  <!-- GOOGLE ANALYTICS 4 -->
+  <!-- ═══ GOOGLE ANALYTICS 4 ═══ replace GA_ID with your measurement ID -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
   <script>
     window.dataLayer=window.dataLayer||[];
@@ -31,8 +36,7 @@
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
 
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -53,17 +57,17 @@
     html{scroll-behavior:smooth}
 
     body{
-      font-family:'Inter',sans-serif;
+      font-family:'Cairo',sans-serif;
       background:var(--bg);
       color:var(--text);
       line-height:1.7;
       overflow-x:hidden;
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav{
       position:fixed;top:0;width:100%;z-index:100;
-      background:rgba(7,94,84,0.95);
+      background:rgba(7,94,84,0.93);
       backdrop-filter:blur(14px);
       padding:13px 32px;
       display:flex;align-items:center;justify-content:space-between;
@@ -73,13 +77,13 @@
     .logo-b{color:var(--green)}
     .nav-cta{
       background:var(--green);color:#000;
-      font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;
+      font-family:'Cairo',sans-serif;font-weight:700;font-size:.88rem;
       border:none;border-radius:50px;padding:8px 22px;cursor:pointer;
       text-decoration:none;transition:transform .15s,box-shadow .15s;
     }
     .nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(37,211,102,.4)}
 
-    /* HERO */
+    /* ── HERO ── */
     .hero{
       min-height:100vh;
       display:flex;
@@ -97,8 +101,8 @@
       background:radial-gradient(circle,rgba(7,94,84,.06),transparent 70%);
       animation:blob 7s ease-in-out infinite alternate;
     }
-    .hero::before{width:500px;height:500px;top:-100px;left:-150px}
-    .hero::after{width:380px;height:380px;bottom:-80px;right:-100px;animation-delay:3.5s}
+    .hero::before{width:500px;height:500px;top:-100px;right:-150px}
+    .hero::after{width:380px;height:380px;bottom:-80px;left:-100px;animation-delay:3.5s}
     @keyframes blob{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.15) rotate(6deg)}}
 
     .hero-text{flex:1.2;min-width:0}
@@ -111,17 +115,17 @@
       padding:4px 16px;border-radius:50px;margin-bottom:20px;
     }
     .hero-text h1{
-      font-size:clamp(1.9rem,4.2vw,3.2rem);
-      font-weight:900;line-height:1.2;margin-bottom:16px;
+      font-size:clamp(1.9rem,4.2vw,3.4rem);
+      font-weight:900;line-height:1.25;margin-bottom:16px;
     }
     .hero-text h1 .gr{color:var(--green)}
     .hero-text h1 .gd{color:var(--gold)}
     .hero-text > p{
-      font-size:clamp(.92rem,1.8vw,1.05rem);
+      font-size:clamp(.92rem,1.8vw,1.1rem);
       color:var(--muted);margin-bottom:28px;max-width:460px;
     }
     .drive-statement{
-      font-size:clamp(1.2rem,2.5vw,1.6rem);
+      font-size:clamp(1.3rem,2.8vw,1.75rem);
       font-weight:900;
       color:var(--dark-green);
       background:rgba(34,197,94,.08);
@@ -130,9 +134,12 @@
       padding:16px 22px;
       line-height:1.4;
     }
-    .drive-statement span{color:var(--gold);font-size:1.1em}
+    .drive-statement span{
+      color:var(--gold);
+      font-size:1.1em;
+    }
 
-    /* FORM CARD */
+    /* ── FORM CARD ── */
     .form-card{
       background:var(--surface);
       border:1.5px solid rgba(7,94,84,.15);
@@ -167,9 +174,10 @@
       width:100%;padding:13px 15px;
       background:#fff;border:1.5px solid rgba(7,94,84,.18);
       border-radius:10px;color:var(--text);
-      font-family:'Inter',sans-serif;
-      font-size:16px;
+      font-family:'Cairo',sans-serif;
+      font-size:16px; /* 16px prevents iOS zoom */
       outline:none;transition:border-color .2s,box-shadow .2s;
+      direction:rtl;
       -webkit-appearance:none;
     }
     .form-group input::placeholder{color:#9ab8a8}
@@ -183,7 +191,7 @@
     .submit-btn{
       width:100%;padding:15px;
       background:var(--green);color:#000;
-      font-family:'Inter',sans-serif;font-weight:900;font-size:1rem;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;
       border:none;border-radius:50px;cursor:pointer;
       margin-top:6px;
       display:flex;align-items:center;justify-content:center;gap:8px;
@@ -191,7 +199,7 @@
     }
     .submit-btn:hover:not(:disabled){
       transform:translateY(-2px);
-      box-shadow:0 8px 28px rgba(34,197,94,.4);
+      box-shadow:0 8px 28px rgba(37,211,102,.4);
     }
     .submit-btn:active:not(:disabled){transform:scale(.98)}
     .submit-btn:disabled{opacity:.6;cursor:not-allowed}
@@ -205,26 +213,7 @@
     }
     .success-toast.show{display:block}
 
-    /* REVIEWS */
-    .reviews-mini{margin-top:18px;display:flex;flex-direction:column;gap:12px}
-    .review-item{
-      background:var(--surface2);
-      border:1px solid rgba(7,94,84,.1);
-      border-radius:14px;padding:13px 14px;
-      display:flex;align-items:flex-start;gap:12px;
-    }
-    .review-avatar{
-      width:46px;height:46px;border-radius:50%;
-      object-fit:cover;flex-shrink:0;
-      border:2px solid rgba(34,197,94,.35);
-    }
-    .review-body{flex:1;min-width:0}
-    .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
-    .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
-    .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
-    .review-label{font-size:.72rem;color:var(--dark-green);opacity:.7;margin-top:4px}
-
-    /* VISUALS STRIP */
+    /* ── VISUALS STRIP ── */
     .visuals{
       display:flex;gap:14px;flex-wrap:wrap;
       justify-content:center;padding:20px 24px 48px;
@@ -233,15 +222,24 @@
       background:var(--surface);border:1px solid rgba(7,94,84,.12);
       border-radius:var(--radius);padding:26px 18px;
       text-align:center;min-width:148px;max-width:188px;flex:1;
-      box-shadow:0 2px 12px rgba(7,94,84,.06);
       transition:transform .2s,border-color .2s,box-shadow .2s;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
     }
     .vis-card:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 6px 24px rgba(34,197,94,.15)}
     .vis-icon{font-size:2.4rem;margin-bottom:8px}
     .vis-card strong{font-size:.88rem}
     .vis-card p{font-size:.78rem;color:var(--muted);margin-top:4px}
 
-    /* STATS */
+    /* ── SECTION ── */
+    .section{padding:80px 24px;max-width:960px;margin:0 auto}
+    .section-title{text-align:center;margin-bottom:48px}
+    .section-title h2{
+      font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;margin-bottom:10px;
+    }
+    .section-title h2 span{color:var(--green)}
+    .section-title p{color:var(--muted);font-size:.95rem}
+
+    /* ── STATS ── */
     .stats-row{
       display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
       padding:56px 24px;
@@ -251,60 +249,61 @@
     .stat-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
     .stat-label{color:var(--light-green);font-size:.83rem;margin-top:4px}
 
-    /* SECTION */
-    .section{padding:80px 24px;max-width:960px;margin:0 auto}
-    .section-title{text-align:center;margin-bottom:48px}
-    .section-title h2{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;margin-bottom:10px}
-    .section-title h2 span{color:var(--green)}
-    .section-title p{color:var(--muted);font-size:.95rem}
-
-    /* SERVICES */
-    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+    /* ── SERVICES ── */
+    .services-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+    }
     .service-card{
       background:var(--surface);border:1px solid rgba(7,94,84,.1);
       border-radius:var(--radius);padding:28px 22px;
       box-shadow:0 2px 12px rgba(7,94,84,.06);
       transition:transform .2s,border-color .2s,box-shadow .2s;
     }
-    .service-card:hover{transform:translateY(-5px);border-color:var(--green);box-shadow:0 8px 28px rgba(34,197,94,.18)}
+    .service-card:hover{
+      transform:translateY(-5px);border-color:var(--green);
+      box-shadow:0 8px 28px rgba(34,197,94,.18);
+    }
     .service-icon{font-size:2.1rem;margin-bottom:12px}
     .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
     .service-card p{color:var(--muted);font-size:.86rem}
 
-    /* PHONE PICKER */
-    .iti{width:100%}
-    .iti__flag-container{left:0}
-    .iti input,.iti input[type=tel]{
-      width:100%;padding:13px 15px 13px 90px;
-      background:#fff;border:1.5px solid rgba(7,94,84,.18);
-      border-radius:10px;color:var(--text);
-      font-family:'Inter',sans-serif;font-size:16px;
-      outline:none;transition:border-color .2s,box-shadow .2s;
+    /* ── REVIEWS ── */
+    .reviews-mini{
+      margin-top:18px;display:flex;flex-direction:column;gap:12px;
     }
-    .iti input:focus{
-      border-color:var(--green);
-      box-shadow:0 0 0 3px rgba(34,197,94,.12);
+    .review-item{
+      background:var(--surface2);
+      border:1px solid rgba(7,94,84,.1);
+      border-radius:14px;
+      padding:13px 14px;
+      display:flex;align-items:flex-start;gap:12px;
     }
-    .iti__selected-flag{
-      background:transparent;border-radius:9px 0 0 9px;
-      padding:0 8px 0 12px;
+    .review-avatar{
+      width:46px;height:46px;border-radius:50%;
+      object-fit:cover;flex-shrink:0;
+      border:2px solid rgba(37,211,102,.35);
     }
-    .iti__selected-flag:hover,.iti__selected-flag:focus{background:rgba(7,94,84,.06)}
-    .iti__country-list{
-      border:1.5px solid rgba(7,94,84,.18);border-radius:10px;
-      box-shadow:0 8px 24px rgba(7,94,84,.12);
-      font-family:'Inter',sans-serif;font-size:.88rem;
-      max-height:240px;
-    }
-    .iti__country.iti__highlight,.iti__country:hover{background:var(--light-green)}
-    .iti__search-input{
-      font-family:'Inter',sans-serif;font-size:.88rem;
-      border-bottom:1px solid rgba(7,94,84,.12);
-      padding:8px 12px;width:100%;outline:none;
-    }
-    .iti__dial-code{color:var(--muted)}
+    .review-body{flex:1;min-width:0}
+    .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
+    .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
+    .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
+    .review-label{font-size:.72rem;color:var(--dark-green);opacity:.7;margin-top:4px}
 
-    /* FOOTER */
+    /* ── FLOATING WHATSAPP ── */
+    .wa-float{display:none !important}
+    .wa-float-show{
+      position:fixed;bottom:24px;left:24px;z-index:999;
+      background:var(--green);color:#000;
+      width:58px;height:58px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 24px rgba(37,211,102,.5);
+      text-decoration:none;
+      transition:transform .15s,box-shadow .15s;
+    }
+    .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,.65)}
+    .wa-float svg{width:30px;height:30px}
+
+    /* ── FOOTER ── */
     footer{
       text-align:center;padding:32px 24px;
       color:var(--muted);font-size:.84rem;
@@ -313,7 +312,7 @@
     }
     footer span{color:var(--dark-green)}
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media(max-width:860px){
       .hero{
         flex-direction:column;
@@ -322,12 +321,13 @@
         text-align:center;
       }
       .hero-text>p{margin-left:auto;margin-right:auto}
+      .trust-list{align-items:center}
       .hero-form{width:100%}
       nav{padding:12px 18px}
     }
     @media(max-width:480px){
       .form-card{padding:24px 16px}
-      .hero-text h1{font-size:1.75rem}
+      .hero-text h1{font-size:1.85rem}
       .logo{font-size:1.2rem}
     }
   </style>
@@ -337,63 +337,64 @@
 <!-- NAV -->
 <nav>
   <img src="/logo.png" alt="AmraniAds" style="height:36px;width:auto"/>
-  <a href="#leadForm" class="nav-cta">Start Now →</a>
+  <a href="#leadForm" class="nav-cta">ابدأ الآن →</a>
 </nav>
 
-<!-- HERO + FORM -->
+<!-- ═══ HERO + FORM ═══ -->
 <section class="hero" id="hero">
 
-  <!-- Text -->
+  <!-- Left: text -->
   <div class="hero-text">
-    <div class="badge">💻 Web Dev · Shopify · AI Chatbot</div>
+    <div class="badge">🇲🇦 خصيصاً للمتاجر الإلكترونية في المغرب</div>
     <h1>
-      Your Store Should Sell<br/>
-      <span class="gr">24/7</span> — Even While <span class="gd">You Sleep</span>
+      إعلانات تُحقق المبيعات،<br/>
+      <span class="gr">نتائج تظهر</span> في <span class="gd">حسابك</span>
     </h1>
     <p>
-      We build custom coded websites, optimize your Shopify store for maximum conversions,
-      and deploy AI chatbots that answer, qualify, and close customers around the clock.
+      خدمات إعلانات ميتا، تحسين شوبيفاي، وبناء المواقع —
+      مصممة خصيصاً لنماذج الدفع عند الاستلام في المغرب
     </p>
     <div class="drive-statement">
-      🤖 Launch Your AI-Powered Store — <span>Get a Free Audit</span>
+      🚀 ضاعف مبيعاتك <span>×100</span> — ابدأ اليوم
     </div>
   </div>
 
-  <!-- Form -->
+  <!-- Right: form -->
   <div class="hero-form">
     <div class="form-card">
-      <div class="form-card-title">📩 Get Your <span>Free</span> Store Audit</div>
-      <div class="form-card-sub">Delivered within 24 hours — no commitment</div>
+      <div class="form-card-title">📩 أرسل <span>طلبك</span> الآن</div>
+      <div class="form-card-sub">تسليم خلال 24 ساعة — بدون أي التزام</div>
 
       <form id="leadForm" novalidate>
         <div class="form-group">
-          <label for="name">Your Name</label>
+          <label for="name">الاسم الكريم</label>
           <input
             type="text" id="name"
-            placeholder="John, Mike, Sarah..."
+            placeholder="محمد، عبدالله، ..."
             required autocomplete="name"
           />
         </div>
         <div class="form-group">
-          <label for="phone">WhatsApp Number</label>
+          <label for="phone">رقم واتساب</label>
           <input
             type="tel" id="phone"
+            placeholder="06XXXXXXXX"
             required autocomplete="tel"
           />
         </div>
         <div class="form-group">
-          <label for="service">Service Needed</label>
+          <label for="service">الخدمة المطلوبة</label>
           <select id="service" required>
-            <option value="" disabled selected>— What do you need? —</option>
-            <option value="Custom Website Build">💻 Custom Website Build (coded)</option>
-            <option value="Shopify Optimization">🛍️ Shopify Store Optimization</option>
-            <option value="AI Chatbot Integration">🤖 AI Chatbot for my Store</option>
-            <option value="Full Package">✨ Full Package (Website + Shopify + AI)</option>
+            <option value="" disabled selected>— اختر الخدمة —</option>
+            <option value="إعلانات ميتا (Meta Ads)">🎯 إعلانات ميتا (Meta Ads)</option>
+            <option value="تحسين شوبيفاي (Shopify)">🛍️ تحسين شوبيفاي (Shopify)</option>
+            <option value="بناء الموقع الإلكتروني">🌐 بناء الموقع الإلكتروني</option>
+            <option value="الباقة الكاملة">✨ الباقة الكاملة (كل الخدمات)</option>
           </select>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">
-          <span id="btnText">Get My Free Audit</span>
+          <span id="btnText">إرسال الطلب</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="22" y1="2" x2="11" y2="13"/>
             <polygon points="22 2 15 22 11 13 2 9 22 2"/>
@@ -401,7 +402,7 @@
         </button>
 
         <div class="success-toast" id="successToast">
-          ✅ Request sent! We'll get back to you shortly.
+          ✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.
         </div>
       </form>
     </div>
@@ -411,23 +412,23 @@
       <div class="review-item">
         <img class="review-avatar"
              src="https://randomuser.me/api/portraits/women/44.jpg"
-             alt="Sara" loading="lazy"/>
+             alt="سارة" loading="lazy"/>
         <div class="review-body">
-          <div class="review-name">Sara El Marini</div>
+          <div class="review-name">سارة المريني</div>
           <div class="review-stars">★★★★★</div>
-          <div class="review-text">They rebuilt our Shopify store from scratch and added an AI chatbot — conversion rate jumped from 1.3% to 4.1% in 3 weeks. 🔥</div>
-          <div class="review-label">Fashion Brand — Paris, France</div>
+          <div class="review-text">شكران بزاف! كنت كنخسر فلوس على الإعلانات وماشي واصل ليا حتى حاجة. من بعد AmraniAds طلباتي تضاعفات 🔥</div>
+          <div class="review-label">متجر COD — تطوان</div>
         </div>
       </div>
       <div class="review-item">
         <img class="review-avatar"
              src="https://randomuser.me/api/portraits/women/26.jpg"
-             alt="Nadia" loading="lazy"/>
+             alt="نادية" loading="lazy"/>
         <div class="review-body">
-          <div class="review-name">Nadia El Houssaini</div>
+          <div class="review-name">نادية الحسيني</div>
           <div class="review-stars">★★★★★</div>
-          <div class="review-text">The AI chatbot alone recovered 40% of our cart abandonment. Custom coded site loads in under 1s. Best investment we've made. 💯</div>
-          <div class="review-label">E-commerce Store — London, UK</div>
+          <div class="review-text">والله خدمة فوق الكلام! هوما كيديرو كولشي من A لـ Z، أنا غير كنتبع النتائج. نصح بيهم بجوج يدين 💯</div>
+          <div class="review-label">Dropshipping — كازابلانكا</div>
         </div>
       </div>
     </div>
@@ -438,129 +439,127 @@
 <!-- VISUAL CARDS -->
 <div class="visuals">
   <div class="vis-card">
-    <div class="vis-icon">💻</div>
-    <strong>Custom Coded</strong>
-    <p>No templates — hand-built for speed, SEO, and conversion</p>
+    <div class="vis-icon">💵</div>
+    <strong>عائد حقيقي بالدرهم</strong>
+    <p>عائد على الاستثمار واضح على كل درهم تُنفقه</p>
   </div>
   <div class="vis-card">
-    <div class="vis-icon">🛍️</div>
-    <strong>Shopify CRO</strong>
-    <p>Checkout, speed & UX fixes that turn visitors into buyers</p>
+    <div class="vis-icon">📦</div>
+    <strong>الدفع عند الاستلام</strong>
+    <p>طلبيات للتسليم إلى باب العميل في أنحاء المغرب</p>
   </div>
   <div class="vis-card">
-    <div class="vis-icon">🤖</div>
-    <strong>AI Chatbot</strong>
-    <p>Qualifies leads and closes sales 24/7 — no human needed</p>
+    <div class="vis-icon">💬</div>
+    <strong>عملاء عبر واتساب</strong>
+    <p>يصلك العميل مباشرةً عبر واتساب دون وسيط</p>
   </div>
   <div class="vis-card">
-    <div class="vis-icon">⚡</div>
-    <strong>48h Launch</strong>
-    <p>From brief to live — fast delivery, zero bloated timelines</p>
+    <div class="vis-icon">📈</div>
+    <strong>نمو متسارع وحقيقي</strong>
+    <p>من أول طلبية إلى مئات الطلبيات شهرياً</p>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats-row">
   <div class="stat">
-    <div class="stat-num">+150</div>
-    <div class="stat-label">Websites & stores built</div>
+    <div class="stat-num">+200</div>
+    <div class="stat-label">حملة إعلانية ناجحة</div>
   </div>
   <div class="stat">
     <div class="stat-num">3×</div>
-    <div class="stat-label">Average conversion rate lift</div>
+    <div class="stat-label">متوسط العائد على الإنفاق الإعلاني</div>
   </div>
   <div class="stat">
-    <div class="stat-num">24/7</div>
-    <div class="stat-label">AI chatbot selling for you</div>
+    <div class="stat-num">100%</div>
+    <div class="stat-label">تركيز على السوق المغربي</div>
   </div>
   <div class="stat">
-    <div class="stat-num">48h</div>
-    <div class="stat-label">Average delivery time</div>
+    <div class="stat-num">COD</div>
+    <div class="stat-label">متخصصون في نموذج الدفع عند الاستلام</div>
   </div>
 </div>
 
 <!-- SERVICES -->
 <div class="section" id="services">
   <div class="section-title">
-    <h2>Three Services. <span>One Goal.</span></h2>
-    <p>More sales, less manual work — powered by clean code and AI</p>
+    <h2>ما الذي <span>نقدمه</span> لك</h2>
+    <p>كل خدمة مصممة خصيصاً للتاجر الإلكتروني المغربي العامل بنظام الدفع عند الاستلام</p>
   </div>
   <div class="services-grid">
     <div class="service-card">
-      <div class="service-icon">💻</div>
-      <h3>Custom Website Build</h3>
-      <p>Hand-coded, pixel-perfect websites built for speed and conversion — no WordPress bloat, no slow templates. SEO-ready and mobile-first from day one</p>
+      <div class="service-icon">🎯</div>
+      <h3>Meta Ads</h3>
+      <p>حملات إعلانية مستهدفة على فيسبوك وإنستغرام — تجلب عملاء عبر واتساب، لا نقرات فارغة</p>
     </div>
     <div class="service-card">
       <div class="service-icon">🛍️</div>
       <h3>Shopify Optimization</h3>
-      <p>Full CRO audit — speed improvements, checkout redesign, upsell flows, and app cleanup — squeezing more revenue from the traffic you already have</p>
+      <p>تحسين شامل للمتجر لتحويل كل زائر إلى طلبية — سرعة التحميل، تجربة المستخدم، ومعدل التحويل</p>
     </div>
     <div class="service-card">
-      <div class="service-icon">🤖</div>
-      <h3>AI Chatbot</h3>
-      <p>A custom AI assistant trained on your products and brand — answers questions, handles objections, recovers abandoned carts, and books calls. Works 24/7</p>
+      <div class="service-icon">🌐</div>
+      <h3>بناء المواقع</h3>
+      <p>صفحات هبوط سريعة ومصممة للتحويل — مع زر واتساب مباشر لإتمام الطلبية</p>
     </div>
   </div>
 </div>
 
+<!-- FLOATING WHATSAPP BUTTON -->
+<a class="wa-float"
+   href="https://wa.me/212627716149?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%2C%20%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20AmraniAds%20%F0%9F%9A%80"
+   target="_blank" aria-label="واتساب">
+  <svg viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.534 5.856L.057 23.571a.75.75 0 0 0 .92.92l5.715-1.477A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.002-1.373l-.36-.213-3.727.977.993-3.635-.235-.375A9.818 9.818 0 1 1 12 21.818z"/>
+  </svg>
+</a>
+
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 <span>AmraniAds</span> — Web Development & AI Agency</p>
-  <p style="margin-top:6px;font-size:.77rem">Custom Websites · Shopify Optimization · AI Chatbots</p>
+  <p>© 2025 <span>AmraniAds</span> — تطوان، المغرب 🇲🇦</p>
+  <p style="margin-top:6px;font-size:.77rem">متخصصون في التجارة الإلكترونية المغربية — Meta Ads · Shopify · Web</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
 <script>
-  // Init country picker — auto-detect by IP, prefer Morocco
-  const phoneEl = document.getElementById('phone');
-  const iti = window.intlTelInput(phoneEl, {
-    initialCountry: 'auto',
-    preferredCountries: ['ma', 'us', 'gb', 'fr', 'ae', 'sa', 'ca', 'de', 'es'],
-    separateDialCode: true,
-    geoIpLookup: function(cb) {
-      fetch('https://ipapi.co/json')
-        .then(r => r.json())
-        .then(d => cb(d.country_code))
-        .catch(() => cb('MA'));
-    },
-    utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js'
-  });
-
   document.getElementById('leadForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const name    = document.getElementById('name').value.trim();
-    const phone   = iti.getNumber(); // full international number e.g. +12125551234
+    const phone   = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     if (!name || !phone || !service) return;
 
     const btn     = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     btn.disabled  = true;
-    btnText.textContent = 'Booking...';
+    btnText.textContent = 'جارٍ الإرسال...';
 
     const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
 
+    // 1 ── Meta Pixel (browser-side)
     if (typeof fbq !== 'undefined') {
       fbq('track', 'Lead', {
-        content_name: service, content_category: 'AmraniAds Morocco EN', currency: 'MAD', value: 0
+        content_name: service, content_category: 'AmraniAds Morocco', currency: 'MAD', value: 0
       }, { eventID: eventId });
     }
 
+    // 2 ── Google Analytics 4
     if (typeof gtag !== 'undefined') {
       gtag('event', 'generate_lead', { event_category: 'form_submission', event_label: service, currency: 'MAD', value: 0 });
     }
 
+    // 3 ── Single server call: CAPI + Telegram + Sheets
     try {
       await fetch('/api/submit', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, service, eventId, pixelId: '1659781648561847', userAgent: navigator.userAgent, eventSourceUrl: location.href })
+        body: JSON.stringify({ name, phone, service, eventId, userAgent: navigator.userAgent, eventSourceUrl: location.href })
       });
     } catch (_) {}
 
-    window.location.href = '/en-success.html';
+    // Redirect to success page
+    window.location.href = '/ar/success.html';
   });
 </script>
 
