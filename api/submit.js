@@ -72,9 +72,16 @@ module.exports = async function handler(req, res) {
       hour: '2-digit', minute: '2-digit'
     });
 
-    const lang = clientPixelId === process.env.META_PIXEL_ID_EN ? '🇬🇧 EN' : '🇲🇦 AR';
+    // Detect source page from URL
+    const srcUrl  = String(eventSourceUrl || '');
+    const source  = srcUrl.includes('/salon')  ? '💅 Salon'
+                  : srcUrl.includes('/en')     ? '🇬🇧 EN'
+                  : srcUrl.includes('/novatech') ? '🖥️ NovaTech'
+                  : clientPixelId === process.env.META_PIXEL_ID_EN ? '🇬🇧 EN'
+                  : '🇲🇦 AmraniAds';
+
     const msg =
-      `🆕 <b>طلب جديد — AmraniAds ${lang}</b>\n\n` +
+      `🆕 <b>طلب جديد — ${source}</b>\n\n` +
       `👤 الاسم: ${name}\n` +
       `📱 الواتساب: <code>${phone}</code>\n` +
       `🎯 الخدمة: ${service}\n` +
