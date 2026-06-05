@@ -917,12 +917,12 @@
     if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: 'salon-agency' }, { eventID: eventId });
 
     try {
-      await fetch('https://amraniads.com/api/submit', {
+      await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name, phone,
-          service: 'عميل وكالة — مدينة: ' + city,
+          service: 'عميل وكالة صالون — مدينة: ' + city,
           eventId,
           userAgent: navigator.userAgent,
           eventSourceUrl: location.href,
