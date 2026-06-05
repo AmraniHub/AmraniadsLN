@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تم الإرسال — AmraniAds</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #0d0d1a;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; color: #e8e8f4;
+    }
+    .card {
+      background: #1a1a35; border-radius: 24px; padding: 52px 44px;
+      max-width: 460px; width: 100%; text-align: center;
+      border: 1px solid rgba(201,146,43,.25);
+      box-shadow: 0 8px 64px rgba(201,146,43,.15);
+      animation: pop .5s cubic-bezier(.175,.885,.32,1.275) both;
+    }
+    @keyframes pop {
+      from { transform: scale(.88); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    .check-circle {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: linear-gradient(135deg, #c9922b, #f0b429);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 2.6rem; margin-bottom: 24px;
+      box-shadow: 0 6px 28px rgba(201,146,43,.4);
+    }
+    h1 { font-size: 1.8rem; font-weight: 900; color: #f0b429; margin-bottom: 12px; }
+    .sub { font-size: .98rem; color: #8888aa; margin-bottom: 28px; line-height: 1.7; }
+    .sub strong { color: #f0b429; }
+    .info-box {
+      background: #13132a; border: 1px solid rgba(201,146,43,.2);
+      border-radius: 14px; padding: 20px 22px;
+      text-align: right; margin-bottom: 24px;
+    }
+    .info-box h3 { font-size: .9rem; font-weight: 700; color: #c9922b; margin-bottom: 12px; }
+    .info-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; font-size: .9rem; color: #8888aa; }
+    .info-step:last-child { margin-bottom: 0; }
+    .step-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, #c9922b, #f0b429);
+      color: #fff; font-size: .72rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .notice {
+      background: rgba(201,146,43,.08); border: 1px solid rgba(201,146,43,.2);
+      border-radius: 12px; padding: 14px 18px;
+      font-size: .9rem; color: #9e9ec0; margin-bottom: 20px; line-height: 1.7;
+    }
+    .notice strong { color: #f0b429; display: block; margin-bottom: 4px; }
+    .back-btn {
+      display: inline-block; color: #c9922b; font-size: .88rem;
+      font-weight: 600; text-decoration: none; opacity: .8;
+    }
+    .back-btn:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="check-circle">🚀</div>
+  <h1>تم استلام طلبك!</h1>
+  <p class="sub">شكراً على ثقتك في <strong>AmraniAds</strong>.<br>فريقنا سيراجع طلبك ويتواصل معك قريباً.</p>
+
+  <div class="info-box">
+    <h3>ماذا يحدث الآن؟</h3>
+    <div class="info-step">
+      <span class="step-dot">1</span>
+      <span>استلم فريقنا طلبك وسيراجعه</span>
+    </div>
+    <div class="info-step">
+      <span class="step-dot">2</span>
+      <span>سيتواصل معك أحد المختصين لفهم احتياجات صالونك</span>
+    </div>
+    <div class="info-step">
+      <span class="step-dot">3</span>
+      <span>نرسل لك عرضاً مخصصاً ونبدأ العمل فوراً</span>
+    </div>
+  </div>
+
+  <div class="notice">
+    <strong>📞 سنتواصل معك قريباً</strong>
+    فريق AmraniAds سيتصل بك خلال ساعات — فقط تأكد أن هاتفك شغّال 🚀
+  </div>
+
+  <a class="back-btn" href="/">← العودة للصفحة الرئيسية</a>
+</div>
+</body>
+</html>

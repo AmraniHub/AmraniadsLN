@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/salon/" />
+  <title>AmraniAds — نظام رقمي لصالونات التجميل | المغرب</title>
+  <meta name="description" content="نبني لصالونك نظام رقمي كامل يجلب عملاء جدد كل يوم — صفحة هبوط + إعلانات + تتبع. تسليم في 48 ساعة." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:        #0d0d1a;
+      --dark2:       #13132a;
+      --card:        #1a1a35;
+      --card2:       #161628;
+      --gold:        #c9922b;
+      --gold-bright: #f0b429;
+      --gold-soft:   rgba(201,146,43,.15);
+      --gold-border: rgba(201,146,43,.25);
+      --green:       #25D366;
+      --green-dark:  #128C7E;
+      --white:       #ffffff;
+      --off-white:   #f0f0f8;
+      --muted:       #8888aa;
+      --text:        #e8e8f4;
+      --grad-gold:   linear-gradient(135deg, #c9922b 0%, #f0b429 100%);
+      --grad-dark:   linear-gradient(135deg, #0d0d1a 0%, #1a1a35 100%);
+      --shadow:      0 4px 32px rgba(201,146,43,.12);
+      --shadow-lg:   0 8px 64px rgba(201,146,43,.2);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 1rem;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--dark2); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ── UTILS ── */
+    .gold      { color: var(--gold-bright); }
+    .white     { color: #fff; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,13,26,.96);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 0 48px; height: 66px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--grad-gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 900; color: #fff;
+    }
+    .nav-logo-text { font-size: 1.15rem; font-weight: 900; }
+    .nav-logo-text span:first-child { color: #fff; }
+    .nav-logo-text span:last-child  { color: var(--gold-bright); }
+    .nav-cta {
+      background: var(--grad-gold); color: #fff; border: none; border-radius: 50px;
+      padding: 9px 22px; font-family: 'Cairo', sans-serif;
+      font-size: .9rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: opacity .2s, transform .15s;
+    }
+    .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 100px 64px 60px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 20% 50%, rgba(201,146,43,.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(201,146,43,.05) 0%, transparent 50%),
+                  var(--dark);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9922b' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; width: 100%;
+      display: flex; align-items: center; gap: 64px;
+      position: relative; z-index: 1;
+    }
+    .hero-text { flex: 1 1 500px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold-soft); border: 1px solid var(--gold-border);
+      color: var(--gold-bright); border-radius: 50px;
+      padding: 6px 16px; font-size: .82rem; font-weight: 700; margin-bottom: 24px;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-bright); animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.3rem);
+      font-weight: 900; line-height: 1.2;
+      color: #fff; margin-bottom: 20px;
+    }
+    h1 .gold-line { color: var(--gold-bright); display: block; }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 460px; margin-bottom: 32px; line-height: 1.8;
+    }
+
+    .hero-proof {
+      display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .proof-item { display: flex; align-items: center; gap: 8px; }
+    .proof-icon { font-size: 1.1rem; }
+    .proof-text { font-size: .88rem; color: var(--off-white); }
+    .proof-text strong { color: var(--gold-bright); }
+
+    /* ── FORM COL ── */
+    .hero-form-col { flex: 0 0 370px; }
+    .form-card {
+      background: var(--card); border-radius: 20px;
+      border: 1px solid var(--gold-border);
+      box-shadow: var(--shadow-lg); overflow: hidden;
+    }
+    .form-card-top {
+      background: var(--grad-gold); padding: 20px 24px; text-align: center;
+    }
+    .form-card-top h2 { color: #fff; font-size: 1.15rem; font-weight: 900; }
+    .form-card-top p  { color: rgba(255,255,255,.85); font-size: .85rem; margin-top: 4px; }
+    .form-body { padding: 26px 24px; }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: .85rem; font-weight: 700;
+      color: var(--gold-bright); margin-bottom: 7px;
+    }
+    .field input,
+    .field select {
+      width: 100%; border: 1.5px solid var(--gold-border);
+      border-radius: 10px; padding: 12px 14px;
+      font-family: 'Cairo', sans-serif; font-size: 16px;
+      color: var(--white); background: var(--dark2); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,146,43,.15);
+    }
+    .field input::placeholder { color: #555577; }
+    .field select option { background: var(--card); }
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '▾'; position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); color: var(--gold); pointer-events: none;
+    }
+
+    .submit-btn {
+      width: 100%; background: var(--grad-gold); color: #fff; border: none;
+      border-radius: 50px; padding: 14px 24px;
+      font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900;
+      cursor: pointer; transition: opacity .2s, transform .15s; letter-spacing: .3px;
+    }
+    .submit-btn:hover  { opacity: .9; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .form-note { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 10px; }
+
+    /* ── CASE STUDY ── */
+    .proof-section {
+      padding: 80px 64px;
+      background: var(--dark2);
+      border-top: 1px solid var(--gold-border);
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .proof-inner { max-width: 1060px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: .8rem; font-weight: 700; color: var(--gold);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900;
+      color: #fff; text-align: center; margin-bottom: 10px; line-height: 1.3;
+    }
+    .section-title .gold { color: var(--gold-bright); }
+    .section-sub {
+      text-align: center; color: var(--muted); font-size: .95rem;
+      margin-bottom: 48px; max-width: 520px; margin-left: auto; margin-right: auto;
+    }
+
+    .case-study-card {
+      background: var(--card); border-radius: 20px;
+      border: 1px solid var(--gold-border);
+      padding: 40px; display: flex; gap: 48px; align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .case-logo {
+      flex: 0 0 160px; text-align: center;
+    }
+    .case-logo-circle {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: var(--grad-gold); margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 24px rgba(201,146,43,.35);
+    }
+    .case-logo-name { font-size: .9rem; font-weight: 700; color: #fff; }
+    .case-logo-city { font-size: .78rem; color: var(--muted); }
+
+    .case-divider { width: 1px; background: var(--gold-border); align-self: stretch; }
+
+    .case-body { flex: 1; }
+    .case-tag {
+      display: inline-block; background: var(--gold-soft);
+      border: 1px solid var(--gold-border); color: var(--gold-bright);
+      border-radius: 50px; padding: 3px 14px; font-size: .78rem;
+      font-weight: 700; margin-bottom: 14px;
+    }
+    .case-quote {
+      font-size: 1.05rem; color: var(--off-white); line-height: 1.7;
+      margin-bottom: 24px; font-style: italic;
+    }
+    .case-metrics {
+      display: flex; gap: 24px; flex-wrap: wrap;
+    }
+    .metric {
+      background: var(--dark2); border-radius: 12px; padding: 14px 20px;
+      border: 1px solid var(--gold-border); text-align: center; flex: 1 1 100px;
+    }
+    .metric-num { font-size: 1.6rem; font-weight: 900; color: var(--gold-bright); display: block; }
+    .metric-lbl { font-size: .78rem; color: var(--muted); }
+
+    .case-what {
+      margin-top: 24px; display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .case-chip {
+      background: var(--gold-soft); border: 1px solid var(--gold-border);
+      color: var(--gold-bright); border-radius: 50px;
+      padding: 4px 14px; font-size: .78rem; font-weight: 600;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { padding: 80px 64px; max-width: 1060px; margin: 0 auto; }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; margin-top: 48px; position: relative;
+    }
+    .step-card {
+      background: var(--card); border-radius: 18px; padding: 32px 26px;
+      border: 1px solid var(--gold-border);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .step-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--grad-gold); color: #fff; font-size: 1.2rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; box-shadow: 0 4px 16px rgba(201,146,43,.35);
+    }
+    .step-title { font-size: 1.05rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .step-desc  { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── PACKAGES ── */
+    .packages-section {
+      padding: 80px 64px;
+      background: var(--dark2);
+      border-top: 1px solid var(--gold-border);
+    }
+    .packages-inner { max-width: 1060px; margin: 0 auto; }
+    .packages-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .pkg-card {
+      background: var(--card); border-radius: 20px; padding: 32px;
+      border: 1px solid var(--gold-border);
+      transition: transform .25s, box-shadow .25s; position: relative;
+      display: flex; flex-direction: column;
+    }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .pkg-card.featured {
+      border-color: var(--gold); background: linear-gradient(160deg, #1a1a35 0%, #1f1a30 100%);
+    }
+    .pkg-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--grad-gold); color: #fff; border-radius: 50px;
+      padding: 4px 18px; font-size: .78rem; font-weight: 700; white-space: nowrap;
+    }
+    .pkg-name  { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+    .pkg-desc  { font-size: .85rem; color: var(--muted); margin-bottom: 20px; }
+    .pkg-price {
+      font-size: 2.4rem; font-weight: 900; color: var(--gold-bright);
+      line-height: 1; margin-bottom: 4px;
+    }
+    .pkg-price span { font-size: .85rem; font-weight: 600; color: var(--muted); }
+    .pkg-billing { font-size: .78rem; color: var(--muted); margin-bottom: 24px; }
+    .pkg-features { list-style: none; flex: 1; }
+    .pkg-features li {
+      font-size: .88rem; color: var(--off-white); padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .pkg-features li:last-child { border-bottom: none; }
+    .pkg-features .check { color: var(--gold-bright); font-size: .85rem; flex-shrink: 0; margin-top: 2px; }
+    .pkg-cta {
+      margin-top: 24px; width: 100%; background: var(--grad-gold);
+      color: #fff; border: none; border-radius: 50px; padding: 13px;
+      font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; text-align: center; display: block;
+      transition: opacity .2s, transform .15s;
+    }
+    .pkg-cta:hover  { opacity: .9; transform: translateY(-1px); }
+    .pkg-cta.outline {
+      background: transparent; border: 2px solid var(--gold-border); color: var(--gold-bright);
+    }
+    .pkg-cta.outline:hover { background: var(--gold-soft); border-color: var(--gold); }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      background: var(--grad-gold); padding: 60px 64px;
+      position: relative; overflow: hidden;
+    }
+    .stats-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.05'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .stats-inner {
+      max-width: 960px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px; text-align: center; position: relative; z-index: 1;
+    }
+    .stat-num   { font-size: 2.8rem; font-weight: 900; color: #fff; display: block; line-height: 1; }
+    .stat-label { font-size: .9rem; color: rgba(255,255,255,.82); margin-top: 6px; display: block; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 80px 64px; max-width: 860px; margin: 0 auto; }
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--card); border-radius: 14px; border: 1px solid var(--gold-border);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; padding: 18px 22px;
+      font-family: 'Cairo', sans-serif; font-size: .97rem; font-weight: 700;
+      color: #fff; text-align: right; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--gold-soft); }
+    .faq-q .arrow { color: var(--gold); font-size: .85rem; transition: transform .25s; flex-shrink: 0; }
+    .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
+      font-size: .92rem; color: var(--muted); line-height: 1.8;
+    }
+    .faq-a-inner { padding: 0 22px 18px; }
+    .faq-item.open .faq-a { max-height: 200px; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: linear-gradient(135deg, #1a1a35 0%, #0d0d1a 100%);
+      border-top: 1px solid var(--gold-border);
+      padding: 90px 64px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .final-cta::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,146,43,.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .final-cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+    .final-cta h2 { font-size: clamp(1.7rem, 3.5vw, 2.5rem); font-weight: 900; color: #fff; margin-bottom: 16px; }
+    .final-cta h2 span { color: var(--gold-bright); }
+    .final-cta p  { color: var(--muted); font-size: 1rem; margin-bottom: 36px; }
+    .final-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--grad-gold); color: #fff; font-family: 'Cairo', sans-serif;
+      font-size: 1rem; font-weight: 700; border: none; border-radius: 50px;
+      padding: 14px 32px; cursor: pointer; text-decoration: none;
+      transition: opacity .2s, transform .15s; display: inline-block;
+    }
+    .btn-gold:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-wa {
+      background: var(--green); color: #fff; font-family: 'Cairo', sans-serif;
+      font-size: 1rem; font-weight: 700; border: none; border-radius: 50px;
+      padding: 14px 32px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-wa:hover { opacity: .9; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080810; border-top: 1px solid var(--gold-border);
+      padding: 36px 64px 24px; color: var(--muted);
+    }
+    .footer-inner {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { font-size: 1.1rem; font-weight: 900; }
+    .footer-logo span { color: var(--gold-bright); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-link { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    .footer-link:hover { color: var(--gold-bright); }
+    .footer-copy { font-size: .8rem; width: 100%; text-align: center; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.05); margin-top: 12px; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--card); border: 1px solid var(--gold-border);
+      color: var(--gold-bright); padding: 12px 28px; border-radius: 50px;
+      font-size: .9rem; font-weight: 700;
+      opacity: 0; transition: opacity .3s, transform .3s;
+      pointer-events: none; z-index: 400; white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .hero { padding: 88px 20px 40px; }
+      .hero-inner { flex-direction: column; gap: 40px; }
+      .hero-form-col { width: 100%; flex: 0 0 auto; }
+      .proof-section, .packages-section, .stats-band, .final-cta, footer { padding-left: 20px; padding-right: 20px; }
+      .how-section, .faq-section { padding: 60px 20px; }
+      .case-study-card { flex-direction: column; gap: 28px; }
+      .case-divider { display: none; }
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 1.9rem; }
+      .hero-proof { flex-direction: column; gap: 10px; }
+      .final-cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">A</div>
+    <div class="nav-logo-text">
+      <span>Amrani</span><span>Ads</span>
+    </div>
+  </a>
+  <a class="nav-cta" href="#leadForm">استشارة مجانية →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- TEXT -->
+    <div class="hero-text">
+      <div class="hero-badge">🇲🇦 متخصصون في صالونات التجميل بالمغرب</div>
+      <h1>
+        صالونك يستاهل<br>
+        <span class="gold-line">عملاء أكثر كل يوم</span>
+      </h1>
+      <p class="hero-sub">
+        نبني لك نظام رقمي كامل — صفحة هبوط احترافية، إعلانات ميتا، تتبع العملاء تلقائياً. كل ما يجي عميل جديد، تتوصل برسالة فورية على هاتفك.
+      </p>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <span class="proof-icon">⚡</span>
+          <span class="proof-text">تسليم في <strong>48 ساعة</strong></span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-icon">📱</span>
+          <span class="proof-text">إشعار فوري على <strong>تيليغرام</strong></span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-icon">📊</span>
+          <span class="proof-text">تتبع كل عميل في <strong>Google Sheets</strong></span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-icon">🎯</span>
+          <span class="proof-text"><strong>Meta Pixel + CAPI</strong> متصل</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-card-top">
+          <h2>🚀 احصل على استشارة مجانية</h2>
+          <p>بدون التزام — نتواصل معك خلال ساعات</p>
+        </div>
+        <div class="form-body">
+          <form id="agencyForm" novalidate>
+            <div class="field">
+              <label for="aname">اسمك الكريم</label>
+              <input type="text" id="aname" name="name" placeholder="اسمك أو اسم الصالون" required />
+            </div>
+            <div class="field">
+              <label for="aphone">رقم الواتساب</label>
+              <input type="tel" id="aphone" name="phone" placeholder="06XXXXXXXX" required />
+            </div>
+            <div class="field">
+              <label>مدينتك</label>
+              <div class="select-wrap">
+                <select name="service" id="acity" required>
+                  <option value="">— اختر المدينة —</option>
+                  <option value="طنجة">طنجة</option>
+                  <option value="الدار البيضاء">الدار البيضاء</option>
+                  <option value="الرباط">الرباط</option>
+                  <option value="مراكش">مراكش</option>
+                  <option value="فاس">فاس</option>
+                  <option value="أكادير">أكادير</option>
+                  <option value="مدينة أخرى">مدينة أخرى</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              أريد نظام لصالوني 🚀
+            </button>
+          </form>
+          <p class="form-note">🔒 معلوماتك سرية — سنتواصل معك عبر الواتساب</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="proof-section">
+  <div class="proof-inner">
+    <div class="section-eyebrow">✦ دراسة حالة حقيقية</div>
+    <h2 class="section-title">هذا ما بنيناه لـ <span class="gold">Centre Solyra</span> طنجة</h2>
+    <p class="section-sub">من صفر إلى نظام رقمي متكامل — في أقل من 48 ساعة</p>
+
+    <div class="case-study-card">
+      <div class="case-logo">
+        <div class="case-logo-circle">S</div>
+        <div class="case-logo-name">Centre Solyra</div>
+        <div class="case-logo-city">📍 طنجة</div>
+      </div>
+      <div class="case-divider"></div>
+      <div class="case-body">
+        <span class="case-tag">✅ نظام مكتمل ومشتغل</span>
+        <p class="case-quote">"صالون تجميل نسائي في طنجة — قبل كانت تستقبل عملاء بالواتساب فقط. الآن عندها صفحة احترافية، إعلانات Meta مربوطة، وتوصل إشعار تيليغرام في كل حجز جديد."</p>
+        <div class="case-metrics">
+          <div class="metric">
+            <span class="metric-num">48h</span>
+            <span class="metric-lbl">وقت التسليم</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">100%</span>
+            <span class="metric-lbl">تتبع تلقائي</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">0 DH</span>
+            <span class="metric-lbl">تكلفة الاستضافة</span>
+          </div>
+          <div class="metric">
+            <span class="metric-num">2</span>
+            <span class="metric-lbl">صفحة هبوط</span>
+          </div>
+        </div>
+        <div class="case-what">
+          <span class="case-chip">🌸 صفحة الحجوزات</span>
+          <span class="case-chip">💼 صفحة التوظيف</span>
+          <span class="case-chip">📱 تيليغرام Notifications</span>
+          <span class="case-chip">📊 Google Sheets CRM</span>
+          <span class="case-chip">🎯 Meta Pixel + CAPI</span>
+          <span class="case-chip">⚙️ Vercel Serverless API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="how-section">
+    <div class="section-eyebrow">✦ كيف نشتغل</div>
+    <h2 class="section-title">3 خطوات بسيطة — <span class="gold">وصالونك أونلاين</span></h2>
+    <p class="section-sub">ما محتاجش أي خبرة تقنية — نحن نتكفل بكل شيء</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">نتكلم ونفهم احتياجاتك</div>
+        <div class="step-desc">استشارة مجانية عبر الواتساب — نفهم خدماتك، أسعارك، وأهدافك خلال 20 دقيقة</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">نبني النظام الرقمي في 48h</div>
+        <div class="step-desc">صفحة هبوط احترافية + ربط تيليغرام + Google Sheets + Meta Pixel — كل شيء جاهز في يومين</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">تبدأ الإعلانات وتجيب عملاء</div>
+        <div class="step-desc">نشغّل إعلانات ميتا ونتابع النتائج — كل عميل جديد يجيك إشعار فوري على هاتفك</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">48h</span>
+      <span class="stat-label">متوسط وقت التسليم</span>
+    </div>
+    <div>
+      <span class="stat-num">100%</span>
+      <span class="stat-label">تتبع تلقائي للعملاء</span>
+    </div>
+    <div>
+      <span class="stat-num">3x</span>
+      <span class="stat-label">متوسط زيادة الحجوزات</span>
+    </div>
+    <div>
+      <span class="stat-num">0</span>
+      <span class="stat-label">خبرة تقنية مطلوبة</span>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages-section">
+  <div class="packages-inner">
+    <div class="section-eyebrow">✦ الباقات</div>
+    <h2 class="section-title">اختر الباقة <span class="gold">المناسبة لصالونك</span></h2>
+    <p class="section-sub">أسعار واضحة — بدون مفاجآت — بدون عقود طويلة</p>
+    <div class="packages-grid">
+
+      <!-- Starter -->
+      <div class="pkg-card">
+        <div class="pkg-name">🚀 Starter</div>
+        <div class="pkg-desc">للصالون اللي يبدأ في عالم الرقمي</div>
+        <div class="pkg-price">2,500 <span>DH</span></div>
+        <div class="pkg-billing">دفعة واحدة — تسليم 48h</div>
+        <ul class="pkg-features">
+          <li><span class="check">✦</span>صفحة هبوط احترافية بتصميم خاص</li>
+          <li><span class="check">✦</span>فورم حجز + إشعار تيليغرام فوري</li>
+          <li><span class="check">✦</span>Google Sheets CRM تلقائي</li>
+          <li><span class="check">✦</span>Meta Pixel + CAPI مربوط</li>
+          <li><span class="check">✦</span>استضافة مجانية على Vercel</li>
+          <li><span class="check">✦</span>صفحة شكر + نشر على GitHub</li>
+        </ul>
+        <a href="#leadForm" class="pkg-cta outline">ابدأ الآن →</a>
+      </div>
+
+      <!-- Pro -->
+      <div class="pkg-card featured">
+        <span class="pkg-badge">⭐ الأكثر طلباً</span>
+        <div class="pkg-name">💎 Pro</div>
+        <div class="pkg-desc">النظام الكامل — إعلانات + تتبع + إعداد</div>
+        <div class="pkg-price">5,000 <span>DH</span></div>
+        <div class="pkg-billing">دفعة واحدة — تسليم 72h</div>
+        <ul class="pkg-features">
+          <li><span class="check">✦</span>كل شيء في Starter</li>
+          <li><span class="check">✦</span>إعداد WhatsApp Business كامل</li>
+          <li><span class="check">✦</span>Google Business Profile محسّن</li>
+          <li><span class="check">✦</span>أول حملة Meta Ads جاهزة</li>
+          <li><span class="check">✦</span>10 قوالب ردود واتساب</li>
+          <li><span class="check">✦</span>تقرير أداء أول شهر</li>
+        </ul>
+        <a href="#leadForm" class="pkg-cta">احجز الباقة Pro →</a>
+      </div>
+
+      <!-- Retainer -->
+      <div class="pkg-card">
+        <div class="pkg-name">📈 Retainer</div>
+        <div class="pkg-desc">إدارة الإعلانات شهرياً + تتبع النتائج</div>
+        <div class="pkg-price">3,000 <span>DH</span></div>
+        <div class="pkg-billing">شهرياً — ميزانية الإعلانات منفصلة</div>
+        <ul class="pkg-features">
+          <li><span class="check">✦</span>إدارة حملات Meta Ads شهرياً</li>
+          <li><span class="check">✦</span>تقرير أداء أسبوعي + شهري</li>
+          <li><span class="check">✦</span>تحسين الإعلانات والجمهور</li>
+          <li><span class="check">✦</span>متابعة العملاء في Sheets</li>
+          <li><span class="check">✦</span>دعم أولوية على الواتساب</li>
+          <li><span class="check">✦</span>تعديلات على الصفحة عند الحاجة</li>
+        </ul>
+        <a href="#leadForm" class="pkg-cta outline">تواصل معنا →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="faq-section">
+    <div class="section-eyebrow">✦ أسئلة شائعة</div>
+    <h2 class="section-title">أجوبة على <span class="gold">أكثر الأسئلة</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          هل أحتاج أي خبرة تقنية؟
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">لا إطلاقاً — أنت فقط تعطينا اسم صالونك وخدماتك وأسعارك. نحن نبني كل شيء ونسلمه جاهزاً. كل ما عليك فعله هو الرد على العملاء اللي يوصلوا ليك.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          كيف أعرف أن النظام يشتغل؟
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">في كل مرة يملأ فيها عميل الفورم، توصلك رسالة فورية على تيليغرام باسمه ورقمه والخدمة. وفي نفس الوقت تُضاف صف جديد تلقائياً في Google Sheets — كل شيء مرئي ومتتبع.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          كم تكلف الإعلانات على Meta؟
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">ميزانية الإعلانات منفصلة عن سعر الباقة — تدفعها مباشرة لـ Meta. نوصي بالبداية من 15–30 درهم يوميًا للحصول على نتائج جيدة. نحن نتكفل بالإدارة والتحسين.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          هل تشتغلون فقط مع صالونات التجميل؟
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">نتخصص في صالونات التجميل ومراكز العناية بالمرأة لأننا نفهم هذا القطاع جيداً. لكن نظامنا يشتغل مع أي نشاط تجاري محلي يحتاج لجلب عملاء جدد.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ما هي خطوات البداية؟
+          <span class="arrow">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">ابدأ بملء الفورم أعلاه أو تواصل معنا على الواتساب. سنرتب معك استشارة مجانية قصيرة، نفهم احتياجاتك، ونرسل لك عرضاً مخصصاً. إذا اتفقنا، نبدأ العمل فوراً.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>جاهز تحول صالونك إلى<br><span>ماكينة حجوزات؟</span></h2>
+    <p>استشارة مجانية — بدون التزام — نتواصل معك خلال ساعات</p>
+    <div class="final-cta-btns">
+      <a href="#leadForm" class="btn-gold">ابدأ الآن — مجاناً →</a>
+      <a href="https://wa.me/212619946109?text=السلام%20عليكم%2C%20بغيت%20نعرف%20أكثر%20على%20خدمات%20AmraniAds" target="_blank" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        واتساب
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Amrani<span>Ads</span> — المغرب 🇲🇦</div>
+    <div class="footer-links">
+      <a class="footer-link" href="#leadForm">ابدأ الآن</a>
+      <a class="footer-link" href="https://wa.me/212619946109" target="_blank">واتساب</a>
+    </div>
+  </div>
+  <p class="footer-copy">© 2025 AmraniAds — نظام رقمي لصالونات التجميل بالمغرب</p>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  // ── FAQ toggle ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── toast ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── event id ──
+  function genEventId() {
+    return 'ev_agency_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+  }
+
+  // ── form ──
+  document.getElementById('agencyForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn  = document.getElementById('submitBtn');
+
+    const name  = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const city  = form.service.value;
+
+    if (!name || !phone || !city) {
+      showToast('⚠️ يرجى ملء جميع الحقول');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ يتم الإرسال...';
+
+    try {
+      await fetch('https://amraniads.com/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name, phone,
+          service: 'عميل وكالة — مدينة: ' + city,
+          eventId: genEventId(),
+          userAgent: navigator.userAgent,
+          eventSourceUrl: location.href,
+          lang: 'AR'
+        })
+      });
+    } catch (_) {}
+
+    window.location.href = '/salon/success.html';
+  });
+
+  // ── scroll animations ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.step-card, .pkg-card, .faq-item, .metric').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
