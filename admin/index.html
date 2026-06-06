@@ -316,10 +316,11 @@
       </div>
 
       <div class="sidebar-section">Vue</div>
-      <button class="nav-btn active" onclick="showView('overview')" id="btn-overview"><span class="ico">📊</span> Vue globale</button>
-      <button class="nav-btn" onclick="showView('leads')"   id="btn-leads"  ><span class="ico">📋</span> Tous les leads</button>
-      <button class="nav-btn" onclick="showView('prompt')"  id="btn-prompt" ><span class="ico">🤖</span> Prompt IA</button>
-      <button class="nav-btn" onclick="showView('setup')"   id="btn-setup"  ><span class="ico">⚙️</span> Configuration</button>
+      <button class="nav-btn active" onclick="showView('overview')"    id="btn-overview"   ><span class="ico">📊</span> Vue globale</button>
+      <button class="nav-btn" onclick="showView('leads')"              id="btn-leads"      ><span class="ico">📋</span> Tous les leads</button>
+      <button class="nav-btn" onclick="showView('dashboards')"         id="btn-dashboards" ><span class="ico">🎛️</span> Dashboards</button>
+      <button class="nav-btn" onclick="showView('prompt')"             id="btn-prompt"     ><span class="ico">🤖</span> Prompt IA</button>
+      <button class="nav-btn" onclick="showView('setup')"              id="btn-setup"      ><span class="ico">⚙️</span> Configuration</button>
 
       <div class="sidebar-section">Sources actives</div>
       <div id="sidebarSources"></div>
@@ -416,6 +417,48 @@
         </div>
       </div>
 
+      <!-- DASHBOARDS CONTROL -->
+      <div id="view-dashboards" style="display:none">
+        <div class="section-hd" style="margin-bottom:20px">
+          <h2>🎛️ Contrôle des dashboards clients</h2>
+          <span style="font-size:.78rem;color:var(--muted)">Gérez les accès et clients de chaque niche</span>
+        </div>
+
+        <!-- SALON -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+            <div>
+              <div style="font-size:1rem;font-weight:900">💅 Dashboard Salon</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:2px">amraniads.com/salon/dashboard · mot de passe: <span id="salonPwDisplay" style="color:var(--pink)">—</span></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn-sm btn-ghost" onclick="openDashPwModal('salon')">🔑 Changer MDP</button>
+              <button class="btn-sm" style="background:var(--pink-soft);color:var(--pink);border:none;border-radius:50px;padding:9px 18px;font-family:Cairo,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer" onclick="openDashClientModal('salon')">+ Ajouter client</button>
+            </div>
+          </div>
+          <div id="salonClientList"><div class="loading-txt">—</div></div>
+        </div>
+
+        <!-- RENTAL CARS -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+            <div>
+              <div style="font-size:1rem;font-weight:900">🚗 Dashboard Location Voiture</div>
+              <div style="font-size:.75rem;color:var(--muted);margin-top:2px">amraniads.com/rentalcars/dashboard · mot de passe: <span id="rcPwDisplay" style="color:var(--blue)">—</span></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn-sm btn-ghost" onclick="openDashPwModal('rc')">🔑 Changer MDP</button>
+              <button class="btn-sm btn-blue" onclick="openDashClientModal('rc')">+ Ajouter client</button>
+            </div>
+          </div>
+          <div id="rcClientList"><div class="loading-txt">—</div></div>
+        </div>
+
+        <div style="background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:16px;font-size:.82rem;color:var(--muted);line-height:1.9">
+          ℹ️ <strong style="color:var(--text)">Comment ça marche :</strong> tous les dashboards sont sur le même domaine (amraniads.com), donc ils partagent le même localStorage. Les changements ici sont <strong style="color:var(--text)">immédiatement visibles</strong> dans chaque dashboard client — pas besoin de recharger.
+        </div>
+      </div>
+
       <!-- SETUP -->
       <div id="view-setup" style="display:none">
         <div class="section-hd" style="margin-bottom:16px">
@@ -452,6 +495,38 @@
       </div>
 
     </main>
+  </div>
+</div>
+
+<!-- DASH PASSWORD MODAL -->
+<div class="modal-overlay" id="modalDashPw" style="display:none" onclick="closeModal('modalDashPw',event)">
+  <div class="modal">
+    <h3 id="dashPwTitle">🔑 Changer le mot de passe</h3>
+    <input type="hidden" id="dashPwTarget"/>
+    <div class="modal-field">
+      <label>Nouveau mot de passe</label>
+      <input type="text" id="dashPwInput" placeholder="Nouveau mot de passe"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalDashPw')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveDashPw()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- DASH ADD CLIENT MODAL -->
+<div class="modal-overlay" id="modalDashClient" style="display:none" onclick="closeModal('modalDashClient',event)">
+  <div class="modal">
+    <h3 id="dashClientTitle">+ Ajouter un client</h3>
+    <input type="hidden" id="dashClientTarget"/>
+    <div class="modal-field"><label>Nom</label><input type="text" id="dcName" placeholder="ex: Salon Nadia"/></div>
+    <div class="modal-field"><label>Ville</label><input type="text" id="dcCity" placeholder="ex: Fes"/></div>
+    <div class="modal-field"><label>URL Apps Script</label><input type="url" id="dcScript" placeholder="https://script.google.com/..."/></div>
+    <div class="modal-field"><label>Téléphone WhatsApp</label><input type="tel" id="dcPhone" placeholder="06XXXXXXXX"/></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalDashClient')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveDashClient()">Ajouter</button>
+    </div>
   </div>
 </div>
 
@@ -836,13 +911,88 @@ function copyPrompt() {
   navigator.clipboard.writeText(text).then(() => toast('✅ Prompt copié !'));
 }
 
+// ── DASHBOARD CONTROL (shared localStorage same domain) ────────
+const DASH_CONFIG = {
+  salon: { pwKey: 'salon_pw',    clientsKey: 'salon_clients',  defaultPw: 'salon2025',      label: '💅 Salon',            listEl: 'salonClientList', pwEl: 'salonPwDisplay' },
+  rc:    { pwKey: 'rc_pw',       clientsKey: 'rc_clients',     defaultPw: 'amraniads2025',  label: '🚗 Location Voiture', listEl: 'rcClientList',    pwEl: 'rcPwDisplay'    },
+};
+
+function renderDashboards() {
+  Object.entries(DASH_CONFIG).forEach(([key, cfg]) => {
+    const pw      = localStorage.getItem(cfg.pwKey) || cfg.defaultPw;
+    const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+    document.getElementById(cfg.pwEl).textContent = pw;
+    const el = document.getElementById(cfg.listEl);
+    if (!clients.length) {
+      el.innerHTML = '<div style="color:var(--muted);font-size:.83rem;padding:4px 0">Aucun client configuré</div>';
+      return;
+    }
+    el.innerHTML = clients.map(c => `
+      <div class="source-list-item">
+        <div class="source-info">
+          <div class="si-name">${escHtml(c.name)} — <span style="color:var(--muted)">${escHtml(c.city||'')}</span></div>
+          <div class="si-url">${escHtml(c.scriptUrl||'—')}</div>
+          ${c.phone ? `<div style="font-size:.72rem;color:var(--green)">📱 ${escHtml(c.phone)}</div>` : ''}
+        </div>
+        <button class="del-btn" onclick="deleteDashClient('${key}','${c.id}')">Supprimer</button>
+      </div>`).join('');
+  });
+}
+
+function openDashPwModal(target) {
+  document.getElementById('dashPwTarget').value = target;
+  document.getElementById('dashPwTitle').textContent = '🔑 Changer MDP — ' + DASH_CONFIG[target].label;
+  document.getElementById('dashPwInput').value = localStorage.getItem(DASH_CONFIG[target].pwKey) || DASH_CONFIG[target].defaultPw;
+  document.getElementById('modalDashPw').style.display = 'flex';
+}
+function saveDashPw() {
+  const target = document.getElementById('dashPwTarget').value;
+  const pw     = document.getElementById('dashPwInput').value.trim();
+  if (!pw) return;
+  localStorage.setItem(DASH_CONFIG[target].pwKey, pw);
+  closeModalById('modalDashPw');
+  renderDashboards();
+  toast('✅ Mot de passe ' + DASH_CONFIG[target].label + ' mis à jour');
+}
+
+function openDashClientModal(target) {
+  document.getElementById('dashClientTarget').value = target;
+  document.getElementById('dashClientTitle').textContent = '+ Ajouter client — ' + DASH_CONFIG[target].label;
+  ['dcName','dcCity','dcScript','dcPhone'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('modalDashClient').style.display = 'flex';
+}
+function saveDashClient() {
+  const target  = document.getElementById('dashClientTarget').value;
+  const cfg     = DASH_CONFIG[target];
+  const name    = document.getElementById('dcName').value.trim();
+  const city    = document.getElementById('dcCity').value.trim();
+  const script  = document.getElementById('dcScript').value.trim();
+  const phone   = document.getElementById('dcPhone').value.trim();
+  if (!name || !script) { alert('Nom et URL Apps Script requis'); return; }
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+  clients.push({ id: 'c' + Date.now(), name, city, scriptUrl: script, phone });
+  localStorage.setItem(cfg.clientsKey, JSON.stringify(clients));
+  closeModalById('modalDashClient');
+  renderDashboards();
+  toast('✅ Client ajouté dans ' + cfg.label);
+}
+function deleteDashClient(target, id) {
+  if (!confirm('Supprimer ce client du dashboard?')) return;
+  const cfg     = DASH_CONFIG[target];
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]').filter(c => c.id !== id);
+  localStorage.setItem(cfg.clientsKey, JSON.stringify(clients));
+  renderDashboards();
+  toast('🗑️ Client supprimé');
+}
+
 // ── VIEWS ──────────────────────────────────────────────────────
 function showView(v) {
-  ['overview','leads','prompt','setup'].forEach(name => {
+  ['overview','leads','dashboards','prompt','setup'].forEach(name => {
     document.getElementById('view-'+name).style.display = v === name ? '' : 'none';
     document.getElementById('btn-'+name).classList.toggle('active', v === name);
   });
-  if (v === 'setup') { renderSetup(); renderSidebarSources(); }
+  if (v === 'setup')      { renderSetup(); renderSidebarSources(); }
+  if (v === 'dashboards') { renderDashboards(); }
 }
 
 // ── MODALS ─────────────────────────────────────────────────────
