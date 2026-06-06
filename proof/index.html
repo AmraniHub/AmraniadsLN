@@ -364,6 +364,75 @@
     /* ── DIVIDER ── */
     .divider { border: none; border-top: 1px solid var(--border); }
 
+    /* ── FOUNDER SECTION ── */
+    .founder-wrap {
+      display: flex; align-items: center; gap: 32px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 36px 40px;
+      max-width: 720px; margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(29,78,216,.08);
+      position: relative; overflow: hidden;
+    }
+    .founder-wrap::before {
+      content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, #1d4ed8, #7c3aed);
+    }
+    .founder-photo {
+      width: 110px; height: 110px; border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      flex-shrink: 0;
+      border: 3px solid var(--blue);
+      box-shadow: 0 0 0 6px var(--blue-l);
+    }
+    .founder-body { flex: 1; }
+    .founder-name  { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+    .founder-title { font-size: .85rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+    .founder-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .founder-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--blue-l); color: var(--blue);
+      border-radius: 50px; padding: 4px 14px;
+      font-size: .75rem; font-weight: 700;
+    }
+    .founder-badge.gold  { background: var(--gold-l);  color: var(--gold);  }
+    .founder-badge.green { background: var(--green-l); color: var(--green); }
+    .founder-wa {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #25d366; color: #fff; border-radius: 50px;
+      padding: 9px 20px; font-family: 'Cairo',sans-serif;
+      font-size: .85rem; font-weight: 700; text-decoration: none;
+    }
+
+    /* ── THANKS SECTION ── */
+    .thanks-wrap {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 24px; padding: 48px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .thanks-wrap::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,.15), transparent 60%);
+    }
+    .thanks-title { font-size: clamp(1.4rem,3vw,1.9rem); font-weight: 900; color: #fff; margin-bottom: 16px; }
+    .thanks-text  { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 2; max-width: 600px; margin: 0 auto 28px; }
+    .thanks-names {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+      margin-bottom: 28px;
+    }
+    .thanks-chip {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 50px; padding: 8px 18px;
+      font-size: .82rem; color: rgba(255,255,255,.8); font-weight: 600;
+    }
+    .thanks-heart { font-size: 2.5rem; margin-bottom: 12px; display: block; animation: heartbeat 1.8s infinite; }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      15%      { transform: scale(1.18); }
+      30%      { transform: scale(1); }
+      45%      { transform: scale(1.1); }
+    }
+    .thanks-sign { font-size: .9rem; color: rgba(255,255,255,.5); margin-top: 8px; }
+
     /* ── FOOTER ── */
     footer { background: #0f172a; color: rgba(255,255,255,.45); text-align: center; padding: 28px 24px; font-size: .8rem; }
     footer a { color: rgba(255,255,255,.65); text-decoration: none; }
@@ -396,7 +465,7 @@
     <a href="#sec-videos">فيديوهات</a>
     <a href="#sec-faq">أسئلة</a>
   </div>
-  <a class="nav-cta" href="https://wa.me/212600000000?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نعرف+أكثر" target="_blank">
+  <a class="nav-cta" href="https://wa.me/212627716149?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نعرف+أكثر" target="_blank">
     💬 تواصل الآن
   </a>
 </nav>
@@ -413,7 +482,7 @@
     <div class="h-stat"><span class="hs-num pink" id="st-reviews">—</span><span class="hs-label">تقييم ⭐⭐⭐⭐⭐</span></div>
   </div>
   <div class="hero-ctas">
-    <a class="btn-wa" href="https://wa.me/212600000000?text=بغيت+نشوف+كيفاش+تقدرو+تجيبو+ليدات+لمشروعي" target="_blank">💬 كيفاش نبدأو معاكم؟</a>
+    <a class="btn-wa" href="https://wa.me/212627716149?text=بغيت+نشوف+كيفاش+تقدرو+تجيبو+ليدات+لمشروعي" target="_blank">💬 كيفاش نبدأو معاكم؟</a>
     <a class="btn-ghost-white" href="#sec-cases">📊 شوف النتائج ↓</a>
   </div>
 </div>
@@ -733,6 +802,59 @@
   </div>
 </section>
 
+<!-- ═══ FOUNDER / ABOUT ═══ -->
+<section class="section" id="sec-founder" style="padding-top:48px;padding-bottom:48px">
+  <div style="text-align:center;margin-bottom:32px">
+    <div class="section-badge blue">👤 من أنا</div>
+    <div class="section-title">الشخص خلف النتائج</div>
+    <p class="section-sub" style="margin:8px auto 0">لأنك تستحق تعرف مع من كتتعامل قبل ما تبدأ</p>
+  </div>
+  <div class="founder-wrap">
+    <img class="founder-photo" src="/salon/founder.jpg" alt="عبد العالي العمراني"/>
+    <div class="founder-body">
+      <div class="founder-name">عبد العالي العمراني</div>
+      <div class="founder-title">مؤسس AmraniAds · متخصص في التسويق الرقمي بالمغرب<br/>5 سنوات خبرة في Meta Ads · Shopify · بناء الأنظمة الرقمية</div>
+      <div class="founder-badges">
+        <span class="founder-badge">🏆 +18 حملة ناجحة</span>
+        <span class="founder-badge gold">📈 10x ROAS</span>
+        <span class="founder-badge green">🇲🇦 فاس، المغرب</span>
+      </div>
+      <a class="founder-wa" href="https://wa.me/212627716149?text=السلام+عليكم+عبد+العالي،+شفت+الصفحة+وبغيت+نتكلمو" target="_blank">
+        💬 تحدث معي مباشرة
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ THANKS ═══ -->
+<section class="section" style="padding-top:48px;padding-bottom:56px">
+  <div class="thanks-wrap">
+    <span class="thanks-heart">❤️</span>
+    <div class="thanks-title">شكراً لكل من آمن بهذا المشروع</div>
+    <p class="thanks-text">
+      هذا الإنجاز مش ديالي وحدي.<br/>
+      كل عميل وثق فينا من البداية، وكل شخص أعطانا فرصة نثبتو فيها —<br/>
+      هم السبب الحقيقي في وجود هذه الصفحة اليوم.
+    </p>
+    <div class="thanks-names" id="thanksNames">
+      <!-- populated from localStorage clients or shown as default -->
+      <span class="thanks-chip">💅 عملاء الصالونات</span>
+      <span class="thanks-chip">🚗 شركات التأجير</span>
+      <span class="thanks-chip">🤝 كل من أحال وأوصى</span>
+      <span class="thanks-chip">👨‍💻 كل من ساعدني في البناء</span>
+      <span class="thanks-chip">🇲🇦 فاس · الدار البيضاء · مراكش</span>
+    </div>
+    <p class="thanks-text" style="margin-bottom:8px;font-size:.88rem">
+      نبنيو سوا — وهذا بس البداية 🚀
+    </p>
+    <div class="thanks-sign">— عبد العالي العمراني · AmraniAds</div>
+  </div>
+</section>
+
+<hr class="divider" style="margin-bottom:0"/>
+
 <!-- ═══ FINAL CTA ═══ -->
 <div style="padding:0 24px">
   <div class="cta-section">
@@ -740,7 +862,7 @@
     <h2>هل تريد نفس النتائج لمشروعك؟</h2>
     <p>نبني لك نظاماً كاملاً يجلب عملاء جدد كل يوم<br/>ليدات على WhatsApp · بدون عقود · بدون مخاطرة</p>
     <div class="cta-btns">
-      <a class="btn-wa" href="https://wa.me/212600000000?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نبدأ" target="_blank">
+      <a class="btn-wa" href="https://wa.me/212627716149?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نبدأ" target="_blank">
         💬 ابدأ الآن عبر WhatsApp
       </a>
       <a class="btn-blue" href="/">🌐 اكتشف خدماتنا</a>
@@ -755,7 +877,7 @@
 </footer>
 
 <!-- FLOATING WHATSAPP -->
-<a class="floating-wa" href="https://wa.me/212600000000?text=بغيت+نعرف+أكثر+على+خدماتكم" target="_blank">
+<a class="floating-wa" href="https://wa.me/212627716149?text=بغيت+نعرف+أكثر+على+خدماتكم" target="_blank">
   <div class="fw-dot"></div>
   💬 تواصل معنا
 </a>
@@ -941,6 +1063,21 @@ function renderRefs(d) {
 
 function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+// ── Thanks section: show real client names ──
+function renderThanks() {
+  const salon = JSON.parse(localStorage.getItem('salon_clients') || '[]');
+  const rc    = JSON.parse(localStorage.getItem('rc_clients')    || '[]');
+  const all   = [...salon.map(c=>({...c,niche:'salon'})), ...rc.map(c=>({...c,niche:'rc'}))];
+  if (!all.length) return;
+  const icons = { salon:'💅', rc:'🚗' };
+  const el = document.getElementById('thanksNames');
+  el.innerHTML = all.map(c =>
+    `<span class="thanks-chip">${icons[c.niche]||'🤝'} ${escH(c.name)}${c.city ? ' · '+escH(c.city) : ''}</span>`
+  ).join('') +
+  `<span class="thanks-chip">👨‍💻 كل من ساعد في البناء</span>
+   <span class="thanks-chip">🇲🇦 فاس · الدار البيضاء · مراكش</span>`;
+}
+
 // ── Boot ──
 document.addEventListener('DOMContentLoaded', () => {
   const d = loadProofData();
@@ -949,6 +1086,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderReviews(d);
   renderVideos(d);
   renderRefs(d);
+  renderThanks();
 });
 </script>
 </body>
