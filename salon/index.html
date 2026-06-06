@@ -583,21 +583,6 @@
               <label for="aphone">رقم الواتساب</label>
               <input type="tel" id="aphone" name="phone" placeholder="06XXXXXXXX" required autocomplete="tel"/>
             </div>
-            <div class="field">
-              <label>مدينتك</label>
-              <div class="select-wrap">
-                <select name="service" id="acity" required>
-                  <option value="">— اختر المدينة —</option>
-                  <option value="طنجة">طنجة</option>
-                  <option value="الدار البيضاء">الدار البيضاء</option>
-                  <option value="الرباط">الرباط</option>
-                  <option value="مراكش">مراكش</option>
-                  <option value="فاس">فاس</option>
-                  <option value="أكادير">أكادير</option>
-                  <option value="مدينة أخرى">مدينة أخرى</option>
-                </select>
-              </div>
-            </div>
             <button type="submit" class="submit-btn" id="submitBtn">
               أريد نظام لصالوني 🚀
             </button>
@@ -898,8 +883,7 @@
     const btn  = document.getElementById('submitBtn');
     const name  = form.name.value.trim();
     const phone = form.phone.value.trim();
-    const city  = form.service.value;
-    if (!name || !phone || !city) { showToast('⚠️ يرجى ملء جميع الحقول'); return; }
+    if (!name || !phone) { showToast('⚠️ يرجى ملء جميع الحقول'); return; }
     btn.disabled = true;
     btn.textContent = '⏳ يتم الإرسال...';
     const eventId = genEventId();
@@ -910,7 +894,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name, phone,
-          service: 'عميل وكالة صالون — مدينة: ' + city,
+          service: 'عميل وكالة صالون — صالون تجميل',
           eventId,
           userAgent: navigator.userAgent,
           eventSourceUrl: location.href,
