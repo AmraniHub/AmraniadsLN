@@ -919,6 +919,21 @@ const DASH_CONFIG = {
   rc:    { pwKey: 'rc_pw',       clientsKey: 'rc_clients',     defaultPw: 'amraniads2025',  label: '🚗 Location Voiture', listEl: 'rcClientList',    pwEl: 'rcPwDisplay'    },
 };
 
+function clientUrl(nicheKey, client) {
+  const config = { niche: nicheKey, name: client.name, city: client.city || '', scriptUrl: client.scriptUrl };
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(config))));
+  return 'https://amraniads.com/dashboard/?c=' + encoded;
+}
+
+function copyClientUrl(nicheKey, clientId) {
+  const cfg     = DASH_CONFIG[nicheKey];
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+  const client  = clients.find(c => c.id === clientId);
+  if (!client) return;
+  navigator.clipboard.writeText(clientUrl(nicheKey, client))
+    .then(() => toast('✅ Lien copié — ' + client.name));
+}
+
 function renderDashboards() {
   Object.entries(DASH_CONFIG).forEach(([key, cfg]) => {
     const pw      = localStorage.getItem(cfg.pwKey) || cfg.defaultPw;
@@ -929,15 +944,23 @@ function renderDashboards() {
       el.innerHTML = '<div style="color:var(--muted);font-size:.83rem;padding:4px 0">Aucun client configuré</div>';
       return;
     }
-    el.innerHTML = clients.map(c => `
-      <div class="source-list-item">
-        <div class="source-info">
-          <div class="si-name">${escHtml(c.name)} — <span style="color:var(--muted)">${escHtml(c.city||'')}</span></div>
-          <div class="si-url">${escHtml(c.scriptUrl||'—')}</div>
-          ${c.phone ? `<div style="font-size:.72rem;color:var(--green)">📱 ${escHtml(c.phone)}</div>` : ''}
-        </div>
-        <button class="del-btn" onclick="deleteDashClient('${key}','${c.id}')">Supprimer</button>
-      </div>`).join('');
+    el.innerHTML = clients.map(c => {
+      const url = clientUrl(key, c);
+      const shortUrl = '/dashboard/?c=…';
+      return `
+        <div class="source-list-item">
+          <div class="source-info">
+            <div class="si-name">${escHtml(c.name)} — <span style="color:var(--muted)">${escHtml(c.city||'')}</span></div>
+            ${c.phone ? `<div style="font-size:.72rem;color:var(--green);margin-bottom:4px">📱 ${escHtml(c.phone)}</div>` : ''}
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:5px">
+              <span style="font-size:.68rem;color:var(--blue);background:var(--blue-soft);padding:3px 10px;border-radius:50px">${shortUrl}</span>
+              <button class="btn-xs blue" onclick="copyClientUrl('${key}','${c.id}')">📋 Copier lien</button>
+              <a href="${url}" target="_blank" class="btn-xs green" style="text-decoration:none">↗ Ouvrir</a>
+            </div>
+          </div>
+          <button class="del-btn" onclick="deleteDashClient('${key}','${c.id}')" style="flex-shrink:0">🗑️</button>
+        </div>`;
+    }).join('');
   });
 }
 

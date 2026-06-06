@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AmraniAds — Dashboard Client</title>
+  <meta id="themeColor" name="theme-color" content="#1d4ed8"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="Dashboard"/>
+  <link rel="manifest" href="/dashboard/manifest.json"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --c:     #1d4ed8;
+      --cs:    rgba(29,78,216,.09);
+      --cb:    rgba(29,78,216,.2);
+      --grad:  linear-gradient(135deg,#1e3a8a,#1d4ed8);
+      --green: #16a34a; --green-s: rgba(22,163,74,.1);
+      --red:   #dc2626; --red-s:   rgba(220,38,38,.08);
+      --amber: #d97706; --amber-s: rgba(217,119,6,.1);
+      --purple:#7c3aed; --purple-s:rgba(124,58,237,.1);
+      --bg:    #f0f6ff; --card: #fff; --muted: #6b7280; --text: #0f172a;
+    }
+    body { font-family: 'Cairo',sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ERROR / LOADING */
+    .splash { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .splash-card { background: var(--card); border-radius: 24px; padding: 48px 36px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 16px 60px rgba(0,0,0,.1); }
+    .splash-ico { font-size: 3rem; margin-bottom: 16px; }
+    .splash-title { font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; }
+    .splash-sub { font-size: .86rem; color: var(--muted); line-height: 1.7; }
+
+    /* TOPBAR */
+    .topbar { background: var(--card); border-bottom: 1px solid var(--cb); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; position: sticky; top: 0; z-index: 20; }
+    .tb-brand { font-weight: 900; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+    .tb-brand .niche-tag { background: var(--cs); color: var(--c); border-radius: 50px; padding: 3px 12px; font-size: .74rem; }
+    .tb-right { display: flex; gap: 8px; }
+    .btn-sm { padding: 8px 16px; border-radius: 50px; font-family: 'Cairo',sans-serif; font-size: .82rem; font-weight: 700; cursor: pointer; border: none; transition: opacity .2s; }
+    .btn-sm:hover { opacity: .85; }
+    .btn-c { background: var(--grad); color: #fff; }
+    .btn-ghost { background: var(--cs); color: var(--c); }
+
+    /* MAIN */
+    .main { max-width: 1100px; margin: 0 auto; padding: 22px 18px; }
+
+    /* ALERT */
+    .alert-bar { background: var(--red-s); border: 1px solid rgba(220,38,38,.25); border-left: 4px solid var(--red); border-radius: 12px; padding: 12px 16px; display: none; align-items: center; gap: 10px; margin-bottom: 18px; font-size: .88rem; font-weight: 700; color: #991b1b; cursor: pointer; }
+    .alert-bar .ad { width: 9px; height: 9px; border-radius: 50%; background: var(--red); flex-shrink: 0; animation: blink 1.4s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.25} }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit,minmax(130px,1fr)); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: var(--card); border: 1px solid var(--cb); border-radius: 14px; padding: 16px 14px; }
+    .stat-card .sl { font-size: .72rem; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+    .stat-card .sn { font-size: 1.8rem; font-weight: 900; color: var(--c); line-height: 1; }
+    .stat-card .ss { font-size: .7rem; color: var(--muted); margin-top: 3px; }
+    .stat-card.green .sn { color: var(--green); }
+    .stat-card.amber .sn { color: var(--amber); }
+    .stat-card.red   .sn { color: var(--red); }
+    .stat-card.purple .sn { color: var(--purple); }
+
+    /* TABS */
+    .tabs { display: flex; gap: 4px; background: var(--card); border: 1px solid var(--cb); border-radius: 12px; padding: 4px; width: fit-content; margin-bottom: 18px; }
+    .tab { padding: 8px 20px; border-radius: 9px; font-family: 'Cairo',sans-serif; font-size: .86rem; font-weight: 700; cursor: pointer; border: none; background: none; color: var(--muted); transition: all .2s; }
+    .tab.active { background: var(--grad); color: #fff; }
+
+    /* TABLE */
+    .table-wrap { background: var(--card); border: 1px solid var(--cb); border-radius: 16px; overflow: hidden; }
+    .table-filters { padding: 12px 14px; border-bottom: 1px solid var(--cb); display: flex; gap: 8px; flex-wrap: wrap; }
+    .fb { padding: 5px 13px; border-radius: 50px; font-family: 'Cairo',sans-serif; font-size: .73rem; font-weight: 700; cursor: pointer; border: 1px solid var(--cb); background: none; color: var(--muted); transition: all .2s; }
+    .fb.active { background: var(--cs); color: var(--c); border-color: var(--c); }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: #eff6ff; }
+    th { padding: 10px 12px; text-align: left; font-size: .7rem; font-weight: 700; color: var(--c); border-bottom: 1px solid var(--cb); white-space: nowrap; }
+    td { padding: 10px 12px; font-size: .83rem; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--cs); }
+    .s-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: .7rem; font-weight: 700; cursor: pointer; }
+    .age-b { display: inline-block; padding: 2px 7px; border-radius: 50px; font-size: .66rem; font-weight: 700; }
+    .age-ok   { background: var(--green-s); color: var(--green); }
+    .age-warn { background: var(--amber-s); color: var(--amber); }
+    .age-hot  { background: var(--red-s);   color: var(--red);   }
+    .wa-lnk { color: var(--green); text-decoration: none; font-weight: 700; font-size: .76rem; }
+    .wa-lnk:hover { text-decoration: underline; }
+
+    /* FLEET */
+    .fleet-hd { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+    .fleet-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 12px; }
+    .car-card { background: var(--card); border: 1.5px solid var(--cb); border-radius: 14px; padding: 16px 14px; cursor: pointer; position: relative; transition: transform .2s, box-shadow .2s; }
+    .car-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,78,216,.12); }
+    .car-dot { position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; }
+    .dot-d { background: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,.2); }
+    .dot-l { background: var(--red);   box-shadow: 0 0 0 3px rgba(220,38,38,.2); }
+    .dot-m { background: var(--amber); box-shadow: 0 0 0 3px rgba(217,119,6,.2); }
+    .car-ico  { font-size: 1.8rem; margin-bottom: 8px; }
+    .car-mdl  { font-size: .93rem; font-weight: 900; }
+    .car-plt  { font-size: .74rem; color: var(--muted); margin: 2px 0 6px; }
+    .car-bdg  { display: inline-block; padding: 2px 9px; border-radius: 50px; font-size: .7rem; font-weight: 700; }
+    .bdg-d { background: var(--green-s); color: var(--green); }
+    .bdg-l { background: var(--red-s);   color: var(--red); }
+    .bdg-m { background: var(--amber-s); color: var(--amber); }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(180px,1fr)); gap: 12px; }
+    .svc-card { background: var(--card); border: 1px solid var(--cb); border-radius: 12px; padding: 16px; }
+    .svc-name { font-size: .9rem; font-weight: 700; margin-bottom: 6px; }
+    .svc-price { font-size: 1.1rem; font-weight: 900; color: var(--c); }
+    .svc-dur { font-size: .72rem; color: var(--muted); margin-top: 2px; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal { background: var(--card); border-radius: 20px; padding: 24px 22px; width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto; box-shadow: 0 16px 60px rgba(29,78,216,.18); }
+    .modal h3 { font-size: 1rem; font-weight: 900; margin-bottom: 14px; }
+    .mf { margin-bottom: 11px; }
+    .mf label { display: block; font-size: .76rem; font-weight: 700; color: var(--c); margin-bottom: 4px; }
+    .mf input, .mf select, .mf textarea { width: 100%; border: 1.5px solid var(--cb); border-radius: 10px; padding: 9px 11px; font-family: 'Cairo',sans-serif; font-size: .88rem; color: var(--text); background: var(--bg); outline: none; }
+    .mf input:focus { border-color: var(--c); }
+    .ma { display: flex; gap: 9px; margin-top: 14px; }
+    .ma button { flex: 1; }
+    .wa-tpls { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--cb); }
+    .wa-tpls-title { font-size: .72rem; font-weight: 700; color: var(--muted); margin-bottom: 8px; }
+    .wa-tpl { background: var(--bg); border: 1px solid var(--cb); border-radius: 9px; padding: 9px 11px; margin-bottom: 7px; cursor: pointer; transition: background .2s; position: relative; }
+    .wa-tpl:hover { background: var(--cs); }
+    .wa-tpl-lbl { font-size: .68rem; font-weight: 700; color: var(--c); margin-bottom: 3px; }
+    .wa-tpl-txt { font-size: .77rem; color: var(--text); line-height: 1.55; }
+    .wa-tpl-cp { position: absolute; top: 7px; right: 7px; font-size: .65rem; color: var(--muted); }
+    .empty { text-align: center; padding: 40px 16px; color: var(--muted); }
+    .empty .ei { font-size: 2.2rem; margin-bottom: 10px; }
+    #toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%) translateY(12px); background: var(--card); border: 1px solid var(--cb); color: var(--c); padding: 9px 22px; border-radius: 50px; font-size: .83rem; font-weight: 700; opacity: 0; transition: all .3s; pointer-events: none; z-index: 400; white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+<!-- Splash shown before config loads -->
+<div class="splash" id="splash">
+  <div class="splash-card">
+    <div class="splash-ico">⏳</div>
+    <div class="splash-title">Chargement...</div>
+    <div class="splash-sub">Initialisation du dashboard</div>
+  </div>
+</div>
+
+<!-- Main app (hidden until config loaded) -->
+<div id="app" style="display:none">
+  <div class="topbar">
+    <div class="tb-brand">
+      <span id="tbEmoji"></span>
+      <span id="tbName">—</span>
+      <span class="niche-tag" id="tbNiche">—</span>
+    </div>
+    <div class="tb-right">
+      <button class="btn-sm btn-ghost" onclick="loadAll()">🔄</button>
+      <button class="btn-sm btn-c" onclick="openAddLeadModal()">+ Lead</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="alert-bar" id="alertBar">
+      <div class="ad"></div>
+      <span id="alertTxt">— leads non contactés +24h</span>
+    </div>
+
+    <div class="stats-row" id="statsRow"></div>
+
+    <div class="tabs" id="tabsBar"></div>
+
+    <div id="tabContent"></div>
+  </div>
+</div>
+
+<!-- Lead status modal -->
+<div class="modal-overlay" id="modalStatus" style="display:none" onclick="closeModal('modalStatus',event)">
+  <div class="modal">
+    <h3>📋 Mettre à jour le lead</h3>
+    <div style="font-size:.85rem;color:var(--muted);margin-bottom:12px" id="statusLeadName"></div>
+    <input type="hidden" id="statusRow"/>
+    <div class="mf"><label>Statut</label>
+      <select id="statusSel" onchange="onStatusChange()"></select>
+    </div>
+    <div class="mf" id="revenueField" style="display:none">
+      <label>Revenue (DH)</label>
+      <input type="number" id="revenueInput" placeholder="ex: 1800"/>
+    </div>
+    <div class="mf"><label>Notes</label><textarea id="statusNotes" rows="2" placeholder="Notes..."></textarea></div>
+    <div class="wa-tpls">
+      <div class="wa-tpls-title">💬 Templates WhatsApp — cliquez pour copier</div>
+      <div id="waTplsContainer"></div>
+    </div>
+    <div class="ma">
+      <button class="btn-sm btn-ghost" onclick="closeById('modalStatus')">Annuler</button>
+      <button class="btn-sm btn-c" onclick="saveStatus()">💾 Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Car modal -->
+<div class="modal-overlay" id="modalCar" style="display:none" onclick="closeModal('modalCar',event)">
+  <div class="modal">
+    <h3 id="carModalTitle">🚗 Modifier voiture</h3>
+    <input type="hidden" id="carId"/>
+    <div class="mf"><label>Statut</label>
+      <select id="carStatusSel">
+        <option value="Disponible">🟢 Disponible</option>
+        <option value="Loué">🔴 Loué</option>
+        <option value="Maintenance">🟡 Maintenance</option>
+      </select>
+    </div>
+    <div class="mf"><label>Client actuel</label><input type="text" id="carClient" placeholder="Nom du locataire"/></div>
+    <div class="mf"><label>Retour prévu</label><input type="date" id="carReturn"/></div>
+    <div class="ma">
+      <button class="btn-sm btn-ghost" onclick="closeById('modalCar')">Annuler</button>
+      <button class="btn-sm btn-c" onclick="saveCar()">💾 Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add car modal -->
+<div class="modal-overlay" id="modalAddCar" style="display:none" onclick="closeModal('modalAddCar',event)">
+  <div class="modal">
+    <h3>🚗 Ajouter une voiture</h3>
+    <div class="mf"><label>Modèle</label><input type="text" id="addCarModel" placeholder="ex: Dacia Sandero"/></div>
+    <div class="mf"><label>Immatriculation</label><input type="text" id="addCarPlate" placeholder="ex: 12345-A-5"/></div>
+    <div class="mf"><label>Année</label><input type="number" id="addCarYear" placeholder="2022"/></div>
+    <div class="ma">
+      <button class="btn-sm btn-ghost" onclick="closeById('modalAddCar')">Annuler</button>
+      <button class="btn-sm btn-c" onclick="saveNewCar()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add lead modal -->
+<div class="modal-overlay" id="modalAddLead" style="display:none" onclick="closeModal('modalAddLead',event)">
+  <div class="modal">
+    <h3>📋 Ajouter lead</h3>
+    <div class="mf"><label>Nom</label><input type="text" id="alName" placeholder="Nom du client"/></div>
+    <div class="mf"><label>Téléphone</label><input type="tel" id="alPhone" placeholder="06XXXXXXXX"/></div>
+    <div class="mf" id="alServiceField"><label>Service / Voiture</label><input type="text" id="alService" placeholder="ex: Coupe femme / SUV"/></div>
+    <div class="mf" id="alDatesField" style="display:none"><label>Dates</label><input type="text" id="alDates" placeholder="ex: 15-20 juillet"/></div>
+    <div class="mf"><label>Source</label>
+      <select id="alSource">
+        <option>Meta Ads</option><option>WhatsApp direct</option><option>Google Maps</option>
+        <option>Référence</option><option>Autre</option>
+      </select>
+    </div>
+    <div class="ma">
+      <button class="btn-sm btn-ghost" onclick="closeById('modalAddLead')">Annuler</button>
+      <button class="btn-sm btn-c" onclick="saveLead()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// NICHE CONFIG — Add any new niche here, no other files needed
+// ══════════════════════════════════════════════════════════════════
+const NICHES = {
+  salon: {
+    label: 'Salon de beauté', emoji: '💅',
+    color: '#ec4899', bg: '#fdf2f8',
+    border: 'rgba(236,72,153,.2)', soft: 'rgba(236,72,153,.08)',
+    grad: 'linear-gradient(135deg,#be185d,#ec4899)',
+    tabs: [{ id:'leads',label:'📋 Leads'}, {id:'services',label:'✂️ Services'}],
+    statuses: ['Nouveau','Contacté','RDV pris','Terminé','Annulé'],
+    revenueStatus: 'Terminé',
+    statusColors: { 'Nouveau':'#3b82f6','Contacté':'#d97706','RDV pris':'#7c3aed','Terminé':'#16a34a','Annulé':'#dc2626' },
+    leadServiceField: 'Service demandé',
+    extraLeadFields: [],
+    waTemplates: {
+      'Nouveau':   [{label:'Premier contact (Darija)', text:'السلام عليكم [الاسم] 👋 شكراً على تواصلك مع صالوننا! واش بغيتي تحجزي موعد؟ أخبريني بالخدمة اللي كتبغي 😊'},
+                   {label:'Premier contact (Français)', text:'Bonjour [Prénom] 👋 Merci de nous avoir contactés ! Quel service souhaitez-vous réserver et quelle date vous convient ? 😊'}],
+      'Contacté':  [{label:'Proposer RDV (Darija)',    text:'السلام عليكم [الاسم]، كنقدرو نعطيوك موعد [اليوم أو الغد] إن شاء الله. واش هاد الوقت كيوافقك؟'},
+                   {label:'Relance J+1',               text:'Bonjour [Prénom] 😊 On a de la disponibilité cette semaine. Souhaitez-vous qu\'on vous réserve un créneau ?'}],
+      'RDV pris':  [{label:'Confirmation (Darija)',    text:'✅ تأكد الموعد ديالك [الاسم] ليوم [التاريخ] فـ [الساعة]. كنستناوك! أي سؤال لا تترددي 💅'},
+                   {label:'Rappel veille',              text:'Bonjour [Prénom] 😊 Rappel : votre RDV est demain à [heure]. On vous attend ! 💅'}],
+      'Terminé':   [{label:'Demande avis (Darija)',    text:'كنا مبسوطين بيك [الاسم] 💅 واش عجبك الخدمة؟ إلا ما عندك شي ملاحظة نكونو سعداء نسمعوها 🙏'},
+                   {label:'Fidélisation',               text:'Bonjour [Prénom] ! On espère que vous êtes satisfaite 💅 N\'hésitez pas à nous recommander à vos amies 🌸'}],
+      'Annulé':    [{label:'Relance douce (Darija)',   text:'السلام [الاسم]، فهمنا إنك ما قدرتيش تجي. إلا بغيتي تعاودي تحجزي في وقت آخر كنا هنا 😊'}],
+    }
+  },
+
+  rentalcars: {
+    label: 'Location Voiture', emoji: '🚗',
+    color: '#1d4ed8', bg: '#f0f6ff',
+    border: 'rgba(59,130,246,.22)', soft: 'rgba(59,130,246,.09)',
+    grad: 'linear-gradient(135deg,#1e3a8a,#1d4ed8,#0891b2)',
+    tabs: [{id:'leads',label:'📋 Leads'},{id:'fleet',label:'🚗 Flotte'}],
+    statuses: ['Nouveau','Contacté','Devis envoyé','Confirmé','Annulé','Pas intéressé'],
+    revenueStatus: 'Confirmé',
+    statusColors: { 'Nouveau':'#3b82f6','Contacté':'#d97706','Devis envoyé':'#7c3aed','Confirmé':'#16a34a','Annulé':'#dc2626','Pas intéressé':'#6b7280' },
+    leadServiceField: 'Voiture demandée',
+    extraLeadFields: ['Dates location'],
+    waTemplates: {
+      'Nouveau':       [{label:'Premier contact (Français)', text:'Bonjour [Prénom] 👋 Merci pour votre demande de location ! Quelle voiture vous intéresse et pour quelles dates exactement ? 🚗'},
+                       {label:'Premier contact (Darija)',    text:'السلام عليكم [الاسم] 👋 شكرا على تواصلك! أي نوع سيارة كتحتاج وفين الأيام اللي بغيتي؟'}],
+      'Contacté':      [{label:'Envoyer disponibilité',      text:'Bonjour [Prénom], [Voiture] est disponible du [dates] à [X] DH/jour. On confirme ? 🚗'},
+                       {label:'Relance J+1',                 text:'Bonjour [Prénom] 😊 Avez-vous pu trouver votre voiture ? On a encore des disponibilités cette semaine !'}],
+      'Devis envoyé':  [{label:'Suivi devis',                text:'Bonjour [Prénom], avez-vous pu consulter notre offre ? Je reste disponible pour toute question 😊'},
+                       {label:'Urgence dispo',               text:'Bonjour [Prénom], je voulais vous prévenir que la voiture [modèle] est toujours disponible pour vos dates. On bloque ?'}],
+      'Confirmé':      [{label:'Confirmation (Français)',     text:'✅ Parfait [Prénom] ! Votre réservation est confirmée 🚗 On vous attend le [date] à [heure]. En cas de besoin : [tel]. Bon voyage !'},
+                       {label:'Rappel veille',               text:'Bonjour [Prénom] 😊 Rappel : votre voiture [modèle] vous attend demain. N\'hésitez pas à appeler si besoin !'}],
+      'Annulé':        [{label:'Relance douce',               text:'Bonjour [Prénom], votre réservation a été annulée. Si vous souhaitez reprogrammer, on reste disponibles 😊'},
+                       {label:'Offre alternative',           text:'Bonjour [Prénom], on a une disponibilité exceptionnelle cette semaine sur [voiture]. Ça vous intéresse ? 🚗'}],
+    }
+  },
+
+  // ── TEMPLATE: add a new niche here ──────────────────────────
+  // salecars: {
+  //   label: 'Vente Voitures', emoji: '🏪',
+  //   color: '#7c3aed', bg: '#f5f3ff',
+  //   border: 'rgba(124,58,237,.2)', soft: 'rgba(124,58,237,.08)',
+  //   grad: 'linear-gradient(135deg,#4c1d95,#7c3aed)',
+  //   tabs: [{id:'leads',label:'📋 Leads'}],
+  //   statuses: ['Nouveau','Contacté','Essai prévu','Vendu','Annulé'],
+  //   revenueStatus: 'Vendu',
+  //   statusColors: { ... },
+  //   leadServiceField: 'Voiture souhaitée',
+  //   extraLeadFields: ['Budget (DH)'],
+  //   waTemplates: { ... }
+  // },
+};
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let CFG   = null; // { niche, name, city, scriptUrl }
+let NICHE = null; // NICHES[cfg.niche]
+let leadsData = [];
+let fleetData = [];
+let currentTab = 'leads';
+let currentFilter = 'all';
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+(function init() {
+  try {
+    const raw = new URLSearchParams(location.search).get('c');
+    if (!raw) return showError('Lien invalide', 'Ce lien ne contient pas de configuration client. Contactez AmraniAds.');
+    CFG   = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    NICHE = NICHES[CFG.niche];
+    if (!NICHE) return showError('Niche inconnue', 'La niche "' + CFG.niche + '" n\'est pas encore configurée.');
+    applyTheme();
+    buildUI();
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadAll();
+  } catch(e) {
+    showError('Erreur de configuration', 'Lien invalide ou corrompu. Contactez AmraniAds. (' + e.message + ')');
+  }
+})();
+
+function showError(title, msg) {
+  document.getElementById('splash').innerHTML = `
+    <div class="splash-card">
+      <div class="splash-ico">⚠️</div>
+      <div class="splash-title">${title}</div>
+      <div class="splash-sub">${msg}</div>
+    </div>`;
+}
+
+function applyTheme() {
+  const r = document.documentElement.style;
+  r.setProperty('--c',    NICHE.color);
+  r.setProperty('--cs',   NICHE.soft);
+  r.setProperty('--cb',   NICHE.border);
+  r.setProperty('--grad', NICHE.grad);
+  r.setProperty('--bg',   NICHE.bg);
+  document.getElementById('themeColor').content = NICHE.color;
+  document.title = `${NICHE.emoji} ${CFG.name} — AmraniAds`;
+}
+
+function buildUI() {
+  document.getElementById('tbEmoji').textContent = NICHE.emoji;
+  document.getElementById('tbName').textContent  = CFG.name + (CFG.city ? ' — ' + CFG.city : '');
+  document.getElementById('tbNiche').textContent = NICHE.label;
+
+  // Stats row
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="sl">Total leads</div><div class="sn" id="st-total">—</div></div>
+    <div class="stat-card green"><div class="sl">${NICHE.revenueStatus}s</div><div class="sn" id="st-conf">—</div></div>
+    <div class="stat-card amber"><div class="sl">Taux conv.</div><div class="sn" id="st-rate">—</div></div>
+    <div class="stat-card purple"><div class="sl">Revenue</div><div class="sn" id="st-rev">—</div><div class="ss">DH</div></div>
+    ${CFG.niche === 'rentalcars' ? '<div class="stat-card"><div class="sl">Dispos</div><div class="sn" id="st-avail">—</div></div><div class="stat-card red"><div class="sl">Louées</div><div class="sn" id="st-rented">—</div></div>' : ''}`;
+
+  // Tabs
+  document.getElementById('tabsBar').innerHTML = NICHE.tabs.map((t, i) =>
+    `<button class="tab ${i===0?'active':''}" onclick="switchTab('${t.id}',this)">${t.label}</button>`
+  ).join('');
+
+  // Status select options
+  document.getElementById('statusSel').innerHTML =
+    NICHE.statuses.map(s => `<option value="${s}">${s}</option>`).join('');
+
+  // Add lead modal — show extra fields
+  if (CFG.niche === 'rentalcars') {
+    document.getElementById('alServiceField').querySelector('label').textContent = 'Voiture demandée';
+    document.getElementById('alService').placeholder = 'ex: SUV, citadine...';
+    document.getElementById('alDatesField').style.display = 'block';
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════════
+async function loadAll() {
+  await Promise.all([loadLeads(), loadStats()]);
+  if (CFG.niche === 'rentalcars') loadFleet();
+  if (CFG.niche === 'salon')      loadServices();
+}
+
+async function loadLeads() {
+  try {
+    const r = await fetch(CFG.scriptUrl + '?tab=leads');
+    const d = await r.json();
+    leadsData = d.rows || [];
+    if (currentTab === 'leads') renderLeads();
+    checkAlert();
+  } catch { renderTabContent('<div class="empty"><div class="ei">⚠️</div><p>Connexion impossible au Google Sheet</p></div>'); }
+}
+
+async function loadFleet() {
+  try {
+    const r = await fetch(CFG.scriptUrl + '?tab=fleet');
+    const d = await r.json();
+    fleetData = d.rows || [];
+    if (currentTab === 'fleet') renderFleet();
+  } catch {}
+}
+
+async function loadServices() {
+  if (currentTab !== 'services') return;
+  try {
+    const r = await fetch(CFG.scriptUrl + '?tab=services');
+    const d = await r.json();
+    renderServices(d.rows || []);
+  } catch {}
+}
+
+async function loadStats() {
+  try {
+    const r = await fetch(CFG.scriptUrl + '?tab=stats');
+    const d = await r.json();
+    const conf = d.leads?.confirmed ?? d.leads?.termine ?? 0;
+    document.getElementById('st-total').textContent = d.leads?.total ?? '—';
+    document.getElementById('st-conf').textContent  = conf;
+    document.getElementById('st-rate').textContent  = (d.conversion ?? 0) + '%';
+    document.getElementById('st-rev').textContent   = (d.revenue ?? 0).toLocaleString('fr');
+    if (CFG.niche === 'rentalcars') {
+      const av = document.getElementById('st-avail');
+      const rn = document.getElementById('st-rented');
+      if (av) av.textContent = d.fleet?.available ?? '—';
+      if (rn) rn.textContent = d.fleet?.rented    ?? '—';
+    }
+  } catch {}
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER LEADS
+// ══════════════════════════════════════════════════════════════════
+function renderLeads() {
+  let leads = [...leadsData].reverse();
+  if (currentFilter === 'nouveau')  leads = leads.filter(l => (l['Statut']||'') === 'Nouveau');
+  if (currentFilter === 'chaud')    leads = leads.filter(isUncontacted);
+  if (currentFilter === 'confirme') leads = leads.filter(l => [NICHE.revenueStatus,'Confirmé','Terminé'].includes(l['Statut']||''));
+
+  const serviceField = NICHE.leadServiceField;
+  const extraFields  = NICHE.extraLeadFields || [];
+
+  const html = `
+    <div class="table-wrap">
+      <div class="table-filters">
+        <button class="fb ${currentFilter==='all'?'active':''}"     onclick="setFilter('all',this)">Tous</button>
+        <button class="fb ${currentFilter==='nouveau'?'active':''}" onclick="setFilter('nouveau',this)">Nouveaux</button>
+        <button class="fb ${currentFilter==='chaud'?'active':''}"   onclick="setFilter('chaud',this)">🔴 +24h</button>
+        <button class="fb ${currentFilter==='confirme'?'active':''}" onclick="setFilter('confirme',this)">✅ Confirmés</button>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Date</th><th>Nom</th><th>Téléphone</th>
+            <th>${serviceField}</th>
+            ${extraFields.map(f=>`<th>${f}</th>`).join('')}
+            <th>Statut</th><th>Âge</th>
+          </tr></thead>
+          <tbody>
+            ${leads.length ? leads.map((l,i) => renderLeadRow(l, leads.length-i, serviceField, extraFields)).join('') : '<tr><td colspan="10"><div class="empty"><div class="ei">📋</div><p>Aucun lead</p></div></td></tr>'}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  renderTabContent(html);
+}
+
+function renderLeadRow(l, idx, serviceField, extraFields) {
+  const st     = l['Statut'] || 'Nouveau';
+  const color  = NICHE.statusColors[st] || '#6b7280';
+  const ph     = String(l['Téléphone']||'').replace(/\D/g,'');
+  const waNum  = ph.startsWith('0') ? '212'+ph.slice(1) : ph;
+  const age    = getAge(l['Date']);
+  const ageCls = age === null ? '' : age<1 ? 'age-ok' : age<2 ? 'age-warn' : 'age-hot';
+  const ageStr = age === null ? '—' : age<1 ? '<1j' : Math.floor(age)+'j';
+  return `<tr>
+    <td style="color:var(--muted);font-size:.75rem">${idx}</td>
+    <td style="font-size:.75rem;color:var(--muted);white-space:nowrap">${String(l['Date']||'').slice(0,16)}</td>
+    <td style="font-weight:700">${esc(l['Nom']||'—')}</td>
+    <td>${ph?`<a class="wa-lnk" href="https://wa.me/${waNum}" target="_blank">💬 ${esc(l['Téléphone']||'')}</a>`:esc(l['Téléphone']||'—')}</td>
+    <td style="font-size:.81rem;color:var(--muted)">${esc(l[serviceField]||'—')}</td>
+    ${extraFields.map(f=>`<td style="font-size:.79rem;color:var(--muted)">${esc(l[f]||'—')}</td>`).join('')}
+    <td><span class="s-badge" style="background:${color}1a;color:${color}" onclick="openStatusModal(${l._row},'${esc(l['Nom']||'')}','${st}')">${st}</span></td>
+    <td>${ageCls?`<span class="age-b ${ageCls}">${ageStr}</span>`:'—'}</td>
+  </tr>`;
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER FLEET
+// ══════════════════════════════════════════════════════════════════
+function renderFleet() {
+  const sc = { 'Disponible':['d','Disponible'], 'Loué':['l','Loué'], 'Maintenance':['m','Maintenance'] };
+  const html = `
+    <div class="fleet-hd">
+      <button class="btn-sm btn-c" onclick="document.getElementById('modalAddCar').style.display='flex'">+ Ajouter voiture</button>
+    </div>
+    <div class="fleet-grid">
+      ${fleetData.length ? fleetData.map(car => {
+        const [cls, lbl] = sc[car['Statut']] || ['d','Disponible'];
+        return `<div class="car-card" onclick="openCarModal(${car._row},'${esc(car['Marque / Modèle']||'')}','${car['Statut']||''}','${esc(car['Client actuel']||'')}','${esc(String(car['Retour prévu']||''))}','${esc(String(car['ID']||''))}')">
+          <div class="car-dot dot-${cls}"></div>
+          <div class="car-ico">🚗</div>
+          <div class="car-mdl">${esc(car['Marque / Modèle']||'—')}</div>
+          <div class="car-plt">🔑 ${esc(car['Immatriculation']||'—')} · ${car['Année']||''}</div>
+          <span class="car-bdg bdg-${cls}">${lbl}</span>
+          ${car['Client actuel']?`<div style="font-size:.73rem;color:var(--muted);margin-top:5px">👤 ${esc(car['Client actuel'])}</div>`:''}
+          ${car['Retour prévu']?`<div style="font-size:.71rem;color:var(--c);margin-top:2px">📅 ${esc(String(car['Retour prévu']))}</div>`:''}
+        </div>`;
+      }).join('') : '<div class="empty"><div class="ei">🚗</div><p>Aucune voiture.<br>Cliquez "+ Ajouter voiture"</p></div>'}
+    </div>`;
+  renderTabContent(html);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RENDER SERVICES
+// ══════════════════════════════════════════════════════════════════
+function renderServices(rows) {
+  if (!rows.length) { renderTabContent('<div class="empty"><div class="ei">✂️</div><p>Aucun service dans le Google Sheet</p></div>'); return; }
+  const html = `<div class="services-grid">${rows.map(s => `
+    <div class="svc-card">
+      <div class="svc-name">${esc(s['Service']||'—')}</div>
+      <div class="svc-price">${s['Prix (DH)']||'—'} DH</div>
+      <div class="svc-dur">⏱️ ${s['Durée (min)']||'—'} min${s['Notes']?' · '+esc(s['Notes']):''}</div>
+    </div>`).join('')}</div>`;
+  renderTabContent(html);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// TABS / FILTERS
+// ══════════════════════════════════════════════════════════════════
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  if (tab === 'leads')    renderLeads();
+  if (tab === 'fleet')    renderFleet();
+  if (tab === 'services') loadServices();
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeads();
+}
+
+function renderTabContent(html) { document.getElementById('tabContent').innerHTML = html; }
+
+// ══════════════════════════════════════════════════════════════════
+// LEAD STATUS MODAL
+// ══════════════════════════════════════════════════════════════════
+function openStatusModal(row, name, status) {
+  document.getElementById('statusRow').value = row;
+  document.getElementById('statusLeadName').textContent = '👤 ' + name;
+  document.getElementById('statusSel').value = status;
+  document.getElementById('statusNotes').value = '';
+  document.getElementById('revenueInput').value = '';
+  onStatusChange();
+  document.getElementById('modalStatus').style.display = 'flex';
+}
+
+function onStatusChange() {
+  const st = document.getElementById('statusSel').value;
+  document.getElementById('revenueField').style.display = st === NICHE.revenueStatus ? 'block' : 'none';
+  const tpls = (NICHE.waTemplates[st] || []);
+  document.getElementById('waTplsContainer').innerHTML = tpls.map(t =>
+    `<div class="wa-tpl" onclick="copyTpl(this,'${esc(t.text)}')">
+      <div class="wa-tpl-lbl">${t.label}</div>
+      <div class="wa-tpl-txt">${esc(t.text)}</div>
+      <span class="wa-tpl-cp">📋</span>
+    </div>`
+  ).join('');
+}
+
+function copyTpl(el, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    el.style.background = 'rgba(22,163,74,.12)';
+    setTimeout(() => el.style.background = '', 1200);
+    toast('✅ Copié !');
+  });
+}
+
+async function saveStatus() {
+  await post({ action:'lead_update', row:document.getElementById('statusRow').value, status:document.getElementById('statusSel').value, notes:document.getElementById('statusNotes').value, revenue:document.getElementById('revenueInput').value });
+  closeById('modalStatus');
+  loadAll();
+  toast('✅ Statut mis à jour');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// CAR MODAL
+// ══════════════════════════════════════════════════════════════════
+function openCarModal(row, model, status, client, returnDate, carId) {
+  document.getElementById('carModalTitle').textContent = '🚗 ' + model;
+  document.getElementById('carId').value = carId;
+  document.getElementById('carStatusSel').value = status;
+  document.getElementById('carClient').value = client;
+  document.getElementById('carReturn').value  = returnDate;
+  document.getElementById('modalCar').style.display = 'flex';
+}
+
+async function saveCar() {
+  await post({ action:'fleet_update', carId:document.getElementById('carId').value, status:document.getElementById('carStatusSel').value, currentClient:document.getElementById('carClient').value, returnDate:document.getElementById('carReturn').value });
+  closeById('modalCar');
+  loadAll();
+  toast('✅ Voiture mise à jour');
+}
+
+async function saveNewCar() {
+  const model = document.getElementById('addCarModel').value.trim();
+  if (!model) { alert('Entrez le modèle'); return; }
+  await post({ action:'fleet_add', model, plate:document.getElementById('addCarPlate').value.trim(), year:document.getElementById('addCarYear').value.trim() });
+  closeById('modalAddCar');
+  ['addCarModel','addCarPlate','addCarYear'].forEach(id => document.getElementById(id).value='');
+  loadAll();
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ADD LEAD
+// ══════════════════════════════════════════════════════════════════
+function openAddLeadModal() { document.getElementById('modalAddLead').style.display = 'flex'; }
+
+async function saveLead() {
+  const name  = document.getElementById('alName').value.trim();
+  const phone = document.getElementById('alPhone').value.trim();
+  if (!name || !phone) { alert('Nom et téléphone requis'); return; }
+  const payload = { action:'lead', name, phone, source:document.getElementById('alSource').value };
+  if (CFG.niche === 'salon')      payload.service = document.getElementById('alService').value.trim();
+  if (CFG.niche === 'rentalcars') { payload.carType = document.getElementById('alService').value.trim(); payload.dates = document.getElementById('alDates').value.trim(); }
+  await post(payload);
+  closeById('modalAddLead');
+  ['alName','alPhone','alService','alDates'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+  loadAll();
+  toast('✅ Lead ajouté');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ALERT
+// ══════════════════════════════════════════════════════════════════
+function isUncontacted(l) { return (l['Statut']||'').toLowerCase()==='nouveau' && getAge(l['Date']) >= 1; }
+function getAge(ds) { if(!ds) return null; const d=new Date(ds); return isNaN(d)?null:(Date.now()-d.getTime())/86400000; }
+function checkAlert() {
+  const n = leadsData.filter(isUncontacted).length;
+  const bar = document.getElementById('alertBar');
+  if (n>0) { document.getElementById('alertTxt').textContent = n+' lead(s) non contactés depuis +24h'; bar.style.display='flex'; }
+  else bar.style.display='none';
+}
+
+// ══════════════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════════════
+async function post(payload) {
+  try { await fetch(CFG.scriptUrl, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) }); }
+  catch(e) { alert('Erreur: '+e.message); }
+}
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function closeModal(id,e) { if(e.target.id===id) document.getElementById(id).style.display='none'; }
+function closeById(id) { document.getElementById(id).style.display='none'; }
+function toast(msg) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.opacity='1'; t.style.transform='translateX(-50%) translateY(0)';
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(12px)'; },2400);
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then(reg => {
+    if ('Notification' in window && Notification.permission === 'default')
+      setTimeout(() => Notification.requestPermission(), 3000);
+  }).catch(() => {});
+}
+</script>
+</body>
+</html>
