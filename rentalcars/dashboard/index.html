@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AmraniAds — Dashboard Location Voiture</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:        #1d4ed8;
+      --blue-deep:   #1e3a8a;
+      --blue-bright: #3b82f6;
+      --blue-soft:   rgba(59,130,246,.09);
+      --blue-border: rgba(59,130,246,.22);
+      --gold:        #d97706;
+      --green:       #16a34a;
+      --green-soft:  rgba(22,163,74,.10);
+      --red:         #dc2626;
+      --red-soft:    rgba(220,38,38,.08);
+      --amber:       #d97706;
+      --amber-soft:  rgba(217,119,6,.10);
+      --bg:          #f0f6ff;
+      --card:        #ffffff;
+      --muted:       #6b7280;
+      --text:        #0f172a;
+      --sidebar-w:   260px;
+    }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      position: fixed; inset: 0; z-index: 999;
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8, #0891b2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-card {
+      background: #fff; border-radius: 24px; padding: 48px 40px;
+      width: 100%; max-width: 400px; text-align: center;
+      box-shadow: 0 24px 80px rgba(0,0,0,.25);
+    }
+    .login-logo { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
+    .login-logo span { color: var(--blue); }
+    .login-sub { color: var(--muted); font-size: .88rem; margin-bottom: 32px; }
+    .login-input {
+      width: 100%; border: 1.5px solid var(--blue-border); border-radius: 12px;
+      padding: 13px 16px; font-family: 'Cairo', sans-serif; font-size: 1rem;
+      color: var(--text); background: var(--bg); margin-bottom: 14px; outline: none;
+    }
+    .login-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(59,130,246,.15); }
+    .login-btn {
+      width: 100%; background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+      color: #fff; border: none; border-radius: 50px; padding: 14px;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer;
+    }
+    .login-err { color: var(--red); font-size: .83rem; margin-top: 8px; display: none; }
+
+    /* ── LAYOUT ── */
+    #app { display: none; }
+    .layout { display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w); background: linear-gradient(180deg, #1e3a8a 0%, #1d4ed8 100%);
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+      display: flex; flex-direction: column; padding: 0 0 24px;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,.12);
+      font-size: 1.1rem; font-weight: 900; color: #fff;
+    }
+    .sidebar-logo span { color: #93c5fd; }
+    .sidebar-section {
+      padding: 16px 12px 8px; font-size: .72rem; font-weight: 700;
+      color: rgba(255,255,255,.45); letter-spacing: 1.2px; text-transform: uppercase;
+    }
+    .sidebar-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px; border-radius: 10px; margin: 2px 10px;
+      background: none; border: none; color: rgba(255,255,255,.75);
+      font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 600;
+      cursor: pointer; text-align: left; transition: background .2s, color .2s;
+      width: calc(100% - 20px);
+    }
+    .sidebar-btn:hover  { background: rgba(255,255,255,.1); color: #fff; }
+    .sidebar-btn.active { background: rgba(255,255,255,.18); color: #fff; }
+    .sidebar-btn .ico   { font-size: 1.1rem; width: 22px; text-align: center; }
+    .client-tag {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 9px 14px; margin: 2px 10px; border-radius: 10px;
+      background: rgba(255,255,255,.06); cursor: pointer;
+      transition: background .2s; border: none; width: calc(100% - 20px);
+      font-family: 'Cairo',sans-serif;
+    }
+    .client-tag:hover    { background: rgba(255,255,255,.12); }
+    .client-tag.selected { background: rgba(255,255,255,.20); }
+    .client-name  { font-size: .88rem; font-weight: 700; color: #fff; }
+    .client-city  { font-size: .72rem; color: rgba(255,255,255,.5); }
+    .client-dot   { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); flex: 1; padding: 28px 24px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+    }
+    .topbar-title { font-size: 1.3rem; font-weight: 900; color: var(--text); }
+    .topbar-title span { color: var(--blue); }
+    .topbar-actions { display: flex; gap: 10px; }
+    .btn-sm {
+      padding: 8px 18px; border-radius: 50px; font-family: 'Cairo',sans-serif;
+      font-size: .85rem; font-weight: 700; cursor: pointer; border: none; transition: opacity .2s, transform .15s;
+    }
+    .btn-sm:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-blue  { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: #fff; }
+    .btn-ghost { background: var(--card); border: 1.5px solid var(--blue-border); color: var(--blue); }
+
+    /* ── STATS ROW ── */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--blue-border);
+      border-radius: 16px; padding: 20px 18px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .stat-card .s-label { font-size: .78rem; color: var(--muted); font-weight: 600; }
+    .stat-card .s-num   { font-size: 2rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .stat-card .s-sub   { font-size: .75rem; color: var(--muted); }
+    .stat-card.green .s-num { color: var(--green); }
+    .stat-card.amber .s-num { color: var(--amber); }
+    .stat-card.red   .s-num { color: var(--red);   }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 4px; background: var(--card); border: 1px solid var(--blue-border); border-radius: 12px; padding: 4px; margin-bottom: 24px; width: fit-content; }
+    .tab {
+      padding: 8px 20px; border-radius: 9px; font-family: 'Cairo',sans-serif;
+      font-size: .88rem; font-weight: 700; cursor: pointer; border: none; background: none;
+      color: var(--muted); transition: background .2s, color .2s;
+    }
+    .tab.active { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: #fff; }
+
+    /* ── FLEET GRID ── */
+    .fleet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+    .car-card {
+      background: var(--card); border-radius: 16px; border: 1.5px solid var(--blue-border);
+      padding: 18px 16px; cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s;
+      position: relative;
+    }
+    .car-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(29,78,216,.12); border-color: var(--blue); }
+    .car-status-dot {
+      position: absolute; top: 14px; right: 14px;
+      width: 11px; height: 11px; border-radius: 50%;
+    }
+    .car-status-dot.disponible  { background: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,.2); }
+    .car-status-dot.loue        { background: var(--red);   box-shadow: 0 0 0 3px rgba(220,38,38,.2); }
+    .car-status-dot.maintenance { background: var(--amber); box-shadow: 0 0 0 3px rgba(217,119,6,.2); }
+    .car-icon  { font-size: 2rem; margin-bottom: 10px; }
+    .car-model { font-size: .95rem; font-weight: 900; color: var(--text); }
+    .car-plate { font-size: .78rem; color: var(--muted); margin: 3px 0 8px; }
+    .car-badge {
+      display: inline-block; padding: 3px 10px; border-radius: 50px;
+      font-size: .73rem; font-weight: 700;
+    }
+    .car-badge.disponible  { background: var(--green-soft); color: var(--green); }
+    .car-badge.loue        { background: var(--red-soft);   color: var(--red);   }
+    .car-badge.maintenance { background: var(--amber-soft); color: var(--amber); }
+    .car-client { font-size: .78rem; color: var(--muted); margin-top: 6px; }
+    .car-return { font-size: .75rem; color: var(--blue); margin-top: 2px; }
+
+    /* ── LEADS TABLE ── */
+    .table-wrap { background: var(--card); border-radius: 16px; border: 1px solid var(--blue-border); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: #eff6ff; }
+    th { padding: 12px 14px; text-align: left; font-size: .78rem; font-weight: 700; color: var(--blue); border-bottom: 1px solid var(--blue-border); white-space: nowrap; }
+    td { padding: 12px 14px; font-size: .86rem; color: var(--text); border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--blue-soft); }
+    .lead-status {
+      display: inline-block; padding: 3px 10px; border-radius: 50px;
+      font-size: .73rem; font-weight: 700; cursor: pointer;
+    }
+    .lead-status.nouveau       { background: var(--blue-soft);  color: var(--blue);  }
+    .lead-status.contacte      { background: var(--amber-soft); color: var(--amber); }
+    .lead-status.devis         { background: rgba(99,102,241,.10); color: #4f46e5; }
+    .lead-status.confirme      { background: var(--green-soft); color: var(--green); }
+    .lead-status.annule        { background: var(--red-soft);   color: var(--red);   }
+    .lead-status.pas-interesse { background: #f3f4f6; color: #6b7280; }
+    .lead-phone { font-family: monospace; font-size: .85rem; }
+    .wa-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: #16a34a; text-decoration: none; font-weight: 700; font-size: .82rem;
+    }
+    .wa-link:hover { text-decoration: underline; }
+
+    /* ── MODALS ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal {
+      background: var(--card); border-radius: 20px; padding: 28px 26px;
+      width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 16px 60px rgba(0,0,0,.2);
+    }
+    .modal h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 20px; }
+    .modal-field { margin-bottom: 14px; }
+    .modal-field label { display: block; font-size: .82rem; font-weight: 700; color: var(--blue); margin-bottom: 5px; }
+    .modal-field input, .modal-field select, .modal-field textarea {
+      width: 100%; border: 1.5px solid var(--blue-border); border-radius: 10px;
+      padding: 10px 13px; font-family: 'Cairo',sans-serif; font-size: .9rem;
+      color: var(--text); background: var(--bg); outline: none;
+    }
+    .modal-field input:focus, .modal-field select:focus { border-color: var(--blue); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .modal-actions button { flex: 1; }
+
+    /* ── SETUP SCREEN ── */
+    #setupScreen { max-width: 700px; margin: 0 auto; }
+    #setupScreen h2 { font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; }
+    #setupScreen .setup-sub { color: var(--muted); font-size: .9rem; margin-bottom: 28px; }
+    .setup-card { background: var(--card); border: 1px solid var(--blue-border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .setup-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+    .client-list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+    }
+    .client-list-item:last-child { border-bottom: none; }
+    .del-btn { background: var(--red-soft); color: var(--red); border: none; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: .78rem; font-weight: 700; }
+
+    /* ── EMPTY ── */
+    .empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+    .empty .empty-ico { font-size: 3rem; margin-bottom: 14px; }
+    .empty p { font-size: .9rem; }
+
+    /* ── LOADING ── */
+    .loading { text-align: center; padding: 40px; color: var(--muted); font-size: .9rem; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); transition: transform .3s; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; padding: 16px; }
+      .fleet-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">Amrani<span>Ads</span></div>
+    <div class="login-sub">Dashboard Location Voiture 🚗</div>
+    <input type="password" id="pwInput" class="login-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">Accéder →</button>
+    <div class="login-err" id="loginErr">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">Amrani<span>Ads</span> 🚗</div>
+
+      <div class="sidebar-section">Navigation</div>
+      <button class="sidebar-btn active" onclick="showView('dashboard')" id="btn-dashboard">
+        <span class="ico">📊</span> Vue globale
+      </button>
+      <button class="sidebar-btn" onclick="showView('setup')" id="btn-setup">
+        <span class="ico">⚙️</span> Clients & Config
+      </button>
+
+      <div class="sidebar-section">Clients</div>
+      <div id="clientList"></div>
+
+      <div style="margin-top:auto;padding:16px 10px 0">
+        <button class="sidebar-btn" onclick="doLogout()">
+          <span class="ico">🚪</span> Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- DASHBOARD VIEW -->
+      <div id="view-dashboard">
+        <div class="topbar">
+          <div>
+            <div class="topbar-title">Bonjour <span id="currentClientName">—</span> 👋</div>
+            <div style="font-size:.82rem;color:var(--muted);margin-top:2px" id="lastRefresh"></div>
+          </div>
+          <div class="topbar-actions">
+            <button class="btn-sm btn-ghost" onclick="loadClientData()">🔄 Actualiser</button>
+            <button class="btn-sm btn-blue" onclick="openAddLeadModal()">+ Nouveau lead</button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row" id="statsRow">
+          <div class="stat-card"><div class="s-label">Total leads</div><div class="s-num" id="st-total">—</div><div class="s-sub">ce mois</div></div>
+          <div class="stat-card green"><div class="s-label">Confirmés</div><div class="s-num" id="st-confirmed">—</div><div class="s-sub">réservations closes</div></div>
+          <div class="stat-card amber"><div class="s-label">Taux conversion</div><div class="s-num" id="st-rate">—</div><div class="s-sub">leads → booking</div></div>
+          <div class="stat-card"><div class="s-label">Voitures dispo</div><div class="s-num" id="st-avail">—</div><div class="s-sub" id="st-fleet-total"></div></div>
+          <div class="stat-card red"><div class="s-label">Louées</div><div class="s-num" id="st-rented">—</div><div class="s-sub">en ce moment</div></div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('fleet',this)">🚗 Flotte</button>
+          <button class="tab" onclick="switchTab('leads',this)">📋 Leads</button>
+        </div>
+
+        <!-- FLEET -->
+        <div id="tab-fleet">
+          <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
+            <button class="btn-sm btn-blue" onclick="openAddCarModal()">+ Ajouter voiture</button>
+          </div>
+          <div class="fleet-grid" id="fleetGrid"><div class="loading">⏳ Chargement...</div></div>
+        </div>
+
+        <!-- LEADS -->
+        <div id="tab-leads" style="display:none">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Nom</th>
+                  <th>Téléphone</th>
+                  <th>Voiture</th>
+                  <th>Dates</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leadsBody"><tr><td colspan="8" class="loading">⏳ Chargement...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETUP VIEW -->
+      <div id="view-setup" style="display:none">
+        <div id="setupScreen">
+          <div class="topbar">
+            <div>
+              <h2>Clients & Configuration</h2>
+              <div class="setup-sub">Gérez vos clients et leurs feuilles Google</div>
+            </div>
+            <button class="btn-sm btn-blue" onclick="openAddClientModal()">+ Ajouter client</button>
+          </div>
+
+          <div class="setup-card">
+            <h3>🔑 Mot de passe du dashboard</h3>
+            <div class="modal-field">
+              <label>Nouveau mot de passe</label>
+              <input type="password" id="newPwInput" placeholder="Entrez un nouveau mot de passe"/>
+            </div>
+            <button class="btn-sm btn-blue" onclick="changePassword()">Sauvegarder le mot de passe</button>
+          </div>
+
+          <div class="setup-card">
+            <h3>👥 Clients actifs</h3>
+            <div id="clientListSetup"></div>
+          </div>
+
+          <div class="setup-card">
+            <h3>📋 Instructions Google Sheets</h3>
+            <ol style="padding-left:20px;font-size:.88rem;color:var(--muted);line-height:2">
+              <li>Créer un nouveau Google Sheet pour le client</li>
+              <li>Extensions → Apps Script → Coller le code <code>apps-script.gs</code></li>
+              <li>Exécuter <code>setupSheet()</code> une fois</li>
+              <li>Exécuter <code>setProperties()</code> avec votre token Telegram</li>
+              <li>Déployer → Nouvelle déploiement → Application Web<br>
+                <em>Exécuter en tant que : Moi | Accès : Tout le monde</em></li>
+              <li>Copier l'URL de déploiement → coller dans "URL Apps Script" du client</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- Add/Edit Car -->
+<div class="modal-overlay" id="modalCar" style="display:none" onclick="closeModal('modalCar',event)">
+  <div class="modal">
+    <h3 id="carModalTitle">🚗 Modifier statut voiture</h3>
+    <input type="hidden" id="carId"/>
+    <div class="modal-field">
+      <label>Statut</label>
+      <select id="carStatus">
+        <option value="Disponible">🟢 Disponible</option>
+        <option value="Loué">🔴 Loué</option>
+        <option value="Maintenance">🟡 Maintenance</option>
+      </select>
+    </div>
+    <div class="modal-field" id="carClientField">
+      <label>Client actuel (si loué)</label>
+      <input type="text" id="carClient" placeholder="Nom du locataire"/>
+    </div>
+    <div class="modal-field" id="carReturnField">
+      <label>Date de retour</label>
+      <input type="date" id="carReturn"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalCar')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveCarStatus()">💾 Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Car -->
+<div class="modal-overlay" id="modalAddCar" style="display:none" onclick="closeModal('modalAddCar',event)">
+  <div class="modal">
+    <h3>🚗 Ajouter une voiture</h3>
+    <div class="modal-field">
+      <label>Marque / Modèle</label>
+      <input type="text" id="addCarModel" placeholder="ex: Dacia Sandero"/>
+    </div>
+    <div class="modal-field">
+      <label>Immatriculation</label>
+      <input type="text" id="addCarPlate" placeholder="ex: 12345-A-5"/>
+    </div>
+    <div class="modal-field">
+      <label>Année</label>
+      <input type="number" id="addCarYear" placeholder="ex: 2022"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalAddCar')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveNewCar()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Lead -->
+<div class="modal-overlay" id="modalLead" style="display:none" onclick="closeModal('modalLead',event)">
+  <div class="modal">
+    <h3>📋 Ajouter un lead manuel</h3>
+    <div class="modal-field">
+      <label>Nom</label>
+      <input type="text" id="leadName" placeholder="Nom du client"/>
+    </div>
+    <div class="modal-field">
+      <label>Téléphone</label>
+      <input type="tel" id="leadPhone" placeholder="06XXXXXXXX"/>
+    </div>
+    <div class="modal-field">
+      <label>Voiture demandée</label>
+      <input type="text" id="leadCar" placeholder="ex: Petite citadine, SUV..."/>
+    </div>
+    <div class="modal-field">
+      <label>Dates</label>
+      <input type="text" id="leadDates" placeholder="ex: 15-20 juillet"/>
+    </div>
+    <div class="modal-field">
+      <label>Source</label>
+      <select id="leadSource">
+        <option>Meta Ads</option>
+        <option>WhatsApp direct</option>
+        <option>Google Maps</option>
+        <option>Référence</option>
+        <option>Booking.com</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalLead')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveNewLead()">Ajouter lead</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Client -->
+<div class="modal-overlay" id="modalClient" style="display:none" onclick="closeModal('modalClient',event)">
+  <div class="modal">
+    <h3>👤 Ajouter un client</h3>
+    <div class="modal-field">
+      <label>Nom de l'agence</label>
+      <input type="text" id="clientNameInput" placeholder="ex: Atlas Drive Cars"/>
+    </div>
+    <div class="modal-field">
+      <label>Ville</label>
+      <input type="text" id="clientCityInput" placeholder="ex: Marrakech"/>
+    </div>
+    <div class="modal-field">
+      <label>URL Apps Script (Google Sheets Web App)</label>
+      <input type="url" id="clientScriptUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
+    </div>
+    <div class="modal-field">
+      <label>Téléphone WhatsApp</label>
+      <input type="tel" id="clientPhone" placeholder="06XXXXXXXX"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalClient')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveNewClient()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lead status update -->
+<div class="modal-overlay" id="modalLeadStatus" style="display:none" onclick="closeModal('modalLeadStatus',event)">
+  <div class="modal">
+    <h3>📋 Mettre à jour le lead</h3>
+    <div style="margin-bottom:14px;font-size:.9rem;color:var(--muted)" id="leadStatusName"></div>
+    <input type="hidden" id="leadRowIndex"/>
+    <div class="modal-field">
+      <label>Nouveau statut</label>
+      <select id="leadNewStatus">
+        <option value="Nouveau">🔵 Nouveau</option>
+        <option value="Contacté">🟡 Contacté</option>
+        <option value="Devis envoyé">🟣 Devis envoyé</option>
+        <option value="Confirmé">🟢 Confirmé</option>
+        <option value="Annulé">🔴 Annulé</option>
+        <option value="Pas intéressé">⚫ Pas intéressé</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Notes</label>
+      <textarea id="leadNotes" rows="3" placeholder="Notes internes..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalLeadStatus')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveLeadStatus()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const DEFAULT_PASSWORD = 'amraniads2025';
+let currentClientId  = null;
+let fleetData        = [];
+let leadsData        = [];
+
+// ─────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────
+function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  const stored = localStorage.getItem('dash_pw') || DEFAULT_PASSWORD;
+  if (pw === stored) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+}
+
+function changePassword() {
+  const v = document.getElementById('newPwInput').value.trim();
+  if (!v) return;
+  localStorage.setItem('dash_pw', v);
+  alert('✅ Mot de passe mis à jour');
+}
+
+// ─────────────────────────────────────────────
+// CLIENTS (stored in localStorage)
+// ─────────────────────────────────────────────
+function getClients() {
+  return JSON.parse(localStorage.getItem('rc_clients') || '[]');
+}
+
+function saveClients(clients) {
+  localStorage.setItem('rc_clients', JSON.stringify(clients));
+}
+
+function renderClientSidebar() {
+  const clients = getClients();
+  const el = document.getElementById('clientList');
+  if (!clients.length) {
+    el.innerHTML = '<div style="padding:8px 16px;font-size:.78rem;color:rgba(255,255,255,.4)">Aucun client — allez dans Config</div>';
+    return;
+  }
+  el.innerHTML = clients.map(c =>
+    `<button class="client-tag ${c.id === currentClientId ? 'selected' : ''}" onclick="selectClient('${c.id}')">
+      <div><div class="client-name">${c.name}</div><div class="client-city">${c.city}</div></div>
+      <div class="client-dot"></div>
+    </button>`
+  ).join('');
+}
+
+function renderClientListSetup() {
+  const clients = getClients();
+  const el = document.getElementById('clientListSetup');
+  if (!clients.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.88rem;padding:8px 0">Aucun client ajouté</div>';
+    return;
+  }
+  el.innerHTML = clients.map(c =>
+    `<div class="client-list-item">
+      <div>
+        <div style="font-weight:700;font-size:.9rem">${c.name} — ${c.city}</div>
+        <div style="font-size:.75rem;color:var(--muted);word-break:break-all">${c.scriptUrl}</div>
+      </div>
+      <button class="del-btn" onclick="deleteClient('${c.id}')">Supprimer</button>
+    </div>`
+  ).join('');
+}
+
+function saveNewClient() {
+  const name      = document.getElementById('clientNameInput').value.trim();
+  const city      = document.getElementById('clientCityInput').value.trim();
+  const scriptUrl = document.getElementById('clientScriptUrl').value.trim();
+  const phone     = document.getElementById('clientPhone').value.trim();
+  if (!name || !scriptUrl) { alert('Nom et URL requis'); return; }
+  const clients = getClients();
+  clients.push({ id: 'c' + Date.now(), name, city, scriptUrl, phone });
+  saveClients(clients);
+  closeModalById('modalClient');
+  renderClientSidebar();
+  renderClientListSetup();
+  document.getElementById('clientNameInput').value = '';
+  document.getElementById('clientCityInput').value = '';
+  document.getElementById('clientScriptUrl').value = '';
+  document.getElementById('clientPhone').value = '';
+}
+
+function deleteClient(id) {
+  if (!confirm('Supprimer ce client?')) return;
+  saveClients(getClients().filter(c => c.id !== id));
+  if (currentClientId === id) { currentClientId = null; }
+  renderClientSidebar();
+  renderClientListSetup();
+}
+
+function selectClient(id) {
+  currentClientId = id;
+  localStorage.setItem('rc_last_client', id);
+  renderClientSidebar();
+  showView('dashboard');
+  loadClientData();
+}
+
+// ─────────────────────────────────────────────
+// DATA LOADING
+// ─────────────────────────────────────────────
+function getClient() {
+  return getClients().find(c => c.id === currentClientId);
+}
+
+async function loadClientData() {
+  const client = getClient();
+  if (!client) {
+    document.getElementById('currentClientName').textContent = 'Sélectionnez un client';
+    return;
+  }
+  document.getElementById('currentClientName').textContent = client.name + ' — ' + client.city;
+  document.getElementById('lastRefresh').textContent = 'Chargement...';
+
+  await Promise.all([loadFleet(client), loadLeads(client), loadStats(client)]);
+
+  document.getElementById('lastRefresh').textContent =
+    'Actualisé à ' + new Date().toLocaleTimeString('fr-MA');
+}
+
+async function loadFleet(client) {
+  try {
+    const r = await fetch(client.scriptUrl + '?tab=fleet');
+    const d = await r.json();
+    fleetData = d.rows || [];
+    renderFleet();
+  } catch (e) {
+    document.getElementById('fleetGrid').innerHTML =
+      `<div class="empty"><div class="empty-ico">⚠️</div><p>Impossible de charger la flotte.<br>Vérifiez l'URL Apps Script.</p></div>`;
+  }
+}
+
+async function loadLeads(client) {
+  try {
+    const r = await fetch(client.scriptUrl + '?tab=leads');
+    const d = await r.json();
+    leadsData = d.rows || [];
+    renderLeads();
+  } catch (e) {
+    document.getElementById('leadsBody').innerHTML =
+      `<tr><td colspan="8" class="loading">⚠️ Impossible de charger les leads</td></tr>`;
+  }
+}
+
+async function loadStats(client) {
+  try {
+    const r = await fetch(client.scriptUrl + '?tab=stats');
+    const d = await r.json();
+    document.getElementById('st-total').textContent     = d.leads?.total     ?? '—';
+    document.getElementById('st-confirmed').textContent = d.leads?.confirmed  ?? '—';
+    document.getElementById('st-rate').textContent      = (d.conversion ?? '—') + '%';
+    document.getElementById('st-avail').textContent     = d.fleet?.available  ?? '—';
+    document.getElementById('st-rented').textContent    = d.fleet?.rented     ?? '—';
+    document.getElementById('st-fleet-total').textContent = `sur ${d.fleet?.total ?? '?'} voitures`;
+  } catch (_) {}
+}
+
+// ─────────────────────────────────────────────
+// RENDER FLEET
+// ─────────────────────────────────────────────
+function renderFleet() {
+  const grid = document.getElementById('fleetGrid');
+  if (!fleetData.length) {
+    grid.innerHTML = `<div class="empty"><div class="empty-ico">🚗</div><p>Aucune voiture ajoutée.<br>Cliquez sur "+ Ajouter voiture"</p></div>`;
+    return;
+  }
+  const statusClass = { 'Disponible': 'disponible', 'Loué': 'loue', 'Maintenance': 'maintenance' };
+  grid.innerHTML = fleetData.map(car => {
+    const st = car['Statut'] || 'Disponible';
+    const sc = statusClass[st] || 'disponible';
+    return `<div class="car-card" onclick="openCarModal(${car._row},'${escHtml(car['Marque / Modèle'])}')">
+      <div class="car-status-dot ${sc}"></div>
+      <div class="car-icon">🚗</div>
+      <div class="car-model">${escHtml(car['Marque / Modèle'] || '—')}</div>
+      <div class="car-plate">🔑 ${escHtml(car['Immatriculation'] || '—')} · ${car['Année'] || ''}</div>
+      <span class="car-badge ${sc}">${st}</span>
+      ${car['Client actuel'] ? `<div class="car-client">👤 ${escHtml(car['Client actuel'])}</div>` : ''}
+      ${car['Retour prévu']  ? `<div class="car-return">📅 Retour: ${escHtml(String(car['Retour prévu']))}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────
+// RENDER LEADS
+// ─────────────────────────────────────────────
+const statusClass = {
+  'Nouveau':'nouveau','Contacté':'contacte','Devis envoyé':'devis',
+  'Confirmé':'confirme','Annulé':'annule','Pas intéressé':'pas-interesse'
+};
+
+function renderLeads() {
+  const tbody = document.getElementById('leadsBody');
+  if (!leadsData.length) {
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-ico">📋</div><p>Aucun lead pour l'instant</p></div></td></tr>`;
+    return;
+  }
+  const sorted = [...leadsData].reverse();
+  tbody.innerHTML = sorted.map((lead, i) => {
+    const st  = lead['Statut'] || 'Nouveau';
+    const sc  = statusClass[st] || 'nouveau';
+    const ph  = String(lead['Téléphone'] || '').replace(/\D/g,'');
+    const wa  = ph ? `<a class="wa-link" href="https://wa.me/${ph.startsWith('0') ? '212'+ph.slice(1) : ph}" target="_blank">💬 WhatsApp</a>` : '';
+    const dt  = lead['Date'] ? String(lead['Date']).slice(0,10) : '—';
+    return `<tr>
+      <td style="color:var(--muted)">${sorted.length - i}</td>
+      <td>${dt}</td>
+      <td style="font-weight:700">${escHtml(lead['Nom'] || '—')}</td>
+      <td><span class="lead-phone">${escHtml(lead['Téléphone'] || '—')}</span><br>${wa}</td>
+      <td>${escHtml(lead['Voiture demandée'] || '—')}</td>
+      <td>${escHtml(lead['Dates location'] || '—')}</td>
+      <td><span class="lead-status ${sc}" onclick="openLeadStatusModal(${lead._row},'${escHtml(lead['Nom']||'')}','${st}')">${st}</span></td>
+      <td><span style="font-size:.75rem;color:var(--muted)">${escHtml(lead['Source'] || '—')}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────
+// CAR MODAL
+// ─────────────────────────────────────────────
+function openCarModal(row, model) {
+  const car = fleetData.find(c => c._row === row);
+  if (!car) return;
+  document.getElementById('carModalTitle').textContent = '🚗 ' + model;
+  document.getElementById('carId').value = car['ID'];
+  document.getElementById('carStatus').value = car['Statut'] || 'Disponible';
+  document.getElementById('carClient').value = car['Client actuel'] || '';
+  document.getElementById('carReturn').value  = car['Retour prévu']  || '';
+  document.getElementById('modalCar').style.display = 'flex';
+}
+
+async function saveCarStatus() {
+  const client = getClient(); if (!client) return;
+  const payload = {
+    action: 'fleet_update',
+    carId:         document.getElementById('carId').value,
+    status:        document.getElementById('carStatus').value,
+    currentClient: document.getElementById('carClient').value,
+    returnDate:    document.getElementById('carReturn').value,
+  };
+  await postToSheet(client.scriptUrl, payload);
+  closeModalById('modalCar');
+  loadClientData();
+}
+
+function openAddCarModal() {
+  document.getElementById('modalAddCar').style.display = 'flex';
+}
+
+async function saveNewCar() {
+  const client = getClient(); if (!client) return;
+  const payload = {
+    action: 'fleet_add',
+    model:  document.getElementById('addCarModel').value.trim(),
+    plate:  document.getElementById('addCarPlate').value.trim(),
+    year:   document.getElementById('addCarYear').value.trim(),
+  };
+  if (!payload.model) { alert('Entrez le modèle'); return; }
+  await postToSheet(client.scriptUrl, payload);
+  closeModalById('modalAddCar');
+  document.getElementById('addCarModel').value = '';
+  document.getElementById('addCarPlate').value = '';
+  document.getElementById('addCarYear').value  = '';
+  loadClientData();
+}
+
+// ─────────────────────────────────────────────
+// LEAD MODALS
+// ─────────────────────────────────────────────
+function openAddLeadModal() {
+  if (!getClient()) { alert('Sélectionnez un client d\'abord'); return; }
+  document.getElementById('modalLead').style.display = 'flex';
+}
+
+async function saveNewLead() {
+  const client = getClient(); if (!client) return;
+  const payload = {
+    action:  'lead',
+    name:    document.getElementById('leadName').value.trim(),
+    phone:   document.getElementById('leadPhone').value.trim(),
+    carType: document.getElementById('leadCar').value.trim(),
+    dates:   document.getElementById('leadDates').value.trim(),
+    source:  document.getElementById('leadSource').value,
+  };
+  if (!payload.name || !payload.phone) { alert('Nom et téléphone requis'); return; }
+  await postToSheet(client.scriptUrl, payload);
+  closeModalById('modalLead');
+  ['leadName','leadPhone','leadCar','leadDates'].forEach(id => document.getElementById(id).value = '');
+  loadClientData();
+}
+
+function openLeadStatusModal(row, name, currentStatus) {
+  document.getElementById('leadRowIndex').value    = row;
+  document.getElementById('leadStatusName').textContent = '👤 ' + name;
+  document.getElementById('leadNewStatus').value   = currentStatus;
+  document.getElementById('leadNotes').value       = '';
+  document.getElementById('modalLeadStatus').style.display = 'flex';
+}
+
+async function saveLeadStatus() {
+  const client = getClient(); if (!client) return;
+  const payload = {
+    action: 'lead_update',
+    row:    document.getElementById('leadRowIndex').value,
+    status: document.getElementById('leadNewStatus').value,
+    notes:  document.getElementById('leadNotes').value,
+  };
+  await postToSheet(client.scriptUrl, payload);
+  closeModalById('modalLeadStatus');
+  loadClientData();
+}
+
+// ─────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────
+async function postToSheet(url, payload) {
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) { alert('Erreur connexion: ' + e.message); }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function openAddClientModal() {
+  document.getElementById('modalClient').style.display = 'flex';
+}
+
+function closeModal(id, event) {
+  if (event.target.id === id) document.getElementById(id).style.display = 'none';
+}
+
+function closeModalById(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-fleet').style.display  = tab === 'fleet'  ? '' : 'none';
+  document.getElementById('tab-leads').style.display  = tab === 'leads'  ? '' : 'none';
+}
+
+function showView(view) {
+  ['dashboard','setup'].forEach(v => {
+    document.getElementById('view-'+v).style.display = v === view ? '' : 'none';
+    document.getElementById('btn-'+v).classList.toggle('active', v === view);
+  });
+  if (view === 'setup') renderClientListSetup();
+}
+
+function initApp() {
+  renderClientSidebar();
+  const lastId = localStorage.getItem('rc_last_client');
+  const clients = getClients();
+  if (lastId && clients.find(c => c.id === lastId)) {
+    currentClientId = lastId;
+    renderClientSidebar();
+    loadClientData();
+  } else if (clients.length) {
+    currentClientId = clients[0].id;
+    renderClientSidebar();
+    loadClientData();
+  } else {
+    document.getElementById('currentClientName').textContent = 'Aucun client';
+    document.getElementById('fleetGrid').innerHTML = `<div class="empty"><div class="empty-ico">👤</div><p>Commencez par ajouter un client<br>dans <strong>Config</strong></p></div>`;
+  }
+}
+</script>
+</body>
+</html>
