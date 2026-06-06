@@ -124,6 +124,46 @@
     .proof-text { font-size: .85rem; color: var(--muted); }
     .proof-text strong { color: var(--pink-bright); font-weight: 700; }
 
+    /* ── HERO PRICE ROW ── */
+    .hero-price-row {
+      display: flex; align-items: center; gap: 16px;
+      flex-wrap: wrap; margin-bottom: 22px;
+    }
+    .hero-price-tag {
+      display: flex; align-items: baseline; gap: 5px;
+      background: var(--pink-soft); border: 1.5px solid var(--pink-border);
+      border-radius: 50px; padding: 8px 18px;
+    }
+    .hpt-from { font-size: .75rem; color: var(--muted); }
+    .hpt-num  { font-size: 1.55rem; font-weight: 900; color: var(--pink); line-height: 1; }
+    .hpt-cur  { font-size: .85rem; font-weight: 700; color: var(--pink); }
+    .hpt-note { font-size: .72rem; color: var(--muted); margin-right: 4px; }
+    .hero-pricing-btn {
+      display: inline-flex; align-items: center;
+      background: transparent; border: 2px solid var(--pink-border);
+      color: var(--pink); border-radius: 50px; padding: 9px 22px;
+      font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 700;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .hero-pricing-btn:hover { background: var(--pink-soft); transform: translateY(-2px); }
+
+    /* ── FOUNDER CARD ── */
+    .founder-card {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--card); border: 1.5px solid var(--pink-border);
+      border-radius: 16px; padding: 14px 18px;
+      max-width: 360px;
+      box-shadow: 0 4px 18px rgba(232,85,154,.08);
+    }
+    .founder-img {
+      width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+      object-position: center top;
+      flex-shrink: 0; border: 2.5px solid var(--pink);
+    }
+    .founder-name  { font-weight: 900; font-size: .92rem; color: var(--text); }
+    .founder-title { font-size: .76rem; color: var(--muted); line-height: 1.4; margin: 3px 0; }
+    .founder-stats { display: flex; gap: 12px; font-size: .75rem; color: var(--pink); font-weight: 700; margin-top: 4px; }
+
     /* ── FORM ── */
     .hero-form-col { flex: 0 0 360px; }
     .form-card {
@@ -510,6 +550,8 @@
       .hero-badge { margin: 0 auto 20px; }
       .hero-sub { margin: 0 auto 24px; }
       .hero-proof { justify-content: center; }
+      .hero-price-row { justify-content: center; }
+      .founder-card { margin: 0 auto; }
       .case-study-card { flex-direction: column; gap: 24px; padding: 24px 20px; }
       .case-divider { display: none; }
       .case-logo { flex: none; }
@@ -564,6 +606,30 @@
         <div class="proof-item"><span class="proof-icon">📱</span><span class="proof-text">إشعار فوري على <strong>تيليغرام</strong></span></div>
         <div class="proof-item"><span class="proof-icon">📊</span><span class="proof-text">تتبع كل عميل في <strong>Google Sheets</strong></span></div>
         <div class="proof-item"><span class="proof-icon">🎯</span><span class="proof-text"><strong>Meta Pixel + CAPI</strong> متصل</span></div>
+      </div>
+
+      <!-- Price anchor + CTA -->
+      <div class="hero-price-row">
+        <div class="hero-price-tag">
+          <span class="hpt-from">ابتداءً من</span>
+          <span class="hpt-num">949</span>
+          <span class="hpt-cur">DH</span>
+          <span class="hpt-note">دفعة واحدة</span>
+        </div>
+        <a href="#packages" class="hero-pricing-btn">عرض الأسعار ↓</a>
+      </div>
+
+      <!-- Founder card -->
+      <div class="founder-card">
+        <img src="founder.jpg" alt="عبد العالي العمراني" class="founder-img"/>
+        <div class="founder-info">
+          <div class="founder-name">عبد العالي العمراني</div>
+          <div class="founder-title">مؤسس AmraniAds · 5 سنوات تسويق رقمي بالمغرب</div>
+          <div class="founder-stats">
+            <span>🏆 10x ROAS</span>
+            <span>📈 +18 حملة</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -738,7 +804,7 @@
 </section>
 
 <!-- PACKAGES -->
-<section class="packages-section">
+<section class="packages-section" id="packages">
   <div class="packages-inner">
     <div class="section-eyebrow">✦ العروض</div>
     <h2 class="section-title">إعلانات الفيسبوك <span class="gold">المضمونة</span> — خبرة 5 سنوات</h2>
