@@ -910,27 +910,83 @@
 <hr class="divider"/>
 
 <!-- ═══ THANKS ═══ -->
-<section class="section" style="padding-top:48px;padding-bottom:56px">
-  <div class="thanks-wrap">
-    <span class="thanks-heart">❤️</span>
-    <div class="thanks-title">شكراً لكل من آمن بهذا المشروع</div>
-    <p class="thanks-text">
-      هذا الإنجاز مش ديالي وحدي.<br/>
-      كل عميل وثق فينا من البداية، وكل شخص أعطانا فرصة نثبتو فيها —<br/>
-      هم السبب الحقيقي في وجود هذه الصفحة اليوم.
-    </p>
-    <div class="thanks-names" id="thanksNames">
-      <!-- populated from localStorage clients or shown as default -->
+<section class="section" id="sec-thanks" style="padding-top:56px;padding-bottom:64px">
+  <div class="thanks-wrap" style="max-width:720px;margin:0 auto;text-align:center">
+
+    <!-- Animated heart -->
+    <span class="thanks-heart" style="display:block;font-size:3rem;margin-bottom:16px;animation:heartbeat 1.4s ease-in-out infinite">❤️</span>
+
+    <!-- Main title -->
+    <div class="thanks-title" style="font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:24px;line-height:1.3">
+      شكراً لكل من وثق بنا
+    </div>
+
+    <!-- Arabic letter — genuine, warm -->
+    <div style="background:linear-gradient(135deg,#fff8f0,#fff3fb);border:1px solid #ffe0cc;border-radius:24px;padding:36px 32px;text-align:right;line-height:2;font-size:1.05rem;color:#1a1a2e;margin-bottom:32px;box-shadow:0 4px 24px rgba(0,0,0,.06)">
+
+      <p style="margin:0 0 18px;font-size:1.15rem;font-weight:700;color:#c0392b">
+        بسم الله الرحمن الرحيم
+      </p>
+
+      <p style="margin:0 0 16px">
+        إلى كل عميل أعطانا من وقته الثمين وثقته التي لا تُقدَّر بثمن —
+      </p>
+
+      <p style="margin:0 0 16px">
+        أنتم لستم مجرد أرقام في تقاريرنا، بل أنتم الشركاء الحقيقيون الذين آمنوا بنا
+        قبل أن نُثبت أنفسنا. كل ليدة حققناها لكم، وكل مبيعة زادت،
+        وكل رسالة واتساب وصلت — كانت أمانةً في أعناقنا قبل أن تكون رقماً في التقرير.
+      </p>
+
+      <p style="margin:0 0 16px">
+        قلنا لكم سنجلب عملاء، وأوفينا. قلنا سنبني أنظمة، وبنينا.
+        لكن ما لم نقله وقتها، وأقوله اليوم بصدق تام:
+        <strong>أنتم السبب الذي يجعلنا نصحى كل صباح ونفكر كيف نزيدكم أكثر.</strong>
+      </p>
+
+      <p style="margin:0 0 24px">
+        نعدكم — وعدًا حقيقيًا لا كلامًا تسويقيًا —
+        أن ما رأيتموه اليوم هو أصغر نسخة من AmraniAds.
+        الأنظمة القادمة ستكون أذكى، والنتائج ستكون أضخم،
+        وكل مشروع منكم سيحصل على ما يستحق من اهتمام ووقت وإبداع.
+      </p>
+
+      <div style="border-top:1px solid #ffe0cc;padding-top:20px;margin-top:4px">
+        <p style="margin:0;font-size:1rem;font-weight:700;color:#1a1a2e">
+          جزاكم الله خيراً على ثقتكم — وإلى الأمام دائماً 🇲🇦
+        </p>
+      </div>
+    </div>
+
+    <!-- Client chips from localStorage -->
+    <div class="thanks-names" id="thanksNames" style="justify-content:center;margin-bottom:28px">
       <span class="thanks-chip">💅 عملاء الصالونات</span>
       <span class="thanks-chip">🚗 شركات التأجير</span>
       <span class="thanks-chip">🤝 كل من أحال وأوصى</span>
-      <span class="thanks-chip">👨‍💻 كل من ساعدني في البناء</span>
       <span class="thanks-chip">🇲🇦 فاس · الدار البيضاء · مراكش</span>
     </div>
-    <p class="thanks-text" style="margin-bottom:8px;font-size:.88rem">
-      نبنيو سوا — وهذا بس البداية 🚀
-    </p>
-    <div class="thanks-sign">— عبد العالي العمراني · AmraniAds</div>
+
+    <!-- Promise banner -->
+    <div style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);border-radius:20px;padding:28px 24px;color:#fff;margin-bottom:24px">
+      <div style="font-size:1.5rem;margin-bottom:10px">🚀</div>
+      <div style="font-weight:900;font-size:1.1rem;margin-bottom:10px">وعدنا للأمام</div>
+      <div style="font-size:.92rem;opacity:.88;line-height:1.9">
+        أنظمة أذكى · مبيعات أعلى · متابعة أعمق<br/>
+        هذا مش بس وكالة — هذا شريك بيزنس حقيقي
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <span style="background:rgba(255,255,255,.12);border-radius:50px;padding:4px 16px;font-size:.78rem">📈 نتائج مضمونة</span>
+        <span style="background:rgba(255,255,255,.12);border-radius:50px;padding:4px 16px;font-size:.78rem">⚡ أنظمة تلقائية</span>
+        <span style="background:rgba(255,255,255,.12);border-radius:50px;padding:4px 16px;font-size:.78rem">💬 دعم مستمر</span>
+      </div>
+    </div>
+
+    <!-- Signature -->
+    <div class="thanks-sign" style="font-size:1rem;color:#666">
+      بكل محبة وتقدير — عبد العالي العمراني<br/>
+      <span style="font-size:.85rem;opacity:.7">مؤسس AmraniAds · فاس، المغرب</span>
+    </div>
+
   </div>
 </section>
 
