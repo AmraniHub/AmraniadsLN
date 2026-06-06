@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/rentalcars/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merci ! — AmraniAds</title>
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1433989221062105');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f0f6ff;
+      color: #0f172a;
+      min-height: 100svh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px 16px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid rgba(59,130,246,.22);
+      border-radius: 24px;
+      padding: 48px 36px;
+      max-width: 520px; width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 48px rgba(29,78,216,.12);
+    }
+    .check {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2rem;
+      box-shadow: 0 8px 32px rgba(29,78,216,.35);
+      animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    h1 { font-size: 1.7rem; font-weight: 900; margin-bottom: 10px; }
+    h1 span { color: #1d4ed8; }
+    .sub { color: #6b7280; font-size: .95rem; line-height: 1.75; margin-bottom: 32px; }
+    .steps {
+      background: #eff6ff;
+      border: 1px solid rgba(59,130,246,.2);
+      border-radius: 16px;
+      padding: 24px 20px; text-align: left; margin-bottom: 28px;
+    }
+    .steps-title { font-size: .85rem; font-weight: 700; color: #1d4ed8; margin-bottom: 16px; letter-spacing: .5px; }
+    .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+    .step:last-child { margin-bottom: 0; }
+    .step-dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+      color: #fff; font-size: .78rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-text { font-size: .88rem; color: #374151; line-height: 1.55; padding-top: 4px; }
+    .step-text strong { color: #0f172a; }
+    .notice {
+      font-size: .8rem; color: #6b7280;
+      border-top: 1px solid rgba(59,130,246,.15);
+      padding-top: 20px; line-height: 1.65;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="check">🚗</div>
+    <h1>Merci ! On vous <span>contacte bientôt</span></h1>
+    <p class="sub">Votre demande d'audit gratuit a bien été reçue. Notre équipe vous contacte dans les prochaines heures via WhatsApp.</p>
+    <div class="steps">
+      <div class="steps-title">📋 Ce qui se passe maintenant :</div>
+      <div class="step">
+        <div class="step-dot">1</div>
+        <div class="step-text"><strong>On analyse votre présence actuelle</strong> — fiche Google, réseaux, dépendance plateformes</div>
+      </div>
+      <div class="step">
+        <div class="step-dot">2</div>
+        <div class="step-text"><strong>On vous contacte sur WhatsApp</strong> dans les prochaines heures avec le résultat de votre audit</div>
+      </div>
+      <div class="step">
+        <div class="step-dot">3</div>
+        <div class="step-text"><strong>On planifie votre lancement</strong> — si vous souhaitez continuer, le système est en ligne en 48h</div>
+      </div>
+    </div>
+    <p class="notice">🔒 Aucun engagement requis — l'audit est 100% gratuit. Si vous n'entendez pas de nous dans 24h, écrivez-nous directement sur WhatsApp : 0627-716-149</p>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const eid = params.get('eid');
+    if (eid && typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { content_name: 'location-voiture-success' }, { eventID: eid });
+    }
+  </script>
+</body>
+</html>

@@ -74,10 +74,12 @@ module.exports = async function handler(req, res) {
 
     // Detect source page from URL
     const srcUrl = String(eventSourceUrl || '');
-    const source = srcUrl.includes('/salon')    ? '💅 Salon'
-                 : srcUrl.includes('/novatech') ? '🖥️ NovaTech'
-                 : srcUrl.includes('/en')       ? '🇬🇧 English Page'
-                 : srcUrl.includes('/ar')       ? '🇲🇦 Arabic Page'
+    const source = srcUrl.includes('/salon')             ? '💅 Salon'
+                 : srcUrl.includes('/novatech')          ? '🖥️ NovaTech'
+                 : srcUrl.includes('/rentalcars')         ? '🚗 Location Voiture'
+                 : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
+                 : srcUrl.includes('/en')                ? '🇬🇧 English Page'
+                 : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
                  : '🌍 Main Website (Foreign)';
 
     const msg =
