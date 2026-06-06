@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AmraniAds — Admin Master</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:          #0f172a;
+      --bg2:         #1e293b;
+      --card:        #1e293b;
+      --card2:       #263348;
+      --border:      rgba(255,255,255,.08);
+      --border2:     rgba(255,255,255,.14);
+      --text:        #f1f5f9;
+      --muted:       #94a3b8;
+      --blue:        #3b82f6;
+      --blue-soft:   rgba(59,130,246,.15);
+      --green:       #22c55e;
+      --green-soft:  rgba(34,197,94,.12);
+      --red:         #ef4444;
+      --red-soft:    rgba(239,68,68,.12);
+      --amber:       #f59e0b;
+      --amber-soft:  rgba(245,158,11,.12);
+      --pink:        #ec4899;
+      --pink-soft:   rgba(236,72,153,.12);
+      --sidebar-w:   240px;
+    }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      position: fixed; inset: 0; z-index: 999;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-card {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 24px; padding: 48px 40px;
+      width: 100%; max-width: 380px; text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    }
+    .login-logo { font-size: 1.6rem; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .login-logo span { color: var(--blue); }
+    .login-badge {
+      display: inline-block; background: var(--blue-soft); color: var(--blue);
+      border-radius: 50px; padding: 3px 14px; font-size: .75rem; font-weight: 700;
+      margin-bottom: 28px;
+    }
+    .login-input {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border2);
+      border-radius: 12px; padding: 13px 16px; font-family: 'Cairo', sans-serif;
+      font-size: 1rem; color: var(--text); margin-bottom: 12px; outline: none;
+    }
+    .login-input:focus { border-color: var(--blue); }
+    .login-btn {
+      width: 100%; background: var(--blue); color: #fff; border: none;
+      border-radius: 50px; padding: 14px; font-family: 'Cairo', sans-serif;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+    }
+    .login-err { color: var(--red); font-size: .82rem; margin-top: 8px; display: none; }
+
+    /* ── APP ── */
+    #app { display: none; }
+    .layout { display: flex; min-height: 100vh; }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w); background: var(--card);
+      border-right: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+      display: flex; flex-direction: column; overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 22px 18px; border-bottom: 1px solid var(--border);
+      font-size: 1.1rem; font-weight: 900; color: var(--text);
+    }
+    .sidebar-logo span { color: var(--blue); }
+    .sidebar-logo small { display: block; font-size: .72rem; color: var(--muted); margin-top: 2px; font-weight: 400; }
+    .sidebar-section { padding: 18px 14px 6px; font-size: .68rem; font-weight: 700; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; }
+    .nav-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; margin: 2px 8px; border-radius: 10px;
+      background: none; border: none; color: var(--muted);
+      font-family: 'Cairo', sans-serif; font-size: .88rem; font-weight: 600;
+      cursor: pointer; text-align: left; transition: all .2s; width: calc(100% - 16px);
+    }
+    .nav-btn:hover  { background: var(--card2); color: var(--text); }
+    .nav-btn.active { background: var(--blue-soft); color: var(--blue); }
+    .nav-btn .ico   { font-size: 1rem; width: 20px; text-align: center; }
+
+    /* Niche sources in sidebar */
+    .source-tag {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; margin: 2px 8px; border-radius: 8px;
+      font-size: .82rem; color: var(--muted);
+    }
+    .source-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── MAIN ── */
+    .main { margin-left: var(--sidebar-w); flex: 1; padding: 24px; min-width: 0; }
+
+    /* ── ALERT BAR ── */
+    .alert-bar {
+      background: linear-gradient(135deg, rgba(239,68,68,.15), rgba(239,68,68,.08));
+      border: 1px solid rgba(239,68,68,.3);
+      border-radius: 14px; padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 22px; cursor: pointer;
+      transition: background .2s;
+    }
+    .alert-bar:hover { background: rgba(239,68,68,.18); }
+    .alert-bar .alert-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); flex-shrink: 0; animation: blink 1.4s infinite; }
+    .alert-bar .alert-text { font-size: .9rem; font-weight: 700; color: var(--red); flex: 1; }
+    .alert-bar .alert-sub  { font-size: .78rem; color: rgba(239,68,68,.7); }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
+    #alertBar { display: none; }
+
+    /* ── STATS ROW ── */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 16px;
+    }
+    .stat-card .s-ico   { font-size: 1.2rem; margin-bottom: 8px; }
+    .stat-card .s-num   { font-size: 1.9rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .stat-card .s-label { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+    .stat-card.blue  .s-num { color: var(--blue);  }
+    .stat-card.green .s-num { color: var(--green); }
+    .stat-card.amber .s-num { color: var(--amber); }
+    .stat-card.pink  .s-num { color: var(--pink);  }
+
+    /* ── NICHE CARDS ── */
+    .niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; margin-bottom: 24px; }
+    .niche-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; position: relative; overflow: hidden;
+    }
+    .niche-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .niche-card.blue::before  { background: var(--blue); }
+    .niche-card.pink::before  { background: var(--pink); }
+    .niche-card.green::before { background: var(--green); }
+    .niche-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .niche-title { font-size: 1rem; font-weight: 900; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .niche-url   { font-size: .72rem; color: var(--muted); }
+    .niche-stats-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .ns { flex: 1 1 60px; text-align: center; }
+    .ns-num   { font-size: 1.4rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .ns-label { font-size: .68rem; color: var(--muted); margin-top: 2px; }
+    .ns.green .ns-num { color: var(--green); }
+    .ns.amber .ns-num { color: var(--amber); }
+    .ns.red   .ns-num { color: var(--red);   }
+    .niche-loading { font-size: .82rem; color: var(--muted); text-align: center; padding: 12px 0; }
+    .niche-actions { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+    .btn-xs {
+      padding: 5px 12px; border-radius: 8px; font-family: 'Cairo',sans-serif;
+      font-size: .75rem; font-weight: 700; cursor: pointer; border: none; transition: opacity .2s;
+    }
+    .btn-xs:hover { opacity: .8; }
+    .btn-xs.blue  { background: var(--blue-soft);  color: var(--blue);  }
+    .btn-xs.pink  { background: var(--pink-soft);  color: var(--pink);  }
+    .btn-xs.green { background: var(--green-soft); color: var(--green); }
+    .btn-xs.red   { background: var(--red-soft);   color: var(--red);   }
+
+    /* ── SECTION HEADER ── */
+    .section-hd {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .section-hd h2 { font-size: 1rem; font-weight: 900; color: var(--text); }
+    .section-hd span { font-size: .78rem; color: var(--muted); }
+
+    /* ── LEADS TABLE ── */
+    .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .table-filters { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .filter-btn {
+      padding: 5px 14px; border-radius: 50px; font-family: 'Cairo',sans-serif;
+      font-size: .78rem; font-weight: 700; cursor: pointer; border: 1px solid var(--border);
+      background: none; color: var(--muted); transition: all .2s;
+    }
+    .filter-btn.active { background: var(--blue-soft); color: var(--blue); border-color: var(--blue); }
+    .filter-search {
+      margin-left: auto; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 12px; font-family: 'Cairo',sans-serif;
+      font-size: .82rem; color: var(--text); outline: none; width: 200px;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: var(--card2); }
+    th { padding: 11px 13px; text-align: left; font-size: .72rem; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--border); white-space: nowrap; }
+    td { padding: 11px 13px; font-size: .84rem; color: var(--text); border-bottom: 1px solid var(--border); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+    .niche-pill {
+      display: inline-block; padding: 2px 9px; border-radius: 50px;
+      font-size: .68rem; font-weight: 700;
+    }
+    .niche-pill.salon      { background: var(--pink-soft);  color: var(--pink);  }
+    .niche-pill.rentalcars { background: var(--blue-soft);  color: var(--blue);  }
+    .niche-pill.other      { background: var(--amber-soft); color: var(--amber); }
+    .status-dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px;
+    }
+    .status-dot.nouveau  { background: var(--blue);  }
+    .status-dot.contacte { background: var(--amber); }
+    .status-dot.rdv, .status-dot.confirme { background: var(--green); }
+    .status-dot.annule   { background: var(--red);   }
+    .age-badge {
+      display: inline-block; padding: 2px 8px; border-radius: 50px;
+      font-size: .68rem; font-weight: 700;
+    }
+    .age-badge.ok  { background: var(--green-soft); color: var(--green); }
+    .age-badge.warn { background: var(--amber-soft); color: var(--amber); }
+    .age-badge.hot  { background: var(--red-soft);   color: var(--red);   }
+    .wa-link { color: var(--green); text-decoration: none; font-size: .8rem; font-weight: 700; }
+    .wa-link:hover { text-decoration: underline; }
+
+    /* ── PROMPT EXPORT ── */
+    .prompt-section {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px; margin-top: 22px;
+    }
+    .prompt-section h2 { font-size: 1rem; font-weight: 900; margin-bottom: 6px; }
+    .prompt-section p  { font-size: .84rem; color: var(--muted); margin-bottom: 16px; line-height: 1.7; }
+    .prompt-box {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; font-size: .8rem; color: var(--muted); line-height: 1.8;
+      white-space: pre-wrap; max-height: 300px; overflow-y: auto;
+      font-family: monospace;
+    }
+    .copy-btn {
+      margin-top: 12px; background: var(--blue); color: #fff; border: none;
+      border-radius: 50px; padding: 10px 24px; font-family: 'Cairo',sans-serif;
+      font-size: .88rem; font-weight: 700; cursor: pointer; transition: opacity .2s;
+    }
+    .copy-btn:hover { opacity: .85; }
+
+    /* ── MODALS ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 20px; padding: 28px 24px;
+      width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,.5);
+    }
+    .modal h3 { font-size: 1.05rem; font-weight: 900; margin-bottom: 18px; }
+    .modal-field { margin-bottom: 13px; }
+    .modal-field label { display: block; font-size: .78rem; font-weight: 700; color: var(--blue); margin-bottom: 5px; }
+    .modal-field input, .modal-field select {
+      width: 100%; background: var(--bg); border: 1.5px solid var(--border2);
+      border-radius: 10px; padding: 10px 12px; font-family: 'Cairo',sans-serif;
+      font-size: .9rem; color: var(--text); outline: none;
+    }
+    .modal-field input:focus { border-color: var(--blue); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .modal-actions button { flex: 1; }
+    .btn-sm {
+      padding: 9px 18px; border-radius: 50px; font-family: 'Cairo',sans-serif;
+      font-size: .85rem; font-weight: 700; cursor: pointer; border: none; transition: opacity .2s;
+    }
+    .btn-sm:hover { opacity: .85; }
+    .btn-blue  { background: var(--blue); color: #fff; }
+    .btn-ghost { background: var(--card2); color: var(--muted); }
+
+    /* ── SETUP VIEW ── */
+    .source-list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+    .source-list-item:last-child { border-bottom: none; }
+    .source-info { flex: 1; min-width: 0; }
+    .source-info .si-name  { font-size: .9rem; font-weight: 700; }
+    .source-info .si-url   { font-size: .72rem; color: var(--muted); word-break: break-all; margin-top: 2px; }
+    .del-btn { background: var(--red-soft); color: var(--red); border: none; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+
+    .empty { text-align: center; padding: 48px 20px; color: var(--muted); }
+    .empty .e-ico { font-size: 2.5rem; margin-bottom: 12px; }
+    .loading-txt { color: var(--muted); font-size: .84rem; text-align: center; padding: 24px; }
+
+    @media (max-width: 768px) {
+      .sidebar { transform: translateX(-100%); }
+      .main { margin-left: 0; padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">Amrani<span>Ads</span></div>
+    <div class="login-badge">🔒 Admin Master</div>
+    <input type="password" id="pwInput" class="login-input" placeholder="Mot de passe admin" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">Accéder →</button>
+    <div class="login-err" id="loginErr">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        Amrani<span>Ads</span>
+        <small>Master Dashboard</small>
+      </div>
+
+      <div class="sidebar-section">Vue</div>
+      <button class="nav-btn active" onclick="showView('overview')" id="btn-overview"><span class="ico">📊</span> Vue globale</button>
+      <button class="nav-btn" onclick="showView('leads')"   id="btn-leads"  ><span class="ico">📋</span> Tous les leads</button>
+      <button class="nav-btn" onclick="showView('prompt')"  id="btn-prompt" ><span class="ico">🤖</span> Prompt IA</button>
+      <button class="nav-btn" onclick="showView('setup')"   id="btn-setup"  ><span class="ico">⚙️</span> Configuration</button>
+
+      <div class="sidebar-section">Sources actives</div>
+      <div id="sidebarSources"></div>
+
+      <div style="margin-top:auto;padding:14px 8px 0">
+        <button class="nav-btn" onclick="refreshAll()"><span class="ico">🔄</span> Tout actualiser</button>
+        <button class="nav-btn" onclick="doLogout()"><span class="ico">🚪</span> Déconnexion</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- ALERT BAR -->
+      <div id="alertBar" class="alert-bar" onclick="showView('leads')">
+        <div class="alert-dot"></div>
+        <div class="flex-1">
+          <div class="alert-text">⚠️ <span id="alertCount">0</span> leads non contactés depuis plus de 24h</div>
+          <div class="alert-sub">Cliquez pour voir et agir →</div>
+        </div>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div id="view-overview">
+        <div style="margin-bottom:22px">
+          <div style="font-size:1.2rem;font-weight:900">Vue globale 👋</div>
+          <div style="font-size:.82rem;color:var(--muted);margin-top:3px" id="lastRefreshTxt">—</div>
+        </div>
+
+        <div class="stats-row" id="globalStats">
+          <div class="stat-card blue"><div class="s-ico">📋</div><div class="s-num" id="g-total">—</div><div class="s-label">Total leads</div></div>
+          <div class="stat-card green"><div class="s-ico">✅</div><div class="s-num" id="g-confirmed">—</div><div class="s-label">Confirmés</div></div>
+          <div class="stat-card amber"><div class="s-ico">📈</div><div class="s-num" id="g-rate">—</div><div class="s-label">Taux conversion</div></div>
+          <div class="stat-card pink"><div class="s-ico">💰</div><div class="s-num" id="g-revenue">—</div><div class="s-label">Revenue total (DH)</div></div>
+          <div class="stat-card"><div class="s-ico">⚡</div><div class="s-num" id="g-today">—</div><div class="s-label">Leads aujourd'hui</div></div>
+        </div>
+
+        <div class="section-hd" style="margin-bottom:14px">
+          <h2>🗂️ Par niche</h2>
+          <button class="btn-sm btn-blue" onclick="showView('setup')">+ Ajouter source</button>
+        </div>
+        <div class="niche-grid" id="nicheGrid">
+          <div class="niche-card"><div class="niche-loading">Chargement...</div></div>
+        </div>
+      </div>
+
+      <!-- ALL LEADS -->
+      <div id="view-leads" style="display:none">
+        <div class="section-hd" style="margin-bottom:16px">
+          <h2>📋 Tous les leads — toutes niches</h2>
+          <span id="leadsCount">—</span>
+        </div>
+        <div class="table-wrap">
+          <div class="table-filters">
+            <button class="filter-btn active" onclick="filterLeads('all',this)">Tous</button>
+            <button class="filter-btn" onclick="filterLeads('nouveau',this)">🔵 Nouveau</button>
+            <button class="filter-btn" onclick="filterLeads('chaud',this)">🔴 Non contactés +24h</button>
+            <button class="filter-btn" onclick="filterLeads('confirme',this)">✅ Confirmés</button>
+            <input type="text" class="filter-search" placeholder="Rechercher nom / téléphone..." oninput="searchLeads(this.value)"/>
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Niche</th>
+                  <th>Date</th>
+                  <th>Nom</th>
+                  <th>Téléphone</th>
+                  <th>Service / Voiture</th>
+                  <th>Statut</th>
+                  <th>Âge</th>
+                  <th>Source</th>
+                </tr>
+              </thead>
+              <tbody id="allLeadsBody">
+                <tr><td colspan="8" class="loading-txt">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMPT IA -->
+      <div id="view-prompt" style="display:none">
+        <div class="section-hd" style="margin-bottom:16px">
+          <h2>🤖 Prompt IA — Analyse des leads</h2>
+        </div>
+        <div class="prompt-section">
+          <h2>Comment utiliser ce prompt</h2>
+          <p>Cliquez sur "Générer le prompt" pour créer automatiquement un prompt à coller dans ChatGPT ou Claude. Il listera tous vos leads actuels et posera les 4 questions stratégiques. Mettez-le à jour chaque lundi matin.</p>
+          <button class="btn-sm btn-blue" onclick="generatePrompt()" style="margin-bottom:16px">⚡ Générer le prompt maintenant</button>
+          <div class="prompt-box" id="promptBox">Cliquez sur "Générer le prompt" pour voir le résultat...</div>
+          <button class="copy-btn" onclick="copyPrompt()">📋 Copier le prompt</button>
+        </div>
+      </div>
+
+      <!-- SETUP -->
+      <div id="view-setup" style="display:none">
+        <div class="section-hd" style="margin-bottom:16px">
+          <h2>⚙️ Configuration</h2>
+          <button class="btn-sm btn-blue" onclick="openAddSourceModal()">+ Ajouter source</button>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px">
+          <h3 style="font-size:.95rem;font-weight:900;margin-bottom:16px">🔑 Mot de passe</h3>
+          <div class="modal-field">
+            <label>Nouveau mot de passe</label>
+            <input type="password" id="newPwInput" placeholder="Nouveau mot de passe"/>
+          </div>
+          <button class="btn-sm btn-blue" onclick="changePw()">Sauvegarder</button>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px">
+          <h3 style="font-size:.95rem;font-weight:900;margin-bottom:16px">📡 Sources de données (Google Sheets)</h3>
+          <div id="sourceListSetup">
+            <div class="loading-txt">Aucune source configurée</div>
+          </div>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-top:16px">
+          <h3 style="font-size:.95rem;font-weight:900;margin-bottom:12px">📋 Instructions</h3>
+          <ol style="padding-left:20px;font-size:.84rem;color:var(--muted);line-height:2.2">
+            <li>Créez un Google Sheet par niche (salon, location voiture...)</li>
+            <li>Coller le Apps Script correspondant → déployer en Web App</li>
+            <li>Copier l'URL de déploiement</li>
+            <li>Ajouter cette URL ici avec le nom de la niche</li>
+            <li>Ajouter la même URL dans les variables Vercel (SALON_SCRIPT_URL, etc.)</li>
+          </ol>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ADD SOURCE MODAL -->
+<div class="modal-overlay" id="modalSource" style="display:none" onclick="closeModal('modalSource',event)">
+  <div class="modal">
+    <h3>📡 Ajouter une source</h3>
+    <div class="modal-field">
+      <label>Nom de la niche</label>
+      <input type="text" id="srcName" placeholder="ex: Salon Fes"/>
+    </div>
+    <div class="modal-field">
+      <label>Type</label>
+      <select id="srcType">
+        <option value="salon">💅 Salon</option>
+        <option value="rentalcars">🚗 Location Voiture</option>
+        <option value="other">📦 Autre</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>URL Apps Script (Google Sheets Web App)</label>
+      <input type="url" id="srcUrl" placeholder="https://script.google.com/macros/s/.../exec"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalSource')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="saveSource()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--card);border:1px solid var(--border2);color:var(--text);padding:10px 24px;border-radius:50px;font-size:.85rem;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:500;white-space:nowrap"></div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+const DEFAULT_PW = 'amrani2025admin';
+let allLeads     = [];  // [{niche, nicheName, ...leadFields}]
+let currentFilter = 'all';
+let searchTerm    = '';
+
+// ── AUTH ───────────────────────────────────────────────────────
+function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  const stored = localStorage.getItem('admin_pw') || DEFAULT_PW;
+  if (pw === stored) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+}
+function changePw() {
+  const v = document.getElementById('newPwInput').value.trim();
+  if (!v) return;
+  localStorage.setItem('admin_pw', v);
+  toast('✅ Mot de passe mis à jour');
+}
+
+// ── SOURCES ────────────────────────────────────────────────────
+function getSources() { return JSON.parse(localStorage.getItem('admin_sources') || '[]'); }
+function saveSources(s) { localStorage.setItem('admin_sources', JSON.stringify(s)); }
+
+function saveSource() {
+  const name = document.getElementById('srcName').value.trim();
+  const type = document.getElementById('srcType').value;
+  const url  = document.getElementById('srcUrl').value.trim();
+  if (!name || !url) { alert('Nom et URL requis'); return; }
+  const sources = getSources();
+  sources.push({ id: 's' + Date.now(), name, type, url });
+  saveSources(sources);
+  closeModalById('modalSource');
+  document.getElementById('srcName').value = '';
+  document.getElementById('srcUrl').value  = '';
+  renderSetup();
+  renderSidebarSources();
+  refreshAll();
+}
+
+function deleteSource(id) {
+  if (!confirm('Supprimer cette source?')) return;
+  saveSources(getSources().filter(s => s.id !== id));
+  renderSetup();
+  renderSidebarSources();
+  refreshAll();
+}
+
+function renderSidebarSources() {
+  const sources = getSources();
+  const el = document.getElementById('sidebarSources');
+  if (!sources.length) {
+    el.innerHTML = '<div style="padding:6px 14px;font-size:.75rem;color:var(--muted)">Aucune source — allez dans Config</div>';
+    return;
+  }
+  const icons = { salon:'💅', rentalcars:'🚗', other:'📦' };
+  const colors = { salon:'#ec4899', rentalcars:'#3b82f6', other:'#f59e0b' };
+  el.innerHTML = sources.map(s =>
+    `<div class="source-tag">
+      <span style="font-size:.85rem">${icons[s.type]||'📦'} ${s.name}</span>
+      <span class="source-dot" style="background:${colors[s.type]||'#f59e0b'}"></span>
+    </div>`
+  ).join('');
+}
+
+function renderSetup() {
+  const sources = getSources();
+  const el = document.getElementById('sourceListSetup');
+  if (!sources.length) {
+    el.innerHTML = '<div class="loading-txt">Aucune source configurée</div>';
+    return;
+  }
+  const icons = { salon:'💅', rentalcars:'🚗', other:'📦' };
+  el.innerHTML = sources.map(s =>
+    `<div class="source-list-item">
+      <div class="source-info">
+        <div class="si-name">${icons[s.type]||'📦'} ${s.name}</div>
+        <div class="si-url">${s.url}</div>
+      </div>
+      <button class="del-btn" onclick="deleteSource('${s.id}')">Supprimer</button>
+    </div>`
+  ).join('');
+}
+
+// ── DATA FETCHING ──────────────────────────────────────────────
+async function refreshAll() {
+  const sources = getSources();
+  if (!sources.length) {
+    renderNicheGrid([]);
+    renderAllLeads([]);
+    return;
+  }
+  allLeads = [];
+  const nicheResults = await Promise.all(sources.map(fetchSource));
+  renderNicheGrid(nicheResults);
+  renderGlobalStats(nicheResults);
+  renderAllLeads(allLeads);
+  checkAlerts();
+  document.getElementById('lastRefreshTxt').textContent =
+    'Actualisé à ' + new Date().toLocaleTimeString('fr-MA');
+}
+
+async function fetchSource(source) {
+  try {
+    const [leadsRes, statsRes] = await Promise.all([
+      fetch(source.url + '?tab=leads').then(r => r.json()),
+      fetch(source.url + '?tab=stats').then(r => r.json()),
+    ]);
+    const rows = (leadsRes.rows || []).map(r => ({
+      ...r,
+      _niche: source.type,
+      _nicheName: source.name,
+      _sourceId: source.id,
+    }));
+    allLeads.push(...rows);
+    return { source, leads: rows, stats: statsRes, error: null };
+  } catch (e) {
+    return { source, leads: [], stats: null, error: e.message };
+  }
+}
+
+// ── RENDER NICHE GRID ──────────────────────────────────────────
+function renderNicheGrid(results) {
+  const grid = document.getElementById('nicheGrid');
+  if (!results.length) {
+    grid.innerHTML = `<div class="niche-card"><div class="empty"><div class="e-ico">📡</div><p>Aucune source. Allez dans <strong>Configuration</strong>.</p></div></div>`;
+    return;
+  }
+  const icons  = { salon:'💅', rentalcars:'🚗', other:'📦' };
+  const colors = { salon:'pink', rentalcars:'blue', other:'green' };
+  grid.innerHTML = results.map(r => {
+    const { source, stats, error } = r;
+    const icon  = icons[source.type]  || '📦';
+    const color = colors[source.type] || 'green';
+    if (error) return `
+      <div class="niche-card ${color}">
+        <div class="niche-card-header">
+          <div class="niche-title">${icon} ${source.name}</div>
+        </div>
+        <div style="color:var(--red);font-size:.82rem">⚠️ Erreur connexion</div>
+      </div>`;
+    const total     = stats?.leads?.total     ?? '—';
+    const confirmed = stats?.leads?.confirmed ?? stats?.leads?.termine ?? '—';
+    const rate      = stats?.conversion !== undefined ? stats.conversion + '%' : '—';
+    const revenue   = stats?.revenue    !== undefined ? stats.revenue + ' DH' : '—';
+    const uncontacted = (r.leads || []).filter(l => isUncontacted(l)).length;
+    return `
+      <div class="niche-card ${color}">
+        <div class="niche-card-header">
+          <div class="niche-title">${icon} ${source.name}</div>
+          ${uncontacted > 0 ? `<span style="background:var(--red-soft);color:var(--red);border-radius:50px;padding:2px 10px;font-size:.72rem;font-weight:700">⚠️ ${uncontacted} chaud</span>` : ''}
+        </div>
+        <div class="niche-stats-row">
+          <div class="ns"><div class="ns-num">${total}</div><div class="ns-label">leads</div></div>
+          <div class="ns green"><div class="ns-num">${confirmed}</div><div class="ns-label">confirmés</div></div>
+          <div class="ns amber"><div class="ns-num">${rate}</div><div class="ns-label">taux</div></div>
+          <div class="ns"><div class="ns-num" style="font-size:1rem">${revenue}</div><div class="ns-label">revenue</div></div>
+        </div>
+        <div class="niche-actions">
+          <button class="btn-xs ${color}" onclick="filterByNiche('${source.id}')">Voir leads</button>
+          <button class="btn-xs green" onclick="promptForNiche('${source.id}')">🤖 Prompt</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── GLOBAL STATS ───────────────────────────────────────────────
+function renderGlobalStats(results) {
+  let total = 0, confirmed = 0, revenue = 0;
+  const today = new Date().toLocaleDateString('fr-MA');
+  results.forEach(r => {
+    total     += r.stats?.leads?.total     || 0;
+    confirmed += (r.stats?.leads?.confirmed || 0) + (r.stats?.leads?.termine || 0);
+    revenue   += r.stats?.revenue || 0;
+  });
+  const todayLeads = allLeads.filter(l => {
+    const d = String(l['Date'] || '');
+    return d.startsWith(new Date().toLocaleDateString('fr-MA')) || d.includes(new Date().toISOString().slice(0,10));
+  }).length;
+  const rate = total > 0 ? Math.round(confirmed / total * 100) : 0;
+  document.getElementById('g-total').textContent     = total;
+  document.getElementById('g-confirmed').textContent = confirmed;
+  document.getElementById('g-rate').textContent      = rate + '%';
+  document.getElementById('g-revenue').textContent   = revenue.toLocaleString('fr');
+  document.getElementById('g-today').textContent     = todayLeads;
+}
+
+// ── LEADS TABLE ────────────────────────────────────────────────
+function renderAllLeads(leads) {
+  document.getElementById('leadsCount').textContent = leads.length + ' leads';
+  applyFilters();
+}
+
+function applyFilters() {
+  let leads = [...allLeads].reverse();
+  if (currentFilter === 'nouveau')  leads = leads.filter(l => (l['Statut'] || '').toLowerCase() === 'nouveau');
+  if (currentFilter === 'chaud')    leads = leads.filter(isUncontacted);
+  if (currentFilter === 'confirme') leads = leads.filter(l => ['Confirmé','Terminé'].includes(l['Statut']));
+  if (searchTerm) {
+    const q = searchTerm.toLowerCase();
+    leads = leads.filter(l =>
+      String(l['Nom']||'').toLowerCase().includes(q) ||
+      String(l['Téléphone']||'').toLowerCase().includes(q)
+    );
+  }
+  const tbody = document.getElementById('allLeadsBody');
+  if (!leads.length) {
+    tbody.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="e-ico">📭</div><p>Aucun lead dans cette catégorie</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = leads.map(l => {
+    const niche   = l._niche || 'other';
+    const niLabel = l._nicheName || niche;
+    const st      = l['Statut'] || 'Nouveau';
+    const stClass = st.toLowerCase().replace(' ','').replace('é','e').replace('è','e');
+    const service = l['Service demandé'] || l['Voiture demandée'] || l['Service'] || '—';
+    const ph      = String(l['Téléphone'] || '').replace(/\D/g,'');
+    const waHref  = ph ? `https://wa.me/${ph.startsWith('0') ? '212'+ph.slice(1) : ph}` : null;
+    const dt      = String(l['Date'] || '').slice(0,16);
+    const ageDays = getAgeDays(l['Date']);
+    const ageCls  = ageDays === null ? '' : ageDays < 1 ? 'ok' : ageDays < 2 ? 'warn' : 'hot';
+    const ageStr  = ageDays === null ? '—' : ageDays < 1 ? '<1j' : Math.floor(ageDays) + 'j';
+    return `<tr>
+      <td><span class="niche-pill ${niche}">${niLabel}</span></td>
+      <td style="white-space:nowrap;color:var(--muted);font-size:.78rem">${dt}</td>
+      <td style="font-weight:700">${escHtml(l['Nom']||'—')}</td>
+      <td>${waHref ? `<a class="wa-link" href="${waHref}" target="_blank">💬 ${escHtml(l['Téléphone']||'')}</a>` : escHtml(l['Téléphone']||'—')}</td>
+      <td style="color:var(--muted)">${escHtml(service)}</td>
+      <td><span class="status-dot ${stClass}"></span>${st}</td>
+      <td>${ageCls ? `<span class="age-badge ${ageCls}">${ageStr}</span>` : '—'}</td>
+      <td style="color:var(--muted);font-size:.75rem">${escHtml(l['Source']||'—')}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterLeads(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function searchLeads(v) { searchTerm = v; applyFilters(); }
+function filterByNiche(sourceId) {
+  showView('leads');
+  currentFilter = 'all';
+  searchTerm    = '';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn').classList.add('active');
+  const leads = allLeads.filter(l => l._sourceId === sourceId);
+  const tbody = document.getElementById('allLeadsBody');
+  if (!leads.length) { tbody.innerHTML = `<tr><td colspan="8" class="loading-txt">Aucun lead pour cette source</td></tr>`; return; }
+  renderAllLeads(leads.map(l => ({...l})));
+  allLeads = allLeads; // keep full list
+}
+
+// ── ALERTS ─────────────────────────────────────────────────────
+function isUncontacted(lead) {
+  const st = (lead['Statut'] || '').toLowerCase();
+  if (st !== 'nouveau') return false;
+  return getAgeDays(lead['Date']) >= 1;
+}
+
+function getAgeDays(dateStr) {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d)) return null;
+  return (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
+}
+
+function checkAlerts() {
+  const uncontacted = allLeads.filter(isUncontacted).length;
+  const bar = document.getElementById('alertBar');
+  if (uncontacted > 0) {
+    document.getElementById('alertCount').textContent = uncontacted;
+    bar.style.display = 'flex';
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+// ── PROMPT GENERATOR ───────────────────────────────────────────
+function generatePrompt() {
+  const sources = getSources();
+  const leadLines = [...allLeads].reverse().slice(0, 50).map(l => {
+    const service = l['Service demandé'] || l['Voiture demandée'] || '';
+    return `- ${l['Nom']||'?'} | ${l._nicheName} | ${l['Statut']||'Nouveau'} | ${service} | ${l['Source']||'?'}`;
+  }).join('\n');
+
+  const prompt = `Tu es un stratège commercial pour AmraniAds, agence de marketing digital au Maroc.
+
+Je gère des publicités Meta pour ${sources.length} niches : ${sources.map(s=>s.name).join(', ')}.
+
+Voici mes leads actuels (${allLeads.length} au total) :
+
+${leadLines || '(Aucun lead pour le moment)'}
+
+Réponds à ces 4 questions :
+
+1. PRIORITÉ — Quels leads contacter AUJOURD'HUI et qu'est-ce que je leur dis exactement (message WhatsApp en français ou darija) ?
+
+2. CROSS-SELL — Est-ce que certains leads d'une niche seraient intéressés par une autre de mes services ? Lesquels et pourquoi ?
+
+3. RÉACTIVATION — Pour les leads annulés ou froids, quelle offre ou angle pourrait rouvrir la conversation ?
+
+4. FOCUS — Que me dit cette liste sur la niche sur laquelle je dois concentrer ma prospection ce mois-ci ?
+
+Sois direct, concret, donne-moi des messages exacts à envoyer.`;
+
+  document.getElementById('promptBox').textContent = prompt;
+}
+
+function promptForNiche(sourceId) {
+  showView('prompt');
+  const source = getSources().find(s => s.id === sourceId);
+  const leads  = allLeads.filter(l => l._sourceId === sourceId);
+  const leadLines = [...leads].reverse().slice(0, 30).map(l => {
+    const service = l['Service demandé'] || l['Voiture demandée'] || '';
+    return `- ${l['Nom']||'?'} | ${l['Statut']||'Nouveau'} | ${service} | ${l['Source']||'?'}`;
+  }).join('\n');
+
+  const prompt = `Tu es un expert en vente pour des ${source?.name || 'clients'} au Maroc.
+
+Voici mes ${leads.length} leads pour cette niche :
+
+${leadLines || '(Aucun lead)'}
+
+1. PRIORITÉ — Qui contacter aujourd'hui et avec quel message WhatsApp ?
+2. RÉACTIVATION — Comment relancer les leads froids ou annulés ?
+3. UPSELL — Lesquels sont prêts pour une offre supplémentaire ?
+4. PATTERN — Qu'est-ce que ces leads m'apprennent sur mon audience ?
+
+Donne des messages exacts en français ou darija.`;
+
+  document.getElementById('promptBox').textContent = prompt;
+}
+
+function copyPrompt() {
+  const text = document.getElementById('promptBox').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('✅ Prompt copié !'));
+}
+
+// ── VIEWS ──────────────────────────────────────────────────────
+function showView(v) {
+  ['overview','leads','prompt','setup'].forEach(name => {
+    document.getElementById('view-'+name).style.display = v === name ? '' : 'none';
+    document.getElementById('btn-'+name).classList.toggle('active', v === name);
+  });
+  if (v === 'setup') { renderSetup(); renderSidebarSources(); }
+}
+
+// ── MODALS ─────────────────────────────────────────────────────
+function openAddSourceModal() { document.getElementById('modalSource').style.display = 'flex'; }
+function closeModal(id, e)    { if (e.target.id === id) document.getElementById(id).style.display = 'none'; }
+function closeModalById(id)   { document.getElementById(id).style.display = 'none'; }
+
+// ── HELPERS ────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(12px)'; }, 2800);
+}
+
+function initApp() {
+  renderSidebarSources();
+  renderSetup();
+  refreshAll();
+}
+</script>
+</body>
+</html>

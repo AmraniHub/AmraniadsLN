@@ -99,8 +99,11 @@ module.exports = async function handler(req, res) {
     } catch (e) { results.telegram = { error: e.message }; }
   }
 
-  // ── 3. CRM — Google Sheets via shared Apps Script ────
-  const scriptUrl = process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
+  // ── 3. CRM — route to correct Google Sheet per niche ─
+  const srcUrl2   = String(eventSourceUrl || '');
+  const scriptUrl = srcUrl2.includes('/salon')      ? process.env.SALON_SCRIPT_URL
+                  : srcUrl2.includes('/rentalcars') ? process.env.RENTALCARS_SCRIPT_URL
+                  : process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
   if (scriptUrl) {
     try {
@@ -109,9 +112,12 @@ module.exports = async function handler(req, res) {
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
-          name:      name    || '',
-          phone:     phone   || '',
-          service:   service || '',
+          name:      name      || '',
+          phone:     phone     || '',
+          service:   service   || '',
+          source:    source    || '',
+          eventId:   eventId   || '',
+          campaign:  req.body?.campaign || '',
         })
       });
       results.sheets = 'sent';
