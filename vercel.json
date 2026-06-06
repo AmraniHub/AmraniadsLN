@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
   "redirects": [
     { "source": "/rentalcar", "destination": "/rentalcars", "permanent": true },
     { "source": "/rentalcar/(.*)", "destination": "/rentalcars/$1", "permanent": true }
