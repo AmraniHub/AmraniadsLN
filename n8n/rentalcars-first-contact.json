@@ -1,0 +1,112 @@
+{
+  "name": "AmraniAds — RC Premier Contact (Meta Cloud API)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "amraniads-rc-lead",
+        "responseMode": "onReceived",
+        "responseData": "allEntries"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000001",
+      "name": "🚗 Nouveau lead RC",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "rc-lead-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize Moroccan phone → international format 212XXXXXXXXX\nconst raw = String($input.first().json.phone || '').replace(/\\D/g, '');\nlet phone = raw;\nif (raw.startsWith('0') && raw.length === 10) phone = '212' + raw.slice(1);\nelse if (!raw.startsWith('212') && raw.length === 9) phone = '212' + raw;\n\nreturn [{\n  json: {\n    ...$input.first().json,\n    phoneNormalized: phone,\n    firstName: String($input.first().json.name || '').split(' ')[0],\n  }\n}];"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000002",
+      "name": "📱 Normaliser téléphone",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "Bearer {{$env.OPENAI_API_KEY}}" },
+            { "name": "Content-Type",  "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-4o-mini\",\n  \"max_tokens\": 160,\n  \"temperature\": 0.7,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"Tu es un commercial d'une agence de location de voitures au Maroc. Tu écris des messages WhatsApp courts, chaleureux et professionnels en darija marocain (dialecte). Tu ne fais JAMAIS plus de 3 lignes. Tu tututoies le client. Tu termines avec une question précise sur les dates ou le type de voiture.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Écris un premier message WhatsApp pour ce nouveau lead:\\n- Nom: {{ $json.firstName }}\\n- Voiture demandée: {{ $json.carType || 'non précisé' }}\\n- Dates souhaitées: {{ $json.dates || 'non précisées' }}\\n- Source: {{ $json.source }}\\n\\nLe message doit: 1) saluer par prénom, 2) confirmer qu'on a reçu la demande, 3) poser UNE question précise (dates ou voiture). Darija uniquement, 2-3 lignes max.\"\n    }\n  ]\n}"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000003",
+      "name": "🤖 OpenAI — Générer message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const aiResponse = $input.first().json.choices[0].message.content.trim();\nconst prev = $('📱 Normaliser téléphone').first().json;\nreturn [{ json: { ...prev, aiMessage: aiResponse } }];"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000004",
+      "name": "📝 Extraire message AI",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v20.0/{{ $env.WA_PHONE_NUMBER_ID }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{ $env.WA_ACCESS_TOKEN }}" },
+            { "name": "Content-Type",  "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $json.phoneNormalized }}\",\n  \"type\": \"template\",\n  \"template\": {\n    \"name\": \"rc_premier_contact\",\n    \"language\": { \"code\": \"fr\" },\n    \"components\": [\n      {\n        \"type\": \"body\",\n        \"parameters\": [\n          { \"type\": \"text\", \"text\": \"{{ $json.firstName }}\" },\n          { \"type\": \"text\", \"text\": \"{{ $json.aiMessage }}\" }\n        ]\n      }\n    ]\n  }\n}"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000005",
+      "name": "📤 Meta Cloud API — Envoyer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.RENTALCARS_SCRIPT_URL }}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\n  \"action\": \"lead_update\",\n  \"row\": {{ $('🚗 Nouveau lead RC').first().json.sheetRow || 0 }},\n  \"status\": \"Contacté\",\n  \"notes\": \"✅ Message auto envoyé par AI agent\"\n}"
+      },
+      "id": "a1b2c3d4-0001-0001-0001-000000000006",
+      "name": "📊 Mettre à jour Google Sheet",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1340, 300]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "🚗 Nouveau lead RC":           { "main": [[{ "node": "📱 Normaliser téléphone",    "type": "main", "index": 0 }]] },
+    "📱 Normaliser téléphone":      { "main": [[{ "node": "🤖 OpenAI — Générer message","type": "main", "index": 0 }]] },
+    "🤖 OpenAI — Générer message":  { "main": [[{ "node": "📝 Extraire message AI",     "type": "main", "index": 0 }]] },
+    "📝 Extraire message AI":        { "main": [[{ "node": "📤 Meta Cloud API — Envoyer","type": "main", "index": 0 }]] },
+    "📤 Meta Cloud API — Envoyer":  { "main": [[{ "node": "📊 Mettre à jour Google Sheet","type":"main","index":0}]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "_comment": "BEFORE ACTIVATING: set env vars WA_PHONE_NUMBER_ID, WA_ACCESS_TOKEN, OPENAI_API_KEY, RENTALCARS_SCRIPT_URL. Create WhatsApp template 'rc_premier_contact' in Meta Business Manager with 2 variables: {{1}} = prénom, {{2}} = message AI."
+  },
+  "tags": [{ "name": "amraniads" }, { "name": "rental-cars" }]
+}

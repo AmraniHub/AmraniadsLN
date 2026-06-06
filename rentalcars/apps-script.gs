@@ -14,13 +14,16 @@ const LEADS_TAB  = 'Leads';
 const FLEET_TAB  = 'Flotte';
 const STATS_TAB  = 'Stats';
 
+// ── Script Properties keys ────────────────────────────────────
+// TELEGRAM_TOKEN, TELEGRAM_CHAT_ID, N8N_WEBHOOK_URL
+
 // ── Setup — run once ──────────────────────────────────────────
 function setupSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
   createTab(ss, LEADS_TAB, [
     'Date', 'Nom', 'Téléphone', 'Voiture demandée', 'Dates location',
-    'Source', 'Statut', 'Notes', 'Event ID'
+    'Source', 'Statut', 'Notes', 'Event ID', 'Revenue (DH)'
   ], '#1d4ed8');
 
   createTab(ss, FLEET_TAB, [
@@ -65,9 +68,12 @@ function doPost(e) {
         data.source   || 'Meta Ads',
         'Nouveau',
         '',
-        data.eventId  || ''
+        data.eventId  || '',
+        ''
       ]);
+      const sheetRow = sheet.getLastRow();
       sendTelegramAlert(data);
+      pingN8nAgent({ ...data, sheetRow });
     }
 
     else if (action === 'lead_update') {
@@ -75,7 +81,8 @@ function doPost(e) {
       const row   = Number(data.row);
       if (row > 1) {
         sheet.getRange(row, 7).setValue(data.status || '');
-        if (data.notes) sheet.getRange(row, 8).setValue(data.notes);
+        if (data.notes)   sheet.getRange(row, 8).setValue(data.notes);
+        if (data.revenue) sheet.getRange(row, 10).setValue(Number(data.revenue));
       }
     }
 
@@ -160,11 +167,37 @@ function buildStats(ss) {
   const available   = fleet.filter(r => r[4] === 'Disponible').length;
   const rented      = fleet.filter(r => r[4] === 'Loué').length;
   const maintenance = fleet.filter(r => r[4] === 'Maintenance').length;
+  const revenue = leads.filter(r => r[6] === 'Confirmé' && r[9])
+                       .reduce((s, r) => s + Number(r[9] || 0), 0);
   return {
     leads: { total, confirmed, cancelled, contacted, nouveau: total - confirmed - cancelled - contacted },
     fleet: { total: fleet.length, available, rented, maintenance },
+    revenue,
     conversion: total > 0 ? Math.round(confirmed / total * 100) : 0
   };
+}
+
+function pingN8nAgent(data) {
+  const webhookUrl = PropertiesService.getScriptProperties().getProperty('N8N_WEBHOOK_URL');
+  if (!webhookUrl) return;
+  try {
+    UrlFetchApp.fetch(webhookUrl, {
+      method: 'post',
+      contentType: 'application/json',
+      payload: JSON.stringify({
+        name:     data.name     || '',
+        phone:    data.phone    || '',
+        carType:  data.carType  || '',
+        dates:    data.dates    || '',
+        source:   data.source   || 'Meta Ads',
+        eventId:  data.eventId  || '',
+        sheetRow: data.sheetRow || 0,
+      }),
+      muteHttpExceptions: true
+    });
+  } catch (e) {
+    Logger.log('n8n webhook error: ' + e.message);
+  }
 }
 
 function sendTelegramAlert(data) {
@@ -189,6 +222,7 @@ function json(obj) {
 function setProperties() {
   PropertiesService.getScriptProperties().setProperties({
     'TELEGRAM_TOKEN':   'YOUR_BOT_TOKEN_HERE',
-    'TELEGRAM_CHAT_ID': 'YOUR_CHAT_ID_HERE'
+    'TELEGRAM_CHAT_ID': 'YOUR_CHAT_ID_HERE',
+    'N8N_WEBHOOK_URL':  'https://your-n8n-instance/webhook/amraniads-rc-lead'
   });
 }
