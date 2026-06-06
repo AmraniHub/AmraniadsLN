@@ -1,3 +1,7 @@
 {
-  "version": 2
+  "version": 2,
+  "redirects": [
+    { "source": "/rentalcar", "destination": "/rentalcars", "permanent": true },
+    { "source": "/rentalcar/(.*)", "destination": "/rentalcars/$1", "permanent": true }
+  ]
 }
