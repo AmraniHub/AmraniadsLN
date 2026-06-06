@@ -364,6 +364,10 @@
     /* ── DIVIDER ── */
     .divider { border: none; border-top: 1px solid var(--border); }
 
+    /* ── CERT CARDS ── */
+    #certsGrid a:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1) !important; transform: translateY(-3px); }
+    #certsGrid a { transition: transform .2s, box-shadow .2s !important; }
+
     /* ── FOUNDER SECTION ── */
     .founder-wrap {
       display: flex; align-items: center; gap: 32px;
@@ -801,6 +805,58 @@
     </div>
   </div>
 </section>
+
+<!-- ═══ CERTIFICATES ═══ -->
+<section class="section" id="sec-certs" style="padding-bottom:48px">
+  <div class="section-badge blue">🎓 الشهادات والاعتمادات</div>
+  <div class="section-title">مؤهلات معتمدة دولياً</div>
+  <p class="section-sub">شهادات رسمية من كبرى منصات التسويق الرقمي العالمية</p>
+  <div id="certsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+
+    <!-- PLACEHOLDER — replace with real certs once user shares links -->
+    <a href="https://www.credential.net/profile/amranirich/wallet" target="_blank"
+       style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;text-decoration:none;color:var(--text);transition:box-shadow .2s"
+       onmouseover="this.style.boxShadow='0 8px 32px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+      <div style="width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#1877f2,#0a52cc);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0">📘</div>
+      <div>
+        <div style="font-weight:900;font-size:.92rem;margin-bottom:3px">Meta Certified</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px">Meta · Digital Marketing</div>
+        <span style="font-size:.7rem;background:var(--blue-l);color:var(--blue);padding:2px 10px;border-radius:50px;font-weight:700">✅ معتمد</span>
+      </div>
+    </a>
+
+    <a href="https://www.credential.net/profile/amranirich/wallet" target="_blank"
+       style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;text-decoration:none;color:var(--text);transition:box-shadow .2s"
+       onmouseover="this.style.boxShadow='0 8px 32px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+      <div style="width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#34a853,#0f9d58);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0">📗</div>
+      <div>
+        <div style="font-weight:900;font-size:.92rem;margin-bottom:3px">Google Analytics</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px">Google · Analytics</div>
+        <span style="font-size:.7rem;background:var(--green-l);color:var(--green);padding:2px 10px;border-radius:50px;font-weight:700">✅ معتمد</span>
+      </div>
+    </a>
+
+    <a href="https://www.credential.net/profile/amranirich/wallet" target="_blank"
+       style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;text-decoration:none;color:var(--text);transition:box-shadow .2s"
+       onmouseover="this.style.boxShadow='0 8px 32px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+      <div style="width:58px;height:58px;border-radius:14px;background:linear-gradient(135deg,#ff7a00,#ff4500);display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0">🏅</div>
+      <div>
+        <div style="font-weight:900;font-size:.92rem;margin-bottom:3px">شهادة أخرى</div>
+        <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px">— · —</div>
+        <span style="font-size:.7rem;background:var(--gold-l);color:var(--gold);padding:2px 10px;border-radius:50px;font-weight:700">✅ معتمد</span>
+      </div>
+    </a>
+
+  </div>
+  <div style="text-align:center;margin-top:20px">
+    <a href="https://www.credential.net/profile/amranirich/wallet" target="_blank"
+       style="display:inline-flex;align-items:center;gap:8px;background:var(--blue-l);color:var(--blue);border-radius:50px;padding:10px 24px;font-weight:700;font-size:.85rem;text-decoration:none">
+      🎓 عرض جميع الشهادات على credential.net ↗
+    </a>
+  </div>
+</section>
+
+<hr class="divider"/>
 
 <!-- ═══ FOUNDER / ABOUT ═══ -->
 <section class="section" id="sec-founder" style="padding-top:48px;padding-bottom:48px">
