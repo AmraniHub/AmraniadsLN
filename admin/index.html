@@ -289,6 +289,93 @@
       .sidebar { transform: translateX(-100%); }
       .main { margin-left: 0; padding: 16px; }
     }
+
+    /* ── PROOF / RESULTS SYSTEM ── */
+    .proof-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+    .proof-tab-btn {
+      padding:7px 18px; border-radius:50px; font-family:'Cairo',sans-serif;
+      font-size:.82rem; font-weight:700; cursor:pointer; border:1.5px solid var(--border2);
+      background:none; color:var(--muted); transition:all .2s;
+    }
+    .proof-tab-btn.active { background:var(--blue-soft); color:var(--blue); border-color:var(--blue); }
+
+    /* Results Card */
+    .result-card-preview {
+      background:linear-gradient(135deg,#0f2040 0%,#1a3a6e 100%);
+      border:1px solid rgba(59,130,246,.3); border-radius:20px; padding:28px;
+      max-width:400px; position:relative; overflow:hidden;
+    }
+    .result-card-preview::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:4px;
+      background:linear-gradient(90deg,#3b82f6,#a855f7);
+    }
+    .rc-logo { font-size:.75rem; font-weight:700; color:rgba(255,255,255,.5); margin-bottom:16px; letter-spacing:1px; }
+    .rc-client { font-size:1.1rem; font-weight:900; color:#fff; margin-bottom:4px; }
+    .rc-period { font-size:.75rem; color:rgba(255,255,255,.55); margin-bottom:20px; }
+    .rc-metrics { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+    .rc-metric { background:rgba(255,255,255,.07); border-radius:12px; padding:14px 12px; }
+    .rc-metric .rcm-num { font-size:1.6rem; font-weight:900; color:#fff; line-height:1; }
+    .rc-metric .rcm-label { font-size:.68rem; color:rgba(255,255,255,.55); margin-top:4px; }
+    .rc-metric.green .rcm-num { color:#4ade80; }
+    .rc-metric.amber .rcm-num { color:#fbbf24; }
+    .rc-cta { font-size:.72rem; color:rgba(255,255,255,.4); text-align:center; border-top:1px solid rgba(255,255,255,.08); padding-top:14px; }
+
+    /* Milestone badges */
+    .milestone-item {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px; background:var(--card); border:1px solid var(--border);
+      border-radius:14px; margin-bottom:10px; gap:12px; flex-wrap:wrap;
+    }
+    .milestone-badges { display:flex; gap:6px; flex-wrap:wrap; }
+    .ms-badge {
+      padding:3px 10px; border-radius:50px; font-size:.7rem; font-weight:700;
+      background:var(--green-soft); color:var(--green);
+    }
+    .ms-badge.pending { background:var(--amber-soft); color:var(--amber); }
+    .ms-badge.locked  { background:var(--card2); color:var(--muted); }
+
+    /* Referral table */
+    .ref-row {
+      display:grid; grid-template-columns:1fr 1fr 1fr auto auto;
+      gap:10px; align-items:center; padding:11px 14px;
+      border-bottom:1px solid var(--border); font-size:.84rem;
+    }
+    .ref-row.header { font-size:.72rem; font-weight:700; color:var(--muted); background:var(--card2); border-radius:10px 10px 0 0; }
+    .check-done { color:var(--green); font-size:1.1rem; }
+    .check-miss { color:var(--muted); font-size:1.1rem; }
+
+    /* Portfolio panel */
+    .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:20px; }
+    .portfolio-card {
+      background:linear-gradient(135deg,#1e3a8a 0%,#1e293b 100%);
+      border:1px solid rgba(59,130,246,.2); border-radius:16px; padding:20px;
+      text-align:center;
+    }
+    .pc-num  { font-size:2rem; font-weight:900; color:#fff; line-height:1; }
+    .pc-label { font-size:.72rem; color:rgba(255,255,255,.55); margin-top:6px; }
+    .pc-sub  { font-size:.65rem; color:rgba(255,255,255,.35); margin-top:2px; }
+    .portfolio-card.green { background:linear-gradient(135deg,#14532d,#1e293b); border-color:rgba(34,197,94,.2); }
+    .portfolio-card.amber { background:linear-gradient(135deg,#78350f,#1e293b); border-color:rgba(245,158,11,.2); }
+    .portfolio-card.pink  { background:linear-gradient(135deg,#831843,#1e293b); border-color:rgba(236,72,153,.2); }
+    .portfolio-copy-box {
+      background:var(--bg); border:1px solid var(--border); border-radius:12px;
+      padding:16px; font-size:.82rem; color:var(--muted); line-height:1.9;
+      white-space:pre-wrap; direction:rtl; text-align:right;
+    }
+
+    /* Proof item cards (admin list) */
+    .proof-item-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:16px; margin-bottom:10px;
+      display:flex; align-items:flex-start; gap:14px;
+    }
+    .proof-item-card .pic-icon { font-size:1.6rem; flex-shrink:0; }
+    .proof-item-card .pic-body { flex:1; min-width:0; }
+    .proof-item-card .pic-name { font-size:.92rem; font-weight:700; }
+    .proof-item-card .pic-meta { font-size:.75rem; color:var(--muted); margin-top:3px; }
+    .proof-item-card .pic-quote { font-size:.8rem; color:var(--muted); margin-top:6px; font-style:italic; direction:rtl; text-align:right; }
+    .proof-item-card .pic-actions { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+    .star-btn { background:var(--amber-soft); color:var(--amber); border:none; border-radius:8px; padding:4px 10px; cursor:pointer; font-size:.72rem; font-weight:700; }
   </style>
 </head>
 <body>
@@ -320,6 +407,7 @@
       <button class="nav-btn" onclick="showView('leads')"              id="btn-leads"      ><span class="ico">📋</span> Tous les leads</button>
       <button class="nav-btn" onclick="showView('dashboards')"         id="btn-dashboards" ><span class="ico">🎛️</span> Dashboards</button>
       <button class="nav-btn" onclick="showView('prompt')"             id="btn-prompt"     ><span class="ico">🤖</span> Prompt IA</button>
+      <button class="nav-btn" onclick="showView('proof')"              id="btn-proof"      ><span class="ico">🏆</span> الإثباتات</button>
       <button class="nav-btn" onclick="showView('setup')"              id="btn-setup"      ><span class="ico">⚙️</span> Configuration</button>
 
       <div class="sidebar-section">Sources actives</div>
@@ -461,6 +549,220 @@
         </div>
       </div>
 
+      <!-- PROOF / RESULTS SYSTEM -->
+      <div id="view-proof" style="display:none">
+        <div style="margin-bottom:22px">
+          <div style="font-size:1.2rem;font-weight:900;direction:rtl;text-align:right">🏆 الإثباتات والنتائج</div>
+          <div style="font-size:.82rem;color:var(--muted);margin-top:3px;direction:rtl;text-align:right">أدر بطاقات النتائج، المعالم، الإحالات، وملف الوكالة</div>
+        </div>
+
+        <div class="proof-tabs">
+          <button class="proof-tab-btn active" onclick="switchProofTab('cards',this)">📊 بطاقة النتائج</button>
+          <button class="proof-tab-btn" onclick="switchProofTab('milestones',this)">🎯 المعالم والتنبيهات</button>
+          <button class="proof-tab-btn" onclick="switchProofTab('referrals',this)">🤝 الإحالات والتقييمات</button>
+          <button class="proof-tab-btn" onclick="switchProofTab('portfolio',this)">🏅 ملف الوكالة</button>
+          <button class="proof-tab-btn" onclick="switchProofTab('items',this)">➕ إضافة إثبات</button>
+        </div>
+
+        <!-- TAB: RESULTS CARDS -->
+        <div id="proof-tab-cards">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start">
+            <div>
+              <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px">
+                <div style="font-size:.9rem;font-weight:900;margin-bottom:16px;direction:rtl;text-align:right">اختر العميل لإنشاء البطاقة</div>
+                <div class="modal-field">
+                  <label style="direction:rtl;text-align:right">النيش</label>
+                  <select id="rc-niche-sel" onchange="loadCardClients()" style="direction:rtl">
+                    <option value="salon">💅 صالون</option>
+                    <option value="rc">🚗 تأجير السيارات</option>
+                  </select>
+                </div>
+                <div class="modal-field">
+                  <label style="direction:rtl;text-align:right">العميل</label>
+                  <select id="rc-client-sel" style="direction:rtl"><option>—</option></select>
+                </div>
+                <div class="modal-field">
+                  <label style="direction:rtl;text-align:right">الفترة</label>
+                  <input type="text" id="rc-period" value="30 يوم" style="direction:rtl"/>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+                  <div class="modal-field" style="margin:0">
+                    <label style="direction:rtl;text-align:right">عدد اللييدز</label>
+                    <input type="number" id="rc-leads" placeholder="47" style="direction:rtl"/>
+                  </div>
+                  <div class="modal-field" style="margin:0">
+                    <label style="direction:rtl;text-align:right">تكلفة اللييد (DH)</label>
+                    <input type="number" id="rc-cpl" placeholder="38" style="direction:rtl"/>
+                  </div>
+                  <div class="modal-field" style="margin:0">
+                    <label style="direction:rtl;text-align:right">عملاء مؤكدون</label>
+                    <input type="number" id="rc-conf" placeholder="12" style="direction:rtl"/>
+                  </div>
+                  <div class="modal-field" style="margin:0">
+                    <label style="direction:rtl;text-align:right">Revenue (DH)</label>
+                    <input type="number" id="rc-rev" placeholder="18000" style="direction:rtl"/>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <button class="btn-sm btn-blue" onclick="generateResultCard()" style="flex:1">⚡ إنشاء البطاقة</button>
+                  <button class="btn-sm" style="background:var(--green-soft);color:var(--green);border:none;border-radius:50px;padding:9px 14px;font-family:Cairo,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;flex:1" onclick="copyCardText()">📋 نسخ النص</button>
+                </div>
+                <div style="margin-top:10px">
+                  <button class="btn-sm" style="background:var(--pink-soft);color:var(--pink);border:none;border-radius:50px;padding:9px 14px;font-family:Cairo,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;width:100%" onclick="saveProofItem()">💾 حفظ في الإثباتات العامة</button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="margin-bottom:12px;font-size:.8rem;color:var(--muted);direction:rtl;text-align:right">معاينة البطاقة ← انسخها وارسلها عبر WhatsApp أو استخدمها في الإعلانات</div>
+              <div class="result-card-preview" id="resultCardPreview">
+                <div class="rc-logo">AMRANIADS.COM</div>
+                <div class="rc-client" id="rcp-client">اختر عميلاً</div>
+                <div class="rc-period" id="rcp-period">خلال 30 يوم</div>
+                <div class="rc-metrics">
+                  <div class="rc-metric"><div class="rcm-num" id="rcp-leads">—</div><div class="rcm-label">ليد مستهدف</div></div>
+                  <div class="rc-metric green"><div class="rcm-num" id="rcp-cpl">—</div><div class="rcm-label">تكلفة الليد (DH)</div></div>
+                  <div class="rc-metric amber"><div class="rcm-num" id="rcp-conf">—</div><div class="rcm-label">عميل مؤكد</div></div>
+                  <div class="rc-metric"><div class="rcm-num" id="rcp-rev">—</div><div class="rcm-label">Revenue (DH)</div></div>
+                </div>
+                <div class="rc-cta">النتائج تتحدث عن نفسها 🚀 amraniads.com</div>
+              </div>
+              <div style="margin-top:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px" id="cardTextBox" dir="rtl">
+                <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px">نص جاهز للنسخ (WhatsApp / إعلانات)</div>
+                <div id="cardTextContent" style="font-size:.84rem;line-height:1.9;white-space:pre-wrap">اضغط "إنشاء البطاقة" لعرض النص...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: MILESTONES -->
+        <div id="proof-tab-milestones" style="display:none">
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px">
+            <div style="font-size:.9rem;font-weight:900;margin-bottom:4px;direction:rtl;text-align:right">🎯 المعالم التلقائية</div>
+            <div style="font-size:.78rem;color:var(--muted);margin-bottom:16px;direction:rtl;text-align:right">حين يصل عميل لهذه الأرقام، أرسل له رسالة WhatsApp للحصول على تقييم أو إحالة</div>
+            <div id="milestonesList"></div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px">
+            <div style="font-size:.9rem;font-weight:900;margin-bottom:16px;direction:rtl;text-align:right">📱 قوالب WhatsApp الجاهزة</div>
+            <div style="display:grid;gap:12px">
+              <div style="background:var(--card2);border-radius:12px;padding:14px;direction:rtl">
+                <div style="font-size:.72rem;font-weight:700;color:var(--green);margin-bottom:8px">✅ عند الوصول لـ 10 ليدات — طلب تقييم</div>
+                <div style="font-size:.82rem;line-height:1.9;color:var(--text)" id="wa-review-template">السلام عليكم [الاسم] 🌟\n\nكنا نتابع معك النتائج — وصلنا اليوم لـ 10 ليدات مع نظامنا!\n\nواحد طلب كبير — ممكن تكتب لنا تقييم صغير؟ حتى نقدر نساعد أشخاص أخرين بحالك 🙏\n\nشكراً بزاف!</div>
+                <button class="btn-xs green" style="margin-top:8px" onclick="copyWaTemplate('review')">📋 نسخ</button>
+              </div>
+              <div style="background:var(--card2);border-radius:12px;padding:14px;direction:rtl">
+                <div style="font-size:.72rem;font-weight:700;color:var(--amber);margin-bottom:8px">🤝 عند الوصول لشهر كامل — طلب إحالة</div>
+                <div style="font-size:.82rem;line-height:1.9;color:var(--text)" id="wa-referral-template">السلام عليكم [الاسم] 💪\n\nمضت شهر كاملة مع بعض — والنتائج ماشية زين!\n\nعندك صاحب أو معارف عنده [صالون/تأجير] ومحتاج نفس النظام؟\n\nإذا جاء منك، غادي نعطيك خصم على الشهر الجاي 🎁</div>
+                <button class="btn-xs green" style="margin-top:8px" onclick="copyWaTemplate('referral')">📋 نسخ</button>
+              </div>
+              <div style="background:var(--card2);border-radius:12px;padding:14px;direction:rtl">
+                <div style="font-size:.72rem;font-weight:700;color:var(--pink);margin-bottom:8px">🎤 طلب شهادة فيديو</div>
+                <div style="font-size:.82rem;line-height:1.9;color:var(--text)" id="wa-video-template">السلام عليكم [الاسم] 🎬\n\nالنتائج ديالكم كانت مميزة هذا الشهر!\n\nواحد طلب صغير — 60 ثانية فيديو قصير تحكي فيه تجربتك معنا؟\n\nغادي نستخدمه بس في المواقع ديالنا، وهذا يساعدنا نوصلو لناس أخرين 🙏</div>
+                <button class="btn-xs green" style="margin-top:8px" onclick="copyWaTemplate('video')">📋 نسخ</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: REFERRALS & REVIEWS -->
+        <div id="proof-tab-referrals" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div style="font-size:.9rem;font-weight:900;direction:rtl">🤝 تتبع الإحالات والتقييمات</div>
+            <button class="btn-sm btn-blue" onclick="openRefModal()">+ إضافة</button>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+            <div class="ref-row header">
+              <span>العميل</span><span>المدينة</span><span>أحال بواسطة</span><span>تقييم</span><span>فيديو</span>
+            </div>
+            <div id="referralsList"></div>
+          </div>
+        </div>
+
+        <!-- TAB: AGENCY PORTFOLIO -->
+        <div id="proof-tab-portfolio" style="display:none">
+          <div class="portfolio-grid" id="portfolioGrid"></div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px">
+            <div style="font-size:.9rem;font-weight:900;margin-bottom:16px;direction:rtl;text-align:right">📋 نصوص جاهزة للبرود أوتريتش</div>
+            <div style="display:grid;gap:12px">
+              <div>
+                <div style="font-size:.72rem;font-weight:700;color:var(--blue);margin-bottom:6px;direction:rtl;text-align:right">رسالة WhatsApp — بارد</div>
+                <div class="portfolio-copy-box" id="cold-wa-text">...</div>
+                <button class="copy-btn" style="margin-top:8px" onclick="copyPortfolioText('cold-wa')">📋 نسخ</button>
+              </div>
+              <div>
+                <div style="font-size:.72rem;font-weight:700;color:var(--pink);margin-bottom:6px;direction:rtl;text-align:right">بوست إنستغرام / فيسبوك</div>
+                <div class="portfolio-copy-box" id="ig-text">...</div>
+                <button class="copy-btn" style="margin-top:8px" onclick="copyPortfolioText('ig')">📋 نسخ</button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px;text-align:center">
+            <a href="/proof/" target="_blank" class="btn-sm btn-blue" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+              🌐 فتح صفحة الإثباتات العامة ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- TAB: ADD PROOF ITEM -->
+        <div id="proof-tab-items" style="display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px">
+              <div style="font-size:.9rem;font-weight:900;margin-bottom:16px;direction:rtl;text-align:right">➕ إضافة إثبات / شهادة</div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">النوع</label>
+                <select id="pi-type" style="direction:rtl">
+                  <option value="casestudy">📊 دراسة حالة (أرقام)</option>
+                  <option value="review">⭐ تقييم عميل</option>
+                  <option value="audio">🎤 شهادة صوتية/فيديو</option>
+                  <option value="referral">🤝 إحالة</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">النيش</label>
+                <select id="pi-niche" style="direction:rtl">
+                  <option value="salon">💅 صالون</option>
+                  <option value="rc">🚗 تأجير السيارات</option>
+                  <option value="other">📦 أخرى</option>
+                </select>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">اسم العميل</label>
+                <input type="text" id="pi-name" placeholder="مثال: صالون ياسمين" style="direction:rtl"/>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">المدينة</label>
+                <input type="text" id="pi-city" placeholder="مثال: فاس" style="direction:rtl"/>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">الفترة</label>
+                <input type="text" id="pi-period" placeholder="30 يوم" style="direction:rtl"/>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+                <div class="modal-field" style="margin:0"><label style="direction:rtl;text-align:right">ليدات</label><input type="number" id="pi-leads" placeholder="47" style="direction:rtl"/></div>
+                <div class="modal-field" style="margin:0"><label style="direction:rtl;text-align:right">تكلفة الليد DH</label><input type="number" id="pi-cpl" placeholder="38" style="direction:rtl"/></div>
+                <div class="modal-field" style="margin:0"><label style="direction:rtl;text-align:right">مؤكدون</label><input type="number" id="pi-conf" placeholder="12" style="direction:rtl"/></div>
+                <div class="modal-field" style="margin:0"><label style="direction:rtl;text-align:right">Revenue DH</label><input type="number" id="pi-rev" placeholder="18000" style="direction:rtl"/></div>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">شهادة العميل (اختياري)</label>
+                <textarea id="pi-quote" placeholder="ما قاله العميل..." style="width:100%;background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:10px;font-family:Cairo,sans-serif;font-size:.88rem;color:var(--text);outline:none;resize:vertical;min-height:80px;direction:rtl"></textarea>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">رابط الفيديو/الصوت (اختياري)</label>
+                <input type="url" id="pi-media" placeholder="https://..." style="direction:rtl"/>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn-sm btn-blue" style="flex:1" onclick="addProofItem()">💾 حفظ الإثبات</button>
+                <button class="btn-sm" style="flex:1;background:var(--pink-soft);color:var(--pink);border:none;border-radius:50px;padding:9px 14px;font-family:Cairo,sans-serif;font-size:.85rem;font-weight:700;cursor:pointer" onclick="addProofItem(true)">⭐ حفظ + نجمة (يظهر أولاً)</button>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:.85rem;font-weight:700;margin-bottom:12px;direction:rtl;text-align:right">الإثباتات المحفوظة (<span id="proofItemsCount">0</span>)</div>
+              <div id="proofItemsList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- SETUP -->
       <div id="view-setup" style="display:none">
         <div class="section-hd" style="margin-bottom:16px">
@@ -555,6 +857,25 @@
     <div class="modal-actions">
       <button class="btn-sm btn-ghost" onclick="closeModalById('modalSource')">Annuler</button>
       <button class="btn-sm btn-blue" onclick="saveSource()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- REFERRAL MODAL -->
+<div class="modal-overlay" id="modalRef" style="display:none" onclick="closeModal('modalRef',event)">
+  <div class="modal">
+    <h3 style="direction:rtl">🤝 إضافة / تحديث عميل</h3>
+    <input type="hidden" id="refEditId"/>
+    <div class="modal-field"><label style="direction:rtl;text-align:right">اسم العميل</label><input type="text" id="ref-name" placeholder="صالون ياسمين" style="direction:rtl"/></div>
+    <div class="modal-field"><label style="direction:rtl;text-align:right">المدينة</label><input type="text" id="ref-city" placeholder="فاس" style="direction:rtl"/></div>
+    <div class="modal-field"><label style="direction:rtl;text-align:right">أحال بواسطة (اسم من أرسله)</label><input type="text" id="ref-by" placeholder="اترك فارغاً إذا لا يوجد" style="direction:rtl"/></div>
+    <div style="display:flex;gap:12px;margin-bottom:10px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;direction:rtl"><input type="checkbox" id="ref-review"/> تقييم مستلم ✅</label>
+      <label style="display:flex;align-items:center;gap:8px;font-size:.85rem;cursor:pointer;direction:rtl"><input type="checkbox" id="ref-video"/> فيديو شهادة 🎤</label>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalRef')">إلغاء</button>
+      <button class="btn-sm btn-blue" onclick="saveRef()">حفظ</button>
     </div>
   </div>
 </div>
@@ -1012,12 +1333,366 @@ function deleteDashClient(target, id) {
 
 // ── VIEWS ──────────────────────────────────────────────────────
 function showView(v) {
-  ['overview','leads','dashboards','prompt','setup'].forEach(name => {
+  ['overview','leads','dashboards','prompt','proof','setup'].forEach(name => {
     document.getElementById('view-'+name).style.display = v === name ? '' : 'none';
     document.getElementById('btn-'+name).classList.toggle('active', v === name);
   });
   if (v === 'setup')      { renderSetup(); renderSidebarSources(); }
   if (v === 'dashboards') { renderDashboards(); }
+  if (v === 'proof')      { initProofView(); }
+}
+
+// ── PROOF / RESULTS SYSTEM ─────────────────────────────────────
+function getProofData() {
+  return JSON.parse(localStorage.getItem('amrani_proof') || '{"items":[],"refs":[],"portfolio":{}}');
+}
+function saveProofData(d) { localStorage.setItem('amrani_proof', JSON.stringify(d)); }
+
+function switchProofTab(tab, btn) {
+  ['cards','milestones','referrals','portfolio','items'].forEach(t => {
+    document.getElementById('proof-tab-'+t).style.display = t === tab ? '' : 'none';
+  });
+  document.querySelectorAll('.proof-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (tab === 'milestones')  renderMilestones();
+  if (tab === 'referrals')   renderReferrals();
+  if (tab === 'portfolio')   renderPortfolio();
+  if (tab === 'items')       renderProofItems();
+}
+
+function initProofView() {
+  loadCardClients();
+  renderPortfolio();
+}
+
+// ── RESULTS CARD ───────────────────────────────────────────────
+function loadCardClients() {
+  const niche = document.getElementById('rc-niche-sel').value;
+  const cfg   = DASH_CONFIG[niche] || DASH_CONFIG['salon'];
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+  const sel = document.getElementById('rc-client-sel');
+  sel.innerHTML = clients.length
+    ? clients.map(c => `<option value="${c.id}">${escHtml(c.name)} — ${escHtml(c.city||'')}</option>`).join('')
+    : '<option>لا يوجد عملاء — أضف من قسم Dashboards</option>';
+}
+
+function generateResultCard() {
+  const niche   = document.getElementById('rc-niche-sel').value;
+  const cfg     = DASH_CONFIG[niche] || DASH_CONFIG['salon'];
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+  const selId   = document.getElementById('rc-client-sel').value;
+  const client  = clients.find(c => c.id === selId) || { name: document.getElementById('rc-client-sel').options[0]?.text || '—' };
+  const period  = document.getElementById('rc-period').value  || '30 يوم';
+  const leads   = document.getElementById('rc-leads').value   || '—';
+  const cpl     = document.getElementById('rc-cpl').value     || '—';
+  const conf    = document.getElementById('rc-conf').value    || '—';
+  const rev     = document.getElementById('rc-rev').value     || '—';
+
+  document.getElementById('rcp-client').textContent  = client.name + (client.city ? ` — ${client.city}` : '');
+  document.getElementById('rcp-period').textContent  = 'خلال ' + period;
+  document.getElementById('rcp-leads').textContent   = leads;
+  document.getElementById('rcp-cpl').textContent     = cpl + ' DH';
+  document.getElementById('rcp-conf').textContent    = conf;
+  document.getElementById('rcp-rev').textContent     = rev ? Number(rev).toLocaleString('fr') + ' DH' : '—';
+
+  const nicheLabel = niche === 'salon' ? 'الصالون' : 'تأجير السيارات';
+  const cardText = `🏆 نتائج حقيقية من عميل ${nicheLabel}
+
+👤 ${client.name}${client.city ? ` — ${client.city}` : ''}
+📅 خلال ${period}
+
+📥 ${leads} ليد مستهدف
+💰 ${cpl} DH تكلفة الليد
+✅ ${conf} عميل مؤكد
+📈 ${rev ? Number(rev).toLocaleString('fr') + ' DH Revenue' : ''}
+
+النتائج تتحدث عن نفسها 🚀
+هل تريد نفس الشيء لمشروعك؟
+👉 amraniads.com`;
+
+  document.getElementById('cardTextContent').textContent = cardText;
+  toast('✅ تم إنشاء البطاقة!');
+}
+
+function copyCardText() {
+  const text = document.getElementById('cardTextContent').textContent;
+  navigator.clipboard.writeText(text).then(() => toast('📋 تم النسخ!'));
+}
+
+function saveProofItem() {
+  const niche   = document.getElementById('rc-niche-sel').value;
+  const cfg     = DASH_CONFIG[niche] || DASH_CONFIG['salon'];
+  const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+  const selId   = document.getElementById('rc-client-sel').value;
+  const client  = clients.find(c => c.id === selId) || {};
+  const d = getProofData();
+  d.items.push({
+    id: 'p' + Date.now(), type: 'casestudy', niche,
+    clientName: client.name || '—', city: client.city || '',
+    period: document.getElementById('rc-period').value || '30 يوم',
+    metrics: {
+      leads: Number(document.getElementById('rc-leads').value) || 0,
+      cpl:   Number(document.getElementById('rc-cpl').value)   || 0,
+      conf:  Number(document.getElementById('rc-conf').value)  || 0,
+      rev:   Number(document.getElementById('rc-rev').value)   || 0,
+    },
+    quote: '', starred: false, date: new Date().toISOString().slice(0,10)
+  });
+  saveProofData(d);
+  toast('✅ تم الحفظ في الإثباتات العامة');
+}
+
+// ── MILESTONES ─────────────────────────────────────────────────
+function renderMilestones() {
+  const el = document.getElementById('milestonesList');
+  // Build list from all dashboard clients
+  let allClients = [];
+  Object.entries(DASH_CONFIG).forEach(([key, cfg]) => {
+    const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
+    clients.forEach(c => allClients.push({ ...c, nicheKey: key, nicheLabel: cfg.label }));
+  });
+
+  if (!allClients.length) {
+    el.innerHTML = '<div class="loading-txt" style="direction:rtl">لا يوجد عملاء — أضف من قسم Dashboards</div>';
+    return;
+  }
+
+  // Get proof data to check existing milestones
+  const d = getProofData();
+  const milestones = { review: 10, referral: 30, video: 50 };
+
+  el.innerHTML = allClients.map(c => {
+    const key = `ms_${c.id}`;
+    const ms  = d.milestones?.[key] || {};
+    return `
+      <div class="milestone-item">
+        <div>
+          <div style="font-weight:700;direction:rtl">${escHtml(c.nicheLabel)} — ${escHtml(c.name)}</div>
+          <div style="font-size:.75rem;color:var(--muted);direction:rtl">${escHtml(c.city||'')}</div>
+        </div>
+        <div class="milestone-badges">
+          <span class="ms-badge ${ms.review ? '' : 'pending'}" onclick="toggleMs('${c.id}','review',this)" style="cursor:pointer" title="10 ليدات — طلب تقييم">
+            ${ms.review ? '✅' : '⏳'} تقييم
+          </span>
+          <span class="ms-badge ${ms.referral ? '' : 'locked'}" onclick="toggleMs('${c.id}','referral',this)" style="cursor:pointer" title="شهر — طلب إحالة">
+            ${ms.referral ? '✅' : '🔒'} إحالة
+          </span>
+          <span class="ms-badge ${ms.video ? '' : 'locked'}" onclick="toggleMs('${c.id}','video',this)" style="cursor:pointer" title="50 ليد — فيديو شهادة">
+            ${ms.video ? '✅' : '🔒'} فيديو
+          </span>
+        </div>
+        ${c.phone ? `<a href="https://wa.me/${c.phone.startsWith('0') ? '212'+c.phone.slice(1) : c.phone}" target="_blank" class="btn-xs green" style="text-decoration:none;flex-shrink:0">💬 WhatsApp</a>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function toggleMs(clientId, type, el) {
+  const d = getProofData();
+  if (!d.milestones) d.milestones = {};
+  const key = `ms_${clientId}`;
+  if (!d.milestones[key]) d.milestones[key] = {};
+  d.milestones[key][type] = !d.milestones[key][type];
+  saveProofData(d);
+  renderMilestones();
+  toast(d.milestones[key][type] ? '✅ تم التأشير' : '↩️ تم الإلغاء');
+}
+
+function copyWaTemplate(type) {
+  const templates = {
+    review:   document.getElementById('wa-review-template').textContent,
+    referral: document.getElementById('wa-referral-template').textContent,
+    video:    document.getElementById('wa-video-template').textContent,
+  };
+  navigator.clipboard.writeText(templates[type] || '').then(() => toast('📋 تم نسخ القالب!'));
+}
+
+// ── REFERRALS ──────────────────────────────────────────────────
+function renderReferrals() {
+  const d   = getProofData();
+  const refs = d.refs || [];
+  const el  = document.getElementById('referralsList');
+  if (!refs.length) {
+    el.innerHTML = '<div class="loading-txt" style="direction:rtl;padding:20px">لا توجد إحالات بعد — أضف عميلاً</div>';
+    return;
+  }
+  el.innerHTML = refs.map(r => `
+    <div class="ref-row" style="direction:rtl">
+      <span style="font-weight:700">${escHtml(r.name)}</span>
+      <span style="color:var(--muted)">${escHtml(r.city||'—')}</span>
+      <span>${r.by ? escHtml(r.by) : '<span style="color:var(--muted)">—</span>'}</span>
+      <span class="${r.review ? 'check-done' : 'check-miss'}">${r.review ? '✅' : '○'}</span>
+      <span style="display:flex;align-items:center;gap:6px">
+        <span class="${r.video ? 'check-done' : 'check-miss'}">${r.video ? '🎤' : '○'}</span>
+        <button class="del-btn" onclick="deleteRef('${r.id}')">🗑️</button>
+      </span>
+    </div>`).join('');
+}
+
+function openRefModal() {
+  document.getElementById('refEditId').value = '';
+  ['ref-name','ref-city','ref-by'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('ref-review').checked = false;
+  document.getElementById('ref-video').checked  = false;
+  document.getElementById('modalRef').style.display = 'flex';
+}
+function saveRef() {
+  const name   = document.getElementById('ref-name').value.trim();
+  if (!name) { alert('الاسم مطلوب'); return; }
+  const d    = getProofData();
+  if (!d.refs) d.refs = [];
+  d.refs.push({
+    id:     'r' + Date.now(),
+    name,
+    city:   document.getElementById('ref-city').value.trim(),
+    by:     document.getElementById('ref-by').value.trim(),
+    review: document.getElementById('ref-review').checked,
+    video:  document.getElementById('ref-video').checked,
+    date:   new Date().toISOString().slice(0,10),
+  });
+  saveProofData(d);
+  closeModalById('modalRef');
+  renderReferrals();
+  toast('✅ تم الحفظ');
+}
+function deleteRef(id) {
+  if (!confirm('حذف هذا العميل؟')) return;
+  const d = getProofData();
+  d.refs  = (d.refs || []).filter(r => r.id !== id);
+  saveProofData(d);
+  renderReferrals();
+}
+
+// ── PORTFOLIO ──────────────────────────────────────────────────
+function renderPortfolio() {
+  const d     = getProofData();
+  const items = d.items || [];
+  const refs  = d.refs  || [];
+
+  // Aggregate from all dashboard sources
+  let totalClients = 0;
+  Object.values(DASH_CONFIG).forEach(cfg => {
+    totalClients += JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]').length;
+  });
+
+  const totalLeads = items.reduce((s, i) => s + (i.metrics?.leads || 0), 0);
+  const avgCpl     = items.length ? Math.round(items.reduce((s,i) => s+(i.metrics?.cpl||0),0)/items.length) : 0;
+  const bestLeads  = items.length ? Math.max(...items.map(i => i.metrics?.leads || 0)) : 0;
+  const totalRev   = items.reduce((s, i) => s + (i.metrics?.rev || 0), 0);
+  const totalReviews = refs.filter(r => r.review).length;
+  const totalRefs    = refs.filter(r => r.by).length;
+
+  document.getElementById('portfolioGrid').innerHTML = `
+    <div class="portfolio-card"><div class="pc-num">${totalClients}</div><div class="pc-label">عميل نشط</div><div class="pc-sub">في نظامنا الآن</div></div>
+    <div class="portfolio-card green"><div class="pc-num">${totalLeads || '—'}</div><div class="pc-label">ليد موثق</div><div class="pc-sub">عبر جميع العملاء</div></div>
+    <div class="portfolio-card amber"><div class="pc-num">${avgCpl || '—'} DH</div><div class="pc-label">متوسط تكلفة الليد</div><div class="pc-sub">عبر جميع النيشات</div></div>
+    <div class="portfolio-card pink"><div class="pc-num">${bestLeads || '—'}</div><div class="pc-label">أفضل نتيجة</div><div class="pc-sub">ليد في شهر واحد</div></div>
+    <div class="portfolio-card"><div class="pc-num">${totalReviews}</div><div class="pc-label">تقييم مستلم</div><div class="pc-sub">من عملاء راضين</div></div>
+    <div class="portfolio-card green"><div class="pc-num">${totalRefs}</div><div class="pc-label">إحالة</div><div class="pc-sub">عملاء أتوا بأصدقاء</div></div>
+  `;
+
+  // Generate copy texts
+  const coldWa = `السلام عليكم 👋
+
+شفنا ${totalClients ? `أن عندكم [صالون/تأجير] في [المدينة]` : 'مشروعكم'} وبغينا نشاركو معكم شي أرقام حقيقية من عملاء بحالكم:
+
+📥 ${bestLeads ? bestLeads + ' ليد في شهر واحد' : ''}
+💰 ${avgCpl ? avgCpl + ' DH متوسط تكلفة الليد' : ''}
+✅ ${totalClients} عميل نشط معنا الآن في المغرب
+
+بغيتو نشاورو كيفاش نقدرو نجيبو نفس النتايج ليكم؟
+
+amraniads.com`;
+
+  const igPost = `🏆 الأرقام ما كتكدب ش
+
+${totalClients} عميل يثقو فينا في المغرب 🇲🇦
+${bestLeads ? `📥 ${bestLeads} ليد في شهر واحد` : ''}
+${avgCpl ? `💰 ${avgCpl} DH متوسط تكلفة الليد` : ''}
+${totalReviews ? `⭐ ${totalReviews} تقييم من عملاء راضيين` : ''}
+
+النتائج تتحدث عن نفسها 🚀
+
+هل تريد نفس الشيء لمشروعك؟
+👇 DM أو WhatsApp
+amraniads.com`;
+
+  document.getElementById('cold-wa-text').textContent = coldWa;
+  document.getElementById('ig-text').textContent      = igPost;
+}
+
+function copyPortfolioText(type) {
+  const el = document.getElementById(type === 'cold-wa' ? 'cold-wa-text' : 'ig-text');
+  navigator.clipboard.writeText(el.textContent).then(() => toast('📋 تم النسخ!'));
+}
+
+// ── PROOF ITEMS ────────────────────────────────────────────────
+function addProofItem(starred = false) {
+  const name = document.getElementById('pi-name').value.trim();
+  if (!name) { alert('اسم العميل مطلوب'); return; }
+  const d = getProofData();
+  d.items.push({
+    id:         'p' + Date.now(),
+    type:       document.getElementById('pi-type').value,
+    niche:      document.getElementById('pi-niche').value,
+    clientName: name,
+    city:       document.getElementById('pi-city').value.trim(),
+    period:     document.getElementById('pi-period').value.trim() || '30 يوم',
+    metrics: {
+      leads: Number(document.getElementById('pi-leads').value) || 0,
+      cpl:   Number(document.getElementById('pi-cpl').value)   || 0,
+      conf:  Number(document.getElementById('pi-conf').value)  || 0,
+      rev:   Number(document.getElementById('pi-rev').value)   || 0,
+    },
+    quote:   document.getElementById('pi-quote').value.trim(),
+    media:   document.getElementById('pi-media').value.trim(),
+    starred: !!starred,
+    date:    new Date().toISOString().slice(0,10),
+  });
+  saveProofData(d);
+  ['pi-name','pi-city','pi-period','pi-leads','pi-cpl','pi-conf','pi-rev','pi-quote','pi-media'].forEach(id => document.getElementById(id).value = '');
+  renderProofItems();
+  toast(starred ? '⭐ تم الحفظ كإثبات مميز!' : '✅ تم الحفظ!');
+}
+
+function renderProofItems() {
+  const d = getProofData();
+  const items = [...(d.items||[])].sort((a,b) => (b.starred?1:0)-(a.starred?1:0));
+  document.getElementById('proofItemsCount').textContent = items.length;
+  const el = document.getElementById('proofItemsList');
+  if (!items.length) {
+    el.innerHTML = '<div class="loading-txt" style="direction:rtl">لا توجد إثباتات بعد</div>';
+    return;
+  }
+  const typeIcons = { casestudy:'📊', review:'⭐', audio:'🎤', referral:'🤝' };
+  const nicheLabels = { salon:'💅 صالون', rc:'🚗 تأجير', other:'📦 أخرى' };
+  el.innerHTML = items.map(item => `
+    <div class="proof-item-card">
+      <div class="pic-icon">${typeIcons[item.type]||'📋'} ${item.starred ? '⭐' : ''}</div>
+      <div class="pic-body">
+        <div class="pic-name">${escHtml(item.clientName)}${item.city ? ` — ${escHtml(item.city)}` : ''}</div>
+        <div class="pic-meta">${nicheLabels[item.niche]||item.niche} · ${escHtml(item.period||'')} · ${escHtml(item.date||'')}</div>
+        ${item.metrics?.leads ? `<div class="pic-meta" style="color:var(--blue)">📥 ${item.metrics.leads} ليد · ${item.metrics.cpl} DH/ليد · ✅ ${item.metrics.conf} مؤكد</div>` : ''}
+        ${item.quote ? `<div class="pic-quote">"${escHtml(item.quote)}"</div>` : ''}
+        <div class="pic-actions">
+          <button class="star-btn" onclick="toggleProofStar('${item.id}')">${item.starred ? '★ مميز' : '☆ تمييز'}</button>
+          <button class="btn-xs red" onclick="deleteProofItem('${item.id}')">🗑️</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleProofStar(id) {
+  const d = getProofData();
+  const item = d.items.find(i => i.id === id);
+  if (item) { item.starred = !item.starred; saveProofData(d); renderProofItems(); }
+}
+function deleteProofItem(id) {
+  if (!confirm('حذف هذا الإثبات؟')) return;
+  const d = getProofData();
+  d.items = d.items.filter(i => i.id !== id);
+  saveProofData(d);
+  renderProofItems();
+  toast('🗑️ تم الحذف');
 }
 
 // ── MODALS ─────────────────────────────────────────────────────

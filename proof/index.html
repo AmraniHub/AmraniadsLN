@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AmraniAds — النتائج والشهادات</title>
+  <meta name="description" content="نتائج حقيقية من عملاء AmraniAds في المغرب — ليدات، تقييمات، وشهادات موثوقة."/>
+  <link rel="icon" href="/logo.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f8fafc;
+      --bg2:      #f1f5f9;
+      --card:     #ffffff;
+      --border:   #e2e8f0;
+      --text:     #0f172a;
+      --muted:    #64748b;
+      --blue:     #1d4ed8;
+      --blue-l:   #dbeafe;
+      --gold:     #d97706;
+      --gold-l:   #fef3c7;
+      --green:    #16a34a;
+      --green-l:  #dcfce7;
+      --pink:     #db2777;
+      --pink-l:   #fce7f3;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 50px; padding: 10px 22px;
+      font-family: 'Cairo', sans-serif; font-size: .88rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0f172a 100%);
+      padding: 72px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,.15) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px; padding: 6px 20px;
+      font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8);
+      margin-bottom: 20px; letter-spacing: .5px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.25; margin-bottom: 16px;
+    }
+    .hero h1 span { color: #60a5fa; }
+    .hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,.65);
+      max-width: 540px; margin: 0 auto 40px; line-height: 1.8;
+    }
+
+    /* ── COUNTER STATS ── */
+    .hero-stats {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 12px; max-width: 700px; margin: 0 auto;
+    }
+    .h-stat {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; padding: 20px 28px;
+      text-align: center; min-width: 140px;
+    }
+    .h-stat .hs-num {
+      font-size: 2rem; font-weight: 900; color: #fff;
+      line-height: 1; display: block;
+    }
+    .h-stat .hs-num.gold  { color: #fbbf24; }
+    .h-stat .hs-num.green { color: #4ade80; }
+    .h-stat .hs-label { font-size: .72rem; color: rgba(255,255,255,.55); margin-top: 6px; display: block; }
+
+    /* ── SECTION ── */
+    section { padding: 64px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-badge {
+      display: inline-block;
+      background: var(--blue-l); color: var(--blue);
+      border-radius: 50px; padding: 5px 16px;
+      font-size: .75rem; font-weight: 700; margin-bottom: 12px;
+    }
+    .section-badge.gold  { background: var(--gold-l);  color: var(--gold);  }
+    .section-badge.green { background: var(--green-l); color: var(--green); }
+    .section-badge.pink  { background: var(--pink-l);  color: var(--pink);  }
+    .section-title {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 900; margin-bottom: 8px;
+    }
+    .section-sub { font-size: .9rem; color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+
+    /* ── CASE STUDIES ── */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .case-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .case-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.1); }
+    .case-card-header {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .case-niche-badge {
+      padding: 4px 12px; border-radius: 50px;
+      font-size: .72rem; font-weight: 700;
+    }
+    .case-niche-badge.salon { background: var(--pink-l); color: var(--pink); }
+    .case-niche-badge.rc    { background: var(--blue-l); color: var(--blue); }
+    .case-niche-badge.other { background: var(--gold-l); color: var(--gold); }
+    .case-period { font-size: .72rem; color: var(--muted); }
+    .case-client { padding: 16px 20px; }
+    .case-client-name { font-size: 1rem; font-weight: 900; margin-bottom: 4px; }
+    .case-client-city { font-size: .78rem; color: var(--muted); }
+    .case-metrics {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border-top: 1px solid var(--border);
+    }
+    .case-metric {
+      background: var(--card); padding: 16px;
+      text-align: center;
+    }
+    .case-metric .cm-num {
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--blue); line-height: 1;
+    }
+    .case-metric .cm-num.green { color: var(--green); }
+    .case-metric .cm-num.gold  { color: var(--gold);  }
+    .case-metric .cm-label { font-size: .68rem; color: var(--muted); margin-top: 4px; }
+    .case-quote {
+      padding: 16px 20px;
+      font-size: .82rem; color: var(--muted);
+      line-height: 1.8; font-style: italic;
+      border-top: 1px solid var(--border);
+    }
+    .case-quote::before { content: '"'; color: var(--blue); font-size: 1.2rem; font-style: normal; }
+    .case-quote::after  { content: '"'; color: var(--blue); font-size: 1.2rem; font-style: normal; }
+    .starred-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--gold-l); color: var(--gold);
+      border-radius: 50px; padding: 3px 10px;
+      font-size: .68rem; font-weight: 700;
+    }
+
+    /* ── REVIEWS WALL ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 22px;
+      position: relative;
+    }
+    .review-stars { color: #f59e0b; font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
+    .review-text  { font-size: .88rem; line-height: 1.8; color: var(--text); margin-bottom: 16px; }
+    .review-author { font-size: .78rem; font-weight: 700; color: var(--blue); }
+    .review-niche  { font-size: .7rem; color: var(--muted); margin-top: 2px; }
+    .quote-mark {
+      position: absolute; top: 16px; left: 18px;
+      font-size: 3rem; color: var(--blue-l);
+      font-family: serif; line-height: 1;
+    }
+
+    /* ── AUDIO / VIDEO SECTION ── */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .media-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .media-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), #a855f7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; flex-shrink: 0;
+    }
+    .media-body { flex: 1; min-width: 0; }
+    .media-name { font-size: .92rem; font-weight: 700; margin-bottom: 4px; }
+    .media-desc { font-size: .78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
+    .media-play {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--blue-l); color: var(--blue);
+      border: none; border-radius: 50px; padding: 7px 16px;
+      font-family: 'Cairo', sans-serif; font-size: .78rem; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+    }
+
+    /* ── REFERRALS ── */
+    .ref-flow {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .ref-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 50px; padding: 10px 20px;
+      font-size: .85rem;
+    }
+    .ref-chip .rc-name { font-weight: 700; }
+    .ref-chip .rc-arrow { color: var(--green); font-size: 1.1rem; }
+    .ref-chip .rc-referred { color: var(--muted); }
+
+    /* ── PROCESS / HOW ── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .process-step {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; text-align: center;
+      position: relative;
+    }
+    .process-step .ps-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      font-weight: 900; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .process-step .ps-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .process-step .ps-title { font-size: .95rem; font-weight: 900; margin-bottom: 6px; }
+    .process-step .ps-desc  { font-size: .8rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      border-radius: 24px; padding: 56px 32px;
+      text-align: center; margin: 0 0 64px;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,.2), transparent 70%);
+    }
+    .cta-section h2 { font-size: clamp(1.4rem,3vw,2rem); font-weight: 900; color: #fff; margin-bottom: 12px; }
+    .cta-section p  { font-size: .95rem; color: rgba(255,255,255,.65); margin-bottom: 32px; line-height: 1.8; }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .cta-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #25d366; color: #fff;
+      border-radius: 50px; padding: 14px 32px;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .cta-wa:hover { opacity: .9; }
+    .cta-site {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); color: #fff;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50px; padding: 14px 32px;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: background .2s;
+    }
+    .cta-site:hover { background: rgba(255,255,255,.15); }
+
+    /* ── EMPTY STATE ── */
+    .empty-section {
+      text-align: center; padding: 48px 20px;
+      color: var(--muted); display: none;
+    }
+    .empty-section.show { display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text); color: rgba(255,255,255,.5);
+      text-align: center; padding: 24px;
+      font-size: .8rem;
+    }
+    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    @media (max-width: 600px) {
+      .hero-stats { gap: 8px; }
+      .h-stat { min-width: 120px; padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">Amrani<span>Ads</span></a>
+  <a class="nav-cta" href="https://wa.me/212600000000" target="_blank">💬 تواصل معنا</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🏆 النتائج الحقيقية لعملائنا في المغرب</div>
+  <h1>النتائج <span>تتحدث</span><br/>عن نفسها</h1>
+  <p class="hero-sub">أرقام حقيقية، عملاء حقيقيون، نتائج موثوقة من صالونات وشركات تأجير السيارات عبر المغرب</p>
+  <div class="hero-stats" id="heroStats">
+    <div class="h-stat"><span class="hs-num" id="st-clients">—</span><span class="hs-label">عميل نشط</span></div>
+    <div class="h-stat"><span class="hs-num gold" id="st-leads">—</span><span class="hs-label">ليد موثق</span></div>
+    <div class="h-stat"><span class="hs-num green" id="st-cpl">—</span><span class="hs-label">متوسط تكلفة الليد</span></div>
+    <div class="h-stat"><span class="hs-num" id="st-reviews">—</span><span class="hs-label">تقييم من عملاء راضين</span></div>
+  </div>
+</div>
+
+<!-- CASE STUDIES -->
+<section id="sec-cases">
+  <div class="section-badge">📊 دراسات الحالة</div>
+  <div class="section-title">نتائج موثوقة بالأرقام</div>
+  <p class="section-sub">كل بطاقة هي عميل حقيقي من عملائنا — الأرقام التي حققناها معاً</p>
+  <div class="cases-grid" id="casesGrid">
+    <!-- Default placeholder cards shown before localStorage loads -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <span class="case-niche-badge salon">💅 صالون</span>
+        <span class="case-period">30 يوم</span>
+      </div>
+      <div class="case-client">
+        <div class="case-client-name">صالون — فاس</div>
+        <div class="case-client-city">المغرب</div>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric"><div class="cm-num">47</div><div class="cm-label">ليد</div></div>
+        <div class="case-metric"><div class="cm-num green">38 DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="case-metric"><div class="cm-num gold">12</div><div class="cm-label">عميل مؤكد</div></div>
+        <div class="case-metric"><div class="cm-num">18k DH</div><div class="cm-label">Revenue</div></div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-card-header">
+        <span class="case-niche-badge rc">🚗 تأجير السيارات</span>
+        <span class="case-period">30 يوم</span>
+      </div>
+      <div class="case-client">
+        <div class="case-client-name">شركة تأجير — مراكش</div>
+        <div class="case-client-city">المغرب</div>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric"><div class="cm-num">23</div><div class="cm-label">ليد</div></div>
+        <div class="case-metric"><div class="cm-num green">52 DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="case-metric"><div class="cm-num gold">8</div><div class="cm-label">حجز مؤكد</div></div>
+        <div class="case-metric"><div class="cm-num">12k DH</div><div class="cm-label">Revenue</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- REVIEWS WALL -->
+<section id="sec-reviews">
+  <div class="section-badge gold">⭐ تقييمات العملاء</div>
+  <div class="section-title">ماذا يقول عملاؤنا</div>
+  <p class="section-sub">تقييمات حقيقية من أصحاب الأعمال الذين شغلنا معهم نظامنا</p>
+  <div class="reviews-grid" id="reviewsGrid">
+    <!-- Default review -->
+    <div class="review-card">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">كنت كنسيفط إعلانات من رأسي وما كنتش كاحصل على نتائج. دابا عندي 8-12 عميل جديد كل شهر من Meta Ads وأنا ما خصنيش نتدخل في التسويق. النظام ديال AmraniAds بدّل الصالون ديالي.</p>
+      <div class="review-author">صاحب صالون — فاس</div>
+      <div class="review-niche">💅 صالون التجميل</div>
+    </div>
+    <div class="review-card">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">الليدات جات من اليوم الأول وكلها ناس محتاجة تأجير. تكلفة الليد صغيرة بزاف مقارنة بما كنت كنخسر قبل. نعاود معاهم بلا تردد.</p>
+      <div class="review-author">مدير شركة تأجير — الدار البيضاء</div>
+      <div class="review-niche">🚗 تأجير السيارات</div>
+    </div>
+    <div class="review-card">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">ما توقعتش النتائج تجي بهذه السرعة. في الأسبوع الأول جاوني 11 طلب. الفريق متعاون وكيتابعو معي كل شي. شكراً AmraniAds!</p>
+      <div class="review-author">صاحبة صالون — الرباط</div>
+      <div class="review-niche">💅 صالون التجميل</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- AUDIO / VIDEO TESTIMONIALS -->
+<section id="sec-media">
+  <div class="section-badge pink">🎤 شهادات صوتية وفيديو</div>
+  <div class="section-title">استمع لعملائنا مباشرة</div>
+  <p class="section-sub">شهادات حقيقية بصوت وصورة أصحاب الأعمال الذين عملنا معهم</p>
+  <div class="media-grid" id="mediaGrid">
+    <!-- Default empty state - will be populated from localStorage -->
+    <div class="media-card">
+      <div class="media-icon">🎤</div>
+      <div class="media-body">
+        <div class="media-name">شهادة — صالون فاس</div>
+        <div class="media-desc">صاحب الصالون يحكي تجربته مع نظام AmraniAds وكيفاش زادت الحجوزات.</div>
+        <span class="media-play">▶ استمع للشهادة</span>
+      </div>
+    </div>
+    <div class="media-card">
+      <div class="media-icon">🎬</div>
+      <div class="media-body">
+        <div class="media-name">فيديو شهادة — تأجير السيارات</div>
+        <div class="media-desc">مدير شركة التأجير يشرح كيف وصلوا لـ 23 ليد في الشهر الأول.</div>
+        <span class="media-play">▶ شاهد الفيديو</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- REFERRALS -->
+<section id="sec-referrals">
+  <div class="section-badge green">🤝 نظام الإحالات</div>
+  <div class="section-title">عملاؤنا يرسلون لنا عملاء جدد</div>
+  <p class="section-sub">أفضل دليل على النتائج — عملاء راضيون يرسحون أصدقاءهم للعمل معنا</p>
+  <div class="ref-flow" id="refFlow">
+    <div class="ref-chip">
+      <span class="rc-name">صالون ياسمين</span>
+      <span class="rc-arrow">→</span>
+      <span class="rc-referred">أحال صالون نادية</span>
+    </div>
+    <div class="ref-chip">
+      <span class="rc-name">شركة الأطلس للتأجير</span>
+      <span class="rc-arrow">→</span>
+      <span class="rc-referred">أحال شركة المغرب للسيارات</span>
+    </div>
+    <div class="ref-chip">
+      <span class="rc-name">صالون فاطمة</span>
+      <span class="rc-arrow">→</span>
+      <span class="rc-referred">أحالت صالون ريم</span>
+    </div>
+  </div>
+  <div style="margin-top:24px;padding:16px 20px;background:var(--green-l);border-radius:14px;font-size:.88rem;color:var(--green);font-weight:700;display:inline-block">
+    ✅ كل عميل يأتي بإحالة يحصل على خصم على الشهر التالي
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="section-badge">⚙️ كيف نعمل</div>
+  <div class="section-title">من الصفر إلى الليدات في 48 ساعة</div>
+  <p class="section-sub">منهجيتنا المجربة التي حققت هذه النتائج</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="ps-num">1</div>
+      <div class="ps-icon">🎯</div>
+      <div class="ps-title">التحليل والهدف</div>
+      <p class="ps-desc">نفهم مشروعك وجمهورك المستهدف ونبني الاستراتيجية الصحيحة من البداية</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">2</div>
+      <div class="ps-icon">🔧</div>
+      <div class="ps-title">بناء النظام</div>
+      <p class="ps-desc">صفحة هبوط + إعلانات Meta + نظام تتبع الليدات عبر WhatsApp تلقائياً</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">3</div>
+      <div class="ps-icon">🚀</div>
+      <div class="ps-title">الإطلاق</div>
+      <p class="ps-desc">نطلق الحملة خلال 24-48 ساعة وتبدأ الليدات تأتيك على WhatsApp مباشرة</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">4</div>
+      <div class="ps-icon">📈</div>
+      <div class="ps-title">التحسين المستمر</div>
+      <p class="ps-desc">نتابع الأداء أسبوعياً ونحسن الإعلانات لتخفيض تكلفة الليد وزيادة العدد</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="padding: 0 24px">
+  <div class="cta-section">
+    <h2>هل تريد نفس النتائج لمشروعك؟</h2>
+    <p>نبني لك نظاماً رقمياً كاملاً يجلب عملاء جدد كل يوم<br/>لا عقود طويلة — النتائج تظهر في الأسبوع الأول</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/212600000000?text=السلام عليكم، شفت نتائج عملائكم وبغيت نعرف أكثر" class="cta-wa" target="_blank">
+        💬 تواصل عبر WhatsApp
+      </a>
+      <a href="/" class="cta-site">🌐 اكتشف خدماتنا</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 AmraniAds — وكالة تسويق رقمي · فاس، المغرب</p>
+  <p style="margin-top:6px"><a href="/">الرئيسية</a> · <a href="/proof/">النتائج</a> · <a href="https://wa.me/212600000000">WhatsApp</a></p>
+</footer>
+
+<script>
+// ── Load proof data from localStorage (shared same domain as admin) ──
+function loadProofData() {
+  try {
+    return JSON.parse(localStorage.getItem('amrani_proof') || '{"items":[],"refs":[]}');
+  } catch(e) { return { items: [], refs: [] }; }
+}
+
+function getDashClients() {
+  const salonClients = JSON.parse(localStorage.getItem('salon_clients') || '[]');
+  const rcClients    = JSON.parse(localStorage.getItem('rc_clients')    || '[]');
+  return salonClients.length + rcClients.length;
+}
+
+// ── Animate counters ──
+function animateCount(el, target, suffix = '', isDecimal = false) {
+  if (!target || target === '—') return;
+  const duration = 1200;
+  const start = performance.now();
+  const num = parseFloat(target);
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = isDecimal ? (num * ease).toFixed(0) : Math.round(num * ease);
+    el.textContent = val + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── Render hero stats ──
+function renderHeroStats(d) {
+  const totalClients = getDashClients();
+  const items   = d.items || [];
+  const refs    = d.refs  || [];
+  const totalLeads   = items.reduce((s, i) => s + (i.metrics?.leads || 0), 0);
+  const avgCpl       = items.length ? Math.round(items.reduce((s,i) => s+(i.metrics?.cpl||0),0)/items.length) : 0;
+  const totalReviews = refs.filter(r => r.review).length;
+
+  if (totalClients)  animateCount(document.getElementById('st-clients'), totalClients);
+  if (totalLeads)    animateCount(document.getElementById('st-leads'), totalLeads, '+');
+  if (avgCpl)        animateCount(document.getElementById('st-cpl'), avgCpl, ' DH');
+  if (totalReviews)  animateCount(document.getElementById('st-reviews'), totalReviews, '+');
+}
+
+// ── Render case studies from localStorage items ──
+function renderCases(d) {
+  const items = (d.items || []).filter(i => i.type === 'casestudy' || !i.type);
+  if (!items.length) return; // keep default cards
+
+  const nicheLabels = { salon: '💅 صالون', rc: '🚗 تأجير السيارات', other: '📦 أخرى' };
+  const nicheCls    = { salon: 'salon', rc: 'rc', other: 'other' };
+
+  const grid = document.getElementById('casesGrid');
+  // Starred first
+  const sorted = [...items].sort((a, b) => (b.starred ? 1 : 0) - (a.starred ? 1 : 0));
+  grid.innerHTML = sorted.map(item => `
+    <div class="case-card">
+      <div class="case-card-header">
+        <span class="case-niche-badge ${nicheCls[item.niche]||'other'}">${nicheLabels[item.niche]||'📦'}</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          ${item.starred ? '<span class="starred-badge">⭐ مميز</span>' : ''}
+          <span class="case-period">${escHtml(item.period||'30 يوم')}</span>
+        </div>
+      </div>
+      <div class="case-client">
+        <div class="case-client-name">${escHtml(item.clientName)}</div>
+        <div class="case-client-city">${escHtml(item.city||'المغرب')}</div>
+      </div>
+      <div class="case-metrics">
+        <div class="case-metric"><div class="cm-num">${item.metrics?.leads||'—'}</div><div class="cm-label">ليد</div></div>
+        <div class="case-metric"><div class="cm-num green">${item.metrics?.cpl||'—'} DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="case-metric"><div class="cm-num gold">${item.metrics?.conf||'—'}</div><div class="cm-label">مؤكد</div></div>
+        <div class="case-metric"><div class="cm-num">${item.metrics?.rev ? (item.metrics.rev/1000).toFixed(0)+'k DH' : '—'}</div><div class="cm-label">Revenue</div></div>
+      </div>
+      ${item.quote ? `<div class="case-quote">${escHtml(item.quote)}</div>` : ''}
+    </div>`).join('');
+}
+
+// ── Render reviews from proof items ──
+function renderReviews(d) {
+  const reviews = (d.items || []).filter(i => i.type === 'review' && i.quote);
+  if (!reviews.length) return; // keep default cards
+
+  const nicheLabels = { salon:'💅 صالون', rc:'🚗 تأجير', other:'📦 أخرى' };
+  document.getElementById('reviewsGrid').innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">${escHtml(r.quote)}</p>
+      <div class="review-author">${escHtml(r.clientName)}${r.city ? ` — ${escHtml(r.city)}` : ''}</div>
+      <div class="review-niche">${nicheLabels[r.niche]||''}</div>
+    </div>`).join('');
+}
+
+// ── Render audio/video from proof items ──
+function renderMedia(d) {
+  const mediaItems = (d.items || []).filter(i => i.type === 'audio' && i.media);
+  if (!mediaItems.length) return; // keep default
+
+  document.getElementById('mediaGrid').innerHTML = mediaItems.map(m => {
+    const isVideo = m.media && (m.media.includes('youtube') || m.media.includes('youtu.be') || m.media.includes('vimeo'));
+    return `
+      <div class="media-card">
+        <div class="media-icon">${isVideo ? '🎬' : '🎤'}</div>
+        <div class="media-body">
+          <div class="media-name">${escHtml(m.clientName)}${m.city ? ` — ${escHtml(m.city)}` : ''}</div>
+          <div class="media-desc">${escHtml(m.quote || (isVideo ? 'شهادة فيديو' : 'شهادة صوتية'))}</div>
+          ${m.media ? `<a href="${escHtml(m.media)}" target="_blank" class="media-play">${isVideo ? '▶ شاهد الفيديو' : '▶ استمع للشهادة'}</a>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── Render referrals ──
+function renderRefs(d) {
+  const refs = (d.refs || []).filter(r => r.by);
+  if (!refs.length) return; // keep defaults
+
+  document.getElementById('refFlow').innerHTML = refs.map(r => `
+    <div class="ref-chip">
+      <span class="rc-name">${escHtml(r.by)}</span>
+      <span class="rc-arrow">→</span>
+      <span class="rc-referred">أحال ${escHtml(r.name)}${r.city ? ` (${escHtml(r.city)})` : ''}</span>
+    </div>`).join('');
+}
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Boot ──
+document.addEventListener('DOMContentLoaded', () => {
+  const d = loadProofData();
+  renderHeroStats(d);
+  renderCases(d);
+  renderReviews(d);
+  renderMedia(d);
+  renderRefs(d);
+});
+
+// Intersection Observer for counter animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const d = loadProofData();
+      renderHeroStats(d);
+      observer.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const heroStats = document.getElementById('heroStats');
+if (heroStats) observer.observe(heroStats);
+</script>
+</body>
+</html>
