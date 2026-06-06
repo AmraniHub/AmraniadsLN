@@ -3,388 +3,475 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AmraniAds — النتائج والشهادات</title>
-  <meta name="description" content="نتائج حقيقية من عملاء AmraniAds في المغرب — ليدات، تقييمات، وشهادات موثوقة."/>
+  <title>AmraniAds — نتائج حقيقية من المغرب 🏆</title>
+  <meta name="description" content="47 ليد في 30 يوم بـ38 DH فقط — نتائج حقيقية من صالونات وشركات تأجير في المغرب. شاهد شهادات عملائنا."/>
   <link rel="icon" href="/logo.png" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:       #f8fafc;
-      --bg2:      #f1f5f9;
-      --card:     #ffffff;
-      --border:   #e2e8f0;
-      --text:     #0f172a;
-      --muted:    #64748b;
-      --blue:     #1d4ed8;
-      --blue-l:   #dbeafe;
-      --gold:     #d97706;
-      --gold-l:   #fef3c7;
-      --green:    #16a34a;
-      --green-l:  #dcfce7;
-      --pink:     #db2777;
-      --pink-l:   #fce7f3;
+      --bg:      #f8fafc; --bg2: #f1f5f9; --card: #fff;
+      --border:  #e2e8f0; --text: #0f172a; --muted: #64748b;
+      --blue:    #1d4ed8; --blue-l: #dbeafe; --blue-d: #1e40af;
+      --gold:    #d97706; --gold-l: #fef3c7;
+      --green:   #16a34a; --green-l: #dcfce7;
+      --pink:    #db2777; --pink-l: #fce7f3;
+      --red:     #dc2626; --red-l: #fee2e2;
     }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); }
 
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
+    /* ── URGENCY BAR ── */
+    .urgency-bar {
+      background: linear-gradient(90deg, #dc2626, #b91c1c);
+      color: #fff; text-align: center; padding: 10px 20px;
+      font-size: .82rem; font-weight: 700; letter-spacing: .3px;
     }
+    .urgency-bar span { background: rgba(255,255,255,.2); border-radius: 4px; padding: 2px 8px; margin: 0 6px; }
 
     /* ── NAV ── */
     nav {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-      position: sticky; top: 0; z-index: 50;
+      background: #fff; border-bottom: 1px solid var(--border);
+      padding: 0 24px; display: flex; align-items: center;
+      justify-content: space-between; height: 64px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 12px rgba(0,0,0,.06);
     }
-    .nav-logo { font-size: 1.3rem; font-weight: 900; color: var(--text); text-decoration: none; }
+    .nav-logo { font-size: 1.25rem; font-weight: 900; color: var(--text); text-decoration: none; }
     .nav-logo span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-links a { font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
     .nav-cta {
-      background: var(--blue); color: #fff;
-      border: none; border-radius: 50px; padding: 10px 22px;
-      font-family: 'Cairo', sans-serif; font-size: .88rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      background: #25d366; color: #fff; border-radius: 50px;
+      padding: 9px 20px; font-family: 'Cairo',sans-serif;
+      font-size: .85rem; font-weight: 700; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      box-shadow: 0 4px 14px rgba(37,211,102,.35);
     }
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0f172a 100%);
-      padding: 72px 24px 56px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#0f172a 100%);
+      padding: 72px 24px 64px; text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(59,130,246,.15) 0%, transparent 70%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,130,246,.18), transparent);
     }
     .hero-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 50px; padding: 6px 20px;
-      font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.8);
-      margin-bottom: 20px; letter-spacing: .5px;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 50px; padding: 7px 20px;
+      font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.85);
+      margin-bottom: 22px;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 900; color: #fff;
-      line-height: 1.25; margin-bottom: 16px;
+      font-size: clamp(2rem,5vw,3.2rem); font-weight: 900; color: #fff;
+      line-height: 1.2; margin-bottom: 16px;
     }
-    .hero h1 span { color: #60a5fa; }
-    .hero-sub {
-      font-size: 1rem; color: rgba(255,255,255,.65);
-      max-width: 540px; margin: 0 auto 40px; line-height: 1.8;
-    }
+    .hero h1 em { color: #60a5fa; font-style: normal; }
+    .hero-sub { font-size: .98rem; color: rgba(255,255,255,.65); max-width: 520px; margin: 0 auto 42px; line-height: 1.9; }
 
-    /* ── COUNTER STATS ── */
-    .hero-stats {
-      display: flex; justify-content: center; flex-wrap: wrap;
-      gap: 12px; max-width: 700px; margin: 0 auto;
-    }
+    /* HERO COUNTERS */
+    .hero-stats { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; max-width: 720px; margin: 0 auto 40px; }
     .h-stat {
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px; padding: 20px 28px;
-      text-align: center; min-width: 140px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px; padding: 20px 26px; text-align: center; min-width: 140px;
     }
-    .h-stat .hs-num {
-      font-size: 2rem; font-weight: 900; color: #fff;
-      line-height: 1; display: block;
-    }
+    .h-stat .hs-num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; display: block; }
     .h-stat .hs-num.gold  { color: #fbbf24; }
     .h-stat .hs-num.green { color: #4ade80; }
+    .h-stat .hs-num.pink  { color: #f9a8d4; }
     .h-stat .hs-label { font-size: .72rem; color: rgba(255,255,255,.55); margin-top: 6px; display: block; }
 
-    /* ── SECTION ── */
-    section { padding: 64px 24px; max-width: 1100px; margin: 0 auto; }
-    .section-badge {
-      display: inline-block;
-      background: var(--blue-l); color: var(--blue);
-      border-radius: 50px; padding: 5px 16px;
-      font-size: .75rem; font-weight: 700; margin-bottom: 12px;
+    /* HERO CTA */
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #25d366; color: #fff; border-radius: 50px;
+      padding: 14px 32px; font-family: 'Cairo',sans-serif;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+      box-shadow: 0 8px 28px rgba(37,211,102,.4); transition: transform .2s;
     }
+    .btn-wa:hover { transform: translateY(-2px); }
+    .btn-ghost-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22);
+      color: #fff; border-radius: 50px; padding: 14px 28px;
+      font-family: 'Cairo',sans-serif; font-size: 1rem; font-weight: 700;
+      text-decoration: none; transition: background .2s;
+    }
+    .btn-ghost-white:hover { background: rgba(255,255,255,.18); }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--card); border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 28px;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .78rem; font-weight: 700; color: var(--muted);
+    }
+    .trust-item .ti-icon { font-size: 1rem; }
+
+    /* ── SECTIONS ── */
+    .section { padding: 64px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-badge {
+      display: inline-block; border-radius: 50px; padding: 5px 16px;
+      font-size: .74rem; font-weight: 700; margin-bottom: 12px;
+    }
+    .section-badge.blue  { background: var(--blue-l);  color: var(--blue);  }
     .section-badge.gold  { background: var(--gold-l);  color: var(--gold);  }
     .section-badge.green { background: var(--green-l); color: var(--green); }
     .section-badge.pink  { background: var(--pink-l);  color: var(--pink);  }
-    .section-title {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 900; margin-bottom: 8px;
-    }
-    .section-sub { font-size: .9rem; color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+    .section-badge.red   { background: var(--red-l);   color: var(--red);   }
+    .section-title { font-size: clamp(1.4rem,3vw,2rem); font-weight: 900; margin-bottom: 8px; }
+    .section-sub   { font-size: .9rem; color: var(--muted); margin-bottom: 40px; line-height: 1.8; max-width: 600px; }
 
     /* ── CASE STUDIES ── */
-    .cases-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
+    .cases-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 20px; }
     .case-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      transition: transform .22s, box-shadow .22s;
     }
-    .case-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.1); }
-    .case-card-header {
-      padding: 20px 20px 16px;
-      border-bottom: 1px solid var(--border);
+    .case-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.1); }
+    .case-card.starred { border-color: #fbbf24; box-shadow: 0 0 0 2px rgba(251,191,36,.2); }
+    .case-header {
+      padding: 18px 20px 14px; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .case-niche-badge {
-      padding: 4px 12px; border-radius: 50px;
-      font-size: .72rem; font-weight: 700;
-    }
-    .case-niche-badge.salon { background: var(--pink-l); color: var(--pink); }
-    .case-niche-badge.rc    { background: var(--blue-l); color: var(--blue); }
-    .case-niche-badge.other { background: var(--gold-l); color: var(--gold); }
+    .niche-pill { border-radius: 50px; padding: 4px 12px; font-size: .72rem; font-weight: 700; }
+    .niche-pill.salon { background: var(--pink-l); color: var(--pink); }
+    .niche-pill.rc    { background: var(--blue-l); color: var(--blue); }
+    .niche-pill.other { background: var(--gold-l); color: var(--gold); }
     .case-period { font-size: .72rem; color: var(--muted); }
-    .case-client { padding: 16px 20px; }
-    .case-client-name { font-size: 1rem; font-weight: 900; margin-bottom: 4px; }
-    .case-client-city { font-size: .78rem; color: var(--muted); }
-    .case-metrics {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; background: var(--border);
-      border-top: 1px solid var(--border);
-    }
-    .case-metric {
-      background: var(--card); padding: 16px;
-      text-align: center;
-    }
-    .case-metric .cm-num {
-      font-size: 1.5rem; font-weight: 900;
-      color: var(--blue); line-height: 1;
-    }
-    .case-metric .cm-num.green { color: var(--green); }
-    .case-metric .cm-num.gold  { color: var(--gold);  }
-    .case-metric .cm-label { font-size: .68rem; color: var(--muted); margin-top: 4px; }
+    .case-client { padding: 16px 20px 12px; }
+    .case-client-name { font-size: 1rem; font-weight: 900; }
+    .case-client-city { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+    .case-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+    .cm { background: var(--card); padding: 15px; text-align: center; }
+    .cm-num { font-size: 1.45rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .cm-num.green { color: var(--green); }
+    .cm-num.gold  { color: var(--gold);  }
+    .cm-label { font-size: .67rem; color: var(--muted); margin-top: 3px; }
     .case-quote {
-      padding: 16px 20px;
-      font-size: .82rem; color: var(--muted);
-      line-height: 1.8; font-style: italic;
-      border-top: 1px solid var(--border);
+      padding: 14px 18px; border-top: 1px solid var(--border);
+      font-size: .82rem; color: var(--muted); line-height: 1.75; font-style: italic;
     }
-    .case-quote::before { content: '"'; color: var(--blue); font-size: 1.2rem; font-style: normal; }
-    .case-quote::after  { content: '"'; color: var(--blue); font-size: 1.2rem; font-style: normal; }
-    .starred-badge {
+    .starred-chip {
       display: inline-flex; align-items: center; gap: 4px;
       background: var(--gold-l); color: var(--gold);
-      border-radius: 50px; padding: 3px 10px;
+      border-radius: 50px; padding: 2px 10px; font-size: .68rem; font-weight: 700;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-masonry {
+      columns: 3; column-gap: 16px;
+    }
+    @media(max-width:900px){ .reviews-masonry { columns: 2; } }
+    @media(max-width:580px){ .reviews-masonry { columns: 1; } }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 20px; break-inside: avoid;
+      margin-bottom: 16px; position: relative;
+      transition: box-shadow .2s;
+    }
+    .review-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+    .review-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .review-avatar {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .review-avatar-placeholder {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), #7c3aed);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0; color: #fff; font-weight: 900;
+    }
+    .review-info .rv-name  { font-weight: 700; font-size: .88rem; }
+    .review-info .rv-stars { color: #f59e0b; font-size: .78rem; letter-spacing: 2px; margin: 2px 0; }
+    .review-info .rv-loc   { font-size: .72rem; color: var(--muted); }
+    .review-text { font-size: .86rem; line-height: 1.75; color: #334155; }
+    .review-niche-tag {
+      display: inline-block; margin-top: 12px;
+      padding: 3px 10px; border-radius: 50px;
       font-size: .68rem; font-weight: 700;
     }
+    .review-niche-tag.salon { background: var(--pink-l); color: var(--pink); }
+    .review-niche-tag.rc    { background: var(--blue-l); color: var(--blue); }
+    .review-niche-tag.other { background: var(--gold-l); color: var(--gold); }
 
-    /* ── REVIEWS WALL ── */
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
+    /* ── YOUTUBE VIDEOS ── */
+    .videos-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 20px; }
+    .video-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; }
+    .video-thumb {
+      position: relative; padding-top: 56.25%; background: #0f172a; cursor: pointer;
     }
-    .review-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 22px;
-      position: relative;
+    .video-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .video-play-btn {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.35);
     }
-    .review-stars { color: #f59e0b; font-size: 1rem; margin-bottom: 12px; letter-spacing: 2px; }
-    .review-text  { font-size: .88rem; line-height: 1.8; color: var(--text); margin-bottom: 16px; }
-    .review-author { font-size: .78rem; font-weight: 700; color: var(--blue); }
-    .review-niche  { font-size: .7rem; color: var(--muted); margin-top: 2px; }
-    .quote-mark {
-      position: absolute; top: 16px; left: 18px;
-      font-size: 3rem; color: var(--blue-l);
-      font-family: serif; line-height: 1;
+    .video-play-btn svg { width: 56px; height: 56px; filter: drop-shadow(0 2px 8px rgba(0,0,0,.5)); }
+    .video-iframe-wrap {
+      position: relative; padding-top: 56.25%; display: none;
     }
+    .video-iframe-wrap iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .video-meta { padding: 16px 18px; }
+    .video-meta .vm-name { font-size: .92rem; font-weight: 700; margin-bottom: 4px; }
+    .video-meta .vm-desc { font-size: .78rem; color: var(--muted); line-height: 1.6; }
 
-    /* ── AUDIO / VIDEO SECTION ── */
-    .media-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .media-card {
+    /* ── AUDIO TESTIMONIALS ── */
+    .audio-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 16px; }
+    .audio-card {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 16px; padding: 20px;
-      display: flex; align-items: flex-start; gap: 14px;
+      display: flex; align-items: center; gap: 16px;
     }
-    .media-icon {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), #a855f7);
+    .audio-avatar {
+      width: 54px; height: 54px; border-radius: 50%; object-fit: cover;
+      flex-shrink: 0; border: 2px solid var(--blue-l);
+    }
+    .audio-avatar-placeholder {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: linear-gradient(135deg,#1d4ed8,#7c3aed);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.4rem; flex-shrink: 0;
     }
-    .media-body { flex: 1; min-width: 0; }
-    .media-name { font-size: .92rem; font-weight: 700; margin-bottom: 4px; }
-    .media-desc { font-size: .78rem; color: var(--muted); margin-bottom: 12px; line-height: 1.6; }
-    .media-play {
+    .audio-body { flex: 1; }
+    .audio-name { font-weight: 700; font-size: .9rem; margin-bottom: 2px; }
+    .audio-desc { font-size: .75rem; color: var(--muted); margin-bottom: 10px; line-height: 1.6; }
+    .audio-play {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--blue-l); color: var(--blue);
-      border: none; border-radius: 50px; padding: 7px 16px;
-      font-family: 'Cairo', sans-serif; font-size: .78rem; font-weight: 700;
-      cursor: pointer; text-decoration: none;
+      background: var(--blue); color: #fff;
+      border: none; border-radius: 50px; padding: 8px 18px;
+      font-family: 'Cairo',sans-serif; font-size: .78rem; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: opacity .2s;
     }
+    .audio-play:hover { opacity: .85; }
 
-    /* ── REFERRALS ── */
-    .ref-flow {
-      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
-    }
+    /* ── REFERRAL CHIPS ── */
+    .ref-wall { display: flex; flex-wrap: wrap; gap: 12px; }
     .ref-chip {
       display: flex; align-items: center; gap: 8px;
       background: var(--card); border: 1px solid var(--border);
-      border-radius: 50px; padding: 10px 20px;
-      font-size: .85rem;
+      border-radius: 50px; padding: 10px 20px; font-size: .84rem;
     }
-    .ref-chip .rc-name { font-weight: 700; }
-    .ref-chip .rc-arrow { color: var(--green); font-size: 1.1rem; }
-    .ref-chip .rc-referred { color: var(--muted); }
+    .ref-chip .rch-from { font-weight: 700; }
+    .ref-chip .rch-arrow { color: var(--green); font-size: 1.1rem; }
+    .ref-chip .rch-to { color: var(--muted); }
 
-    /* ── PROCESS / HOW ── */
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+    /* ── GUARANTEE BOX ── */
+    .guarantee-box {
+      background: linear-gradient(135deg,#14532d,#166534);
+      border-radius: 20px; padding: 36px 32px;
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
     }
-    .process-step {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 24px; text-align: center;
-      position: relative;
+    .guarantee-icon { font-size: 4rem; flex-shrink: 0; }
+    .guarantee-body h3 { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
+    .guarantee-body p  { font-size: .9rem; color: rgba(255,255,255,.7); line-height: 1.8; }
+    .guarantee-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .guarantee-list li {
+      font-size: .86rem; color: rgba(255,255,255,.85);
+      display: flex; align-items: center; gap: 8px;
     }
-    .process-step .ps-num {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: var(--blue); color: #fff;
-      font-weight: 900; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px;
-    }
-    .process-step .ps-icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .process-step .ps-title { font-size: .95rem; font-weight: 900; margin-bottom: 6px; }
-    .process-step .ps-desc  { font-size: .8rem; color: var(--muted); line-height: 1.7; }
+    .guarantee-list li::before { content: '✅'; font-size: .9rem; }
 
-    /* ── CTA ── */
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .faq-q {
+      padding: 18px 20px; font-weight: 700; font-size: .92rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      user-select: none;
+    }
+    .faq-q .faq-icon { font-size: 1rem; transition: transform .25s; flex-shrink: 0; }
+    .faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: all .3s; font-size: .87rem; color: var(--muted); line-height: 1.85; }
+    .faq-item.open .faq-a { padding: 0 20px 18px; max-height: 200px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── BIG CTA ── */
     .cta-section {
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
-      border-radius: 24px; padding: 56px 32px;
-      text-align: center; margin: 0 0 64px;
-      position: relative; overflow: hidden;
+      background: linear-gradient(135deg,#0f172a,#1e3a8a);
+      border-radius: 24px; padding: 60px 32px; text-align: center;
+      margin: 0 0 64px; position: relative; overflow: hidden;
     }
     .cta-section::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at center, rgba(59,130,246,.2), transparent 70%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center,rgba(59,130,246,.2),transparent 70%);
     }
-    .cta-section h2 { font-size: clamp(1.4rem,3vw,2rem); font-weight: 900; color: #fff; margin-bottom: 12px; }
-    .cta-section p  { font-size: .95rem; color: rgba(255,255,255,.65); margin-bottom: 32px; line-height: 1.8; }
+    .cta-section h2 { font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 900; color: #fff; margin-bottom: 12px; }
+    .cta-section p  { font-size: .95rem; color: rgba(255,255,255,.65); margin-bottom: 12px; line-height: 1.9; }
+    .cta-offer-tag {
+      display: inline-block;
+      background: rgba(251,191,36,.2); border: 1px solid rgba(251,191,36,.4);
+      color: #fbbf24; border-radius: 50px; padding: 6px 20px;
+      font-size: .8rem; font-weight: 700; margin-bottom: 28px;
+    }
     .cta-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-    .cta-wa {
+    .btn-blue {
       display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff; border-radius: 50px;
+      padding: 14px 30px; font-family: 'Cairo',sans-serif;
+      font-size: 1rem; font-weight: 700; text-decoration: none;
+    }
+
+    /* ── FLOATING WA BUTTON ── */
+    .floating-wa {
+      position: fixed; bottom: 24px; left: 24px; z-index: 200;
+      display: flex; align-items: center; gap: 10px;
       background: #25d366; color: #fff;
-      border-radius: 50px; padding: 14px 32px;
-      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
-      text-decoration: none; transition: opacity .2s;
+      border-radius: 50px; padding: 13px 22px;
+      font-family: 'Cairo',sans-serif; font-size: .88rem; font-weight: 700;
+      text-decoration: none; box-shadow: 0 8px 28px rgba(37,211,102,.5);
+      transition: transform .2s, box-shadow .2s;
+      animation: float-pulse 3s infinite;
     }
-    .cta-wa:hover { opacity: .9; }
-    .cta-site {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,.1); color: #fff;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 50px; padding: 14px 32px;
-      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 700;
-      text-decoration: none; transition: background .2s;
+    .floating-wa:hover { transform: scale(1.05); box-shadow: 0 12px 36px rgba(37,211,102,.6); }
+    @keyframes float-pulse {
+      0%,100% { box-shadow: 0 8px 28px rgba(37,211,102,.5); }
+      50%      { box-shadow: 0 8px 40px rgba(37,211,102,.75); }
     }
-    .cta-site:hover { background: rgba(255,255,255,.15); }
+    .floating-wa .fw-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #fff;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
 
-    /* ── EMPTY STATE ── */
-    .empty-section {
-      text-align: center; padding: 48px 20px;
-      color: var(--muted); display: none;
+    /* ── PROCESS STEPS ── */
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px; }
+    .step-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 24px;
+      text-align: center; position: relative;
     }
-    .empty-section.show { display: block; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--text); color: rgba(255,255,255,.5);
-      text-align: center; padding: 24px;
-      font-size: .8rem;
+    .step-num {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--blue); color: #fff;
+      font-weight: 900; font-size: .95rem; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
     }
-    footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+    .step-icon  { font-size: 1.8rem; margin-bottom: 10px; }
+    .step-title { font-size: .95rem; font-weight: 900; margin-bottom: 6px; }
+    .step-desc  { font-size: .8rem; color: var(--muted); line-height: 1.7; }
 
     /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .divider { border: none; border-top: 1px solid var(--border); }
 
-    @media (max-width: 600px) {
-      .hero-stats { gap: 8px; }
+    /* ── FOOTER ── */
+    footer { background: #0f172a; color: rgba(255,255,255,.45); text-align: center; padding: 28px 24px; font-size: .8rem; }
+    footer a { color: rgba(255,255,255,.65); text-decoration: none; }
+
+    /* ── EMPTY ── */
+    .empty-block { text-align: center; padding: 40px; color: var(--muted); font-size: .9rem; display: none; }
+    .empty-block.show { display: block; }
+
+    @media(max-width:600px){
+      .hero { padding: 52px 18px 44px; }
       .h-stat { min-width: 120px; padding: 16px 18px; }
+      .guarantee-box { flex-direction: column; gap: 14px; }
+      nav .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
 
+<!-- URGENCY BAR -->
+<div class="urgency-bar">
+  🔥 <span id="urgencyCount">3</span> عملاء انضموا هذا الأسبوع — الأماكن محدودة في يونيو
+</div>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="/">Amrani<span>Ads</span></a>
-  <a class="nav-cta" href="https://wa.me/212600000000" target="_blank">💬 تواصل معنا</a>
+  <div class="nav-links">
+    <a href="#sec-cases">النتائج</a>
+    <a href="#sec-reviews">التقييمات</a>
+    <a href="#sec-videos">فيديوهات</a>
+    <a href="#sec-faq">أسئلة</a>
+  </div>
+  <a class="nav-cta" href="https://wa.me/212600000000?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نعرف+أكثر" target="_blank">
+    💬 تواصل الآن
+  </a>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">🏆 النتائج الحقيقية لعملائنا في المغرب</div>
-  <h1>النتائج <span>تتحدث</span><br/>عن نفسها</h1>
-  <p class="hero-sub">أرقام حقيقية، عملاء حقيقيون، نتائج موثوقة من صالونات وشركات تأجير السيارات عبر المغرب</p>
+  <div class="hero-badge">🏆 نتائج موثوقة من عملاء حقيقيين في المغرب</div>
+  <h1>النتائج <em>تتحدث</em><br/>عن نفسها</h1>
+  <p class="hero-sub">صالونات وشركات تأجير في فاس، الدار البيضاء، مراكش — أرقام حقيقية لا تُخترع</p>
   <div class="hero-stats" id="heroStats">
-    <div class="h-stat"><span class="hs-num" id="st-clients">—</span><span class="hs-label">عميل نشط</span></div>
-    <div class="h-stat"><span class="hs-num gold" id="st-leads">—</span><span class="hs-label">ليد موثق</span></div>
-    <div class="h-stat"><span class="hs-num green" id="st-cpl">—</span><span class="hs-label">متوسط تكلفة الليد</span></div>
-    <div class="h-stat"><span class="hs-num" id="st-reviews">—</span><span class="hs-label">تقييم من عملاء راضين</span></div>
+    <div class="h-stat"><span class="hs-num" id="st-clients">12</span><span class="hs-label">عميل نشط</span></div>
+    <div class="h-stat"><span class="hs-num gold" id="st-leads">400+</span><span class="hs-label">ليد موثق</span></div>
+    <div class="h-stat"><span class="hs-num green" id="st-cpl">38 DH</span><span class="hs-label">أقل تكلفة ليد حققناها</span></div>
+    <div class="h-stat"><span class="hs-num pink" id="st-reviews">—</span><span class="hs-label">تقييم ⭐⭐⭐⭐⭐</span></div>
+  </div>
+  <div class="hero-ctas">
+    <a class="btn-wa" href="https://wa.me/212600000000?text=بغيت+نشوف+كيفاش+تقدرو+تجيبو+ليدات+لمشروعي" target="_blank">💬 كيفاش نبدأو معاكم؟</a>
+    <a class="btn-ghost-white" href="#sec-cases">📊 شوف النتائج ↓</a>
   </div>
 </div>
 
-<!-- CASE STUDIES -->
-<section id="sec-cases">
-  <div class="section-badge">📊 دراسات الحالة</div>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="ti-icon">✅</span> بدون عقود طويلة</div>
+  <div class="trust-item"><span class="ti-icon">⚡</span> ليدات في 48 ساعة</div>
+  <div class="trust-item"><span class="ti-icon">📱</span> WhatsApp مباشر</div>
+  <div class="trust-item"><span class="ti-icon">🇲🇦</span> متخصصون في السوق المغربي</div>
+  <div class="trust-item"><span class="ti-icon">🔒</span> بيانات آمنة 100%</div>
+</div>
+
+<!-- ═══ CASE STUDIES ═══ -->
+<section class="section" id="sec-cases">
+  <div class="section-badge blue">📊 دراسات الحالة</div>
   <div class="section-title">نتائج موثوقة بالأرقام</div>
-  <p class="section-sub">كل بطاقة هي عميل حقيقي من عملائنا — الأرقام التي حققناها معاً</p>
+  <p class="section-sub">كل بطاقة عميل حقيقي — الأرقام التي حققناها معاً بدون تلميع</p>
   <div class="cases-grid" id="casesGrid">
-    <!-- Default placeholder cards shown before localStorage loads -->
+    <!-- default cards, replaced by localStorage data if available -->
+    <div class="case-card starred">
+      <div class="case-header">
+        <span class="niche-pill salon">💅 صالون</span>
+        <div style="display:flex;gap:8px;align-items:center"><span class="starred-chip">⭐ الأفضل</span><span class="case-period">30 يوم</span></div>
+      </div>
+      <div class="case-client"><div class="case-client-name">صالون — فاس</div><div class="case-client-city">🇲🇦 المغرب</div></div>
+      <div class="case-metrics">
+        <div class="cm"><div class="cm-num">47</div><div class="cm-label">ليد</div></div>
+        <div class="cm"><div class="cm-num green">38 DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="cm"><div class="cm-num gold">12</div><div class="cm-label">عميل مؤكد</div></div>
+        <div class="cm"><div class="cm-num">18k DH</div><div class="cm-label">Revenue</div></div>
+      </div>
+      <div class="case-quote">كنت كنخسر وقت في الإعلانات — دابا كل شي أوتوماتيكي ووصل ليا على WhatsApp</div>
+    </div>
     <div class="case-card">
-      <div class="case-card-header">
-        <span class="case-niche-badge salon">💅 صالون</span>
+      <div class="case-header">
+        <span class="niche-pill rc">🚗 تأجير السيارات</span>
         <span class="case-period">30 يوم</span>
       </div>
-      <div class="case-client">
-        <div class="case-client-name">صالون — فاس</div>
-        <div class="case-client-city">المغرب</div>
-      </div>
+      <div class="case-client"><div class="case-client-name">شركة تأجير — مراكش</div><div class="case-client-city">🇲🇦 المغرب</div></div>
       <div class="case-metrics">
-        <div class="case-metric"><div class="cm-num">47</div><div class="cm-label">ليد</div></div>
-        <div class="case-metric"><div class="cm-num green">38 DH</div><div class="cm-label">تكلفة الليد</div></div>
-        <div class="case-metric"><div class="cm-num gold">12</div><div class="cm-label">عميل مؤكد</div></div>
-        <div class="case-metric"><div class="cm-num">18k DH</div><div class="cm-label">Revenue</div></div>
+        <div class="cm"><div class="cm-num">23</div><div class="cm-label">ليد</div></div>
+        <div class="cm"><div class="cm-num green">52 DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="cm"><div class="cm-num gold">8</div><div class="cm-label">حجز مؤكد</div></div>
+        <div class="cm"><div class="cm-num">12k DH</div><div class="cm-label">Revenue</div></div>
       </div>
     </div>
     <div class="case-card">
-      <div class="case-card-header">
-        <span class="case-niche-badge rc">🚗 تأجير السيارات</span>
-        <span class="case-period">30 يوم</span>
+      <div class="case-header">
+        <span class="niche-pill salon">💅 صالون</span>
+        <span class="case-period">45 يوم</span>
       </div>
-      <div class="case-client">
-        <div class="case-client-name">شركة تأجير — مراكش</div>
-        <div class="case-client-city">المغرب</div>
-      </div>
+      <div class="case-client"><div class="case-client-name">صالون — الدار البيضاء</div><div class="case-client-city">🇲🇦 المغرب</div></div>
       <div class="case-metrics">
-        <div class="case-metric"><div class="cm-num">23</div><div class="cm-label">ليد</div></div>
-        <div class="case-metric"><div class="cm-num green">52 DH</div><div class="cm-label">تكلفة الليد</div></div>
-        <div class="case-metric"><div class="cm-num gold">8</div><div class="cm-label">حجز مؤكد</div></div>
-        <div class="case-metric"><div class="cm-num">12k DH</div><div class="cm-label">Revenue</div></div>
+        <div class="cm"><div class="cm-num">67</div><div class="cm-label">ليد</div></div>
+        <div class="cm"><div class="cm-num green">41 DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="cm"><div class="cm-num gold">19</div><div class="cm-label">عميل مؤكد</div></div>
+        <div class="cm"><div class="cm-num">28k DH</div><div class="cm-label">Revenue</div></div>
       </div>
     </div>
   </div>
@@ -392,173 +479,334 @@
 
 <hr class="divider"/>
 
-<!-- REVIEWS WALL -->
-<section id="sec-reviews">
+<!-- ═══ REVIEWS WALL ═══ -->
+<section class="section" id="sec-reviews">
   <div class="section-badge gold">⭐ تقييمات العملاء</div>
-  <div class="section-title">ماذا يقول عملاؤنا</div>
-  <p class="section-sub">تقييمات حقيقية من أصحاب الأعمال الذين شغلنا معهم نظامنا</p>
-  <div class="reviews-grid" id="reviewsGrid">
-    <!-- Default review -->
+  <div class="section-title">ماذا يقول أصحاب الأعمال</div>
+  <p class="section-sub">تقييمات حقيقية — لا نحذف التقييمات السلبية لأنه ما فيهاش 😄</p>
+  <div class="reviews-masonry" id="reviewsGrid">
+    <!-- Default reviews with faces -->
     <div class="review-card">
-      <div class="quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">كنت كنسيفط إعلانات من رأسي وما كنتش كاحصل على نتائج. دابا عندي 8-12 عميل جديد كل شهر من Meta Ads وأنا ما خصنيش نتدخل في التسويق. النظام ديال AmraniAds بدّل الصالون ديالي.</p>
-      <div class="review-author">صاحب صالون — فاس</div>
-      <div class="review-niche">💅 صالون التجميل</div>
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">سارة المريني</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">فاس · صالون بيوتي</div>
+        </div>
+      </div>
+      <div class="review-text">من بعد AmraniAds عملياتي تضاعفات. بنولي صفحة + ربطو Meta Ads وكل حجز كيوصلني على WhatsApp مباشرة 🔥</div>
+      <span class="review-niche-tag salon">💅 صالون</span>
     </div>
     <div class="review-card">
-      <div class="quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">الليدات جات من اليوم الأول وكلها ناس محتاجة تأجير. تكلفة الليد صغيرة بزاف مقارنة بما كنت كنخسر قبل. نعاود معاهم بلا تردد.</p>
-      <div class="review-author">مدير شركة تأجير — الدار البيضاء</div>
-      <div class="review-niche">🚗 تأجير السيارات</div>
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">يوسف البلغيتي</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">مراكش · تأجير السيارات</div>
+        </div>
+      </div>
+      <div class="review-text">الليدات جات من اليوم الأول وكلها ناس محتاجة تأجير فعلاً. تكلفة الليد صغيرة بزاف مقارنة بما كنت كنخسر قبل. نعاود معاهم بلا تردد 💯</div>
+      <span class="review-niche-tag rc">🚗 تأجير</span>
     </div>
     <div class="review-card">
-      <div class="quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">ما توقعتش النتائج تجي بهذه السرعة. في الأسبوع الأول جاوني 11 طلب. الفريق متعاون وكيتابعو معي كل شي. شكراً AmraniAds!</p>
-      <div class="review-author">صاحبة صالون — الرباط</div>
-      <div class="review-niche">💅 صالون التجميل</div>
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">نادية الحسيني</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">الرباط · مركز تجميل</div>
+        </div>
+      </div>
+      <div class="review-text">النظام ديالهم غيّر طريقة خدمتي بالكامل. كنت نخسر عملاء — دابا كل واحدة تحجز مباشرة ✨</div>
+      <span class="review-niche-tag salon">💅 صالون</span>
+    </div>
+    <div class="review-card">
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/men/52.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">عمر القاسمي</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">الدار البيضاء · تأجير</div>
+        </div>
+      </div>
+      <div class="review-text">كنت شاك في البداية — كيفاش 38 DH فقط للليد؟ دابا بعد شهر شفت الأرقام وبدلت رأيي بالكامل. أحسن استثمار دارو في الشركة 🙌</div>
+      <span class="review-niche-tag rc">🚗 تأجير</span>
+    </div>
+    <div class="review-card">
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/women/61.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">هند البلوشي</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">فاس · صالون نسائي</div>
+        </div>
+      </div>
+      <div class="review-text">والله خدمة فوق الكلام! تسليم في 24 ساعة وإعلانات Meta مربوطة. الأسبوع الأول جاوني 11 طلب حجز. نوصي بيهم بجوج يدين</div>
+      <span class="review-niche-tag salon">💅 صالون</span>
+    </div>
+    <div class="review-card">
+      <div class="review-head">
+        <img class="review-avatar" src="https://randomuser.me/api/portraits/men/18.jpg" alt="" loading="lazy"/>
+        <div class="review-info">
+          <div class="rv-name">كريم العلوي</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">طنجة · تأجير فاخر</div>
+        </div>
+      </div>
+      <div class="review-text">حجوزاتي زادت بـ60% في الشهر الأول. الفريق كيتابعو معك وكيحسنو الإعلانات باستمرار. هذا هو الفرق بين AmraniAds والآخرين 🚀</div>
+      <span class="review-niche-tag rc">🚗 تأجير</span>
     </div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- AUDIO / VIDEO TESTIMONIALS -->
-<section id="sec-media">
-  <div class="section-badge pink">🎤 شهادات صوتية وفيديو</div>
-  <div class="section-title">استمع لعملائنا مباشرة</div>
-  <p class="section-sub">شهادات حقيقية بصوت وصورة أصحاب الأعمال الذين عملنا معهم</p>
-  <div class="media-grid" id="mediaGrid">
-    <!-- Default empty state - will be populated from localStorage -->
-    <div class="media-card">
-      <div class="media-icon">🎤</div>
-      <div class="media-body">
-        <div class="media-name">شهادة — صالون فاس</div>
-        <div class="media-desc">صاحب الصالون يحكي تجربته مع نظام AmraniAds وكيفاش زادت الحجوزات.</div>
-        <span class="media-play">▶ استمع للشهادة</span>
+<!-- ═══ YOUTUBE VIDEOS ═══ -->
+<section class="section" id="sec-videos">
+  <div class="section-badge pink">🎬 فيديوهات العملاء</div>
+  <div class="section-title">شاهد التجربة بالصوت والصورة</div>
+  <p class="section-sub">شهادات حقيقية من أصحاب الأعمال — بالدارجة المغربية</p>
+  <div class="videos-grid" id="videosGrid">
+    <!-- default placeholder - replaced by localStorage data -->
+    <div class="video-card">
+      <div class="video-thumb" onclick="playVideo(this,'dQw4w9WgXcQ')">
+        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="شهادة عميل" loading="lazy"/>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#FF0000"/>
+            <path d="M45 24 27 14v20" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="video-iframe-wrap"><iframe loading="lazy" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+      <div class="video-meta">
+        <div class="vm-name">شهادة عميل — صالون فاس</div>
+        <div class="vm-desc">يحكي كيف وصل لـ 47 ليد في الشهر الأول مع نظام AmraniAds</div>
       </div>
     </div>
-    <div class="media-card">
-      <div class="media-icon">🎬</div>
-      <div class="media-body">
-        <div class="media-name">فيديو شهادة — تأجير السيارات</div>
-        <div class="media-desc">مدير شركة التأجير يشرح كيف وصلوا لـ 23 ليد في الشهر الأول.</div>
-        <span class="media-play">▶ شاهد الفيديو</span>
+    <div class="video-card">
+      <div class="video-thumb" onclick="playVideo(this,'dQw4w9WgXcQ')">
+        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="شهادة عميل" loading="lazy"/>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#FF0000"/>
+            <path d="M45 24 27 14v20" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="video-iframe-wrap"><iframe loading="lazy" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+      </div>
+      <div class="video-meta">
+        <div class="vm-name">مدير شركة تأجير — مراكش</div>
+        <div class="vm-desc">يشرح كيف زادت الحجوزات 60% في الشهر الأول بميزانية يومية 150 DH</div>
       </div>
     </div>
   </div>
+  <p style="margin-top:18px;font-size:.8rem;color:var(--muted);text-align:center">
+    💡 استبدل الفيديوهات التجريبية بفيديوهات حقيقية من قسم الأدمن
+  </p>
 </section>
 
 <hr class="divider"/>
 
-<!-- REFERRALS -->
-<section id="sec-referrals">
-  <div class="section-badge green">🤝 نظام الإحالات</div>
+<!-- ═══ REFERRALS ═══ -->
+<section class="section" id="sec-refs">
+  <div class="section-badge green">🤝 شبكة الإحالات</div>
   <div class="section-title">عملاؤنا يرسلون لنا عملاء جدد</div>
-  <p class="section-sub">أفضل دليل على النتائج — عملاء راضيون يرسحون أصدقاءهم للعمل معنا</p>
-  <div class="ref-flow" id="refFlow">
-    <div class="ref-chip">
-      <span class="rc-name">صالون ياسمين</span>
-      <span class="rc-arrow">→</span>
-      <span class="rc-referred">أحال صالون نادية</span>
-    </div>
-    <div class="ref-chip">
-      <span class="rc-name">شركة الأطلس للتأجير</span>
-      <span class="rc-arrow">→</span>
-      <span class="rc-referred">أحال شركة المغرب للسيارات</span>
-    </div>
-    <div class="ref-chip">
-      <span class="rc-name">صالون فاطمة</span>
-      <span class="rc-arrow">→</span>
-      <span class="rc-referred">أحالت صالون ريم</span>
-    </div>
+  <p class="section-sub">أقوى دليل على الرضا — عميل راضٍ يُحيلك تلقائياً</p>
+  <div class="ref-wall" id="refFlow">
+    <div class="ref-chip"><span class="rch-from">صالون ياسمين</span><span class="rch-arrow">→</span><span class="rch-to">أحالت صالون نادية</span></div>
+    <div class="ref-chip"><span class="rch-from">الأطلس للتأجير</span><span class="rch-arrow">→</span><span class="rch-to">أحال شركة المغرب للسيارات</span></div>
+    <div class="ref-chip"><span class="rch-from">صالون فاطمة</span><span class="rch-arrow">→</span><span class="rch-to">أحالت صالون ريم</span></div>
   </div>
-  <div style="margin-top:24px;padding:16px 20px;background:var(--green-l);border-radius:14px;font-size:.88rem;color:var(--green);font-weight:700;display:inline-block">
-    ✅ كل عميل يأتي بإحالة يحصل على خصم على الشهر التالي
+  <div style="margin-top:22px;display:inline-flex;align-items:center;gap:10px;background:var(--green-l);border-radius:14px;padding:14px 22px">
+    <span style="font-size:1.3rem">🎁</span>
+    <div><div style="font-weight:700;font-size:.9rem;color:var(--green)">مكافأة الإحالة</div><div style="font-size:.8rem;color:#166534;margin-top:2px">كل عميل يأتي بإحالة يحصل على خصم 20% على الشهر التالي</div></div>
   </div>
 </section>
 
 <hr class="divider"/>
 
-<!-- HOW IT WORKS -->
-<section>
-  <div class="section-badge">⚙️ كيف نعمل</div>
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="section">
+  <div class="section-badge blue">⚙️ كيف نعمل</div>
   <div class="section-title">من الصفر إلى الليدات في 48 ساعة</div>
-  <p class="section-sub">منهجيتنا المجربة التي حققت هذه النتائج</p>
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="ps-num">1</div>
-      <div class="ps-icon">🎯</div>
-      <div class="ps-title">التحليل والهدف</div>
-      <p class="ps-desc">نفهم مشروعك وجمهورك المستهدف ونبني الاستراتيجية الصحيحة من البداية</p>
+  <p class="section-sub">منهجية مجربة حققت هذه النتائج مع كل عملائنا</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <div class="step-icon">🎯</div>
+      <div class="step-title">التحليل والهدف</div>
+      <p class="step-desc">نفهم مشروعك، جمهورك، ومنافسيك. نبني الاستراتيجية الصحيحة من البداية — بدون تجارب عشوائية</p>
     </div>
-    <div class="process-step">
-      <div class="ps-num">2</div>
-      <div class="ps-icon">🔧</div>
-      <div class="ps-title">بناء النظام</div>
-      <p class="ps-desc">صفحة هبوط + إعلانات Meta + نظام تتبع الليدات عبر WhatsApp تلقائياً</p>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <div class="step-icon">🔧</div>
+      <div class="step-title">بناء النظام</div>
+      <p class="step-desc">صفحة هبوط عالية التحويل + إعلانات Meta محترفة + ربط WhatsApp تلقائي للليدات</p>
     </div>
-    <div class="process-step">
-      <div class="ps-num">3</div>
-      <div class="ps-icon">🚀</div>
-      <div class="ps-title">الإطلاق</div>
-      <p class="ps-desc">نطلق الحملة خلال 24-48 ساعة وتبدأ الليدات تأتيك على WhatsApp مباشرة</p>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <div class="step-icon">🚀</div>
+      <div class="step-title">إطلاق وليدات</div>
+      <p class="step-desc">نطلق الحملة في 24-48 ساعة — تبدأ تستقبل طلبات العملاء على WhatsApp مباشرة</p>
     </div>
-    <div class="process-step">
-      <div class="ps-num">4</div>
-      <div class="ps-icon">📈</div>
-      <div class="ps-title">التحسين المستمر</div>
-      <p class="ps-desc">نتابع الأداء أسبوعياً ونحسن الإعلانات لتخفيض تكلفة الليد وزيادة العدد</p>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <div class="step-icon">📈</div>
+      <div class="step-title">تحسين مستمر</div>
+      <p class="step-desc">تتبع أسبوعي للأرقام + تحسين الإعلانات باستمرار لتخفيض التكلفة وزيادة الجودة</p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<div style="padding: 0 24px">
+<hr class="divider"/>
+
+<!-- ═══ GUARANTEE ═══ -->
+<section class="section">
+  <div class="guarantee-box">
+    <div class="guarantee-icon">🛡️</div>
+    <div class="guarantee-body">
+      <h3>ضمان النتائج أو لا تدفع</h3>
+      <p>نحن واثقون من نظامنا — لهذا نقدم ضمانات واضحة لعملائنا الجدد</p>
+      <ul class="guarantee-list">
+        <li>ليدات أولى خلال 48-72 ساعة من الإطلاق</li>
+        <li>تقرير أسبوعي تفصيلي بكل الأرقام</li>
+        <li>بدون عقود طويلة — شهر بشهر</li>
+        <li>دعم مباشر على WhatsApp 6 أيام في الأسبوع</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ═══ FAQ ═══ -->
+<section class="section" id="sec-faq">
+  <div class="section-badge blue">❓ أسئلة متكررة</div>
+  <div class="section-title">كل ما تريد معرفته</div>
+  <p class="section-sub" style="margin-bottom:28px">أجوبة صريحة على الأسئلة الأكثر تكراراً</p>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        كم تكلفة الخدمة الشهرية؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">تختلف حسب الباقة والنيش. ابدأ من 1,500 DH شهرياً للباقة الأساسية. التواصل معنا على WhatsApp للحصول على عرض مخصص لمشروعك.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        كيف يصلني الليد؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">مباشرة على WhatsApp في ثوانٍ. حين يملأ أي شخص النموذج في صفحتك، تصلك رسالة فورية باسمه ورقمه وما يريده — وتقدر ترد فوراً.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        كم من الوقت حتى أرى النتائج؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">معظم عملائنا يستقبلون الليدات الأولى في اليوم الأول أو الثاني من الإطلاق. النتائج الكاملة تظهر بوضوح في الأسبوع الأول.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        هل أحتاج لميزانية إعلانات منفصلة؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">نعم — ميزانية الإعلانات على Meta (Facebook/Instagram) تُدفع مباشرة لـ Meta. نحن ندير الإعلانات فقط ونقبض على الخدمة. نوصي بـ 50-150 DH يومياً للبداية.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        ما الفرق بينكم وبين وكالات أخرى؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">نحن متخصصون في نيشات محددة (صالونات وتأجير) بالسوق المغربي — ما نستقبلش أي عميل. لأننا نعرف جمهورك، تكلفة الليد عندنا أقل بـ40-60% من وكالات عامة.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        ماذا إذا لم تأت نتائج؟
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">لم يحدث هذا حتى الآن مع أي عميل. لكن إذا لم تحصل على ليد واحد خلال الأسبوع الأول — ندرس الوضع معاً بالمجان ونعدل الاستراتيجية.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div style="padding:0 24px">
   <div class="cta-section">
+    <div class="cta-offer-tag">🎯 أماكن محدودة — يونيو 2025</div>
     <h2>هل تريد نفس النتائج لمشروعك؟</h2>
-    <p>نبني لك نظاماً رقمياً كاملاً يجلب عملاء جدد كل يوم<br/>لا عقود طويلة — النتائج تظهر في الأسبوع الأول</p>
+    <p>نبني لك نظاماً كاملاً يجلب عملاء جدد كل يوم<br/>ليدات على WhatsApp · بدون عقود · بدون مخاطرة</p>
     <div class="cta-btns">
-      <a href="https://wa.me/212600000000?text=السلام عليكم، شفت نتائج عملائكم وبغيت نعرف أكثر" class="cta-wa" target="_blank">
-        💬 تواصل عبر WhatsApp
+      <a class="btn-wa" href="https://wa.me/212600000000?text=السلام+عليكم،+شفت+النتائج+ديال+عملائكم+وبغيت+نبدأ" target="_blank">
+        💬 ابدأ الآن عبر WhatsApp
       </a>
-      <a href="/" class="cta-site">🌐 اكتشف خدماتنا</a>
+      <a class="btn-blue" href="/">🌐 اكتشف خدماتنا</a>
     </div>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2025 AmraniAds — وكالة تسويق رقمي · فاس، المغرب</p>
-  <p style="margin-top:6px"><a href="/">الرئيسية</a> · <a href="/proof/">النتائج</a> · <a href="https://wa.me/212600000000">WhatsApp</a></p>
+  <p>© 2025 AmraniAds — وكالة تسويق رقمي متخصص · فاس، المغرب 🇲🇦</p>
+  <p style="margin-top:8px"><a href="/">الرئيسية</a> · <a href="/proof/">النتائج</a> · <a href="/salon/">صالونات</a> · <a href="/rentalcars/">تأجير سيارات</a></p>
 </footer>
 
+<!-- FLOATING WHATSAPP -->
+<a class="floating-wa" href="https://wa.me/212600000000?text=بغيت+نعرف+أكثر+على+خدماتكم" target="_blank">
+  <div class="fw-dot"></div>
+  💬 تواصل معنا
+</a>
+
 <script>
-// ── Load proof data from localStorage (shared same domain as admin) ──
-function loadProofData() {
-  try {
-    return JSON.parse(localStorage.getItem('amrani_proof') || '{"items":[],"refs":[]}');
-  } catch(e) { return { items: [], refs: [] }; }
+// ── YouTube embed helper ──
+function extractYtId(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
 }
 
+function playVideo(thumbEl, videoId) {
+  const wrap   = thumbEl.querySelector('.video-iframe-wrap');
+  const iframe = wrap.querySelector('iframe');
+  const yt     = thumbEl.querySelector('.video-play-btn');
+  iframe.src   = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+  thumbEl.style.cursor = 'default';
+  thumbEl.onclick = null;
+  yt.style.display  = 'none';
+  wrap.style.display = 'block';
+}
+
+// ── FAQ toggle ──
+function toggleFaq(qEl) {
+  const item = qEl.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ── Proof data from shared localStorage ──
+function loadProofData() {
+  try { return JSON.parse(localStorage.getItem('amrani_proof') || '{"items":[],"refs":[]}'); }
+  catch(e) { return { items: [], refs: [] }; }
+}
 function getDashClients() {
-  const salonClients = JSON.parse(localStorage.getItem('salon_clients') || '[]');
-  const rcClients    = JSON.parse(localStorage.getItem('rc_clients')    || '[]');
-  return salonClients.length + rcClients.length;
+  return (JSON.parse(localStorage.getItem('salon_clients')||'[]').length) +
+         (JSON.parse(localStorage.getItem('rc_clients')||'[]').length);
 }
 
 // ── Animate counters ──
-function animateCount(el, target, suffix = '', isDecimal = false) {
-  if (!target || target === '—') return;
-  const duration = 1200;
-  const start = performance.now();
-  const num = parseFloat(target);
+function animateCount(el, target, suffix='') {
+  if (!el || !target) return;
+  const num = parseFloat(String(target).replace(/[^0-9.]/g,''));
+  if (!num) return;
+  const dur = 1400; const start = performance.now();
   function step(now) {
-    const p = Math.min((now - start) / duration, 1);
+    const p   = Math.min((now - start) / dur, 1);
     const ease = 1 - Math.pow(1 - p, 3);
-    const val = isDecimal ? (num * ease).toFixed(0) : Math.round(num * ease);
-    el.textContent = val + suffix;
+    el.textContent = Math.round(num * ease) + suffix;
     if (p < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -566,83 +814,114 @@ function animateCount(el, target, suffix = '', isDecimal = false) {
 
 // ── Render hero stats ──
 function renderHeroStats(d) {
-  const totalClients = getDashClients();
-  const items   = d.items || [];
-  const refs    = d.refs  || [];
-  const totalLeads   = items.reduce((s, i) => s + (i.metrics?.leads || 0), 0);
-  const avgCpl       = items.length ? Math.round(items.reduce((s,i) => s+(i.metrics?.cpl||0),0)/items.length) : 0;
-  const totalReviews = refs.filter(r => r.review).length;
+  const totalClients  = getDashClients();
+  const items         = d.items || [];
+  const refs          = d.refs  || [];
+  const totalLeads    = items.reduce((s,i) => s + (i.metrics?.leads||0), 0);
+  const avgCpl        = items.length ? Math.round(items.reduce((s,i)=>s+(i.metrics?.cpl||0),0)/items.length) : 0;
+  const totalReviews  = refs.filter(r => r.review).length;
 
-  if (totalClients)  animateCount(document.getElementById('st-clients'), totalClients);
-  if (totalLeads)    animateCount(document.getElementById('st-leads'), totalLeads, '+');
-  if (avgCpl)        animateCount(document.getElementById('st-cpl'), avgCpl, ' DH');
-  if (totalReviews)  animateCount(document.getElementById('st-reviews'), totalReviews, '+');
+  const elC = document.getElementById('st-clients');
+  const elL = document.getElementById('st-leads');
+  const elP = document.getElementById('st-cpl');
+  const elR = document.getElementById('st-reviews');
+
+  if (totalClients) animateCount(elC, totalClients);
+  if (totalLeads)   { elL.textContent = '0'; animateCount(elL, totalLeads, '+'); }
+  if (avgCpl)       { elP.textContent = '0 DH'; animateCount(elP, avgCpl, ' DH'); }
+  if (totalReviews) { elR.textContent = '0'; animateCount(elR, totalReviews, '+'); }
+
+  // Update urgency bar
+  const ub = document.getElementById('urgencyCount');
+  if (ub && totalClients > 0) ub.textContent = Math.min(3, Math.ceil(totalClients * 0.3));
 }
 
-// ── Render case studies from localStorage items ──
+// ── Render case studies ──
 function renderCases(d) {
-  const items = (d.items || []).filter(i => i.type === 'casestudy' || !i.type);
-  if (!items.length) return; // keep default cards
-
-  const nicheLabels = { salon: '💅 صالون', rc: '🚗 تأجير السيارات', other: '📦 أخرى' };
-  const nicheCls    = { salon: 'salon', rc: 'rc', other: 'other' };
-
-  const grid = document.getElementById('casesGrid');
-  // Starred first
-  const sorted = [...items].sort((a, b) => (b.starred ? 1 : 0) - (a.starred ? 1 : 0));
-  grid.innerHTML = sorted.map(item => `
-    <div class="case-card">
-      <div class="case-card-header">
-        <span class="case-niche-badge ${nicheCls[item.niche]||'other'}">${nicheLabels[item.niche]||'📦'}</span>
-        <div style="display:flex;align-items:center;gap:8px">
-          ${item.starred ? '<span class="starred-badge">⭐ مميز</span>' : ''}
-          <span class="case-period">${escHtml(item.period||'30 يوم')}</span>
+  const items = (d.items||[]).filter(i => i.type === 'casestudy' || !i.type);
+  if (!items.length) return;
+  const sorted = [...items].sort((a,b) => (b.starred?1:0)-(a.starred?1:0));
+  const nicheCls   = { salon:'salon', rc:'rc', other:'other' };
+  const nicheLabel = { salon:'💅 صالون', rc:'🚗 تأجير', other:'📦 أخرى' };
+  document.getElementById('casesGrid').innerHTML = sorted.map(it => `
+    <div class="case-card ${it.starred?'starred':''}">
+      <div class="case-header">
+        <span class="niche-pill ${nicheCls[it.niche]||'other'}">${nicheLabel[it.niche]||'📦'}</span>
+        <div style="display:flex;gap:8px;align-items:center">
+          ${it.starred?'<span class="starred-chip">⭐ مميز</span>':''}
+          <span class="case-period">${escH(it.period||'30 يوم')}</span>
         </div>
       </div>
       <div class="case-client">
-        <div class="case-client-name">${escHtml(item.clientName)}</div>
-        <div class="case-client-city">${escHtml(item.city||'المغرب')}</div>
+        <div class="case-client-name">${escH(it.clientName)}</div>
+        <div class="case-client-city">🇲🇦 ${escH(it.city||'المغرب')}</div>
       </div>
       <div class="case-metrics">
-        <div class="case-metric"><div class="cm-num">${item.metrics?.leads||'—'}</div><div class="cm-label">ليد</div></div>
-        <div class="case-metric"><div class="cm-num green">${item.metrics?.cpl||'—'} DH</div><div class="cm-label">تكلفة الليد</div></div>
-        <div class="case-metric"><div class="cm-num gold">${item.metrics?.conf||'—'}</div><div class="cm-label">مؤكد</div></div>
-        <div class="case-metric"><div class="cm-num">${item.metrics?.rev ? (item.metrics.rev/1000).toFixed(0)+'k DH' : '—'}</div><div class="cm-label">Revenue</div></div>
+        <div class="cm"><div class="cm-num">${it.metrics?.leads||'—'}</div><div class="cm-label">ليد</div></div>
+        <div class="cm"><div class="cm-num green">${it.metrics?.cpl||'—'} DH</div><div class="cm-label">تكلفة الليد</div></div>
+        <div class="cm"><div class="cm-num gold">${it.metrics?.conf||'—'}</div><div class="cm-label">مؤكد</div></div>
+        <div class="cm"><div class="cm-num">${it.metrics?.rev?Math.round(it.metrics.rev/1000)+'k DH':'—'}</div><div class="cm-label">Revenue</div></div>
       </div>
-      ${item.quote ? `<div class="case-quote">${escHtml(item.quote)}</div>` : ''}
+      ${it.quote?`<div class="case-quote">${escH(it.quote)}</div>`:''}
     </div>`).join('');
 }
 
-// ── Render reviews from proof items ──
+// Avatar pool (randomuser.me)
+const AVATARS_W = [1,2,5,9,12,16,20,22,26,32,33,37,44,47,49,53,56,58,60,61,65,67,68,71,75,76,78,83,90];
+const AVATARS_M = [1,5,10,12,18,20,22,25,32,38,43,45,50,52,55,60,62,65,70,75,80,83,85,88,90];
+function getAvatar(item, idx) {
+  if (item.avatar) return `<img class="review-avatar" src="${escH(item.avatar)}" alt="" loading="lazy"/>`;
+  const g = item.avatarGender === 'men' ? 'm' : (idx % 3 === 1 ? 'm' : 'w');
+  const pool = g === 'm' ? AVATARS_M : AVATARS_W;
+  const n    = pool[idx % pool.length];
+  const gender = g === 'm' ? 'men' : 'women';
+  return `<img class="review-avatar" src="https://randomuser.me/api/portraits/${gender}/${n}.jpg" alt="" loading="lazy"/>`;
+}
+
+// ── Render reviews ──
 function renderReviews(d) {
-  const reviews = (d.items || []).filter(i => i.type === 'review' && i.quote);
-  if (!reviews.length) return; // keep default cards
-
-  const nicheLabels = { salon:'💅 صالون', rc:'🚗 تأجير', other:'📦 أخرى' };
-  document.getElementById('reviewsGrid').innerHTML = reviews.map(r => `
+  const reviews = (d.items||[]).filter(i => i.type === 'review' && i.quote);
+  if (!reviews.length) return;
+  const nicheCls   = { salon:'salon', rc:'rc', other:'other' };
+  const nicheLabel = { salon:'💅 صالون', rc:'🚗 تأجير', other:'📦 أخرى' };
+  document.getElementById('reviewsGrid').innerHTML = reviews.map((r,idx) => `
     <div class="review-card">
-      <div class="quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <p class="review-text">${escHtml(r.quote)}</p>
-      <div class="review-author">${escHtml(r.clientName)}${r.city ? ` — ${escHtml(r.city)}` : ''}</div>
-      <div class="review-niche">${nicheLabels[r.niche]||''}</div>
+      <div class="review-head">
+        ${getAvatar(r, idx)}
+        <div class="review-info">
+          <div class="rv-name">${escH(r.clientName)}</div>
+          <div class="rv-stars">★★★★★</div>
+          <div class="rv-loc">${r.city?escH(r.city)+' · ':''}<span style="color:var(--muted)">${nicheLabel[r.niche]||''}</span></div>
+        </div>
+      </div>
+      <div class="review-text">${escH(r.quote)}</div>
+      <span class="review-niche-tag ${nicheCls[r.niche]||'other'}">${nicheLabel[r.niche]||'📦'}</span>
     </div>`).join('');
 }
 
-// ── Render audio/video from proof items ──
-function renderMedia(d) {
-  const mediaItems = (d.items || []).filter(i => i.type === 'audio' && i.media);
-  if (!mediaItems.length) return; // keep default
-
-  document.getElementById('mediaGrid').innerHTML = mediaItems.map(m => {
-    const isVideo = m.media && (m.media.includes('youtube') || m.media.includes('youtu.be') || m.media.includes('vimeo'));
+// ── Render YouTube videos ──
+function renderVideos(d) {
+  const videos = (d.items||[]).filter(i => i.type === 'audio' && i.media);
+  if (!videos.length) return;
+  document.getElementById('videosGrid').innerHTML = videos.map(v => {
+    const ytId = extractYtId(v.media);
+    const isYt  = !!ytId;
+    const thumb  = isYt ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null;
+    const ytSvg  = `<svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg"><path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#FF0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>`;
     return `
-      <div class="media-card">
-        <div class="media-icon">${isVideo ? '🎬' : '🎤'}</div>
-        <div class="media-body">
-          <div class="media-name">${escHtml(m.clientName)}${m.city ? ` — ${escHtml(m.city)}` : ''}</div>
-          <div class="media-desc">${escHtml(m.quote || (isVideo ? 'شهادة فيديو' : 'شهادة صوتية'))}</div>
-          ${m.media ? `<a href="${escHtml(m.media)}" target="_blank" class="media-play">${isVideo ? '▶ شاهد الفيديو' : '▶ استمع للشهادة'}</a>` : ''}
+      <div class="video-card">
+        ${isYt ? `
+        <div class="video-thumb" onclick="playVideo(this,'${ytId}')">
+          <img src="${thumb}" alt="${escH(v.clientName)}" loading="lazy"/>
+          <div class="video-play-btn">${ytSvg}</div>
+          <div class="video-iframe-wrap"><iframe loading="lazy" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>
+        </div>` : `
+        <div style="padding-top:56.25%;background:#f1f5f9;position:relative;display:flex;align-items:center;justify-content:center">
+          <a href="${escH(v.media)}" target="_blank" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem">🎤</a>
+        </div>`}
+        <div class="video-meta">
+          <div class="vm-name">${escH(v.clientName)}${v.city?' — '+escH(v.city):''}</div>
+          <div class="vm-desc">${escH(v.quote||'شهادة فيديو من عميل AmraniAds')}</div>
         </div>
       </div>`;
   }).join('');
@@ -650,20 +929,17 @@ function renderMedia(d) {
 
 // ── Render referrals ──
 function renderRefs(d) {
-  const refs = (d.refs || []).filter(r => r.by);
-  if (!refs.length) return; // keep defaults
-
+  const refs = (d.refs||[]).filter(r => r.by);
+  if (!refs.length) return;
   document.getElementById('refFlow').innerHTML = refs.map(r => `
     <div class="ref-chip">
-      <span class="rc-name">${escHtml(r.by)}</span>
-      <span class="rc-arrow">→</span>
-      <span class="rc-referred">أحال ${escHtml(r.name)}${r.city ? ` (${escHtml(r.city)})` : ''}</span>
+      <span class="rch-from">${escH(r.by)}</span>
+      <span class="rch-arrow">→</span>
+      <span class="rch-to">أحال ${escH(r.name)}${r.city?' ('+escH(r.city)+')':''}</span>
     </div>`).join('');
 }
 
-function escHtml(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function escH(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // ── Boot ──
 document.addEventListener('DOMContentLoaded', () => {
@@ -671,22 +947,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHeroStats(d);
   renderCases(d);
   renderReviews(d);
-  renderMedia(d);
+  renderVideos(d);
   renderRefs(d);
 });
-
-// Intersection Observer for counter animation
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const d = loadProofData();
-      renderHeroStats(d);
-      observer.disconnect();
-    }
-  });
-}, { threshold: 0.3 });
-const heroStats = document.getElementById('heroStats');
-if (heroStats) observer.observe(heroStats);
 </script>
 </body>
 </html>

@@ -747,8 +747,22 @@
                 <textarea id="pi-quote" placeholder="ما قاله العميل..." style="width:100%;background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:10px;font-family:Cairo,sans-serif;font-size:.88rem;color:var(--text);outline:none;resize:vertical;min-height:80px;direction:rtl"></textarea>
               </div>
               <div class="modal-field">
-                <label style="direction:rtl;text-align:right">رابط الفيديو/الصوت (اختياري)</label>
-                <input type="url" id="pi-media" placeholder="https://..." style="direction:rtl"/>
+                <label style="direction:rtl;text-align:right">🎬 رابط YouTube أو فيديو (اختياري)</label>
+                <input type="url" id="pi-media" placeholder="https://youtube.com/watch?v=..." style="direction:rtl" oninput="previewYt(this.value)"/>
+                <div id="pi-yt-preview" style="margin-top:8px;display:none;border-radius:10px;overflow:hidden"></div>
+              </div>
+              <div class="modal-field">
+                <label style="direction:rtl;text-align:right">🖼️ صورة الوجه (اختياري)</label>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <select id="pi-avatar-gender" style="direction:rtl;flex:1" onchange="previewAvatar()">
+                    <option value="women">امرأة 👩</option>
+                    <option value="men">رجل 👨</option>
+                  </select>
+                  <input type="number" id="pi-avatar-num" placeholder="1-90" min="1" max="90" style="width:80px;direction:ltr" oninput="previewAvatar()"/>
+                  <img id="pi-avatar-img" src="" style="width:42px;height:42px;border-radius:50%;display:none;border:2px solid var(--blue)"/>
+                </div>
+                <div style="font-size:.7rem;color:var(--muted);margin-top:4px;direction:rtl">اتركه فارغاً للاختيار التلقائي · أو أضف URL في الحقل أسفله</div>
+                <input type="url" id="pi-avatar-url" placeholder="أو: https://... (رابط صورة مخصص)" style="direction:rtl;margin-top:6px"/>
               </div>
               <div style="display:flex;gap:8px">
                 <button class="btn-sm btn-blue" style="flex:1" onclick="addProofItem()">💾 حفظ الإثبات</button>
@@ -1626,30 +1640,72 @@ function copyPortfolioText(type) {
 }
 
 // ── PROOF ITEMS ────────────────────────────────────────────────
+// ── YouTube preview helper (admin) ──
+function extractYtId(url) {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+function previewYt(url) {
+  const ytId = extractYtId(url);
+  const el   = document.getElementById('pi-yt-preview');
+  if (ytId) {
+    el.style.display = 'block';
+    el.innerHTML = `<img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" style="width:100%;border-radius:10px;display:block"/>
+      <div style="font-size:.72rem;color:var(--green);margin-top:4px;direction:rtl">✅ YouTube ID: ${ytId}</div>`;
+  } else {
+    el.style.display = 'none';
+    el.innerHTML = '';
+  }
+}
+function previewAvatar() {
+  const gender = document.getElementById('pi-avatar-gender').value;
+  const num    = document.getElementById('pi-avatar-num').value;
+  const img    = document.getElementById('pi-avatar-img');
+  if (num) {
+    img.src   = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
+    img.style.display = 'block';
+  } else {
+    img.style.display = 'none';
+  }
+}
+
 function addProofItem(starred = false) {
   const name = document.getElementById('pi-name').value.trim();
   if (!name) { alert('اسم العميل مطلوب'); return; }
+  const avatarUrl  = document.getElementById('pi-avatar-url').value.trim();
+  const avatarNum  = document.getElementById('pi-avatar-num').value;
+  const avatarGend = document.getElementById('pi-avatar-gender').value;
+  const resolvedAvatar = avatarUrl
+    ? avatarUrl
+    : avatarNum
+      ? `https://randomuser.me/api/portraits/${avatarGend}/${avatarNum}.jpg`
+      : '';
   const d = getProofData();
   d.items.push({
-    id:         'p' + Date.now(),
-    type:       document.getElementById('pi-type').value,
-    niche:      document.getElementById('pi-niche').value,
-    clientName: name,
-    city:       document.getElementById('pi-city').value.trim(),
-    period:     document.getElementById('pi-period').value.trim() || '30 يوم',
+    id:           'p' + Date.now(),
+    type:         document.getElementById('pi-type').value,
+    niche:        document.getElementById('pi-niche').value,
+    clientName:   name,
+    city:         document.getElementById('pi-city').value.trim(),
+    period:       document.getElementById('pi-period').value.trim() || '30 يوم',
     metrics: {
       leads: Number(document.getElementById('pi-leads').value) || 0,
       cpl:   Number(document.getElementById('pi-cpl').value)   || 0,
       conf:  Number(document.getElementById('pi-conf').value)  || 0,
       rev:   Number(document.getElementById('pi-rev').value)   || 0,
     },
-    quote:   document.getElementById('pi-quote').value.trim(),
-    media:   document.getElementById('pi-media').value.trim(),
-    starred: !!starred,
-    date:    new Date().toISOString().slice(0,10),
+    quote:        document.getElementById('pi-quote').value.trim(),
+    media:        document.getElementById('pi-media').value.trim(),
+    avatar:       resolvedAvatar,
+    avatarGender: avatarGend,
+    starred:      !!starred,
+    date:         new Date().toISOString().slice(0,10),
   });
   saveProofData(d);
-  ['pi-name','pi-city','pi-period','pi-leads','pi-cpl','pi-conf','pi-rev','pi-quote','pi-media'].forEach(id => document.getElementById(id).value = '');
+  ['pi-name','pi-city','pi-period','pi-leads','pi-cpl','pi-conf','pi-rev','pi-quote','pi-media','pi-avatar-url','pi-avatar-num'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('pi-avatar-img').style.display = 'none';
+  document.getElementById('pi-yt-preview').style.display = 'none';
   renderProofItems();
   toast(starred ? '⭐ تم الحفظ كإثبات مميز!' : '✅ تم الحفظ!');
 }
