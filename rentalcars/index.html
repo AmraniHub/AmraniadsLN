@@ -611,6 +611,169 @@
     .footer-link:hover { color: var(--blue-bright); }
     .footer-copy { font-size: .78rem; width: 100%; text-align: center; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.4); margin-top: 12px; }
 
+    /* ── BOOKING SECTION ── */
+    .booking-section {
+      padding: 80px 20px;
+      background: linear-gradient(180deg, #fff 0%, #f0f6ff 100%);
+      border-top: 1px solid var(--blue-border);
+    }
+    .booking-inner { max-width: 1060px; margin: 0 auto; }
+
+    /* Steps */
+    .book-steps-row {
+      display: flex; gap: 0; margin-bottom: 40px;
+      background: var(--card); border: 1.5px solid var(--blue-border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .book-step-tab {
+      flex: 1; padding: 14px 10px; text-align: center;
+      font-size: .8rem; font-weight: 700; color: var(--muted);
+      border-right: 1px solid var(--blue-border); cursor: default;
+      transition: background .2s, color .2s;
+    }
+    .book-step-tab:last-child { border-right: none; }
+    .book-step-tab.active { background: var(--blue-soft); color: var(--blue); }
+    .book-step-tab .snum {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%; font-size: .72rem;
+      background: var(--blue-border); color: var(--blue); font-weight: 900;
+      margin-right: 6px;
+    }
+    .book-step-tab.active .snum { background: var(--blue); color: #fff; }
+    .book-step-tab.done .snum { background: #22c55e; color: #fff; }
+    .book-step-tab.done { color: #15803d; }
+
+    /* Date row */
+    .date-row {
+      display: grid; grid-template-columns: 1fr 1fr auto;
+      gap: 14px; align-items: end; margin-bottom: 32px;
+    }
+    .date-field label {
+      display: block; font-size: .8rem; font-weight: 700;
+      color: var(--blue-bright); margin-bottom: 6px;
+    }
+    .date-field input[type="date"] {
+      width: 100%; border: 1.5px solid var(--blue-border);
+      border-radius: 10px; padding: 12px 14px;
+      font-family: 'Cairo', sans-serif; font-size: .95rem;
+      color: var(--text); background: #f0f6ff; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .date-field input[type="date"]:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+    }
+    .days-badge {
+      background: var(--grad-main); color: #fff;
+      border-radius: 12px; padding: 12px 20px;
+      font-weight: 900; font-size: 1.1rem; text-align: center;
+      white-space: nowrap; min-width: 110px;
+      box-shadow: 0 4px 16px rgba(29,78,216,.3);
+    }
+    .days-badge small { display: block; font-size: .7rem; font-weight: 400; opacity: .85; }
+
+    /* Car cards */
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 14px; margin-bottom: 28px;
+    }
+    .car-card {
+      background: var(--card); border: 2px solid var(--blue-border);
+      border-radius: 18px; padding: 20px 16px;
+      cursor: pointer; transition: all .2s; position: relative;
+      text-align: center;
+    }
+    .car-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--blue); }
+    .car-card.selected {
+      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,78,216,.15);
+      background: var(--blue-soft);
+    }
+    .car-card.selected::after {
+      content: '✓'; position: absolute; top: -10px; right: -10px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      font-size: .8rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 8px rgba(29,78,216,.4);
+    }
+    .car-emoji { font-size: 3rem; margin-bottom: 10px; display: block; }
+    .car-name  { font-weight: 900; font-size: .92rem; color: var(--text); margin-bottom: 4px; }
+    .car-price { font-size: 1.3rem; font-weight: 900; color: var(--blue); line-height: 1; }
+    .car-price small { font-size: .72rem; color: var(--muted); font-weight: 400; }
+    .car-tags  { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; margin-top: 8px; }
+    .car-tag   {
+      font-size: .65rem; padding: 2px 8px; border-radius: 50px;
+      background: var(--bg2); color: var(--blue); font-weight: 700;
+    }
+    .car-avail { font-size: .7rem; color: #16a34a; font-weight: 700; margin-top: 6px; }
+
+    /* Extras */
+    .extras-grid {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px;
+    }
+    .extra-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--card); border: 2px solid var(--blue-border);
+      border-radius: 50px; padding: 10px 18px;
+      cursor: pointer; transition: all .2s; user-select: none;
+    }
+    .extra-chip:hover { border-color: var(--blue); background: var(--blue-soft); }
+    .extra-chip.selected {
+      border-color: var(--blue); background: var(--blue-soft); color: var(--blue);
+    }
+    .extra-chip .elabel { font-size: .85rem; font-weight: 700; }
+    .extra-chip .eprice { font-size: .75rem; color: var(--muted); margin-left: 4px; }
+    .extra-chip.selected .eprice { color: var(--blue); }
+
+    /* Summary box */
+    .book-summary {
+      background: var(--card); border: 2px solid var(--blue-border);
+      border-radius: 22px; padding: 28px 28px; margin-top: 8px;
+      box-shadow: var(--shadow);
+    }
+    .summary-title { font-weight: 900; font-size: 1rem; margin-bottom: 18px; color: var(--text); }
+    .summary-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid var(--blue-border);
+      font-size: .88rem; color: var(--muted);
+    }
+    .summary-row:last-of-type { border-bottom: none; }
+    .summary-row strong { color: var(--text); }
+    .summary-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 14px; margin-top: 6px; border-top: 2px solid var(--blue);
+      font-weight: 900; font-size: 1.1rem; color: var(--text);
+    }
+    .summary-total .total-num { font-size: 2rem; color: var(--blue); line-height: 1; }
+    .book-cta-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .book-wa-btn {
+      flex: 1; background: #25D366; color: #fff;
+      border: none; border-radius: 50px; padding: 16px 24px;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 900;
+      cursor: pointer; text-decoration: none; text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 6px 24px rgba(37,211,102,.35);
+    }
+    .book-wa-btn:hover { opacity: .9; transform: translateY(-2px); }
+    .book-wa-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .no-select-notice {
+      color: var(--muted); font-size: .82rem;
+      background: var(--bg2); border-radius: 10px; padding: 12px 16px;
+      text-align: center; margin-top: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .date-row { grid-template-columns: 1fr 1fr; }
+      .days-badge { grid-column: span 2; text-align: center; }
+      .cars-grid { grid-template-columns: repeat(2, 1fr); }
+      .book-summary { padding: 20px 16px; }
+    }
+    @media (max-width: 420px) {
+      .cars-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     /* ── TOAST ── */
     #toast {
       position: fixed; bottom: 28px; left: 50%;
@@ -674,7 +837,10 @@
       <span style="color:#0f172a">Amrani</span><span style="color:#1d4ed8">Ads</span>
     </span>
   </a>
-  <a class="nav-cta" href="#leadForm">Audit Gratuit →</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a style="font-size:.82rem;font-weight:700;color:var(--blue);text-decoration:none" href="#booking">📅 Réserver</a>
+    <a class="nav-cta" href="#leadForm">Audit Gratuit →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -777,6 +943,74 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- BOOKING SYSTEM DEMO -->
+<section class="booking-section" id="booking">
+  <div class="booking-inner">
+    <div class="section-eyebrow">✦ SYSTÈME DE RÉSERVATION EN LIGNE</div>
+    <h2 class="section-title">Vérifiez la disponibilité <span class="blue">et réservez en 60 secondes</span></h2>
+    <p class="section-sub">Sélectionnez vos dates, votre véhicule et vos options — un message WhatsApp complet vous attend en un clic</p>
+
+    <!-- Progress tabs -->
+    <div class="book-steps-row">
+      <div class="book-step-tab active" id="stab1"><span class="snum">1</span>Dates</div>
+      <div class="book-step-tab" id="stab2"><span class="snum">2</span>Véhicule</div>
+      <div class="book-step-tab" id="stab3"><span class="snum">3</span>Options</div>
+      <div class="book-step-tab" id="stab4"><span class="snum">4</span>Réservation</div>
+    </div>
+
+    <!-- STEP 1 — Dates -->
+    <div class="date-row">
+      <div class="date-field">
+        <label>📅 Date d'arrivée</label>
+        <input type="date" id="dateIn" />
+      </div>
+      <div class="date-field">
+        <label>📅 Date de retour</label>
+        <input type="date" id="dateOut" />
+      </div>
+      <div class="days-badge" id="daysBadge">
+        — jours
+        <small>sélectionnez les dates</small>
+      </div>
+    </div>
+
+    <!-- STEP 2 — Cars -->
+    <div style="font-size:.8rem;font-weight:700;color:var(--blue-bright);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">🚗 Choisissez votre véhicule</div>
+    <div class="cars-grid" id="carsGrid">
+      <!-- injected by JS -->
+    </div>
+
+    <!-- STEP 3 — Extras -->
+    <div style="font-size:.8rem;font-weight:700;color:var(--blue-bright);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px">➕ Options supplémentaires</div>
+    <div class="extras-grid" id="extrasGrid">
+      <!-- injected by JS -->
+    </div>
+
+    <!-- STEP 4 — Summary + CTA -->
+    <div class="book-summary" id="bookSummary">
+      <div class="summary-title">📋 Récapitulatif de votre réservation</div>
+      <div id="summaryRows">
+        <div class="no-select-notice">Sélectionnez vos dates et un véhicule pour voir le récapitulatif</div>
+      </div>
+      <div id="summaryTotalWrap" style="display:none">
+        <div class="summary-total">
+          <span>Total estimé</span>
+          <span class="total-num" id="summaryTotal">0 DH</span>
+        </div>
+        <div class="book-cta-row">
+          <a class="book-wa-btn" id="bookWaBtn" href="#" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Confirmer sur WhatsApp
+          </a>
+        </div>
+        <p style="text-align:center;font-size:.74rem;color:var(--muted);margin-top:10px">
+          🔒 Réservation confirmée par WhatsApp — aucun paiement en ligne requis
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1095,6 +1329,185 @@
     } catch (_) {}
     window.location.href = '/rentalcars/success.html?eid=' + encodeURIComponent(eventId);
   });
+
+  // ══════════════════════════════════════════════════════
+  // BOOKING SYSTEM
+  // ══════════════════════════════════════════════════════
+
+  const WA_NUMBER = '212627716149';
+
+  const CARS = [
+    { id: 'logan',   emoji: '🚗', name: 'Dacia Logan',       price: 250, seats: 5, tags: ['Clim', 'GPS', 'Manuelle'],         color: '#e3f2fd' },
+    { id: 'clio',    emoji: '🚙', name: 'Renault Clio',      price: 300, seats: 5, tags: ['Clim', 'Bluetooth', 'Automatique'],color: '#f3e5f5' },
+    { id: 'duster',  emoji: '🏔️', name: 'Dacia Duster 4x4',  price: 450, seats: 5, tags: ['4WD', 'GPS', 'Clim', 'Auto'],      color: '#e8f5e9' },
+    { id: 'tucson',  emoji: '🏎️', name: 'Hyundai Tucson',    price: 550, seats: 5, tags: ['Full option', 'GPS', 'Caméra'],    color: '#fff8e1' },
+    { id: 'berlingo',emoji: '🚐', name: 'Citroën Berlingo',  price: 380, seats: 7, tags: ['7 places', 'Familial', 'Clim'],    color: '#fce4ec' },
+  ];
+
+  const EXTRAS = [
+    { id: 'gps',       label: '🗺️ GPS',                  price: 50  },
+    { id: 'baby',      label: '👶 Siège bébé',            price: 30  },
+    { id: 'wifi',      label: '📶 WiFi portable',         price: 40  },
+    { id: 'insurance', label: '🛡️ Assurance tous risques',price: 80  },
+    { id: 'driver',    label: '👨‍✈️ Chauffeur privé',       price: 200 },
+  ];
+
+  let selectedCar    = null;
+  let selectedExtras = new Set();
+  let numDays        = 0;
+  let dateInVal      = '';
+  let dateOutVal     = '';
+
+  // ── Set date input minimums ──
+  (function initDates() {
+    const today = new Date();
+    const fmt   = d => d.toISOString().split('T')[0];
+    document.getElementById('dateIn').min  = fmt(today);
+    document.getElementById('dateOut').min = fmt(today);
+    // Default: today → tomorrow
+    const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
+    document.getElementById('dateIn').value  = fmt(today);
+    document.getElementById('dateOut').value = fmt(tomorrow);
+    dateInVal  = fmt(today);
+    dateOutVal = fmt(tomorrow);
+    calcDays();
+  })();
+
+  // ── Render car cards ──
+  document.getElementById('carsGrid').innerHTML = CARS.map(c => `
+    <div class="car-card" id="car-${c.id}" onclick="selectCar('${c.id}')" style="border-top:4px solid ${c.color.replace('f','d')}">
+      <span class="car-emoji">${c.emoji}</span>
+      <div class="car-name">${c.name}</div>
+      <div class="car-price">${c.price} <small>DH/jour</small></div>
+      <div class="car-tags">${c.tags.map(t=>`<span class="car-tag">${t}</span>`).join('')}<span class="car-tag">👥 ${c.seats} places</span></div>
+      <div class="car-avail">✅ Disponible</div>
+    </div>
+  `).join('');
+
+  // ── Render extras ──
+  document.getElementById('extrasGrid').innerHTML = EXTRAS.map(x => `
+    <div class="extra-chip" id="extra-${x.id}" onclick="toggleExtra('${x.id}')">
+      <span class="elabel">${x.label}</span>
+      <span class="eprice">+${x.price} DH/j</span>
+    </div>
+  `).join('');
+
+  // ── Date listeners ──
+  document.getElementById('dateIn').addEventListener('change', function() {
+    dateInVal = this.value;
+    // Ensure check-out is at least check-in + 1
+    const nextDay = new Date(this.value);
+    nextDay.setDate(nextDay.getDate() + 1);
+    const fmt = d => d.toISOString().split('T')[0];
+    document.getElementById('dateOut').min = fmt(nextDay);
+    if (dateOutVal && dateOutVal <= dateInVal) {
+      document.getElementById('dateOut').value = fmt(nextDay);
+      dateOutVal = fmt(nextDay);
+    }
+    calcDays();
+  });
+
+  document.getElementById('dateOut').addEventListener('change', function() {
+    dateOutVal = this.value;
+    calcDays();
+  });
+
+  function calcDays() {
+    if (!dateInVal || !dateOutVal) { numDays = 0; updateDaysBadge(); updateSummary(); return; }
+    const d1 = new Date(dateInVal);
+    const d2 = new Date(dateOutVal);
+    numDays  = Math.max(0, Math.round((d2 - d1) / 86400000));
+    updateDaysBadge();
+    updateSummary();
+    updateStepTabs();
+  }
+
+  function updateDaysBadge() {
+    const el = document.getElementById('daysBadge');
+    if (numDays <= 0) {
+      el.innerHTML = '— jours<small>sélectionnez les dates</small>';
+    } else {
+      el.innerHTML = `${numDays} jour${numDays>1?'s':''}<small>${fmtDate(dateInVal)} → ${fmtDate(dateOutVal)}</small>`;
+    }
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const [y,m,d] = iso.split('-');
+    return `${d}/${m}`;
+  }
+
+  function selectCar(id) {
+    selectedCar = id;
+    document.querySelectorAll('.car-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('car-' + id).classList.add('selected');
+    updateSummary();
+    updateStepTabs();
+  }
+
+  function toggleExtra(id) {
+    const el = document.getElementById('extra-' + id);
+    if (selectedExtras.has(id)) {
+      selectedExtras.delete(id);
+      el.classList.remove('selected');
+    } else {
+      selectedExtras.add(id);
+      el.classList.add('selected');
+    }
+    updateSummary();
+    updateStepTabs();
+  }
+
+  function updateStepTabs() {
+    const t1 = document.getElementById('stab1');
+    const t2 = document.getElementById('stab2');
+    const t3 = document.getElementById('stab3');
+    const t4 = document.getElementById('stab4');
+    t1.className = 'book-step-tab ' + (numDays > 0 ? 'done' : 'active');
+    t2.className = 'book-step-tab ' + (numDays > 0 && !selectedCar ? 'active' : selectedCar ? 'done' : '');
+    t3.className = 'book-step-tab ' + (selectedCar && selectedExtras.size > 0 ? 'done' : selectedCar ? 'active' : '');
+    t4.className = 'book-step-tab ' + (selectedCar && numDays > 0 ? 'active' : '');
+  }
+
+  function updateSummary() {
+    const car = CARS.find(c => c.id === selectedCar);
+    if (!car || numDays <= 0) {
+      document.getElementById('summaryRows').innerHTML = '<div class="no-select-notice">Sélectionnez vos dates et un véhicule pour voir le récapitulatif</div>';
+      document.getElementById('summaryTotalWrap').style.display = 'none';
+      return;
+    }
+
+    const carTotal    = car.price * numDays;
+    const extrasItems = [...selectedExtras].map(id => EXTRAS.find(x => x.id === id)).filter(Boolean);
+    const extrasTotal = extrasItems.reduce((s, x) => s + x.price * numDays, 0);
+    const grandTotal  = carTotal + extrasTotal;
+
+    let rows = `
+      <div class="summary-row"><span>📅 Période</span><strong>${fmtDate(dateInVal)} → ${fmtDate(dateOutVal)} (${numDays} jour${numDays>1?'s':''})</strong></div>
+      <div class="summary-row"><span>${car.emoji} ${car.name}</span><strong>${car.price} DH × ${numDays}j = ${carTotal} DH</strong></div>
+    `;
+    extrasItems.forEach(x => {
+      rows += `<div class="summary-row"><span>${x.label}</span><strong>+${x.price} DH × ${numDays}j = ${x.price*numDays} DH</strong></div>`;
+    });
+
+    document.getElementById('summaryRows').innerHTML = rows;
+    document.getElementById('summaryTotal').textContent = grandTotal.toLocaleString('fr-FR') + ' DH';
+    document.getElementById('summaryTotalWrap').style.display = '';
+
+    // Build WhatsApp message
+    const extrasText = extrasItems.length
+      ? extrasItems.map(x => x.label.replace(/^[^ ]+ /, '')).join(', ')
+      : 'Aucune option';
+    const msg = [
+      `Bonjour 👋 je voudrais réserver:`,
+      `🚗 Véhicule: ${car.name}`,
+      `📅 Du ${fmtDate(dateInVal).replace('/','-')} au ${fmtDate(dateOutVal).replace('/','-')} (${numDays} jour${numDays>1?'s':''})`,
+      `➕ Options: ${extrasText}`,
+      `💰 Total estimé: ${grandTotal.toLocaleString('fr-FR')} DH`,
+      `Merci de confirmer la disponibilité 🙏`,
+    ].join('\n');
+    document.getElementById('bookWaBtn').href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  }
 
   const obs = new IntersectionObserver(entries => {
     entries.forEach(en => {
