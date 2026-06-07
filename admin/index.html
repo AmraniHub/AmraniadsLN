@@ -408,6 +408,7 @@
       <button class="nav-btn" onclick="showView('dashboards')"         id="btn-dashboards" ><span class="ico">🎛️</span> Dashboards</button>
       <button class="nav-btn" onclick="showView('prompt')"             id="btn-prompt"     ><span class="ico">🤖</span> Prompt IA</button>
       <button class="nav-btn" onclick="showView('proof')"              id="btn-proof"      ><span class="ico">🏆</span> الإثباتات</button>
+      <button class="nav-btn" onclick="showView('clients')"            id="btn-clients"    ><span class="ico">🌐</span> كل الليدات</button>
       <button class="nav-btn" onclick="showView('setup')"              id="btn-setup"      ><span class="ico">⚙️</span> Configuration</button>
 
       <div class="sidebar-section">Sources actives</div>
@@ -774,6 +775,64 @@
               <div id="proofItemsList"></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- ═══ CLIENTS / ALL LEADS ═══ -->
+      <div id="view-clients" style="display:none">
+        <div class="section-hd" style="margin-bottom:6px">
+          <div>
+            <h2 style="font-size:1.2rem;margin:0">🌐 كل الليدات — جميع العملاء</h2>
+            <p style="margin:4px 0 0;font-size:.78rem;color:var(--muted)">ليدات من جميع صفحات العملاء المربوطة بنظام AmraniAds</p>
+          </div>
+          <button class="btn-sm btn-blue" onclick="loadCentralLeads()">🔄 تحديث</button>
+        </div>
+
+        <!-- Client filter chips -->
+        <div id="clientFilterChips" style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px"></div>
+
+        <!-- Stats bar -->
+        <div id="clientsStats" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px"></div>
+
+        <!-- Setup notice (shown when not configured) -->
+        <div id="clientsSetupNotice" style="display:none;background:var(--card);border:2px dashed var(--border);border-radius:16px;padding:32px;text-align:center;direction:rtl">
+          <div style="font-size:2rem;margin-bottom:12px">⚙️</div>
+          <div style="font-weight:700;font-size:1rem;margin-bottom:8px">الخطوة الأخيرة — إعداد Google Sheet المركزي</div>
+          <div style="font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:16px">
+            1. افتح <b>google-apps-script/CentralCRM.gs</b> من المشروع<br>
+            2. ألصقه في <a href="https://script.google.com" target="_blank" style="color:var(--blue)">script.google.com</a> → شغّل <b>setup()</b> مرة واحدة<br>
+            3. Deploy → Web App → Anyone → انسخ الرابط<br>
+            4. في Vercel (مشروع amraniads): Settings → Env Vars → أضف:<br>
+            <code style="background:var(--card2);padding:4px 10px;border-radius:6px;font-size:.8rem">CENTRAL_SHEETS_URL = [رابط Web App]</code><br>
+            5. أعد نشر المشروع
+          </div>
+        </div>
+
+        <!-- Leads table -->
+        <div id="clientsLeadsWrap" style="overflow-x:auto;display:none">
+          <table id="clientsTable" style="width:100%;border-collapse:collapse;font-size:.82rem;direction:rtl">
+            <thead>
+              <tr style="background:var(--card2);text-align:right">
+                <th style="padding:10px 12px;font-weight:700">العميل</th>
+                <th style="padding:10px 12px;font-weight:700">الاسم</th>
+                <th style="padding:10px 12px;font-weight:700">الهاتف</th>
+                <th style="padding:10px 12px;font-weight:700">الخدمة</th>
+                <th style="padding:10px 12px;font-weight:700">النوع</th>
+                <th style="padding:10px 12px;font-weight:700">التاريخ</th>
+                <th style="padding:10px 12px;font-weight:700">تواصل</th>
+              </tr>
+            </thead>
+            <tbody id="clientsTableBody"></tbody>
+          </table>
+          <div id="clientsEmpty" style="display:none;text-align:center;padding:32px;color:var(--muted)">
+            لا توجد ليدات بعد. سيظهران هنا فور أول إرسال من أي صفحة عميل.
+          </div>
+        </div>
+
+        <!-- Loading spinner -->
+        <div id="clientsLoading" style="text-align:center;padding:40px;color:var(--muted);display:none">
+          <div style="font-size:1.5rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
+          <div style="margin-top:8px;font-size:.85rem">جاري تحميل الليدات...</div>
         </div>
       </div>
 
@@ -1347,13 +1406,14 @@ function deleteDashClient(target, id) {
 
 // ── VIEWS ──────────────────────────────────────────────────────
 function showView(v) {
-  ['overview','leads','dashboards','prompt','proof','setup'].forEach(name => {
+  ['overview','leads','dashboards','prompt','proof','clients','setup'].forEach(name => {
     document.getElementById('view-'+name).style.display = v === name ? '' : 'none';
     document.getElementById('btn-'+name).classList.toggle('active', v === name);
   });
   if (v === 'setup')      { renderSetup(); renderSidebarSources(); }
   if (v === 'dashboards') { renderDashboards(); }
   if (v === 'proof')      { initProofView(); }
+  if (v === 'clients')    { initClientsView(); }
 }
 
 // ── PROOF / RESULTS SYSTEM ─────────────────────────────────────
@@ -1770,6 +1830,143 @@ function initApp() {
   renderSidebarSources();
   renderSetup();
   refreshAll();
+}
+
+// ══════════════════════════════════════════════════════════════
+// ── CLIENTS / CENTRAL LEADS VIEW ─────────────────────────────
+// Fetches all leads from all client pages via /api/crm-leads
+// ══════════════════════════════════════════════════════════════
+
+let _clientsData   = null; // cache
+let _clientFilter  = 'all';
+
+async function initClientsView() {
+  if (_clientsData) { renderClientsView(_clientsData); return; }
+  await loadCentralLeads();
+}
+
+async function loadCentralLeads() {
+  document.getElementById('clientsLoading').style.display      = '';
+  document.getElementById('clientsLeadsWrap').style.display    = 'none';
+  document.getElementById('clientsSetupNotice').style.display  = 'none';
+  document.getElementById('clientsStats').innerHTML            = '';
+  document.getElementById('clientFilterChips').innerHTML       = '';
+  _clientFilter = 'all';
+
+  try {
+    const r    = await fetch('/api/crm-leads');
+    const data = await r.json();
+    _clientsData = data;
+    renderClientsView(data);
+  } catch (e) {
+    document.getElementById('clientsLoading').style.display = 'none';
+    document.getElementById('clientsSetupNotice').style.display = '';
+  }
+}
+
+function renderClientsView(data) {
+  document.getElementById('clientsLoading').style.display = 'none';
+
+  if (!data.configured) {
+    document.getElementById('clientsSetupNotice').style.display = '';
+    return;
+  }
+
+  const leads = data.leads || [];
+  document.getElementById('clientsLeadsWrap').style.display = '';
+
+  // ── Stats bar ──
+  const statEl = document.getElementById('clientsStats');
+  const byClient = data.byClient || {};
+  const statCards = [
+    { label: 'إجمالي الليدات', value: data.total || leads.length, icon: '📥', color: '#1877f2' },
+    ...Object.entries(byClient).map(([c, n]) => ({ label: c, value: n, icon: '🏪', color: '#00897b' }))
+  ];
+  statEl.innerHTML = statCards.map(s =>
+    `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;text-align:center">
+      <div style="font-size:1.4rem">${s.icon}</div>
+      <div style="font-size:1.5rem;font-weight:900;color:${s.color}">${s.value}</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-top:2px">${s.label}</div>
+    </div>`
+  ).join('');
+
+  // ── Client filter chips ──
+  const clients = [...new Set(leads.map(l => l['Client'] || l['client_name'] || 'unknown'))];
+  const chipEl  = document.getElementById('clientFilterChips');
+  chipEl.innerHTML = [
+    `<button onclick="filterClients('all',this)" style="padding:5px 14px;border-radius:50px;border:1.5px solid var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:700;cursor:pointer;font-size:.78rem">كل العملاء (${leads.length})</button>`,
+    ...clients.map(c => {
+      const n = leads.filter(l => (l['Client'] || l['client_name']) === c).length;
+      return `<button onclick="filterClients('${c}',this)" style="padding:5px 14px;border-radius:50px;border:1.5px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-size:.78rem">🏪 ${c} (${n})</button>`;
+    })
+  ].join('');
+
+  renderClientsTable(leads);
+}
+
+function filterClients(client, btn) {
+  _clientFilter = client;
+  // Update active chip style
+  document.querySelectorAll('#clientFilterChips button').forEach(b => {
+    b.style.background = 'var(--card)';
+    b.style.color      = 'var(--text)';
+    b.style.borderColor = 'var(--border)';
+    b.style.fontWeight  = '400';
+  });
+  btn.style.background  = 'var(--blue-soft)';
+  btn.style.color       = 'var(--blue)';
+  btn.style.borderColor = 'var(--blue)';
+  btn.style.fontWeight  = '700';
+
+  const leads = (_clientsData?.leads || []).filter(l =>
+    client === 'all' || (l['Client'] || l['client_name']) === client
+  );
+  renderClientsTable(leads);
+}
+
+function renderClientsTable(leads) {
+  const tbody  = document.getElementById('clientsTableBody');
+  const empty  = document.getElementById('clientsEmpty');
+
+  if (!leads.length) {
+    tbody.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+
+  // Client color map
+  const clientColors = {
+    'Centre Solyra': '#fce4ec',
+    'solyra':        '#fce4ec',
+  };
+
+  tbody.innerHTML = leads.map((l, i) => {
+    const client  = l['Client']    || l['client_name'] || '—';
+    const name    = l['Nom']       || l['name']        || '—';
+    const phone   = l['WhatsApp']  || l['phone']       || '';
+    const service = l['Service']   || l['service']     || '—';
+    const type    = l['Type']      || l['type']        || 'lead';
+    const date    = l['Date']      || l['timestamp']   || '—';
+    const waNum   = phone.replace(/\D/g, '');
+    const waBg    = clientColors[client] || (i % 2 === 0 ? 'var(--card)' : 'var(--card2)');
+    const typeBadge = type === 'recrutement'
+      ? '<span style="background:#f3e5f5;color:#7b1fa2;padding:2px 8px;border-radius:50px;font-size:.7rem;font-weight:700">توظيف</span>'
+      : '<span style="background:#e3f2fd;color:#1565c0;padding:2px 8px;border-radius:50px;font-size:.7rem;font-weight:700">ليد</span>';
+
+    return `<tr style="background:${waBg};border-bottom:1px solid var(--border)">
+      <td style="padding:10px 12px;font-weight:700">${client}</td>
+      <td style="padding:10px 12px">${name}</td>
+      <td style="padding:10px 12px;font-family:monospace;font-size:.8rem">${phone || '—'}</td>
+      <td style="padding:10px 12px;color:var(--muted)">${service}</td>
+      <td style="padding:10px 12px">${typeBadge}</td>
+      <td style="padding:10px 12px;color:var(--muted);font-size:.75rem">${date}</td>
+      <td style="padding:10px 12px">${waNum
+        ? `<a href="https://wa.me/${waNum}?text=السلام+عليكم+${encodeURIComponent(name)}" target="_blank" style="background:#25D366;color:#fff;padding:4px 12px;border-radius:50px;text-decoration:none;font-size:.75rem;font-weight:700">💬 WA</a>`
+        : '—'
+      }</td>
+    </tr>`;
+  }).join('');
 }
 </script>
 </body>
