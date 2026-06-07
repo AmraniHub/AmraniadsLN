@@ -409,6 +409,7 @@
       <button class="nav-btn" onclick="showView('prompt')"             id="btn-prompt"     ><span class="ico">🤖</span> Prompt IA</button>
       <button class="nav-btn" onclick="showView('proof')"              id="btn-proof"      ><span class="ico">🏆</span> الإثباتات</button>
       <button class="nav-btn" onclick="showView('clients')"            id="btn-clients"    ><span class="ico">🌐</span> كل الليدات</button>
+      <button class="nav-btn" onclick="showView('portals')"            id="btn-portals"    ><span class="ico">🔗</span> Portails clients</button>
       <button class="nav-btn" onclick="showView('setup')"              id="btn-setup"      ><span class="ico">⚙️</span> Configuration</button>
 
       <div class="sidebar-section">Sources actives</div>
@@ -833,6 +834,82 @@
         <div id="clientsLoading" style="text-align:center;padding:40px;color:var(--muted);display:none">
           <div style="font-size:1.5rem;animation:spin 1s linear infinite;display:inline-block">⏳</div>
           <div style="margin-top:8px;font-size:.85rem">جاري تحميل الليدات...</div>
+        </div>
+      </div>
+
+      <!-- PORTALS -->
+      <div id="view-portals" style="display:none">
+        <div class="section-hd" style="margin-bottom:16px">
+          <h2>🔗 Portails clients</h2>
+        </div>
+
+        <!-- Generator card -->
+        <div style="background:var(--card);border:1px solid var(--blue-border);border-radius:18px;padding:28px 24px;max-width:600px;margin-bottom:22px">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:18px;color:var(--text)">✨ Générateur de code d'accès</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">Nom du client</label>
+              <input id="pg-name" type="text" placeholder="ex: Salon Ma Belle" oninput="pgAutoId()" style="width:100%;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+            </div>
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">ID client (slug)</label>
+              <input id="pg-id" type="text" placeholder="ex: salon-ma-belle" style="width:100%;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">Emoji</label>
+              <input id="pg-emoji" type="text" placeholder="💄" maxlength="4" value="💼" style="width:100%;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:1.2rem;text-align:center;background:var(--bg);outline:none"/>
+            </div>
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">Couleur thème</label>
+              <input id="pg-color" type="color" value="#be185d" style="width:100%;height:41px;border:1.5px solid var(--blue-border);border-radius:10px;padding:3px 6px;background:var(--bg);cursor:pointer"/>
+            </div>
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">Mot de passe</label>
+              <input id="pg-pw" type="text" placeholder="ex: mabelle2025" style="width:100%;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+            </div>
+          </div>
+          <button onclick="generatePortalCode()" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8);color:#fff;border:none;border-radius:50px;padding:12px 28px;font-family:Cairo,sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;width:100%">
+            ✨ Générer le code d'accès
+          </button>
+        </div>
+
+        <!-- Output -->
+        <div id="pg-result" style="display:none;background:var(--card);border:1px solid var(--blue-border);border-radius:18px;padding:24px;max-width:600px">
+          <h3 style="font-size:.95rem;font-weight:700;margin-bottom:14px">📋 Code généré — à envoyer au client</h3>
+
+          <div style="margin-bottom:14px">
+            <label style="font-size:.75rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">URL du portail</label>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="pg-url" readonly style="flex:1;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.83rem;color:var(--text);background:#f8faff;outline:none"/>
+              <button onclick="copyField('pg-url')" style="background:var(--blue-soft);border:1px solid var(--blue-border);color:var(--blue);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.8rem;font-weight:700;white-space:nowrap">📋 Copier</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px">
+            <label style="font-size:.75rem;font-weight:700;color:var(--blue);display:block;margin-bottom:5px">Code d'accès (une seule fois)</label>
+            <div style="display:flex;gap:8px;align-items:flex-start">
+              <textarea id="pg-code" readonly rows="3" style="flex:1;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:monospace;font-size:.78rem;color:var(--text);background:#f8faff;outline:none;resize:none;line-break:anywhere;word-break:break-all"></textarea>
+              <button onclick="copyField('pg-code')" style="background:var(--blue-soft);border:1px solid var(--blue-border);color:var(--blue);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.8rem;font-weight:700;white-space:nowrap">📋 Copier</button>
+            </div>
+          </div>
+
+          <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:14px 16px">
+            <div style="font-size:.8rem;font-weight:700;color:#166534;margin-bottom:8px">💬 Message WhatsApp à envoyer au client</div>
+            <div id="pg-wa-msg" style="font-size:.83rem;color:#374151;line-height:1.7;white-space:pre-wrap"></div>
+            <button onclick="copyField('pg-wa-msg',true)" style="margin-top:10px;background:#25D366;color:#fff;border:none;border-radius:50px;padding:8px 20px;font-family:Cairo,sans-serif;font-size:.82rem;font-weight:700;cursor:pointer">
+              💬 Copier le message WA
+            </button>
+          </div>
+        </div>
+
+        <!-- Active portals list -->
+        <div style="background:var(--card);border:1px solid var(--blue-border);border-radius:18px;padding:24px;max-width:600px;margin-top:20px">
+          <h3 style="font-size:.95rem;font-weight:700;margin-bottom:14px">🗂️ Portails actifs</h3>
+          <div id="pg-saved-list">
+            <div style="color:var(--muted);font-size:.85rem">Aucun portail généré pour l'instant.</div>
+          </div>
         </div>
       </div>
 
@@ -1406,10 +1483,11 @@ function deleteDashClient(target, id) {
 
 // ── VIEWS ──────────────────────────────────────────────────────
 function showView(v) {
-  ['overview','leads','dashboards','prompt','proof','clients','setup'].forEach(name => {
+  ['overview','leads','dashboards','prompt','proof','clients','portals','setup'].forEach(name => {
     document.getElementById('view-'+name).style.display = v === name ? '' : 'none';
     document.getElementById('btn-'+name).classList.toggle('active', v === name);
   });
+  if (v === 'portals')    { renderSavedPortals(); }
   if (v === 'setup')      { renderSetup(); renderSidebarSources(); }
   if (v === 'dashboards') { renderDashboards(); }
   if (v === 'proof')      { initProofView(); }
@@ -1967,6 +2045,102 @@ function renderClientsTable(leads) {
       }</td>
     </tr>`;
   }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════
+// ── PORTAL GENERATOR ─────────────────────────────────────────
+// Generates base64 access codes for client portals
+// ══════════════════════════════════════════════════════════════
+
+const PORTALS_KEY = 'pg_saved_portals';
+
+function getSavedPortals() {
+  try { return JSON.parse(localStorage.getItem(PORTALS_KEY) || '[]'); } catch { return []; }
+}
+function savePortal(p) {
+  const list = getSavedPortals().filter(x => x.id !== p.id);
+  list.unshift(p);
+  localStorage.setItem(PORTALS_KEY, JSON.stringify(list));
+}
+
+function pgAutoId() {
+  const name = document.getElementById('pg-name').value;
+  const id = name.toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  document.getElementById('pg-id').value = id;
+}
+
+function generatePortalCode() {
+  const name  = document.getElementById('pg-name').value.trim();
+  const id    = document.getElementById('pg-id').value.trim();
+  const emoji = document.getElementById('pg-emoji').value.trim() || '💼';
+  const color = document.getElementById('pg-color').value;
+  const pw    = document.getElementById('pg-pw').value.trim();
+
+  if (!name) { alert('Entrez le nom du client'); return; }
+  if (!id)   { alert('Entrez l\'ID client (slug)'); return; }
+  if (!pw)   { alert('Entrez un mot de passe'); return; }
+
+  const config = { id, name, emoji, color, pw };
+  const code   = btoa(JSON.stringify(config));
+  const url    = 'https://amraniads.com/portal/';
+
+  const waMsg = `السلام عليكم ${name} 👋\n\nلقد تم إنشاء بوابتك الخاصة على AmraniAds!\n\n🔗 الرابط: ${url}\n\n📋 كود الدخول (مرة واحدة فقط):\n${code}\n\n🔑 كلمة المرور: ${pw}\n\n💡 كيف تستخدمها:\n1️⃣ افتح الرابط\n2️⃣ ضع الكود في خانة "Code d'accès"\n3️⃣ ضع كلمة المرور\n4️⃣ احفظ الصفحة في المفضلة\n\nمن الآن فصاعداً ستجد جميع leads الخاصة بك هناك 📊\n\n— AmraniAds`;
+
+  document.getElementById('pg-url').value    = url;
+  document.getElementById('pg-code').value   = code;
+  document.getElementById('pg-wa-msg').textContent = waMsg;
+  document.getElementById('pg-result').style.display = 'block';
+
+  // Save
+  savePortal({ id, name, emoji, color, pw, code, createdAt: new Date().toLocaleDateString('fr-MA') });
+  renderSavedPortals();
+
+  document.getElementById('pg-result').scrollIntoView({ behavior: 'smooth' });
+  toast('✅ Code généré pour ' + name);
+}
+
+function copyField(id, isText) {
+  const el = document.getElementById(id);
+  const txt = isText ? el.textContent : el.value;
+  navigator.clipboard.writeText(txt).then(() => toast('✅ Copié !'));
+}
+
+function renderSavedPortals() {
+  const el   = document.getElementById('pg-saved-list');
+  const list = getSavedPortals();
+  if (!list.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">Aucun portail généré pour l\'instant.</div>';
+    return;
+  }
+  el.innerHTML = list.map(p => `
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--blue-border)">
+      <div style="width:36px;height:36px;border-radius:10px;background:${p.color};display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">${p.emoji}</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-weight:700;font-size:.88rem">${p.name}</div>
+        <div style="font-size:.72rem;color:var(--muted)">ID: ${p.id} · Créé le ${p.createdAt}</div>
+      </div>
+      <button onclick="reCopyCode('${p.id}')" style="background:var(--blue-soft);border:1px solid var(--blue-border);color:var(--blue);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.75rem;font-weight:700">📋 Recopier</button>
+      <button onclick="deletePortal('${p.id}')" style="background:#fff1f2;border:1px solid #fecdd3;color:#dc2626;border-radius:8px;padding:6px 12px;cursor:pointer;font-size:.75rem;font-weight:700">🗑️</button>
+    </div>
+  `).join('');
+}
+
+function reCopyCode(id) {
+  const p = getSavedPortals().find(x => x.id === id);
+  if (!p) return;
+  navigator.clipboard.writeText(p.code).then(() => toast('✅ Code copié pour ' + p.name));
+}
+
+function deletePortal(id) {
+  if (!confirm('Supprimer ce portail ?')) return;
+  const list = getSavedPortals().filter(p => p.id !== id);
+  localStorage.setItem(PORTALS_KEY, JSON.stringify(list));
+  renderSavedPortals();
+  toast('🗑️ Portail supprimé');
 }
 </script>
 </body>
