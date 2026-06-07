@@ -220,6 +220,87 @@
     .empty .e-ico { font-size: 2.5rem; margin-bottom: 12px; }
     .loading { text-align: center; padding: 28px; color: var(--muted); font-size: .85rem; }
 
+    /* ── CALENDAR ── */
+    .cal-legend { display: flex; gap: 18px; margin-bottom: 14px; flex-wrap: wrap; }
+    .cal-leg { display: flex; align-items: center; gap: 6px; font-size: .78rem; color: var(--muted); }
+    .cal-dot { width: 13px; height: 13px; border-radius: 3px; flex-shrink: 0; }
+    .cal-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--blue-border); background: var(--card); }
+    .cal-table { border-collapse: collapse; min-width: 900px; width: 100%; }
+    .cal-table th { padding: 7px 6px; font-size: .68rem; font-weight: 700; color: var(--muted); border-bottom: 1px solid var(--blue-border); border-right: 1px solid var(--blue-border); text-align: center; background: #f8faff; white-space: nowrap; }
+    .cal-table th.cal-car-head { text-align: left; padding-left: 14px; min-width: 150px; font-size: .78rem; color: var(--text); }
+    .cal-table td { border-right: 1px solid var(--blue-border); border-bottom: 1px solid var(--blue-border); padding: 0; text-align: center; height: 38px; position: relative; }
+    .cal-table td.cal-car-name { text-align: left; padding: 0 12px; font-size: .82rem; font-weight: 700; min-width: 150px; background: #f8faff; }
+    .cal-table td.cal-car-plate { font-size: .68rem; color: var(--muted); font-weight: 400; display: block; }
+    .cal-cell { width: 100%; height: 38px; display: flex; align-items: center; justify-content: center; font-size: .68rem; font-weight: 700; cursor: pointer; transition: opacity .15s; }
+    .cal-cell:hover { opacity: .75; }
+    .cal-avail { background: rgba(22,163,74,.13); color: var(--green); }
+    .cal-loue  { background: rgba(220,38,38,.13); color: var(--red); }
+    .cal-maint { background: rgba(217,119,6,.13); color: var(--amber); }
+    .cal-today-col { background: rgba(59,130,246,.06) !important; }
+    .cal-today-head { color: var(--blue) !important; font-weight: 900 !important; }
+    .cal-nav { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .cal-nav-title { font-size: 1rem; font-weight: 700; }
+    .cal-nav button { background: var(--card); border: 1.5px solid var(--blue-border); border-radius: 8px; padding: 6px 14px; cursor: pointer; font-family: 'Cairo',sans-serif; font-size: .82rem; font-weight: 700; color: var(--blue); }
+
+    /* ── ANALYTICS ── */
+    .analytics-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 14px; margin-bottom: 22px; }
+    .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+    @media(max-width:900px){ .analytics-grid { grid-template-columns: 1fr; } }
+    .chart-card { background: var(--card); border: 1px solid var(--blue-border); border-radius: 16px; padding: 20px 18px; }
+    .chart-card.wide { grid-column: 1 / -1; }
+    .chart-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .funnel-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .funnel-label { font-size: .78rem; color: var(--muted); width: 110px; flex-shrink: 0; }
+    .funnel-bar-wrap { flex: 1; background: #f1f5f9; border-radius: 50px; height: 22px; overflow: hidden; }
+    .funnel-bar { height: 100%; border-radius: 50px; display: flex; align-items: center; padding: 0 10px; transition: width 1s ease; }
+    .funnel-num { font-size: .72rem; font-weight: 700; color: #fff; white-space: nowrap; }
+    .bar-chart-wrap { display: flex; align-items: flex-end; gap: 10px; height: 160px; padding-bottom: 28px; position: relative; }
+    .bar-chart-wrap::before { content: ''; position: absolute; left: 0; right: 0; bottom: 28px; border-bottom: 2px solid var(--blue-border); }
+    .bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bar-fill { width: 100%; border-radius: 6px 6px 0 0; background: var(--grad); min-height: 4px; transition: height 1s ease; }
+    .bar-label { font-size: .64rem; color: var(--muted); text-align: center; margin-top: 4px; white-space: nowrap; }
+    .bar-val { font-size: .68rem; font-weight: 700; color: var(--blue); }
+    .top-cars-list { display: flex; flex-direction: column; gap: 10px; }
+    .top-car-row { display: flex; align-items: center; gap: 12px; }
+    .top-car-rank { font-size: 1.2rem; width: 28px; text-align: center; }
+    .top-car-info { flex: 1; }
+    .top-car-name { font-size: .88rem; font-weight: 700; }
+    .top-car-sub  { font-size: .74rem; color: var(--muted); }
+    .top-car-rev  { font-size: .85rem; font-weight: 700; color: var(--blue); }
+
+    /* ── QUOTE / CONTRACT ── */
+    .quote-extras-list { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .quote-extra-row { display: flex; align-items: center; gap: 8px; }
+    .quote-extra-row label { font-size: .82rem; color: var(--text); flex: 1; }
+    .quote-extra-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--blue); }
+    .quote-total-box { background: var(--blue-soft); border: 1.5px solid var(--blue-border); border-radius: 12px; padding: 14px 16px; margin-top: 16px; }
+    .quote-total-row { display: flex; justify-content: space-between; font-size: .85rem; padding: 3px 0; }
+    .quote-total-final { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 900; color: var(--blue); border-top: 1.5px solid var(--blue-border); margin-top: 8px; padding-top: 8px; }
+    .ref-badge { display: inline-block; background: var(--blue-soft); border: 1px solid var(--blue-border); color: var(--blue); border-radius: 50px; padding: 2px 10px; font-size: .72rem; font-weight: 700; }
+    .dep-badge { display: inline-block; border-radius: 50px; padding: 2px 8px; font-size: .68rem; font-weight: 700; }
+    .dep-paid   { background: var(--green-soft); color: var(--green); }
+    .dep-unpaid { background: var(--red-soft);   color: var(--red);   }
+
+    /* ── PRINT STYLES (contract / quote) ── */
+    #printArea { display: none; }
+    @media print {
+      body > * { display: none !important; }
+      #printArea { display: block !important; font-family: 'Cairo', Arial, sans-serif; color: #000; padding: 24px; max-width: 700px; margin: 0 auto; }
+      .pr-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #1d4ed8; padding-bottom: 16px; margin-bottom: 20px; }
+      .pr-logo { font-size: 1.3rem; font-weight: 900; color: #1d4ed8; }
+      .pr-ref  { font-size: .82rem; color: #6b7280; text-align: right; }
+      .pr-section { margin-bottom: 18px; }
+      .pr-section h3 { font-size: .88rem; color: #1d4ed8; font-weight: 700; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; margin-bottom: 10px; }
+      .pr-row { display: flex; justify-content: space-between; font-size: .85rem; padding: 4px 0; border-bottom: 1px solid #f3f4f6; }
+      .pr-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 900; color: #1d4ed8; border-top: 2px solid #1d4ed8; margin-top: 10px; padding-top: 10px; }
+      .pr-sig { margin-top: 32px; display: flex; justify-content: space-between; }
+      .pr-sig-box { width: 45%; border-top: 1.5px solid #000; padding-top: 6px; font-size: .78rem; color: #6b7280; }
+      .pr-terms { font-size: .72rem; color: #9ca3af; margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 12px; line-height: 1.7; }
+      .pr-checklist { font-size: .8rem; }
+      .pr-checklist li { padding: 4px 0; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 8px; }
+      .pr-check { width: 14px; height: 14px; border: 1.5px solid #000; border-radius: 2px; flex-shrink: 0; }
+    }
+
     #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px); background: var(--card); border: 1px solid var(--blue-border); color: var(--blue); padding: 10px 24px; border-radius: 50px; font-size: .85rem; font-weight: 700; opacity: 0; transition: all .3s; pointer-events: none; z-index: 400; white-space: nowrap; }
 
     @media(max-width:768px){ .sidebar{transform:translateX(-100%);} .main{margin-left:0;padding:14px;} .fleet-grid{grid-template-columns:1fr 1fr;} }
@@ -244,6 +325,7 @@
       <div class="sidebar-logo">Amrani<span>Ads</span> 🚗</div>
       <div class="sidebar-section">Navigation</div>
       <button class="nav-btn active" onclick="showView('dashboard')" id="btn-dashboard"><span class="ico">📊</span> Dashboard</button>
+      <button class="nav-btn" onclick="showView('analytics')" id="btn-analytics"><span class="ico">📈</span> Analytique</button>
       <button class="nav-btn" onclick="showView('setup')" id="btn-setup"><span class="ico">⚙️</span> Clients & Config</button>
       <div class="sidebar-section">Clients</div>
       <div id="clientList"></div>
@@ -284,6 +366,7 @@
         <div class="tabs">
           <button class="tab active" onclick="switchTab('fleet',this)">🚗 Flotte</button>
           <button class="tab" onclick="switchTab('leads',this)">📋 Leads</button>
+          <button class="tab" onclick="switchTab('calendar',this)">📅 Calendrier</button>
         </div>
 
         <!-- FLEET -->
@@ -297,20 +380,69 @@
         <!-- LEADS -->
         <div id="tab-leads" style="display:none">
           <div class="table-wrap">
-            <div class="table-filters">
-              <button class="filter-btn active" onclick="filterLeads('all',this)">Tous</button>
-              <button class="filter-btn" onclick="filterLeads('nouveau',this)">🔵 Nouveau</button>
-              <button class="filter-btn" onclick="filterLeads('chaud',this)">🔴 +24h</button>
-              <button class="filter-btn" onclick="filterLeads('confirme',this)">✅ Confirmés</button>
+            <div class="table-filters" style="justify-content:space-between">
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="filter-btn active" onclick="filterLeads('all',this)">Tous</button>
+                <button class="filter-btn" onclick="filterLeads('nouveau',this)">🔵 Nouveau</button>
+                <button class="filter-btn" onclick="filterLeads('chaud',this)">🔴 +24h</button>
+                <button class="filter-btn" onclick="filterLeads('confirme',this)">✅ Confirmés</button>
+              </div>
+              <button class="btn-sm btn-ghost" onclick="exportCSV()" style="font-size:.75rem;padding:5px 14px">⬇️ CSV</button>
             </div>
             <div style="overflow-x:auto">
               <table>
                 <thead>
-                  <tr><th>#</th><th>Date</th><th>Nom</th><th>Téléphone</th><th>Voiture</th><th>Dates</th><th>Statut</th><th>Âge</th><th>Source</th></tr>
+                  <tr><th>#</th><th>Réf</th><th>Date</th><th>Nom</th><th>Téléphone</th><th>Voiture</th><th>Dates</th><th>Statut</th><th>Acompte</th><th>Âge</th><th>Actions</th></tr>
                 </thead>
-                <tbody id="leadsBody"><tr><td colspan="9" class="loading">Chargement...</td></tr></tbody>
+                <tbody id="leadsBody"><tr><td colspan="11" class="loading">Chargement...</td></tr></tbody>
               </table>
             </div>
+          </div>
+        </div>
+
+        <!-- CALENDAR -->
+        <div id="tab-calendar" style="display:none">
+          <div class="cal-nav">
+            <button onclick="calShift(-7)">← Préc.</button>
+            <span class="cal-nav-title" id="calRangeLabel">—</span>
+            <button onclick="calShift(7)">Suiv. →</button>
+            <button onclick="calReset()" style="margin-left:8px">Aujourd'hui</button>
+          </div>
+          <div class="cal-legend">
+            <div class="cal-leg"><div class="cal-dot" style="background:rgba(22,163,74,.4)"></div> Disponible</div>
+            <div class="cal-leg"><div class="cal-dot" style="background:rgba(220,38,38,.4)"></div> Loué</div>
+            <div class="cal-leg"><div class="cal-dot" style="background:rgba(217,119,6,.4)"></div> Maintenance</div>
+          </div>
+          <div class="cal-wrap">
+            <table class="cal-table" id="calTable"><tr><td class="loading" style="text-align:center;padding:28px">Chargement...</td></tr></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div id="view-analytics" style="display:none">
+        <div class="topbar">
+          <div><div class="topbar-title">📈 <span>Analytique</span></div><div class="topbar-sub" id="analyticsRefresh">—</div></div>
+          <button class="btn-sm btn-ghost" onclick="loadAnalytics()">🔄 Actualiser</button>
+        </div>
+        <div class="analytics-kpis">
+          <div class="stat-card green"><div class="s-label">Revenue total</div><div class="s-num" id="an-rev">—</div><div class="s-sub">DH confirmé</div></div>
+          <div class="stat-card"><div class="s-label">Revenu moyen/booking</div><div class="s-num" id="an-avg">—</div><div class="s-sub">DH</div></div>
+          <div class="stat-card amber"><div class="s-label">Meilleur mois</div><div class="s-num" id="an-best">—</div><div class="s-sub" id="an-best-rev">DH</div></div>
+          <div class="stat-card purple"><div class="s-label">Taux conversion</div><div class="s-num" id="an-conv">—</div><div class="s-sub">des leads</div></div>
+        </div>
+        <div class="analytics-grid">
+          <div class="chart-card wide">
+            <div class="chart-title">💰 Revenue mensuel (6 derniers mois)</div>
+            <div class="bar-chart-wrap" id="revenueChart"><div class="loading">Chargement...</div></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">📊 Entonnoir des leads</div>
+            <div id="funnelChart"><div class="loading">Chargement...</div></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">🚗 Top véhicules demandés</div>
+            <div class="top-cars-list" id="topCarsChart"><div class="loading">Chargement...</div></div>
           </div>
         </div>
       </div>
@@ -402,6 +534,17 @@
       <label>Revenue de la location (DH)</label>
       <input type="number" id="revenueInput" placeholder="ex: 1800"/>
     </div>
+    <div class="modal-field">
+      <label>Acompte</label>
+      <div style="display:flex;gap:8px">
+        <select id="leadDeposit" style="flex:0 0 110px;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 10px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none">
+          <option value="">— Acompte —</option>
+          <option value="Non payé">Non payé</option>
+          <option value="Payé">Payé ✅</option>
+        </select>
+        <input type="number" id="leadDepositAmt" placeholder="Montant (DH)" style="flex:1;border:1.5px solid var(--blue-border);border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+      </div>
+    </div>
     <div class="modal-field"><label>Notes internes</label><textarea id="leadNotes" rows="2" placeholder="Notes..."></textarea></div>
 
     <div class="wa-templates">
@@ -451,6 +594,50 @@
     </div>
   </div>
 </div>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="modalQuote" style="display:none" onclick="closeModal('modalQuote',event)">
+  <div class="modal" style="max-width:520px">
+    <h3>📄 Générer devis / contrat</h3>
+    <input type="hidden" id="qRef"/>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="modal-field"><label>Nom client</label><input type="text" id="qName" placeholder="Nom complet"/></div>
+      <div class="modal-field"><label>Téléphone</label><input type="tel" id="qPhone" placeholder="06XXXXXXXX"/></div>
+    </div>
+    <div class="modal-field"><label>Véhicule</label><input type="text" id="qCar" placeholder="ex: Dacia Duster 4x4"/></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div class="modal-field"><label>Date début</label><input type="date" id="qStart" onchange="calcQuote()"/></div>
+      <div class="modal-field"><label>Date fin</label><input type="date" id="qEnd" onchange="calcQuote()"/></div>
+      <div class="modal-field"><label>Prix / jour (DH)</label><input type="number" id="qPriceDay" value="300" onchange="calcQuote()"/></div>
+    </div>
+    <div class="modal-field">
+      <label>Extras</label>
+      <div class="quote-extras-list">
+        <div class="quote-extra-row"><input type="checkbox" id="qGPS" onchange="calcQuote()"/><label for="qGPS">GPS (+50 DH/j)</label></div>
+        <div class="quote-extra-row"><input type="checkbox" id="qBaby" onchange="calcQuote()"/><label for="qBaby">Siège bébé (+30 DH/j)</label></div>
+        <div class="quote-extra-row"><input type="checkbox" id="qWifi" onchange="calcQuote()"/><label for="qWifi">WiFi portable (+40 DH/j)</label></div>
+        <div class="quote-extra-row"><input type="checkbox" id="qInsur" onchange="calcQuote()"/><label for="qInsur">Assurance tous risques (+80 DH/j)</label></div>
+        <div class="quote-extra-row"><input type="checkbox" id="qDriver" onchange="calcQuote()"/><label for="qDriver">Avec chauffeur (+200 DH/j)</label></div>
+      </div>
+    </div>
+    <div class="modal-field"><label>Acompte versé (DH)</label><input type="number" id="qDeposit" value="0" onchange="calcQuote()"/></div>
+    <div class="quote-total-box" id="quoteTotalBox">
+      <div class="quote-total-row"><span>Durée</span><span id="qDays">—</span></div>
+      <div class="quote-total-row"><span>Location</span><span id="qSubBase">—</span></div>
+      <div class="quote-total-row"><span>Extras</span><span id="qSubExtras">—</span></div>
+      <div class="quote-total-row"><span>Acompte versé</span><span id="qSubDep" style="color:var(--green)">—</span></div>
+      <div class="quote-total-final"><span>Reste à payer</span><span id="qTotal">—</span></div>
+    </div>
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn-sm btn-ghost" onclick="closeModalById('modalQuote')">Annuler</button>
+      <button class="btn-sm btn-blue" onclick="printQuote(false)">🖨️ Devis PDF</button>
+      <button class="btn-sm btn-blue" style="background:linear-gradient(135deg,#064e3b,#065f46)" onclick="printQuote(true)">📋 Contrat PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT AREA (hidden; shown during window.print()) -->
+<div id="printArea"></div>
 
 <div id="toast"></div>
 
@@ -640,21 +827,26 @@ function renderLeads() {
     const st  = l['Statut'] || 'Nouveau';
     const sc  = stClass[st] || 's-nouveau';
     const ph  = String(l['Téléphone']||'').replace(/\D/g,'');
-    const wa  = ph ? `<a class="wa-link" href="https://wa.me/${ph.startsWith('0')?'212'+ph.slice(1):ph}" target="_blank">💬 WA</a>` : '';
+    const wa  = ph ? `<a class="wa-link" href="https://wa.me/${ph.startsWith('0')?'212'+ph.slice(1):ph}" target="_blank">💬</a>` : '';
     const dt  = String(l['Date']||'').slice(0,16);
     const age = getAgeDays(l['Date']);
     const ageCls = age === null ? '' : age < 1 ? 'age-ok' : age < 2 ? 'age-warn' : 'age-hot';
     const ageStr = age === null ? '—' : age < 1 ? '<1j' : Math.floor(age) + 'j';
+    const ref  = l['Référence'] ? `<span class="ref-badge">${escHtml(l['Référence'])}</span>` : '—';
+    const dep  = l['Acompte'] === 'Payé' ? `<span class="dep-badge dep-paid">✅ Payé</span>` : (l['Acompte'] === 'Non payé' ? `<span class="dep-badge dep-unpaid">Non payé</span>` : '—');
+    const rowJson = escHtml(JSON.stringify({ Nom: l['Nom']||'', Téléphone: l['Téléphone']||'', 'Voiture demandée': l['Voiture demandée']||'', Référence: l['Référence']||'' }));
     return `<tr>
       <td style="color:var(--muted)">${leads.length - i}</td>
+      <td>${ref}</td>
       <td style="font-size:.76rem;color:var(--muted);white-space:nowrap">${dt}</td>
       <td style="font-weight:700">${escHtml(l['Nom']||'—')}</td>
-      <td>${escHtml(l['Téléphone']||'—')}<br>${wa}</td>
+      <td style="font-size:.82rem">${escHtml(l['Téléphone']||'—')} ${wa}</td>
       <td style="font-size:.82rem;color:var(--muted)">${escHtml(l['Voiture demandée']||'—')}</td>
       <td style="font-size:.79rem;color:var(--muted)">${escHtml(l['Dates location']||'—')}</td>
       <td><span class="lead-status ${sc}" onclick="openLeadStatusModal(${l._row},'${escHtml(l['Nom']||'')}','${st}')">${st}</span></td>
+      <td>${dep}</td>
       <td>${ageCls ? `<span class="age-badge ${ageCls}">${ageStr}</span>` : '—'}</td>
-      <td style="font-size:.74rem;color:var(--muted)">${escHtml(l['Source']||'—')}</td>
+      <td><button class="btn-sm btn-ghost" style="font-size:.72rem;padding:4px 10px" onclick='openQuoteModal(${rowJson})'>📄 Devis</button></td>
     </tr>`;
   }).join('');
 }
@@ -710,11 +902,14 @@ async function saveNewCar() {
 
 // LEAD STATUS MODAL
 function openLeadStatusModal(row, name, currentStatus) {
+  const lead = leadsData.find(l => l._row === row) || {};
   document.getElementById('leadRow').value = row;
   document.getElementById('leadModalName').textContent = '👤 ' + name;
   document.getElementById('leadStatusSel').value = currentStatus;
-  document.getElementById('leadNotes').value = '';
-  document.getElementById('revenueInput').value = '';
+  document.getElementById('leadNotes').value = lead['Notes'] || '';
+  document.getElementById('revenueInput').value = lead['Revenue (DH)'] || '';
+  document.getElementById('leadDeposit').value = lead['Acompte'] || '';
+  document.getElementById('leadDepositAmt').value = lead['Montant acompte'] || '';
   onLeadStatusChange();
   document.getElementById('modalLeadStatus').style.display = 'flex';
 }
@@ -739,7 +934,15 @@ function copyTpl(el, text) {
 }
 async function saveLeadStatus() {
   const cl = getClient(); if (!cl) return;
-  await postToSheet(cl.scriptUrl, { action:'lead_update', row:document.getElementById('leadRow').value, status:document.getElementById('leadStatusSel').value, notes:document.getElementById('leadNotes').value, revenue:document.getElementById('revenueInput').value });
+  await postToSheet(cl.scriptUrl, {
+    action:      'lead_update',
+    row:         document.getElementById('leadRow').value,
+    status:      document.getElementById('leadStatusSel').value,
+    notes:       document.getElementById('leadNotes').value,
+    revenue:     document.getElementById('revenueInput').value,
+    deposit:     document.getElementById('leadDeposit').value,
+    depositAmt:  document.getElementById('leadDepositAmt').value,
+  });
   closeModalById('modalLeadStatus');
   loadData();
 }
@@ -767,15 +970,325 @@ async function postToSheet(url, payload) {
 function switchTab(tab, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('tab-fleet').style.display = tab === 'fleet' ? '' : 'none';
-  document.getElementById('tab-leads').style.display = tab === 'leads' ? '' : 'none';
+  document.getElementById('tab-fleet').style.display    = tab === 'fleet'    ? '' : 'none';
+  document.getElementById('tab-leads').style.display    = tab === 'leads'    ? '' : 'none';
+  document.getElementById('tab-calendar').style.display = tab === 'calendar' ? '' : 'none';
+  if (tab === 'calendar') renderCalendar();
 }
 function showView(v) {
-  ['dashboard','setup'].forEach(n => {
+  ['dashboard','analytics','setup'].forEach(n => {
     document.getElementById('view-'+n).style.display = v === n ? '' : 'none';
     document.getElementById('btn-'+n).classList.toggle('active', v === n);
   });
-  if (v === 'setup') { renderClientListSetup(); renderClientSidebar(); }
+  if (v === 'setup')     { renderClientListSetup(); renderClientSidebar(); }
+  if (v === 'analytics') loadAnalytics();
+}
+
+// ─── CALENDAR ────────────────────────────────────────────────────
+let calOffset = 0; // days offset from today
+const CAL_DAYS = 14;
+
+function calShift(n) { calOffset += n; renderCalendar(); }
+function calReset()  { calOffset = 0;  renderCalendar(); }
+
+function renderCalendar() {
+  const tbl   = document.getElementById('calTable');
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  const days = [];
+  for (let i = 0; i < CAL_DAYS; i++) {
+    const d = new Date(today); d.setDate(d.getDate() + calOffset + i);
+    days.push(d);
+  }
+
+  // Update nav label
+  const fmt = d => d.toLocaleDateString('fr-MA', { day:'2-digit', month:'short' });
+  document.getElementById('calRangeLabel').textContent = fmt(days[0]) + ' — ' + fmt(days[CAL_DAYS-1]);
+
+  if (!fleetData.length) { tbl.innerHTML = '<tr><td class="loading" style="text-align:center;padding:28px">Aucune voiture dans la flotte</td></tr>'; return; }
+
+  // Header row
+  let html = '<thead><tr><th class="cal-car-head">Véhicule</th>';
+  days.forEach(d => {
+    const isToday = d.toDateString() === today.toDateString();
+    const label = d.toLocaleDateString('fr-MA', { weekday:'short', day:'2-digit', month:'2-digit' });
+    html += `<th class="${isToday ? 'cal-today-head' : ''}">${label}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  // Car rows
+  fleetData.forEach(car => {
+    const model  = car['Marque / Modèle'] || '—';
+    const plate  = car['Immatriculation'] || '';
+    const status = (car['Statut'] || 'Disponible');
+    const retStr = car['Retour prévu'] ? String(car['Retour prévu']) : '';
+    const retDate = retStr ? new Date(retStr) : null;
+    if (retDate) retDate.setHours(23,59,59,0);
+
+    html += `<tr><td class="cal-car-name">${escHtml(model)}<span class="cal-car-plate">${escHtml(plate)}</span></td>`;
+    days.forEach(d => {
+      let cls = 'cal-avail', label = '✓';
+      if (status === 'Maintenance') {
+        cls = 'cal-maint'; label = '🔧';
+      } else if (status === 'Loué') {
+        // show as loué from today until retour prévu
+        if (!retDate || d <= retDate) { cls = 'cal-loue'; label = car['Client actuel'] ? escHtml(String(car['Client actuel']).split(' ')[0]) : '🔒'; }
+      }
+      const todayCls = d.toDateString() === today.toDateString() ? ' cal-today-col' : '';
+      html += `<td class="${todayCls}"><div class="cal-cell ${cls}" title="${escHtml(model)} — ${d.toLocaleDateString('fr-MA')}">${label}</div></td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody>';
+  tbl.innerHTML = html;
+}
+
+// ─── ANALYTICS ───────────────────────────────────────────────────
+async function loadAnalytics() {
+  const cl = getClient();
+  document.getElementById('analyticsRefresh').textContent = 'Chargement...';
+  if (!cl) { document.getElementById('analyticsRefresh').textContent = 'Sélectionnez un client'; return; }
+
+  // Build analytics from local leadsData (already loaded)
+  if (!leadsData.length) await loadData();
+  buildAnalytics();
+  document.getElementById('analyticsRefresh').textContent = 'Mis à jour ' + new Date().toLocaleTimeString('fr-MA');
+}
+
+function buildAnalytics() {
+  const confirmed = leadsData.filter(l => (l['Statut']||'') === 'Confirmé');
+  const totalRev  = confirmed.reduce((s, l) => s + Number(l['Revenue (DH)']||0), 0);
+  const avgRev    = confirmed.length ? Math.round(totalRev / confirmed.length) : 0;
+  const convRate  = leadsData.length ? Math.round(confirmed.length / leadsData.length * 100) : 0;
+
+  document.getElementById('an-rev').textContent  = totalRev.toLocaleString('fr') + ' DH';
+  document.getElementById('an-avg').textContent  = avgRev.toLocaleString('fr');
+  document.getElementById('an-conv').textContent = convRate + '%';
+
+  // Monthly revenue (last 6 months)
+  const monthlyMap = {};
+  confirmed.forEach(l => {
+    const d = new Date(l['Date']||''); if (isNaN(d)) return;
+    const key = d.toLocaleDateString('fr-MA', { month:'short', year:'2-digit' });
+    monthlyMap[key] = (monthlyMap[key]||0) + Number(l['Revenue (DH)']||0);
+  });
+  // All months in last 6
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - i);
+    months.push(d.toLocaleDateString('fr-MA', { month:'short', year:'2-digit' }));
+  }
+  const monthlyData = months.map(m => ({ label: m, value: monthlyMap[m]||0 }));
+
+  // Best month
+  const best = monthlyData.reduce((a, b) => b.value > a.value ? b : a, { label:'—', value:0 });
+  document.getElementById('an-best').textContent = best.label;
+  document.getElementById('an-best-rev').textContent = best.value.toLocaleString('fr') + ' DH';
+
+  renderRevenueChart(monthlyData);
+  renderFunnelChart();
+  renderTopCars();
+}
+
+function renderRevenueChart(data) {
+  const wrap = document.getElementById('revenueChart');
+  const maxVal = Math.max(...data.map(d => d.value), 1);
+  wrap.innerHTML = data.map(d => {
+    const pct = Math.round((d.value / maxVal) * 100);
+    return `<div class="bar-item">
+      <div class="bar-val">${d.value ? (d.value/1000).toFixed(1)+'k' : ''}</div>
+      <div class="bar-fill" style="height:${Math.max(pct,4)}%"></div>
+      <div class="bar-label">${d.label}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderFunnelChart() {
+  const counts = { 'Nouveau':0, 'Contacté':0, 'Devis envoyé':0, 'Confirmé':0, 'Annulé':0 };
+  leadsData.forEach(l => { const s = l['Statut']||'Nouveau'; if (counts[s]!==undefined) counts[s]++; });
+  const total = leadsData.length || 1;
+  const colors = { 'Nouveau':'#3b82f6','Contacté':'#f59e0b','Devis envoyé':'#8b5cf6','Confirmé':'#16a34a','Annulé':'#dc2626' };
+  const el = document.getElementById('funnelChart');
+  el.innerHTML = Object.entries(counts).map(([label, n]) =>
+    `<div class="funnel-row">
+      <div class="funnel-label">${label}</div>
+      <div class="funnel-bar-wrap">
+        <div class="funnel-bar" style="width:${Math.round(n/total*100)}%;background:${colors[label]}">
+          <span class="funnel-num">${n}</span>
+        </div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+function renderTopCars() {
+  const carMap = {};
+  leadsData.forEach(l => {
+    const car = (l['Voiture demandée']||'Non précisé').trim();
+    if (!carMap[car]) carMap[car] = { count:0, rev:0 };
+    carMap[car].count++;
+    carMap[car].rev += Number(l['Revenue (DH)']||0);
+  });
+  const sorted = Object.entries(carMap).sort((a,b) => b[1].count - a[1].count).slice(0,5);
+  const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+  const el = document.getElementById('topCarsChart');
+  if (!sorted.length) { el.innerHTML = '<div class="empty"><div class="e-ico">🚗</div><p>Pas encore de données</p></div>'; return; }
+  el.innerHTML = sorted.map(([name, d], i) =>
+    `<div class="top-car-row">
+      <div class="top-car-rank">${medals[i]||''}</div>
+      <div class="top-car-info">
+        <div class="top-car-name">${escHtml(name)}</div>
+        <div class="top-car-sub">${d.count} demande${d.count>1?'s':''}</div>
+      </div>
+      ${d.rev ? `<div class="top-car-rev">${d.rev.toLocaleString('fr')} DH</div>` : ''}
+    </div>`
+  ).join('');
+}
+
+// ─── QUOTE / CONTRACT ─────────────────────────────────────────────
+function openQuoteModal(lead) {
+  document.getElementById('qName').value    = lead ? (lead['Nom']||'') : '';
+  document.getElementById('qPhone').value   = lead ? (lead['Téléphone']||'') : '';
+  document.getElementById('qCar').value     = lead ? (lead['Voiture demandée']||'') : '';
+  document.getElementById('qRef').value     = lead ? (lead['Référence']||genRef()) : genRef();
+  document.getElementById('qStart').value   = '';
+  document.getElementById('qEnd').value     = '';
+  document.getElementById('qPriceDay').value = '300';
+  document.getElementById('qDeposit').value  = '0';
+  ['qGPS','qBaby','qWifi','qInsur','qDriver'].forEach(id => { document.getElementById(id).checked = false; });
+  calcQuote();
+  document.getElementById('modalQuote').style.display = 'flex';
+}
+
+function genRef() {
+  return 'RC-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random()*9000)+1000);
+}
+
+function calcQuote() {
+  const start = new Date(document.getElementById('qStart').value);
+  const end   = new Date(document.getElementById('qEnd').value);
+  const pDay  = Number(document.getElementById('qPriceDay').value)||0;
+  const dep   = Number(document.getElementById('qDeposit').value)||0;
+  const isValid = !isNaN(start) && !isNaN(end) && end > start;
+  const days  = isValid ? Math.ceil((end - start) / 86400000) : 0;
+  const extras = [
+    { id:'qGPS',    price:50  },
+    { id:'qBaby',   price:30  },
+    { id:'qWifi',   price:40  },
+    { id:'qInsur',  price:80  },
+    { id:'qDriver', price:200 },
+  ];
+  const extrasTotal = extras.reduce((s, e) => document.getElementById(e.id).checked ? s + e.price * days : s, 0);
+  const base  = days * pDay;
+  const total = Math.max(base + extrasTotal - dep, 0);
+  document.getElementById('qDays').textContent     = days ? days + ' jour' + (days>1?'s':'') : '—';
+  document.getElementById('qSubBase').textContent   = base ? base.toLocaleString('fr') + ' DH' : '—';
+  document.getElementById('qSubExtras').textContent = extrasTotal ? extrasTotal.toLocaleString('fr') + ' DH' : '0 DH';
+  document.getElementById('qSubDep').textContent    = dep ? '- ' + dep.toLocaleString('fr') + ' DH' : '0 DH';
+  document.getElementById('qTotal').textContent     = total.toLocaleString('fr') + ' DH';
+}
+
+function printQuote(isContract) {
+  const name   = document.getElementById('qName').value || '—';
+  const phone  = document.getElementById('qPhone').value || '—';
+  const car    = document.getElementById('qCar').value   || '—';
+  const ref    = document.getElementById('qRef').value   || genRef();
+  const start  = document.getElementById('qStart').value;
+  const end    = document.getElementById('qEnd').value;
+  const pDay   = Number(document.getElementById('qPriceDay').value)||0;
+  const dep    = Number(document.getElementById('qDeposit').value)||0;
+  const now    = new Date().toLocaleDateString('fr-MA');
+
+  const extras = [
+    { id:'qGPS',    label:'GPS',                    price:50  },
+    { id:'qBaby',   label:'Siège bébé',              price:30  },
+    { id:'qWifi',   label:'WiFi portable',           price:40  },
+    { id:'qInsur',  label:'Assurance tous risques',  price:80  },
+    { id:'qDriver', label:'Chauffeur',               price:200 },
+  ].filter(e => document.getElementById(e.id).checked);
+
+  const s = new Date(start); const e2 = new Date(end);
+  const days = (!isNaN(s)&&!isNaN(e2)&&e2>s) ? Math.ceil((e2-s)/86400000) : 0;
+  const base = days * pDay;
+  const extTotal = extras.reduce((sum, ex) => sum + ex.price * days, 0);
+  const grandTotal = base + extTotal;
+  const reste = Math.max(grandTotal - dep, 0);
+
+  const extRows = extras.map(ex =>
+    `<div class="pr-row"><span>${ex.label}</span><span>${(ex.price*days).toLocaleString('fr')} DH</span></div>`
+  ).join('');
+
+  const contractExtra = isContract ? `
+    <div class="pr-section">
+      <h3>État du véhicule (départ)</h3>
+      <ul class="pr-checklist">
+        <li><div class="pr-check"></div>Carrosserie sans dommage</li>
+        <li><div class="pr-check"></div>Vitres intactes</li>
+        <li><div class="pr-check"></div>Niveau carburant: ________</li>
+        <li><div class="pr-check"></div>Kilométrage départ: ________</li>
+        <li><div class="pr-check"></div>Kilométrage retour: ________</li>
+      </ul>
+    </div>
+    <div class="pr-terms">
+      CONDITIONS GÉNÉRALES — La location commence à la date de départ indiquée et se termine à la date de retour convenue. Tout retard supérieur à 2h sera facturé une journée supplémentaire. Le locataire est responsable de tout dommage causé au véhicule pendant la période de location. Le carburant est à la charge du locataire. Le véhicule doit être restitué dans le même état qu'à la prise en charge.
+    </div>
+  ` : `<div class="pr-terms">Ce devis est valable 48 heures. Nous restons disponibles pour tout ajustement. — AmraniAds</div>`;
+
+  document.getElementById('printArea').innerHTML = `
+    <div class="pr-header">
+      <div>
+        <div class="pr-logo">🚗 ${isContract ? 'CONTRAT' : 'DEVIS'} DE LOCATION</div>
+        <div style="font-size:.85rem;color:#6b7280;margin-top:4px">AmraniAds — Système de location</div>
+      </div>
+      <div class="pr-ref">
+        <div>Réf: <strong>${ref}</strong></div>
+        <div>Date: ${now}</div>
+        ${isContract ? `<div>Type: <strong>CONTRAT</strong></div>` : ''}
+      </div>
+    </div>
+    <div class="pr-section">
+      <h3>Client</h3>
+      <div class="pr-row"><span>Nom</span><span>${escHtml(name)}</span></div>
+      <div class="pr-row"><span>Téléphone</span><span>${escHtml(phone)}</span></div>
+    </div>
+    <div class="pr-section">
+      <h3>Véhicule & Dates</h3>
+      <div class="pr-row"><span>Véhicule</span><span>${escHtml(car)}</span></div>
+      <div class="pr-row"><span>Date de départ</span><span>${start||'—'}</span></div>
+      <div class="pr-row"><span>Date de retour</span><span>${end||'—'}</span></div>
+      <div class="pr-row"><span>Durée</span><span>${days} jour${days>1?'s':''}</span></div>
+    </div>
+    <div class="pr-section">
+      <h3>Tarification</h3>
+      <div class="pr-row"><span>Location (${days}j × ${pDay} DH/j)</span><span>${base.toLocaleString('fr')} DH</span></div>
+      ${extRows}
+      ${dep ? `<div class="pr-row"><span>Acompte versé</span><span style="color:#16a34a">- ${dep.toLocaleString('fr')} DH</span></div>` : ''}
+      <div class="pr-total"><span>Reste à payer</span><span>${reste.toLocaleString('fr')} DH</span></div>
+    </div>
+    ${contractExtra}
+    <div class="pr-sig">
+      <div class="pr-sig-box">Signature client<br><br><br></div>
+      <div class="pr-sig-box">Signature agence<br><br><br></div>
+    </div>
+  `;
+  setTimeout(() => window.print(), 100);
+}
+
+// ─── CSV EXPORT ───────────────────────────────────────────────────
+function exportCSV() {
+  if (!leadsData.length) { toast('⚠️ Aucun lead à exporter'); return; }
+  const headers = ['Référence','Date','Nom','Téléphone','Voiture demandée','Dates location','Source','Statut','Revenue (DH)','Notes'];
+  const rows = leadsData.map(l => headers.map(h => {
+    const v = String(l[h]||'').replace(/"/g,'""');
+    return `"${v}"`;
+  }));
+  const csv = '﻿' + [headers.map(h=>`"${h}"`), ...rows].map(r=>r.join(',')).join('\n');
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), { href:url, download:'leads-location-' + new Date().toISOString().slice(0,10) + '.csv' });
+  a.click(); URL.revokeObjectURL(url);
+  toast('✅ CSV exporté !');
 }
 function closeModal(id, e) { if (e.target.id === id) document.getElementById(id).style.display = 'none'; }
 function closeModalById(id) { document.getElementById(id).style.display = 'none'; }
