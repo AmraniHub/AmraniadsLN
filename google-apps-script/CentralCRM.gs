@@ -178,21 +178,9 @@ function setup() {
 
   SpreadsheetApp.flush();
 
-  var ui = SpreadsheetApp.getUi ? SpreadsheetApp.getUi() : null;
-  var msg =
-    '✅ Central CRM Ready!\n\n' +
-    'Sheet created:\n' + url + '\n\n' +
-    'Next step — Deploy as Web App:\n' +
-    'Deploy → New deployment → Web app\n' +
-    'Execute as: Me | Who has access: Anyone\n\n' +
-    'Then add CENTRAL_SHEETS_URL in Vercel.';
-
-  if (ui) {
-    ui.alert(msg);
-  } else {
-    Logger.log(msg);
-    Logger.log('📊 Sheet URL: ' + url);
-  }
+  Logger.log('✅ Central CRM Ready!');
+  Logger.log('📊 Sheet URL: ' + url);
+  Logger.log('👉 Next: Deploy → New deployment → Web app → Execute as Me → Anyone');
 }
 
 // ── Helper: format a per-client sheet ────────────────────────
