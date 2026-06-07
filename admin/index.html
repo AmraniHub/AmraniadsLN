@@ -312,13 +312,29 @@
     .rc-logo { font-size:.75rem; font-weight:700; color:rgba(255,255,255,.5); margin-bottom:16px; letter-spacing:1px; }
     .rc-client { font-size:1.1rem; font-weight:900; color:#fff; margin-bottom:4px; }
     .rc-period { font-size:.75rem; color:rgba(255,255,255,.55); margin-bottom:20px; }
-    .rc-metrics { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+    .rc-metrics { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:10px; margin-bottom:20px; }
     .rc-metric { background:rgba(255,255,255,.07); border-radius:12px; padding:14px 12px; }
     .rc-metric .rcm-num { font-size:1.6rem; font-weight:900; color:#fff; line-height:1; }
     .rc-metric .rcm-label { font-size:.68rem; color:rgba(255,255,255,.55); margin-top:4px; }
     .rc-metric.green .rcm-num { color:#4ade80; }
     .rc-metric.amber .rcm-num { color:#fbbf24; }
+    .rc-metric.blue .rcm-num  { color:#60a5fa; }
+    .rc-metric.pink .rcm-num  { color:#f472b6; }
+    .rc-metric.purple .rcm-num{ color:#c084fc; }
     .rc-cta { font-size:.72rem; color:rgba(255,255,255,.4); text-align:center; border-top:1px solid rgba(255,255,255,.08); padding-top:14px; }
+    /* Dynamic metric rows */
+    .metric-row { display:flex;gap:7px;align-items:center;background:var(--card2);border-radius:10px;padding:7px 9px;margin-bottom:7px; }
+    .metric-row .mr-lbl { flex:1;min-width:0;font-size:.8rem;direction:rtl;text-align:right; }
+    .metric-row .mr-val { width:72px;font-size:.8rem;text-align:center; }
+    .mr-dots { display:flex;gap:3px;align-items:center; }
+    .mr-dot { width:17px;height:17px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .15s,transform .1s;flex-shrink:0; }
+    .mr-dot.active { border-color:#fff;transform:scale(1.15); }
+    .mr-dot:hover { opacity:.85; }
+    .mr-del { background:rgba(248,113,113,.15);color:#f87171;border:none;border-radius:7px;padding:5px 9px;cursor:pointer;font-size:.85rem;flex-shrink:0;line-height:1; }
+    .mr-del:hover { background:rgba(248,113,113,.3); }
+    .metric-presets { display:flex;flex-wrap:wrap;gap:5px;margin-top:6px; }
+    .mpreset { background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-family:Cairo,sans-serif;font-size:.73rem;color:var(--muted);cursor:pointer;transition:background .15s,color .15s; }
+    .mpreset:hover { background:var(--blue);color:#fff;border-color:var(--blue); }
 
     /* Milestone badges */
     .milestone-item {
@@ -587,22 +603,25 @@
                   <label style="direction:rtl;text-align:right">الفترة</label>
                   <input type="text" id="rc-period" value="30 يوم" style="direction:rtl"/>
                 </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-                  <div class="modal-field" style="margin:0">
-                    <label style="direction:rtl;text-align:right">عدد اللييدز</label>
-                    <input type="number" id="rc-leads" placeholder="47" style="direction:rtl"/>
+                <!-- Dynamic metrics -->
+                <div style="margin-bottom:10px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+                    <div style="font-size:.73rem;color:var(--muted);direction:rtl">المقاييس (اضغط الدائرة لتغيير اللون)</div>
+                    <button class="btn-xs btn-blue" onclick="addMetricRow()" style="padding:5px 10px;font-size:.75rem">＋ مقياس</button>
                   </div>
-                  <div class="modal-field" style="margin:0">
-                    <label style="direction:rtl;text-align:right">تكلفة اللييد (DH)</label>
-                    <input type="number" id="rc-cpl" placeholder="38" style="direction:rtl"/>
-                  </div>
-                  <div class="modal-field" style="margin:0">
-                    <label style="direction:rtl;text-align:right">عملاء مؤكدون</label>
-                    <input type="number" id="rc-conf" placeholder="12" style="direction:rtl"/>
-                  </div>
-                  <div class="modal-field" style="margin:0">
-                    <label style="direction:rtl;text-align:right">Revenue (DH)</label>
-                    <input type="number" id="rc-rev" placeholder="18000" style="direction:rtl"/>
+                  <div id="metric-rows-wrap"></div>
+                  <div class="metric-presets" dir="rtl">
+                    <span style="font-size:.7rem;color:var(--muted);align-self:center;padding-left:4px">سريع:</span>
+                    <button class="mpreset" onclick="addMetricPreset('ليد مستهدف','')">ليد مستهدف</button>
+                    <button class="mpreset" onclick="addMetricPreset('تكلفة الليد (DH)','green')">تكلفة الليد</button>
+                    <button class="mpreset" onclick="addMetricPreset('عميل مؤكد','amber')">عميل مؤكد</button>
+                    <button class="mpreset" onclick="addMetricPreset('Revenue (DH)','')">Revenue</button>
+                    <button class="mpreset" onclick="addMetricPreset('ROAS','blue')">ROAS</button>
+                    <button class="mpreset" onclick="addMetricPreset('CTR %','blue')">CTR %</button>
+                    <button class="mpreset" onclick="addMetricPreset('مشاهدات','')">مشاهدات</button>
+                    <button class="mpreset" onclick="addMetricPreset('نقرات','amber')">نقرات</button>
+                    <button class="mpreset" onclick="addMetricPreset('وصول','')">وصول</button>
+                    <button class="mpreset" onclick="addMetricPreset('تكلفة الحملة (DH)','pink')">تكلفة الحملة</button>
                   </div>
                 </div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -620,12 +639,7 @@
                 <div class="rc-logo">AMRANIADS.COM</div>
                 <div class="rc-client" id="rcp-client">اختر عميلاً</div>
                 <div class="rc-period" id="rcp-period">خلال 30 يوم</div>
-                <div class="rc-metrics">
-                  <div class="rc-metric"><div class="rcm-num" id="rcp-leads">—</div><div class="rcm-label">ليد مستهدف</div></div>
-                  <div class="rc-metric green"><div class="rcm-num" id="rcp-cpl">—</div><div class="rcm-label">تكلفة الليد (DH)</div></div>
-                  <div class="rc-metric amber"><div class="rcm-num" id="rcp-conf">—</div><div class="rcm-label">عميل مؤكد</div></div>
-                  <div class="rc-metric"><div class="rcm-num" id="rcp-rev">—</div><div class="rcm-label">Revenue (DH)</div></div>
-                </div>
+                <div class="rc-metrics" id="rc-metrics-preview"></div>
                 <div class="rc-cta">النتائج تتحدث عن نفسها 🚀 amraniads.com</div>
               </div>
               <div style="margin-top:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px" id="cardTextBox" dir="rtl">
@@ -1514,7 +1528,84 @@ function switchProofTab(tab, btn) {
 
 function initProofView() {
   loadCardClients();
+  renderMetricRows();
   renderPortfolio();
+}
+
+// ── RESULTS CARD — Dynamic Metrics ─────────────────────────────
+const RC_DOTS = {
+  '':       { bg:'rgba(255,255,255,.25)', title:'عادي (أبيض)' },
+  'green':  { bg:'#4ade80',              title:'أخضر'         },
+  'amber':  { bg:'#fbbf24',              title:'برتقالي'      },
+  'blue':   { bg:'#60a5fa',              title:'أزرق'         },
+  'pink':   { bg:'#f472b6',              title:'وردي'         },
+  'purple': { bg:'#c084fc',              title:'بنفسجي'       },
+};
+
+let rcMetrics = [
+  { label:'ليد مستهدف',       value:'', color:''      },
+  { label:'تكلفة الليد (DH)', value:'', color:'green' },
+  { label:'عميل مؤكد',        value:'', color:'amber' },
+  { label:'Revenue (DH)',      value:'', color:''      },
+];
+
+function renderMetricRows() {
+  const wrap = document.getElementById('metric-rows-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = rcMetrics.map((m, i) => `
+    <div class="metric-row">
+      <input class="form-input mr-lbl" type="text" placeholder="اسم المقياس"
+        value="${escHtml(m.label)}"
+        oninput="rcMetrics[${i}].label=this.value;renderCardPreview()"/>
+      <input class="form-input mr-val" type="text" placeholder="القيمة"
+        value="${escHtml(m.value)}"
+        oninput="rcMetrics[${i}].value=this.value;renderCardPreview()"/>
+      <div class="mr-dots">
+        ${Object.entries(RC_DOTS).map(([k,v]) =>
+          `<div class="mr-dot${m.color===k?' active':''}"
+            title="${v.title}"
+            style="background:${v.bg}"
+            onclick="rcMetrics[${i}].color='${k}';renderMetricRows()"></div>`
+        ).join('')}
+      </div>
+      <button class="mr-del" onclick="removeMetric(${i})" title="حذف">✕</button>
+    </div>
+  `).join('') || '<div style="text-align:center;color:var(--muted);font-size:.8rem;padding:10px">لا توجد مقاييس — اضغط ＋ أو اختر من القائمة السريعة</div>';
+  renderCardPreview();
+}
+
+function addMetricRow() {
+  if (rcMetrics.length >= 6) { toast('⚠️ الحد الأقصى 6 مقاييس'); return; }
+  rcMetrics.push({ label:'', value:'', color:'' });
+  renderMetricRows();
+  // Focus the new label input
+  const rows = document.querySelectorAll('.metric-row .mr-lbl');
+  if (rows.length) rows[rows.length - 1].focus();
+}
+
+function addMetricPreset(label, color) {
+  if (rcMetrics.length >= 6) { toast('⚠️ الحد الأقصى 6 مقاييس'); return; }
+  rcMetrics.push({ label, value:'', color });
+  renderMetricRows();
+  // Focus the new value input
+  const vals = document.querySelectorAll('.metric-row .mr-val');
+  if (vals.length) vals[vals.length - 1].focus();
+}
+
+function removeMetric(i) {
+  rcMetrics.splice(i, 1);
+  renderMetricRows();
+}
+
+function renderCardPreview() {
+  const preview = document.getElementById('rc-metrics-preview');
+  if (!preview) return;
+  preview.innerHTML = rcMetrics.map(m =>
+    `<div class="rc-metric${m.color ? ' '+m.color : ''}">
+      <div class="rcm-num">${escHtml(m.value || '—')}</div>
+      <div class="rcm-label">${escHtml(m.label)}</div>
+    </div>`
+  ).join('');
 }
 
 // ── RESULTS CARD ───────────────────────────────────────────────
@@ -1534,18 +1625,16 @@ function generateResultCard() {
   const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
   const selId   = document.getElementById('rc-client-sel').value;
   const client  = clients.find(c => c.id === selId) || { name: document.getElementById('rc-client-sel').options[0]?.text || '—' };
-  const period  = document.getElementById('rc-period').value  || '30 يوم';
-  const leads   = document.getElementById('rc-leads').value   || '—';
-  const cpl     = document.getElementById('rc-cpl').value     || '—';
-  const conf    = document.getElementById('rc-conf').value    || '—';
-  const rev     = document.getElementById('rc-rev').value     || '—';
+  const period  = document.getElementById('rc-period').value || '30 يوم';
 
-  document.getElementById('rcp-client').textContent  = client.name + (client.city ? ` — ${client.city}` : '');
-  document.getElementById('rcp-period').textContent  = 'خلال ' + period;
-  document.getElementById('rcp-leads').textContent   = leads;
-  document.getElementById('rcp-cpl').textContent     = cpl + ' DH';
-  document.getElementById('rcp-conf').textContent    = conf;
-  document.getElementById('rcp-rev').textContent     = rev ? Number(rev).toLocaleString('fr') + ' DH' : '—';
+  document.getElementById('rcp-client').textContent = client.name + (client.city ? ` — ${client.city}` : '');
+  document.getElementById('rcp-period').textContent = 'خلال ' + period;
+  renderCardPreview();
+
+  const colorEmoji = { '':'📌', 'green':'💰', 'amber':'✅', 'blue':'📊', 'pink':'🌸', 'purple':'⭐' };
+  const metricLines = rcMetrics.map(m =>
+    `${colorEmoji[m.color] || '📌'} ${m.value || '—'} ${m.label}`
+  ).join('\n');
 
   const nicheLabel = niche === 'salon' ? 'الصالون' : 'تأجير السيارات';
   const cardText = `🏆 نتائج حقيقية من عميل ${nicheLabel}
@@ -1553,10 +1642,7 @@ function generateResultCard() {
 👤 ${client.name}${client.city ? ` — ${client.city}` : ''}
 📅 خلال ${period}
 
-📥 ${leads} ليد مستهدف
-💰 ${cpl} DH تكلفة الليد
-✅ ${conf} عميل مؤكد
-📈 ${rev ? Number(rev).toLocaleString('fr') + ' DH Revenue' : ''}
+${metricLines}
 
 النتائج تتحدث عن نفسها 🚀
 هل تريد نفس الشيء لمشروعك؟
@@ -1577,17 +1663,13 @@ function saveProofItem() {
   const clients = JSON.parse(localStorage.getItem(cfg.clientsKey) || '[]');
   const selId   = document.getElementById('rc-client-sel').value;
   const client  = clients.find(c => c.id === selId) || {};
+  if (!rcMetrics.length) { toast('⚠️ أضف مقياساً واحداً على الأقل'); return; }
   const d = getProofData();
   d.items.push({
     id: 'p' + Date.now(), type: 'casestudy', niche,
     clientName: client.name || '—', city: client.city || '',
     period: document.getElementById('rc-period').value || '30 يوم',
-    metrics: {
-      leads: Number(document.getElementById('rc-leads').value) || 0,
-      cpl:   Number(document.getElementById('rc-cpl').value)   || 0,
-      conf:  Number(document.getElementById('rc-conf').value)  || 0,
-      rev:   Number(document.getElementById('rc-rev').value)   || 0,
-    },
+    metrics: rcMetrics.map(m => ({ label: m.label, value: m.value, color: m.color })),
     quote: '', starred: false, date: new Date().toISOString().slice(0,10)
   });
   saveProofData(d);
