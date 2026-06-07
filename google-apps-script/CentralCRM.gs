@@ -1,10 +1,10 @@
 // ═════════════════════════════════════════════════════════════
 //  AmraniAds — Central CRM Google Apps Script
-//  One Google Sheet, all clients' leads in one place.
+//  Works as a STANDALONE script (no need to open from a Sheet).
 //
 //  HOW TO DEPLOY:
 //  1. Go to script.google.com → New project → paste this code
-//  2. Run setup() once to create the AllLeads sheet
+//  2. Run setup() once — it creates the Google Sheet automatically
 //  3. Deploy → New deployment → Web app
 //     Execute as: Me | Who has access: Anyone
 //  4. Copy the Web App URL
@@ -16,6 +16,23 @@
 
 var ALL_HEADERS = ['#', 'Client', 'Type', 'Nom', 'WhatsApp', 'Lien WA', 'Service', 'Date'];
 var COL = { NUM:1, CLIENT:2, TYPE:3, NAME:4, PHONE:5, WALINK:6, SERVICE:7, DATE:8 };
+
+// ── Get (or create) the spreadsheet ──────────────────────────
+// Saves the spreadsheet ID in Script Properties so it persists
+// across runs — works whether the script is standalone or bound.
+function getSpreadsheet() {
+  var props = PropertiesService.getScriptProperties();
+  var ssId  = props.getProperty('SPREADSHEET_ID');
+
+  if (ssId) {
+    try { return SpreadsheetApp.openById(ssId); } catch (e) {}
+  }
+
+  // First run — create the sheet and remember its ID
+  var ss = SpreadsheetApp.create('AmraniAds — Central CRM');
+  props.setProperty('SPREADSHEET_ID', ss.getId());
+  return ss;
+}
 
 // ── Normalize Moroccan phone ──────────────────────────────────
 function normalizePhone(raw) {
@@ -29,8 +46,8 @@ function normalizePhone(raw) {
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
+    var ss   = getSpreadsheet();
 
-    var ss          = SpreadsheetApp.getActiveSpreadsheet();
     var allSheet    = ss.getSheetByName('AllLeads') || ss.insertSheet('AllLeads');
     var clientSheet = ss.getSheetByName(data.client_id);
     if (!clientSheet) {
@@ -60,17 +77,13 @@ function doPost(e) {
       waCell.setFormula('=HYPERLINK("' + waLink + '","WhatsApp 💬")');
       waCell.setFontColor('#1b5e20').setFontWeight('bold');
     }
-    // Alternating row color by client
-    var clientColors = {
-      solyra:     '#fce4ec',
-      carrent:    '#e3f2fd',
-      beauty:     '#f3e5f5',
-      ecom:       '#e8f5e9',
-    };
+
+    // Color rows per client
+    var clientColors = { solyra: '#fce4ec', carrent: '#e3f2fd', beauty: '#f3e5f5', ecom: '#e8f5e9' };
     var bgColor = clientColors[data.client_id] || '#fff9c4';
     allSheet.getRange(newRow, 1, 1, ALL_HEADERS.length).setBackground(bgColor);
 
-    // ── Client-specific tab ──
+    // ── Client tab ──
     var clientRowNum = Math.max(clientSheet.getLastRow(), 1);
     clientSheet.appendRow([clientRowNum, data.name || '', phone, '', data.service || '', data.type || 'lead', dateStr]);
     var clientNewRow = clientSheet.getLastRow();
@@ -94,8 +107,8 @@ function doPost(e) {
 // ── doGet: return all leads as JSON for admin dashboard ───────
 function doGet(e) {
   try {
-    var ss       = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet    = ss.getSheetByName('AllLeads');
+    var ss    = getSpreadsheet();
+    var sheet = ss.getSheetByName('AllLeads');
 
     if (!sheet || sheet.getLastRow() < 2) {
       return ContentService
@@ -115,10 +128,8 @@ function doGet(e) {
       leads.push(row);
     }
 
-    // Return newest first
-    leads.reverse();
+    leads.reverse(); // newest first
 
-    // Count per client
     var byClient = {};
     leads.forEach(function(l) {
       var c = l['Client'] || 'unknown';
@@ -136,9 +147,9 @@ function doGet(e) {
   }
 }
 
-// ── setup(): run once to initialize AllLeads sheet ───────────
+// ── setup(): run ONCE to create and format the AllLeads sheet ─
 function setup() {
-  var ss    = SpreadsheetApp.getActiveSpreadsheet();
+  var ss    = getSpreadsheet(); // creates spreadsheet if needed
   var sheet = ss.getSheetByName('AllLeads');
   if (!sheet) sheet = ss.insertSheet('AllLeads');
 
@@ -163,16 +174,28 @@ function setup() {
   sheet.setColumnWidth(COL.SERVICE,200);
   sheet.setColumnWidth(COL.DATE,   145);
 
-  SpreadsheetApp.getUi().alert(
+  var url = 'https://docs.google.com/spreadsheets/d/' + ss.getId();
+
+  SpreadsheetApp.flush();
+
+  var ui = SpreadsheetApp.getUi ? SpreadsheetApp.getUi() : null;
+  var msg =
     '✅ Central CRM Ready!\n\n' +
-    'Now deploy as Web App:\n' +
+    'Sheet created:\n' + url + '\n\n' +
+    'Next step — Deploy as Web App:\n' +
     'Deploy → New deployment → Web app\n' +
     'Execute as: Me | Who has access: Anyone\n\n' +
-    'Then copy the URL and add it as CENTRAL_SHEETS_URL in Vercel.'
-  );
+    'Then add CENTRAL_SHEETS_URL in Vercel.';
+
+  if (ui) {
+    ui.alert(msg);
+  } else {
+    Logger.log(msg);
+    Logger.log('📊 Sheet URL: ' + url);
+  }
 }
 
-// ── Helper: setup a per-client sheet ─────────────────────────
+// ── Helper: format a per-client sheet ────────────────────────
 function setupClientSheet(sheet, clientName) {
   var headers = ['#', 'Nom', 'WhatsApp', 'Lien WA', 'Service', 'Type', 'Date'];
   sheet.appendRow(headers);
