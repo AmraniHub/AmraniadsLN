@@ -16,7 +16,17 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const { name, phone, service, eventId, pixelId: clientPixelId, userAgent, eventSourceUrl } = req.body || {};
+  const {
+    name,
+    phone,
+    service,
+    eventId,
+    pixelId: clientPixelId,
+    userAgent,
+    eventSourceUrl,
+    fbp,
+    fbc,
+  } = req.body || {};
   const results = {};
 
   // ── 1. Meta CAPI ──────────────────────────────────────
@@ -44,6 +54,8 @@ module.exports = async function handler(req, res) {
           ph: [sha256(normalizePhone(phone))].filter(Boolean),
           fn: [sha256(parts[0])].filter(Boolean),
           ln: parts[1] ? [sha256(parts[1])] : [],
+          fbp: fbp || undefined,
+          fbc: fbc || undefined,
           client_ip_address: clientIp  || undefined,
           client_user_agent: userAgent || undefined,
         },

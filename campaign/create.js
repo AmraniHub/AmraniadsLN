@@ -24,7 +24,7 @@ for (const f of ['.env.local', '.env']) {
 const TOKEN   = process.env.META_ACCESS_TOKEN;
 const PIXEL   = process.env.META_PIXEL_ID || '1433989221062105';
 const ACCOUNT = 'act_903715665970067';
-const URL_LP  = 'https://amraniads.com/';
+const URL_LP  = 'https://amraniads.com/rentalcars/';
 const API     = 'https://graph.facebook.com/v20.0';
 const VAPI    = 'https://graph-video.facebook.com/v20.0';
 
