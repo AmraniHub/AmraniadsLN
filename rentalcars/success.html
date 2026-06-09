@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <base href="/rentalcars/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Merci ! — AmraniAds</title>
+  <title>تم استلام الطلب | AmraniAds</title>
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -13,91 +13,154 @@
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','1433989221062105');
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .ltr { direction: ltr; unicode-bidi: plaintext; display: inline-block; }
+
     body {
       font-family: 'Cairo', sans-serif;
-      background: #f0f6ff;
-      color: #0f172a;
       min-height: 100svh;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 24px 16px;
+      background:
+        radial-gradient(circle at top right, rgba(37,99,235,.12), transparent 24%),
+        #f4f8ff;
+      color: #10203a;
     }
+
     .card {
+      width: min(560px, 100%);
       background: #fff;
-      border: 1px solid rgba(59,130,246,.22);
-      border-radius: 24px;
-      padding: 48px 36px;
-      max-width: 520px; width: 100%;
+      border: 1px solid rgba(37,99,235,.14);
+      border-radius: 28px;
+      padding: 40px 30px;
+      box-shadow: 0 18px 48px rgba(21,59,148,.12);
       text-align: center;
-      box-shadow: 0 8px 48px rgba(29,78,216,.12);
     }
-    .check {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 24px;
+
+    .icon {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #153b94 0%, #2563eb 58%, #0ea5e9 100%);
+      color: #fff;
       font-size: 2rem;
-      box-shadow: 0 8px 32px rgba(29,78,216,.35);
-      animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
+      box-shadow: 0 14px 32px rgba(37,99,235,.22);
     }
-    @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    h1 { font-size: 1.7rem; font-weight: 900; margin-bottom: 10px; }
-    h1 span { color: #1d4ed8; }
-    .sub { color: #6b7280; font-size: .95rem; line-height: 1.75; margin-bottom: 32px; }
+
+    h1 {
+      font-size: 1.9rem;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    h1 span { color: #2563eb; }
+
+    .sub {
+      color: #6d7c95;
+      font-size: .98rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
     .steps {
-      background: #eff6ff;
-      border: 1px solid rgba(59,130,246,.2);
-      border-radius: 16px;
-      padding: 24px 20px; text-align: left; margin-bottom: 28px;
+      text-align: right;
+      background: #f8fbff;
+      border: 1px solid rgba(37,99,235,.10);
+      border-radius: 20px;
+      padding: 22px 18px;
+      margin-bottom: 24px;
     }
-    .steps-title { font-size: .85rem; font-weight: 700; color: #1d4ed8; margin-bottom: 16px; letter-spacing: .5px; }
-    .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+
+    .steps-title {
+      color: #2563eb;
+      font-size: .9rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
     .step:last-child { margin-bottom: 0; }
-    .step-dot {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
-      color: #fff; font-size: .78rem; font-weight: 900;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #153b94 0%, #2563eb 58%, #0ea5e9 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      font-weight: 900;
+      flex-shrink: 0;
     }
-    .step-text { font-size: .88rem; color: #374151; line-height: 1.55; padding-top: 4px; }
-    .step-text strong { color: #0f172a; }
+
+    .step-text {
+      color: #44526b;
+      font-size: .9rem;
+      line-height: 1.7;
+      padding-top: 2px;
+    }
+
+    .step-text strong { color: #10203a; }
+
     .notice {
-      font-size: .8rem; color: #6b7280;
-      border-top: 1px solid rgba(59,130,246,.15);
-      padding-top: 20px; line-height: 1.65;
+      color: #6d7c95;
+      font-size: .84rem;
+      line-height: 1.8;
+      border-top: 1px solid rgba(37,99,235,.12);
+      padding-top: 18px;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <div class="check">🚗</div>
-    <h1>Merci ! On vous <span>contacte bientôt</span></h1>
-    <p class="sub">Votre demande d'audit gratuit a bien été reçue. Notre équipe vous contacte dans les prochaines heures via WhatsApp.</p>
+    <div class="icon">🚗</div>
+    <h1>تم استلام <span>الطلب ديالك</span></h1>
+    <p class="sub">شكرا لك. فريقنا غادي يراجع المعطيات ويرجع ليك على واتساب في أقرب وقت باش نعطيوك التصور المناسب لوكالة الكراء ديالك.</p>
+
     <div class="steps">
-      <div class="steps-title">📋 Ce qui se passe maintenant :</div>
+      <div class="steps-title">شنو غادي يوقع دابا؟</div>
       <div class="step">
-        <div class="step-dot">1</div>
-        <div class="step-text"><strong>On analyse votre présence actuelle</strong> — fiche Google, réseaux, dépendance plateformes</div>
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>كنراجعو الوضع الحالي ديالك</strong> من ناحية الحضور الرقمي، الإعلانات، وطريقة وصول الطلبات الحالية.</div>
       </div>
       <div class="step">
-        <div class="step-dot">2</div>
-        <div class="step-text"><strong>On vous contacte sur WhatsApp</strong> dans les prochaines heures avec le résultat de votre audit</div>
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>كنجاوبوك على واتساب</strong> باش نعطيوك الخطوات اللي تقدر تخدم بها بسرعة.</div>
       </div>
       <div class="step">
-        <div class="step-dot">3</div>
-        <div class="step-text"><strong>On planifie votre lancement</strong> — si vous souhaitez continuer, le système est en ligne en 25h</div>
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>إلى وافقت</strong> نقدروا نطلقو النظام ديالك في مدة تقريبية ديال <span class="ltr">25h</span>.</div>
       </div>
     </div>
-    <p class="notice">🔒 Aucun engagement requis — l'audit est 100% gratuit. Si vous n'entendez pas de nous dans 24h, écrivez-nous directement sur WhatsApp : 0627-716-149</p>
+
+    <p class="notice">إلى ما توصلكش الرسالة في ظرف معقول، راسلنا مباشرة على واتساب: <span class="ltr">0627-716-149</span></p>
   </div>
+
   <script>
     const params = new URLSearchParams(location.search);
     const eid = params.get('eid');
     if (eid && typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', { content_name: 'location-voiture-success' }, { eventID: eid });
+      fbq('track', 'Lead', { content_name: 'location-voiture-success-ar' }, { eventID: eid });
     }
   </script>
 </body>
