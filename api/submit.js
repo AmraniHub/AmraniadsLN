@@ -90,6 +90,7 @@ module.exports = async function handler(req, res) {
                  : srcUrl.includes('/novatech')          ? '🖥️ NovaTech'
                  : srcUrl.includes('/rentalcars')         ? '🚗 Location Voiture'
                  : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
+                 : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
                  : srcUrl.includes('/en')                ? '🇬🇧 English Page'
                  : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
                  : '🌍 Main Website (Foreign)';
