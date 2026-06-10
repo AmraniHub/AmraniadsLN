@@ -1,647 +1,418 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <base href="/shehrazade/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maison Beauty Shehrazade — Salon de Beauté | Maroc</title>
-  <meta name="description" content="Maison Beauty Shehrazade — votre espace beauté d'exception au Maroc. Soins visage, coiffure, maquillage, ongles & hammam. Réservez en ligne." />
+  <title>Maison Beauty Shehrazade — صالون التجميل | المغرب</title>
+  <meta name="description" content="Maison Beauty Shehrazade — صالون تجميل نسائي احترافي في المغرب. كوافور، بروتين الشعر، عناية بالبشرة، مكياج، أظافر وحمام مغربي. احجزي موعدك الآن!" />
   <link rel="icon" href="logo.png" type="image/png" />
 
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID_HERE');
+  fbq('track','PageView');
+  fbq('track','ViewContent');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=PIXEL_ID_HERE&ev=PageView&noscript=1"/></noscript>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Raleway:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:        #fdf8f0;
-      --cream2:       #f8eedb;
-      --cream3:       #f0dfc0;
-      --cream-dark:   #e8d5a8;
-      --gold:         #c9a84c;
-      --gold-light:   #d4b55e;
-      --gold-bright:  #e8c96a;
-      --gold-deep:    #a07828;
-      --gold-soft:    rgba(201,168,76,.10);
-      --gold-border:  rgba(201,168,76,.30);
-      --gold-glow:    rgba(201,168,76,.18);
-      --gold-shadow:  0 4px 32px rgba(201,168,76,.18);
-      --gold-shadow-lg: 0 12px 60px rgba(201,168,76,.26);
-      --text:         #3d2b10;
-      --muted:        #8a6f4a;
-      --light-muted:  #b8986a;
-      --dark:         #251505;
-      --white:        #ffffff;
+      --crimson:      #8b0020;
+      --crimson-mid:  #b0002a;
+      --pink:         #e91e6c;
+      --pink-soft:    rgba(233,30,108,.10);
+      --pink-border:  rgba(233,30,108,.22);
+      --gold:         #c9922b;
+      --gold-light:   #f0c060;
+      --gold-soft:    rgba(201,146,43,.12);
+      --bg:           #fff5f7;
+      --surface:      #ffffff;
+      --surface2:     #fdf0f4;
+      --text:         #1a0510;
+      --muted:        #7c3050;
       --green:        #25D366;
+      --grad:         linear-gradient(135deg, #e91e6c 0%, #8b0020 100%);
+      --grad-soft:    linear-gradient(135deg, #fce4ec 0%, #f8bbd0 60%, #fdf0f4 100%);
+      --shadow:       0 4px 24px rgba(139,0,32,.13);
+      --shadow-lg:    0 8px 48px rgba(139,0,32,.18);
     }
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Raleway', sans-serif;
-      background: var(--cream);
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
-    /* ── ORNAMENTAL DIVIDER ── */
-    .ornament {
-      display: flex; align-items: center; gap: 16px;
-      margin: 0 auto 42px; max-width: 320px;
-    }
-    .ornament-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .ornament-diamond {
-      width: 10px; height: 10px; background: var(--gold);
-      transform: rotate(45deg); flex-shrink: 0;
-      box-shadow: 0 0 12px rgba(201,168,76,.5);
-    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #fce4ec; }
+    ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 3px; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(253,248,240,.96);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--gold-border);
-      padding: 0 28px; height: 64px;
+      background: rgba(139,0,32,.97);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      padding: 0 32px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 24px rgba(139,0,32,.4);
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 44px; width: auto; }
-    .nav-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: .92rem; line-height: 1.25; color: var(--text);
-    }
-    .nav-logo-text span { display: block; font-size: .72rem; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-weight: 400; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .nav-logo-text { font-size: 1.05rem; font-weight: 900; line-height: 1.15; }
+    .nav-logo-text .t1 { color: #fff; }
+    .nav-logo-text .t2 { color: var(--gold); display: block; font-size: .82rem; }
     .nav-cta {
-      background: linear-gradient(135deg, var(--gold-deep), var(--gold-light));
-      color: #fff; border: none; border-radius: 50px;
-      padding: 10px 24px; font-family: 'Raleway', sans-serif;
-      font-size: .85rem; font-weight: 700; cursor: pointer;
-      text-decoration: none; transition: opacity .2s, transform .15s;
-      letter-spacing: .5px;
-      box-shadow: 0 4px 18px rgba(201,168,76,.35);
+      background: var(--gold); color: var(--crimson);
+      border: none; border-radius: 50px; padding: 9px 22px;
+      font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 900;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, transform .15s; white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(201,146,43,.4);
     }
-    .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     /* ── HERO ── */
     .hero {
       min-height: 100svh;
-      padding: 80px 20px 60px;
+      padding: 90px 40px 60px;
       display: flex; align-items: center; justify-content: center;
-      background:
-        radial-gradient(ellipse 70% 60% at 20% 30%, rgba(240,215,160,.35) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(201,168,76,.12) 0%, transparent 55%),
-        var(--cream);
-      text-align: center;
+      background: var(--grad-soft);
       position: relative; overflow: hidden;
     }
     .hero::before {
       content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,30,108,.10) 0%, transparent 70%);
+      top: -150px; right: -100px; pointer-events: none;
     }
-    .hero-inner { max-width: 680px; width: 100%; position: relative; z-index: 1; }
-    .hero-logo { width: 200px; height: 200px; border-radius: 50%; margin: 0 auto 32px;
-      object-fit: cover;
-      filter: drop-shadow(0 8px 40px rgba(201,168,76,.35));
-      animation: hero-float 4s ease-in-out infinite;
-    }
-    @keyframes hero-float {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-8px); }
-    }
-
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gold-soft); border: 1px solid var(--gold-border);
-      color: var(--gold-deep); border-radius: 50px;
-      padding: 6px 18px; font-size: .78rem; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 22px;
-    }
-    .hero-tag::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); animation: blink 2s infinite; flex-shrink: 0;
-    }
-    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.25} }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
-      font-weight: 700; line-height: 1.18;
-      color: var(--text); margin-bottom: 8px;
-    }
-    h1 em {
-      font-style: italic; color: var(--gold-deep);
-      display: block;
-    }
-    .hero-sub-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1rem, 2.5vw, 1.35rem);
-      font-weight: 400; color: var(--gold);
-      letter-spacing: 4px; text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-    .hero-desc {
-      font-size: 1.05rem; color: var(--muted);
-      max-width: 500px; margin: 0 auto 36px; font-weight: 400;
-      line-height: 1.9;
-    }
-    .hero-proof {
-      display: flex; gap: 28px; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 36px;
-    }
-    .proof-item { display: flex; align-items: center; gap: 8px; }
-    .proof-icon { font-size: 1rem; }
-    .proof-txt  { font-size: .82rem; color: var(--muted); font-weight: 500; }
-    .proof-txt strong { color: var(--gold-deep); font-weight: 700; }
-
-    .hero-btns {
-      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-light) 100%);
-      color: #fff; font-family: 'Raleway', sans-serif;
-      font-size: .95rem; font-weight: 700; border: none; border-radius: 50px;
-      padding: 15px 36px; cursor: pointer; text-decoration: none;
-      transition: opacity .2s, transform .15s; display: inline-block;
-      box-shadow: 0 6px 32px rgba(201,168,76,.45);
-      letter-spacing: .5px;
-    }
-    .btn-primary:hover { opacity: .9; transform: translateY(-2px); }
-    .btn-wa {
-      background: var(--green); color: #fff; font-family: 'Raleway', sans-serif;
-      font-size: .95rem; font-weight: 700; border: none; border-radius: 50px;
-      padding: 15px 30px; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 9px;
-      transition: opacity .2s, transform .15s;
-      box-shadow: 0 6px 24px rgba(37,211,102,.3);
-    }
-    .btn-wa:hover { opacity: .9; transform: translateY(-2px); }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--gold-border);
-      color: var(--gold-deep); font-family: 'Raleway', sans-serif;
-      font-size: .95rem; font-weight: 600; border-radius: 50px;
-      padding: 14px 32px; text-decoration: none; display: inline-block;
-      transition: background .2s, transform .15s;
-    }
-    .btn-outline:hover { background: var(--gold-soft); transform: translateY(-2px); }
-
-    /* ── SECTION COMMONS ── */
-    .section-eyebrow {
-      font-size: .72rem; font-weight: 700; color: var(--gold);
-      letter-spacing: 3px; text-transform: uppercase;
-      text-align: center; margin-bottom: 14px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700;
-      color: var(--text); text-align: center; margin-bottom: 14px; line-height: 1.28;
-    }
-    .section-title em { font-style: italic; color: var(--gold-deep); }
-    .section-sub {
-      text-align: center; color: var(--muted); font-size: .96rem;
-      max-width: 520px; margin: 0 auto; line-height: 1.85; font-weight: 400;
-    }
-
-    /* ── ABOUT ── */
-    .about-section {
-      padding: 100px 24px;
-      background: var(--white);
-      border-top: 1px solid var(--gold-border);
-    }
-    .about-inner {
-      max-width: 1060px; margin: 0 auto;
-      display: flex; align-items: center; gap: 72px;
-    }
-    .about-visual { flex: 0 0 380px; }
-    .about-frame {
-      border-radius: 24px;
-      border: 2px solid var(--gold-border);
-      background: linear-gradient(145deg, var(--cream), var(--cream2));
-      padding: 36px; text-align: center;
-      box-shadow: var(--gold-shadow-lg);
-      position: relative; overflow: hidden;
-    }
-    .about-frame::before {
+    .hero::after {
       content: '';
-      position: absolute; top: -50px; right: -50px;
-      width: 200px; height: 200px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.15) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .about-frame img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 3px solid var(--gold-border); }
-    .about-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-style: italic;
-      color: var(--text); line-height: 1.75; margin-bottom: 16px;
-    }
-    .about-stats { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .astat {
-      background: var(--gold-soft);
-      border: 1px solid var(--gold-border);
-      border-radius: 12px; padding: 12px 20px; text-align: center;
-    }
-    .astat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--gold-deep); display: block; line-height: 1; }
-    .astat-lbl { font-size: .72rem; color: var(--muted); margin-top: 4px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
-
-    .about-text { flex: 1; }
-    .about-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700;
-      color: var(--text); margin-bottom: 18px; line-height: 1.3;
-    }
-    .about-text h2 em { font-style: italic; color: var(--gold-deep); }
-    .about-text p { font-size: .97rem; color: var(--muted); line-height: 1.9; margin-bottom: 16px; }
-    .about-pills { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
-    .pill {
-      background: var(--gold-soft); border: 1px solid var(--gold-border);
-      color: var(--gold-deep); border-radius: 50px;
-      padding: 7px 18px; font-size: .8rem; font-weight: 600;
-      letter-spacing: .3px;
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,146,43,.09) 0%, transparent 70%);
+      bottom: -80px; left: 8%; pointer-events: none;
     }
 
-    /* ── SERVICES ── */
-    .services-section {
-      padding: 100px 24px;
-      background: linear-gradient(180deg, var(--cream) 0%, var(--cream2) 100%);
-      border-top: 1px solid var(--gold-border);
-    }
-    .services-inner { max-width: 1080px; margin: 0 auto; }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px; margin-top: 0;
-    }
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--gold-border);
-      border-radius: 20px; padding: 32px 28px;
-      transition: transform .28s, box-shadow .28s, border-color .28s;
-      position: relative; overflow: hidden;
-    }
-    .service-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright), var(--gold-deep));
-      opacity: 0; transition: opacity .28s;
-    }
-    .service-card:hover { transform: translateY(-6px); box-shadow: var(--gold-shadow-lg); border-color: var(--gold); }
-    .service-card:hover::after { opacity: 1; }
-    .svc-icon {
-      width: 58px; height: 58px; border-radius: 16px;
-      background: linear-gradient(135deg, var(--cream2), var(--cream3));
-      border: 1px solid var(--gold-border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; margin-bottom: 18px;
-      box-shadow: var(--gold-shadow);
-    }
-    .svc-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-    .svc-desc  { font-size: .88rem; color: var(--muted); line-height: 1.75; margin-bottom: 16px; }
-    .svc-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .svc-items li { font-size: .82rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-    .svc-items li::before { content: '◆'; font-size: .45rem; color: var(--gold); flex-shrink: 0; }
-
-    /* ── EXPERIENCE STRIP ── */
-    .strip {
-      background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-light) 50%, var(--gold-deep) 100%);
-      padding: 64px 24px;
-      position: relative; overflow: hidden;
-    }
-    .strip::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.05'%3E%3Cpath d='M0 0h80v80H0V0zm20 20v40h40V20H20zm20 35a15 15 0 110-30 15 15 0 010 30z' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-    .strip-inner {
-      max-width: 960px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 32px; text-align: center; position: relative; z-index: 1;
-    }
-    .strip-num   { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #fff; display: block; line-height: 1; }
-    .strip-label { font-size: .82rem; color: rgba(255,255,255,.82); margin-top: 8px; display: block; font-weight: 500; letter-spacing: .5px; }
-
-    /* ── WHY US ── */
-    .why-section {
-      padding: 100px 24px;
-      background: var(--white);
-      border-top: 1px solid var(--gold-border);
-    }
-    .why-inner { max-width: 1060px; margin: 0 auto; }
-    .why-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px; margin-top: 0;
-    }
-    .why-card {
-      text-align: center; padding: 36px 24px;
-      border: 1px solid var(--gold-border); border-radius: 20px;
-      background: linear-gradient(160deg, var(--cream) 0%, var(--white) 100%);
-      transition: transform .25s, box-shadow .25s, border-color .25s;
-    }
-    .why-card:hover { transform: translateY(-5px); box-shadow: var(--gold-shadow-lg); border-color: var(--gold); }
-    .why-icon {
-      font-size: 2.4rem; margin-bottom: 16px; display: block;
-      filter: drop-shadow(0 4px 12px rgba(201,168,76,.3));
-    }
-    .why-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .why-desc  { font-size: .86rem; color: var(--muted); line-height: 1.75; }
-
-    /* ── TESTIMONIALS ── */
-    .testimonials-section {
-      padding: 100px 24px;
-      background: linear-gradient(180deg, var(--cream2) 0%, var(--cream) 100%);
-      border-top: 1px solid var(--gold-border);
-    }
-    .testimonials-inner { max-width: 1060px; margin: 0 auto; }
-    .testimonials-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 22px; margin-top: 0;
-    }
-    .testi-card {
-      background: var(--white); border-radius: 20px; padding: 30px 26px;
-      border: 1px solid var(--gold-border);
-      transition: transform .25s, box-shadow .25s;
-      position: relative;
-    }
-    .testi-card::before {
-      content: '"';
-      position: absolute; top: 20px; right: 24px;
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem; color: var(--gold-soft);
-      line-height: 1; pointer-events: none;
-      color: rgba(201,168,76,.15);
-    }
-    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--gold-shadow-lg); }
-    .testi-stars { color: var(--gold); font-size: .85rem; letter-spacing: 3px; margin-bottom: 12px; }
-    .testi-text  { font-size: .92rem; color: var(--muted); line-height: 1.85; margin-bottom: 20px; font-style: italic; }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
-      border: 2px solid var(--gold-border); flex-shrink: 0;
-    }
-    .testi-name { font-weight: 700; font-size: .88rem; color: var(--text); }
-    .testi-loc  { font-size: .76rem; color: var(--gold-deep); margin-top: 2px; }
-
-    /* ── BOOKING SECTION ── */
-    .booking-section {
-      padding: 100px 24px;
-      background: linear-gradient(160deg, var(--cream3) 0%, var(--cream2) 100%);
-      border-top: 1px solid var(--gold-border);
-      position: relative; overflow: hidden;
-    }
-    .booking-section::before {
-      content: '';
-      position: absolute; width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.10) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-    .booking-inner {
-      max-width: 1060px; margin: 0 auto;
-      display: flex; gap: 72px; align-items: flex-start;
+    .hero-inner {
+      max-width: 1100px; width: 100%;
+      display: flex; align-items: center; gap: 56px;
       position: relative; z-index: 1;
     }
-    .booking-text { flex: 1; padding-top: 8px; }
-    .booking-text h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700;
-      color: var(--text); margin-bottom: 18px; line-height: 1.3;
+
+    /* text side */
+    .hero-text { flex: 1 1 480px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(139,0,32,.08); border: 1.5px solid rgba(233,30,108,.25);
+      color: var(--crimson-mid); border-radius: 50px;
+      padding: 6px 16px; font-size: .82rem; font-weight: 700; margin-bottom: 22px;
     }
-    .booking-text h2 em { font-style: italic; color: var(--gold-deep); }
-    .booking-text p { font-size: .97rem; color: var(--muted); line-height: 1.9; margin-bottom: 20px; }
-    .booking-benefits { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
-    .booking-benefits li {
-      display: flex; align-items: center; gap: 12px;
-      font-size: .92rem; color: var(--text);
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--pink); animation: blink 1.8s infinite; flex-shrink: 0;
     }
-    .booking-benefits li .bben-icon {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--gold-soft); border: 1px solid var(--gold-border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem; flex-shrink: 0;
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900; line-height: 1.22; color: var(--crimson); margin-bottom: 18px;
+    }
+    h1 .accent { color: var(--pink); }
+    h1 .gold   { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 440px; margin-bottom: 28px; line-height: 1.85;
     }
 
-    /* FORM */
-    .booking-form-col { flex: 0 0 420px; }
+    .motivation-box {
+      background: var(--surface);
+      border: 1.5px solid var(--pink-border);
+      border-radius: 14px; padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 12px;
+      box-shadow: var(--shadow); max-width: 480px;
+    }
+    .motivation-box .icon { font-size: 1.7rem; flex-shrink: 0; }
+    .motivation-box p { font-size: .95rem; color: var(--muted); line-height: 1.7; }
+    .motivation-box p strong { color: var(--crimson); }
+
+    /* form side */
+    .hero-form-col { flex: 0 0 380px; }
+
     .form-card {
-      background: var(--white); border-radius: 24px;
-      border: 1px solid var(--gold-border);
-      box-shadow: var(--gold-shadow-lg), 0 0 0 1px rgba(201,168,76,.06);
-      overflow: hidden;
+      background: var(--surface); border-radius: 20px;
+      box-shadow: var(--shadow-lg); overflow: hidden;
+      border: 1px solid var(--pink-border);
     }
     .form-card-top {
-      background: linear-gradient(135deg, var(--gold-deep), var(--gold-light));
-      padding: 24px 28px; text-align: center;
+      background: var(--grad); padding: 20px 24px; text-align: center;
     }
-    .form-card-top h3 { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.35; }
-    .form-card-top p  { color: rgba(255,255,255,.85); font-size: .83rem; margin-top: 6px; }
-    .form-body { padding: 28px 26px; }
+    .form-card-top h2 { color: #fff; font-size: 1.2rem; font-weight: 900; line-height: 1.3; }
+    .form-card-top p  { color: rgba(255,255,255,.85); font-size: .85rem; margin-top: 4px; }
+    .form-card-body   { padding: 24px; }
 
     .field { margin-bottom: 16px; }
     .field label {
-      display: block; font-size: .78rem; font-weight: 700;
-      color: var(--gold-deep); margin-bottom: 7px; letter-spacing: .5px; text-transform: uppercase;
+      display: block; font-size: .85rem; font-weight: 700;
+      color: var(--crimson); margin-bottom: 6px;
     }
-    .field input,
-    .field select,
-    .field textarea {
-      width: 100%; border: 1.5px solid var(--gold-border);
-      border-radius: 12px; padding: 13px 16px;
-      font-family: 'Raleway', sans-serif; font-size: 15px;
-      color: var(--text); background: var(--cream); outline: none;
+    .field input, .field select {
+      width: 100%; border: 1.5px solid var(--pink-border);
+      border-radius: 10px; padding: 12px 14px;
+      font-family: 'Cairo', sans-serif; font-size: 16px;
+      color: var(--text); background: var(--surface2); outline: none;
       transition: border-color .2s, box-shadow .2s;
       appearance: none; -webkit-appearance: none;
     }
-    .field textarea { resize: vertical; min-height: 80px; }
-    .field input:focus, .field select:focus, .field textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,.15);
+    .field input:focus, .field select:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(233,30,108,.12);
     }
-    .field input::placeholder, .field textarea::placeholder { color: var(--light-muted); opacity: .7; }
+    .field input::placeholder { color: #c4a3b0; }
     .field select option { background: #fff; color: var(--text); }
     .select-wrap { position: relative; }
     .select-wrap::after {
-      content: '▾'; position: absolute; right: 16px; top: 50%;
-      transform: translateY(-50%); color: var(--gold); pointer-events: none;
+      content: '▾'; position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); color: var(--pink); pointer-events: none;
     }
 
     .submit-btn {
-      width: 100%;
-      background: linear-gradient(135deg, var(--gold-deep), var(--gold-light));
-      color: #fff; border: none;
-      border-radius: 50px; padding: 16px 24px;
-      font-family: 'Raleway', sans-serif; font-size: 1rem; font-weight: 700;
+      width: 100%; background: var(--grad); color: #fff; border: none;
+      border-radius: 50px; padding: 14px 24px;
+      font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900;
       cursor: pointer; transition: opacity .2s, transform .15s;
-      box-shadow: 0 6px 32px rgba(201,168,76,.45);
-      letter-spacing: .5px;
+      box-shadow: 0 5px 24px rgba(139,0,32,.35); letter-spacing: .3px;
     }
-    .submit-btn:hover  { opacity: .9; transform: translateY(-2px); }
+    .submit-btn:hover  { opacity: .9; transform: translateY(-1px); }
     .submit-btn:active { transform: translateY(0); }
-    .submit-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
-    .form-note { text-align: center; font-size: .76rem; color: var(--muted); margin-top: 12px; }
+    .submit-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .form-note { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 10px; }
 
-    /* ── HOURS & LOCATION ── */
-    .info-section {
-      padding: 80px 24px;
-      background: var(--white);
-      border-top: 1px solid var(--gold-border);
+    /* reviews */
+    .reviews { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .review-item {
+      background: var(--surface2); border-radius: 12px; padding: 12px 14px;
+      display: flex; align-items: flex-start; gap: 10px;
+      border: 1px solid rgba(233,30,108,.10);
     }
-    .info-inner {
+    .review-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid rgba(233,30,108,.3); }
+    .review-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px; }
+    .review-name   { font-size: .85rem; font-weight: 700; color: var(--crimson); }
+    .review-stars  { color: var(--gold); font-size: .82rem; }
+    .review-text   { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+    .review-city   { display: inline-block; margin-top: 5px; font-size: .72rem; background: #fce4ec; color: var(--crimson-mid); border-radius: 50px; padding: 1px 9px; font-weight: 700; }
+
+    /* ── SECTION COMMONS ── */
+    .section-label { text-align: center; font-size: .8rem; font-weight: 700; color: var(--pink); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { text-align: center; font-size: clamp(1.55rem, 3.2vw, 2.2rem); font-weight: 900; color: var(--crimson); margin-bottom: 10px; line-height: 1.3; }
+    .section-title .accent { color: var(--pink); }
+    .section-title .gold   { color: var(--gold); }
+    .section-sub { text-align: center; color: var(--muted); font-size: .95rem; margin-bottom: 44px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+
+    /* ── WHY US ── */
+    .why-section { max-width: 1060px; margin: 0 auto; padding: 80px 40px 40px; }
+    .why-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px;
+    }
+    .why-card {
+      background: var(--surface); border-radius: 16px; padding: 28px 22px; text-align: center;
+      border: 1.5px solid var(--pink-border);
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .why-card:hover { transform: translateY(-5px); border-color: var(--pink); box-shadow: var(--shadow-lg); }
+    .why-icon  { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+    .why-title { font-size: 1rem; font-weight: 900; color: var(--crimson); margin-bottom: 6px; }
+    .why-desc  { font-size: .86rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      background: var(--grad); padding: 56px 40px; margin: 40px 0;
+      position: relative; overflow: hidden;
+    }
+    .stats-band::before {
+      content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%;
+      background: rgba(255,255,255,.06); top: -200px; right: -100px;
+    }
+    .stats-inner {
       max-width: 960px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px; text-align: center; position: relative; z-index: 1;
     }
-    .info-card {
-      background: var(--cream);
-      border: 1px solid var(--gold-border);
-      border-radius: 20px; padding: 32px 28px;
+    .stat-num   { font-size: 2.8rem; font-weight: 900; color: var(--gold-light); display: block; line-height: 1; }
+    .stat-label { font-size: .88rem; color: rgba(255,255,255,.85); margin-top: 6px; display: block; }
+
+    /* ── SERVICES ── */
+    .services-section { max-width: 1060px; margin: 0 auto; padding: 60px 40px 80px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+    .service-card {
+      background: var(--surface); border-radius: 18px; overflow: hidden;
+      border: 1.5px solid var(--pink-border);
+      transition: transform .25s, box-shadow .25s, border-color .25s; cursor: pointer;
     }
-    .info-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--text); margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .info-card h3 span { color: var(--gold); }
-    .hours-row {
-      display: flex; justify-content: space-between;
-      padding: 8px 0; border-bottom: 1px solid var(--gold-border);
-      font-size: .88rem;
-    }
-    .hours-row:last-child { border-bottom: none; }
-    .hours-day { color: var(--text); font-weight: 600; }
-    .hours-time { color: var(--muted); }
-    .hours-closed { color: var(--light-muted); font-style: italic; }
-    .contact-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 12px 0; border-bottom: 1px solid var(--gold-border);
-      font-size: .9rem; color: var(--text);
-    }
-    .contact-row:last-child { border-bottom: none; }
-    .contact-row .icon {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: var(--gold-soft); border: 1px solid var(--gold-border);
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--pink); }
+    .service-img-wrap {
+      height: 160px; background: var(--grad-soft);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
+      font-size: 4rem; position: relative; overflow: hidden;
     }
-    .contact-row a { color: var(--gold-deep); text-decoration: none; font-weight: 600; }
-    .contact-row a:hover { text-decoration: underline; }
+    .service-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--grad); color: #fff;
+      border-radius: 50px; padding: 3px 12px; font-size: .75rem; font-weight: 700;
+    }
+    .service-body  { padding: 20px; }
+    .service-name  { font-size: 1.05rem; font-weight: 900; color: var(--crimson); margin-bottom: 6px; }
+    .service-desc  { font-size: .87rem; color: var(--muted); margin-bottom: 14px; line-height: 1.65; }
+    .service-footer { display: flex; align-items: center; justify-content: space-between; }
+    .service-price  { font-size: 1.2rem; font-weight: 900; color: var(--gold); }
+    .service-price span { font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .service-btn {
+      background: #fce4ec; color: var(--crimson-mid); border: none; border-radius: 50px;
+      padding: 7px 16px; font-family: 'Cairo', sans-serif; font-size: .82rem; font-weight: 700;
+      cursor: pointer; transition: background .2s, color .2s; text-decoration: none;
+    }
+    .service-btn:hover { background: var(--pink); color: #fff; }
+
+    /* ── BEFORE / AFTER ── */
+    .ba-section { background: var(--surface2); padding: 70px 40px; text-align: center; border-top: 1px solid var(--pink-border); }
+    .ba-inner { max-width: 960px; margin: 0 auto; }
+    .ba-cards { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+    .ba-card {
+      background: var(--surface); border-radius: 18px; padding: 20px;
+      box-shadow: var(--shadow); border: 1.5px solid var(--pink-border);
+      flex: 1 1 240px; max-width: 270px;
+    }
+    .ba-label-row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+    .ba-lbl { font-size: .8rem; font-weight: 700; padding: 3px 12px; border-radius: 50px; }
+    .ba-lbl.before { background: #f3e5f5; color: #6a1b9a; }
+    .ba-lbl.after  { background: #fce4ec; color: var(--crimson-mid); }
+    .ba-imgs { display: flex; gap: 8px; }
+    .ba-img-box {
+      flex: 1; height: 120px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem; background: var(--grad-soft);
+    }
+    .ba-title { margin-top: 14px; font-weight: 900; color: var(--crimson); font-size: .95rem; }
+    .ba-sub   { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── FINAL CTA ── */
+    .cta-section {
+      background: var(--grad); padding: 80px 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before { content: '✨'; position: absolute; font-size: 8rem; opacity: .07; top: -20px; right: 5%; pointer-events: none; }
+    .cta-section::after  { content: '💅'; position: absolute; font-size: 7rem; opacity: .07; bottom: -10px; left: 5%; pointer-events: none; }
+    .cta-inner { max-width: 620px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-section h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #fff; margin-bottom: 14px; }
+    .cta-section p  { color: rgba(255,255,255,.85); font-size: 1rem; margin-bottom: 34px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: var(--crimson);
+      font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900;
+      border-radius: 50px; padding: 14px 36px; text-decoration: none;
+      transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 20px rgba(0,0,0,.2);
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.28); }
+    .cta-btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green); color: #fff;
+      font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900;
+      border-radius: 50px; padding: 14px 32px; text-decoration: none;
+      transition: transform .2s, opacity .2s; box-shadow: 0 4px 20px rgba(37,211,102,.35);
+    }
+    .cta-btn-wa:hover { transform: translateY(-2px); opacity: .92; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--crimson); padding: 50px 40px 24px; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-top {
+      display: flex; gap: 44px; flex-wrap: wrap;
+      justify-content: space-between; margin-bottom: 36px;
+    }
+    .footer-logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .footer-logo-row img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .footer-brand-name { font-size: 1.1rem; font-weight: 900; color: #fff; }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-tagline { font-size: .88rem; color: rgba(255,255,255,.65); max-width: 240px; line-height: 1.6; }
+    .footer-col h4 { color: #fff; font-size: .95rem; font-weight: 700; margin-bottom: 14px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { font-size: .88rem; color: rgba(255,255,255,.7); margin-bottom: 8px; }
+    .footer-contact-item { display: flex; align-items: center; gap: 9px; font-size: .88rem; color: rgba(255,255,255,.7); margin-bottom: 10px; }
+    .footer-contact-item a { color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
+    .footer-contact-item a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; font-size: .82rem; color: rgba(255,255,255,.5);
+    }
+    .footer-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .footer-tag { background: rgba(255,255,255,.1); color: rgba(255,255,255,.75); border-radius: 50px; padding: 3px 12px; font-size: .78rem; }
+    .footer-bottom a { color: var(--gold); text-decoration: none; }
 
     /* ── FLOATING WA ── */
     .wa-float {
-      display: none;
-      position: fixed; bottom: 22px; right: 22px; z-index: 200;
-      background: var(--green); color: #fff;
-      width: 58px; height: 58px; border-radius: 50%;
-      align-items: center; justify-content: center;
-      font-size: 1.7rem; text-decoration: none;
-      box-shadow: 0 4px 24px rgba(37,211,102,.5);
-      animation: wa-pulse 2.5s infinite;
+      position: fixed; bottom: 22px; left: 22px; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45); text-decoration: none;
+      animation: pulse-wa 2.5s ease-in-out infinite;
     }
-    @keyframes wa-pulse {
-      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); }
-      50%      { box-shadow: 0 4px 36px rgba(37,211,102,.85); }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float svg { width: 30px; height: 30px; fill: #fff; }
+    @keyframes pulse-wa {
+      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.45); }
+      50%      { box-shadow: 0 4px 32px rgba(37,211,102,.78); }
     }
-
-    /* ── FINAL CTA ── */
-    .final-section {
-      padding: 100px 24px; text-align: center;
-      background: linear-gradient(160deg, var(--cream2) 0%, var(--cream3) 100%);
-      border-top: 1px solid var(--gold-border);
-      position: relative; overflow: hidden;
-    }
-    .final-section::before {
-      content: '';
-      position: absolute; width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,.12) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      pointer-events: none;
-    }
-    .final-inner { max-width: 580px; margin: 0 auto; position: relative; z-index: 1; }
-    .final-inner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 700;
-      color: var(--text); margin-bottom: 16px; line-height: 1.28;
-    }
-    .final-inner h2 em { font-style: italic; color: var(--gold-deep); }
-    .final-inner p { color: var(--muted); font-size: .97rem; margin-bottom: 38px; line-height: 1.8; }
-    .final-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      padding: 44px 24px 24px;
-    }
-    .footer-inner {
-      max-width: 960px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
-    }
-    .footer-logo img { height: 52px; width: auto; filter: brightness(1.05); }
-    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--cream); margin-top: 6px; }
-    .footer-brand span { color: var(--gold-light); }
-    .footer-links { display: flex; flex-direction: column; gap: 8px; }
-    .footer-link { color: rgba(253,248,240,.55); text-decoration: none; font-size: .84rem; transition: color .2s; }
-    .footer-link:hover { color: var(--gold-light); }
-    .footer-social { display: flex; gap: 12px; }
-    .footer-social a {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.25);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; text-decoration: none; color: var(--gold-light);
-      transition: background .2s, transform .15s;
-    }
-    .footer-social a:hover { background: rgba(201,168,76,.25); transform: translateY(-2px); }
-    .footer-copy {
-      font-size: .76rem; color: rgba(253,248,240,.35);
-      text-align: center; padding-top: 20px; margin-top: 20px;
-      border-top: 1px solid rgba(201,168,76,.12); width: 100%;
-    }
-    .footer-copy a { color: var(--gold); text-decoration: none; }
 
     /* ── TOAST ── */
     #toast {
-      position: fixed; bottom: 30px; left: 50%;
-      transform: translateX(-50%) translateY(16px);
-      background: var(--white); border: 1px solid var(--gold-border);
-      color: var(--gold-deep); padding: 12px 28px; border-radius: 50px;
-      font-size: .88rem; font-weight: 700;
-      opacity: 0; transition: opacity .3s, transform .3s;
-      pointer-events: none; z-index: 400; white-space: nowrap;
-      box-shadow: var(--gold-shadow);
+      position: fixed; bottom: 90px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--crimson); color: #fff;
+      padding: 12px 28px; border-radius: 50px; font-size: .9rem; font-weight: 700;
+      opacity: 0; transition: opacity .35s, transform .35s;
+      pointer-events: none; z-index: 300; white-space: nowrap;
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .about-inner   { flex-direction: column; gap: 44px; }
-      .about-visual  { flex: none; max-width: 480px; margin: 0 auto; }
-      .booking-inner { flex-direction: column; gap: 44px; }
-      .booking-form-col { width: 100%; flex: none; max-width: 520px; margin: 0 auto; }
-      .info-inner    { grid-template-columns: 1fr; }
+    @media (max-width: 900px) {
+      nav { padding: 0 16px; }
+      .hero { padding: 80px 16px 44px; }
+      .hero-inner { flex-direction: column; gap: 20px; }
+      .hero-text { flex: 0 0 auto; width: 100%; }
+      .hero-form-col { width: 100%; flex: 0 0 auto; }
+      .why-section, .services-section { padding: 60px 16px 40px; }
+      .stats-band { padding: 48px 16px; }
+      .ba-section { padding: 60px 16px; }
+      .cta-section { padding: 64px 16px; }
+      footer { padding: 40px 16px 20px; }
+      .footer-top { gap: 28px; }
     }
-    @media (max-width: 680px) {
-      .hero-logo { width: 160px; height: 160px; }
-      h1 { font-size: 2rem; }
-      .section-title { font-size: 1.7rem; }
-      .hero-proof { gap: 16px; }
-      .strip-inner { grid-template-columns: repeat(2,1fr); }
-      .final-btns { flex-direction: column; align-items: center; }
-      .btn-primary, .btn-wa, .btn-outline { width: 100%; justify-content: center; text-align: center; }
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
-      .wa-float { display: flex; }
-      nav .nav-logo-text { display: none; }
-    }
-    @media (max-width: 480px) {
-      .services-grid  { grid-template-columns: 1fr; }
-      .why-grid       { grid-template-columns: 1fr; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+    @media (max-width: 520px) {
+      h1 { font-size: 1.85rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .ba-cards { flex-direction: column; align-items: center; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .cta-btn, .cta-btn-wa { width: 100%; justify-content: center; }
+      .footer-bottom { flex-direction: column; align-items: flex-end; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
     }
   </style>
 </head>
@@ -652,378 +423,245 @@
   <a href="#" class="nav-logo">
     <img src="logo.png" alt="Maison Beauty Shehrazade" />
     <div class="nav-logo-text">
-      Maison Beauty
-      <span>Shehrazade</span>
+      <span class="t1">Maison Beauty</span>
+      <span class="t2">Shehrazade</span>
     </div>
   </a>
-  <a class="nav-cta" href="#reservation">Réserver ↓</a>
+  <a class="nav-cta" href="#leadForm">احجزي موعدك ✨</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <img src="logo.png" alt="Maison Beauty Shehrazade" class="hero-logo" />
 
-    <div class="hero-tag">✦ Salon de Beauté d'Exception — Maroc</div>
-
-    <h1>
-      L'Art de la Beauté
-      <em>Réinventé pour Vous</em>
-    </h1>
-    <p class="hero-sub-name">Maison Beauty Shehrazade</p>
-
-    <p class="hero-desc">
-      Un espace dédié à votre élégance — soins visage, coiffure, maquillage, ongles & hammam traditionnel. Parce que vous méritez le meilleur.
-    </p>
-
-    <div class="hero-proof">
-      <div class="proof-item"><span class="proof-icon">⭐</span><span class="proof-txt"><strong>5★</strong> Avis clients</span></div>
-      <div class="proof-item"><span class="proof-icon">👑</span><span class="proof-txt"><strong>Produits</strong> Premium</span></div>
-      <div class="proof-item"><span class="proof-icon">✨</span><span class="proof-txt"><strong>Expertes</strong> Certifiées</span></div>
-      <div class="proof-item"><span class="proof-icon">📍</span><span class="proof-txt"><strong>Maroc</strong></span></div>
+    <!-- TEXT -->
+    <div class="hero-text">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        🇲🇦 صالون تجميل نسائي احترافي
+      </div>
+      <h1>
+        جمالك يستحق<br>
+        <span class="accent">أفضل</span> عناية<br>
+        <span class="gold">في المغرب</span>
+      </h1>
+      <p class="hero-sub">
+        خدمات تجميل احترافية للمرأة — كوافور، بروتين الشعر، عناية بالبشرة، مكياج، أظافر وحمام مغربي أصيل. بأيدي خبيرات متخصصات.
+      </p>
+      <div class="motivation-box">
+        <span class="icon">👑</span>
+        <p>نستخدم <strong>أفضل المنتجات العالمية</strong> لضمان نتائج مذهلة من أول جلسة — لأن جمالك لا يقبل المساومة.</p>
+      </div>
     </div>
 
-    <div class="hero-btns">
-      <a href="#reservation" class="btn-primary">Prendre Rendez-vous →</a>
-      <a href="https://wa.me/212XXXXXXXXX" class="btn-wa" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-</section>
+    <!-- FORM -->
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-card-top">
+          <h2>✨ احجزي موعدك الآن</h2>
+          <p>مجاناً · بدون التزام · رد خلال دقائق</p>
+        </div>
+        <div class="form-card-body">
+          <form id="bookingForm" novalidate>
+            <div class="field">
+              <label for="fname">اسمك الكريم</label>
+              <input type="text" id="fname" name="name" placeholder="مثال: فاطمة الزهراء" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="fphone">رقم الواتساب</label>
+              <input type="tel" id="fphone" name="phone" placeholder="07XXXXXXXX" required autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="fserviceSelect">الخدمة المطلوبة</label>
+              <div class="select-wrap">
+                <select id="fserviceSelect" onchange="document.getElementById('fservice').value=this.value" required>
+                  <option value="" disabled selected>اختاري الخدمة</option>
+                  <option>كوافور وتصفيف الشعر</option>
+                  <option>بروتين الشعر</option>
+                  <option>صبغ وتلوين الشعر</option>
+                  <option>عناية بالبشرة</option>
+                  <option>مكياج احترافي</option>
+                  <option>مكياج عروس</option>
+                  <option>أظافر وناخن آرت</option>
+                  <option>حمام مغربي</option>
+                  <option>إزالة الشعر</option>
+                  <option>استشارة مجانية</option>
+                </select>
+              </div>
+            </div>
+            <input type="hidden" name="service" id="fservice" value="طلب حجز - Maison Beauty Shehrazade" />
+            <button type="submit" class="submit-btn" id="submitBtn">
+              احجزي الآن — مجاناً 🌸
+            </button>
+          </form>
+          <p class="form-note">🔒 معلوماتك سرية ومحمية — لن نشاركها مع أي جهة</p>
+        </div>
+      </div>
 
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="about-inner">
-
-    <div class="about-visual">
-      <div class="about-frame">
-        <img src="logo.png" alt="Maison Beauty Shehrazade" />
-        <p class="about-quote">
-          "Chaque femme est une princesse. Notre mission : révéler la lumière qui brille en vous."
-        </p>
-        <div class="about-stats">
-          <div class="astat">
-            <span class="astat-num">5+</span>
-            <span class="astat-lbl">Années</span>
+      <!-- REVIEWS -->
+      <div class="reviews">
+        <div class="review-item">
+          <img class="review-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" loading="lazy" alt="" />
+          <div>
+            <div class="review-header">
+              <span class="review-name">نادية ب.</span>
+              <span class="review-stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <p class="review-text">بروتين الشعر مزيان بزاف، شعري ولا ناعم وطويل من أول جلسة 🥹</p>
+            <span class="review-city">📍 عميلة وفية</span>
           </div>
-          <div class="astat">
-            <span class="astat-num">500+</span>
-            <span class="astat-lbl">Clientes</span>
+        </div>
+        <div class="review-item">
+          <img class="review-avatar" src="https://randomuser.me/api/portraits/women/68.jpg" loading="lazy" alt="" />
+          <div>
+            <div class="review-header">
+              <span class="review-name">سارة م.</span>
+              <span class="review-stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <p class="review-text">مكياج العروس كان فوق الكلام، كل الضيوف مدحوني 💕 شكراً Shehrazade!</p>
+            <span class="review-city">📍 مكياج عروس</span>
           </div>
-          <div class="astat">
-            <span class="astat-num">5★</span>
-            <span class="astat-lbl">Avis</span>
+        </div>
+        <div class="review-item">
+          <img class="review-avatar" src="https://randomuser.me/api/portraits/women/26.jpg" loading="lazy" alt="" />
+          <div>
+            <div class="review-header">
+              <span class="review-name">هند الع.</span>
+              <span class="review-stars">⭐⭐⭐⭐⭐</span>
+            </div>
+            <p class="review-text">الحمام المغربي والعناية بالبشرة خرجت كأني ولدت من جديد ✨ نوصي بيهم بجوج يدين!</p>
+            <span class="review-city">📍 حمام مغربي</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="about-text">
-      <div class="section-eyebrow">✦ Notre Histoire</div>
-      <h2>
-        Un Sanctuaire de Beauté<br>
-        <em>Créé pour Vous</em>
-      </h2>
-      <p>
-        Maison Beauty Shehrazade est bien plus qu'un salon — c'est un véritable espace de bien-être et d'élégance, pensé pour la femme marocaine moderne qui exige le meilleur.
-      </p>
-      <p>
-        Notre équipe d'expertes certifiées allie techniques contemporaines et rituels de beauté traditionnels pour vous offrir une expérience unique, à chaque visite.
-      </p>
-      <div class="about-pills">
-        <span class="pill">✦ Soins Personnalisés</span>
-        <span class="pill">✦ Produits Premium</span>
-        <span class="pill">✦ Ambiance Exclusive</span>
-        <span class="pill">✦ Résultats Garantis</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services-section">
-  <div class="services-inner">
-    <div class="section-eyebrow">✦ Nos Prestations</div>
-    <h2 class="section-title">Une Beauté Complète,<br><em>Du Visage aux Pieds</em></h2>
-    <p class="section-sub">Chaque soin est réalisé par nos expertes avec des produits haut de gamme, pour des résultats visibles et durables.</p>
-
-    <div class="ornament" style="margin-top:36px">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line"></div>
-    </div>
-
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="svc-icon">✨</div>
-        <div class="svc-title">Soins Visage & Corps</div>
-        <div class="svc-desc">Des soins ciblés pour une peau lumineuse, hydratée et repulpée, adaptés à votre type de peau.</div>
-        <ul class="svc-items">
-          <li>Soin hydratant & éclat</li>
-          <li>Soin anti-âge & raffermissant</li>
-          <li>Peeling & exfoliation</li>
-          <li>Masques naturels personnalisés</li>
-        </ul>
-      </div>
-
-      <div class="service-card">
-        <div class="svc-icon">💇‍♀️</div>
-        <div class="svc-title">Coiffure & Coupe</div>
-        <div class="svc-desc">De la coupe tendance au brushing parfait — sublimez votre chevelure avec nos coiffeuses expertes.</div>
-        <ul class="svc-items">
-          <li>Coupe & styling</li>
-          <li>Brushing & lissage brésilien</li>
-          <li>Coloration & mèches</li>
-          <li>Chignons & coiffures de fête</li>
-        </ul>
-      </div>
-
-      <div class="service-card">
-        <div class="svc-icon">💄</div>
-        <div class="svc-title">Maquillage Professionnel</div>
-        <div class="svc-desc">Un maquillage longue tenue qui met en valeur votre beauté naturelle pour toutes les occasions.</div>
-        <ul class="svc-items">
-          <li>Maquillage jour & soirée</li>
-          <li>Maquillage mariée</li>
-          <li>Sourcils & regard</li>
-          <li>Maquillage naturel & nude</li>
-        </ul>
-      </div>
-
-      <div class="service-card">
-        <div class="svc-icon">💅</div>
-        <div class="svc-title">Ongles & Nail Art</div>
-        <div class="svc-desc">Des mains et pieds impeccables — de la manucure classique aux créations nail art les plus tendance.</div>
-        <ul class="svc-items">
-          <li>Manucure & pédicure classique</li>
-          <li>Pose de gel & résine</li>
-          <li>Nail art & décoration</li>
-          <li>Soin des ongles & cuticules</li>
-        </ul>
-      </div>
-
-      <div class="service-card">
-        <div class="svc-icon">🌸</div>
-        <div class="svc-title">Épilation & Lissage</div>
-        <div class="svc-desc">Des techniques douces et efficaces pour une peau parfaitement lisse et douce au toucher.</div>
-        <ul class="svc-items">
-          <li>Épilation au fil & à la cire</li>
-          <li>Épilation au sucre (halawa)</li>
-          <li>Sourcils & lèvres</li>
-          <li>Lissage & restructuration</li>
-        </ul>
-      </div>
-
-      <div class="service-card">
-        <div class="svc-icon">🛁</div>
-        <div class="svc-title">Hammam & Soins Traditionnels</div>
-        <div class="svc-desc">Plongez dans les rituels ancestraux marocains pour un moment de pure détente et régénération.</div>
-        <ul class="svc-items">
-          <li>Hammam vapeur complet</li>
-          <li>Gommage au savon beldi</li>
-          <li>Masque au ghassoul</li>
-          <li>Massage relaxant à l'huile d'argan</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- STATS STRIP -->
-<section class="strip">
-  <div class="strip-inner">
-    <div>
-      <span class="strip-num">5+</span>
-      <span class="strip-label">Années d'Expérience</span>
-    </div>
-    <div>
-      <span class="strip-num">500+</span>
-      <span class="strip-label">Clientes Satisfaites</span>
-    </div>
-    <div>
-      <span class="strip-num">20+</span>
-      <span class="strip-label">Prestations au Menu</span>
-    </div>
-    <div>
-      <span class="strip-num">5★</span>
-      <span class="strip-label">Note Moyenne</span>
-    </div>
   </div>
 </section>
 
 <!-- WHY US -->
 <section class="why-section">
-  <div class="why-inner">
-    <div class="section-eyebrow">✦ Pourquoi Nous Choisir</div>
-    <h2 class="section-title">L'Excellence<br><em>à Chaque Visite</em></h2>
-    <p class="section-sub">Maison Beauty Shehrazade est synonyme de qualité, de raffinement et de soin personnalisé.</p>
-
-    <div class="ornament" style="margin-top:36px">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line"></div>
+  <div class="section-label">لماذا Maison Beauty Shehrazade؟</div>
+  <h2 class="section-title">كل ما تحتاجيه<br>في <span class="accent">مكان واحد</span></h2>
+  <p class="section-sub">خبرة + جودة + أسعار معقولة — هذا هو وعدنا لك كل يوم</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-icon">👑</span>
+      <div class="why-title">خبيرات متخصصات</div>
+      <div class="why-desc">فريق من أفضل الخبيرات المتخصصات في التجميل والعناية بالمرأة — بتجربة سنوات</div>
     </div>
-
-    <div class="why-grid">
-      <div class="why-card">
-        <span class="why-icon">👑</span>
-        <div class="why-title">Expertes Certifiées</div>
-        <div class="why-desc">Notre équipe est formée aux dernières techniques et certifiée par des instituts reconnus. Votre beauté est entre de bonnes mains.</div>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">✨</span>
-        <div class="why-title">Produits Haut de Gamme</div>
-        <div class="why-desc">Nous utilisons uniquement des produits premium de grandes marques pour des résultats durables et un soin optimal de votre peau.</div>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">🌹</span>
-        <div class="why-title">Ambiance Exclusive</div>
-        <div class="why-desc">Un espace pensé pour votre confort absolu — décoration raffinée, musique douce, arômes apaisants. Un vrai moment rien que pour vous.</div>
-      </div>
-      <div class="why-card">
-        <span class="why-icon">💎</span>
-        <div class="why-title">Résultats Garantis</div>
-        <div class="why-desc">Chaque prestation est adaptée à vos besoins spécifiques. Nous prenons le temps de vous écouter pour un résultat qui vous correspond.</div>
-      </div>
+    <div class="why-card">
+      <span class="why-icon">⚡</span>
+      <div class="why-title">نتيجة فورية</div>
+      <div class="why-desc">ستلاحظين الفرق من أول جلسة — شعر ناعم وبشرة مضيئة بدون انتظار</div>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">🏆</span>
+      <div class="why-title">منتجات عالمية</div>
+      <div class="why-desc">نستخدم فقط أفضل الماركات العالمية لنتائج تدوم وتجربة فاخرة</div>
+    </div>
+    <div class="why-card">
+      <span class="why-icon">💝</span>
+      <div class="why-title">أجواء مريحة</div>
+      <div class="why-desc">فضاء أنيق ومريح خصيصاً للمرأة — تجربة تجميل كاملة تشعرك بالأميرة</div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-  <div class="testimonials-inner">
-    <div class="section-eyebrow">✦ Avis Clients</div>
-    <h2 class="section-title">Ce que Disent<br><em>Nos Clientes</em></h2>
-    <p class="section-sub">Des femmes qui ont vécu l'expérience Shehrazade et qui reviennent encore et encore.</p>
-
-    <div class="ornament" style="margin-top:36px">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line"></div>
-    </div>
-
-    <div class="testimonials-grid">
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Une expérience absolument magnifique ! Le soin visage était incroyable, ma peau n'a jamais été aussi lumineuse. L'ambiance est feutrée et l'équipe est aux petits soins. Je recommande à toutes mes amies !"</p>
-        <div class="testi-author">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" loading="lazy" alt="" class="testi-avatar" />
-          <div>
-            <div class="testi-name">Salma Benali</div>
-            <div class="testi-loc">📍 Cliente fidèle depuis 3 ans</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Je venais pour mon maquillage de mariée et le résultat était au-delà de mes espérances ! Toutes mes invitées m'ont complimentée. Merci Shehrazade pour avoir rendu mon jour si spécial ✨"</p>
-        <div class="testi-author">
-          <img src="https://randomuser.me/api/portraits/women/26.jpg" loading="lazy" alt="" class="testi-avatar" />
-          <div>
-            <div class="testi-name">Nadia El Fassi</div>
-            <div class="testi-loc">📍 Maquillage de Mariage</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Le hammam et le gommage sont une pure merveille. Je repars à chaque fois complètement régénérée. Les produits utilisés sentent divinement bon et la peau est douce comme de la soie. Bravo à toute l'équipe !"</p>
-        <div class="testi-author">
-          <img src="https://randomuser.me/api/portraits/women/61.jpg" loading="lazy" alt="" class="testi-avatar" />
-          <div>
-            <div class="testi-name">Kenza Alaoui</div>
-            <div class="testi-loc">📍 Hammam & Soins Corps</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+<!-- STATS BAND -->
+<section class="stats-band">
+  <div class="stats-inner">
+    <div><span class="stat-num">+500</span><span class="stat-label">عميلة راضية</span></div>
+    <div><span class="stat-num">5+</span><span class="stat-label">سنوات خبرة</span></div>
+    <div><span class="stat-num">10+</span><span class="stat-label">خدمة متخصصة</span></div>
+    <div><span class="stat-num">5★</span><span class="stat-label">تقييم العميلات</span></div>
   </div>
 </section>
 
-<!-- BOOKING -->
-<section class="booking-section" id="reservation">
-  <div class="booking-inner">
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-label">خدماتنا</div>
+  <h2 class="section-title">اكتشفي <span class="accent">خدماتنا</span></h2>
+  <p class="section-sub">من الكوافور إلى الحمام المغربي — نغطي كل احتياجاتك الجمالية باحترافية عالية</p>
+  <div class="services-grid">
 
-    <div class="booking-text">
-      <div class="section-eyebrow">✦ Réservation</div>
-      <h2>
-        Réservez Votre<br>
-        <em>Moment de Beauté</em>
-      </h2>
-      <p>
-        Offrez-vous une pause bien méritée. Remplissez le formulaire ci-contre et notre équipe vous contacte dans les plus brefs délais pour confirmer votre rendez-vous.
-      </p>
-      <ul class="booking-benefits">
-        <li>
-          <span class="bben-icon">⚡</span>
-          Réponse confirmée sous 2 heures
-        </li>
-        <li>
-          <span class="bben-icon">📱</span>
-          Rappel par WhatsApp avant votre RDV
-        </li>
-        <li>
-          <span class="bben-icon">🎁</span>
-          Consultation beauté offerte à la 1ère visite
-        </li>
-        <li>
-          <span class="bben-icon">🔒</span>
-          Vos données restent strictement confidentielles
-        </li>
-      </ul>
+    <div class="service-card" onclick="scrollToForm('بروتين الشعر')">
+      <div class="service-img-wrap">
+        <span>💇‍♀️</span>
+        <span class="service-badge">الأكثر طلباً</span>
+      </div>
+      <div class="service-body">
+        <div class="service-name">بروتين الشعر</div>
+        <div class="service-desc">نعومة ولمعان من أول جلسة — بأفضل المنتجات لحماية شعرك وإعادة حيويته.</div>
+        <div class="service-footer">
+          <div class="service-price">على حسب<span> الطول</span></div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
+        </div>
+      </div>
     </div>
 
-    <div class="booking-form-col">
-      <div class="form-card" id="bookingForm">
-        <div class="form-card-top">
-          <h3>✦ Prendre Rendez-vous</h3>
-          <p>Gratuit · Sans engagement · Réponse rapide</p>
+    <div class="service-card" onclick="scrollToForm('كوافور وتصفيف الشعر')">
+      <div class="service-img-wrap"><span>✂️</span></div>
+      <div class="service-body">
+        <div class="service-name">كوافور وتصفيف</div>
+        <div class="service-desc">قصات عصرية، بلوواوت، تسريحات مناسبات — يدي خبيرة تحول شعرك.</div>
+        <div class="service-footer">
+          <div class="service-price">حسب الطلب</div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
         </div>
-        <div class="form-body">
-          <form id="salonForm" novalidate>
-            <div class="field">
-              <label for="fname">Votre Prénom</label>
-              <input type="text" id="fname" name="name" placeholder="Votre prénom" required autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="fphone">WhatsApp</label>
-              <input type="tel" id="fphone" name="phone" placeholder="06XXXXXXXX" required autocomplete="tel" />
-            </div>
-            <div class="field">
-              <label for="fservice">Prestation Souhaitée</label>
-              <div class="select-wrap">
-                <select id="fservice" name="service" required>
-                  <option value="" disabled selected>Choisir une prestation</option>
-                  <option>Soins Visage & Corps</option>
-                  <option>Coiffure & Coupe</option>
-                  <option>Maquillage Professionnel</option>
-                  <option>Ongles & Nail Art</option>
-                  <option>Épilation & Lissage</option>
-                  <option>Hammam & Soins Traditionnels</option>
-                  <option>Maquillage Mariée</option>
-                  <option>Forfait Complet</option>
-                  <option>Autre / Je ne sais pas encore</option>
-                </select>
-              </div>
-            </div>
-            <div class="field">
-              <label for="fmsg">Message (optionnel)</label>
-              <textarea id="fmsg" name="message" placeholder="Une question ? Un souhait particulier ?"></textarea>
-            </div>
-            <button type="submit" class="submit-btn" id="submitBtn">
-              Réserver Mon Rendez-vous ✦
-            </button>
-          </form>
-          <p class="form-note">🔒 Vos informations sont confidentielles et ne seront jamais partagées.</p>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="scrollToForm('مكياج احترافي')">
+      <div class="service-img-wrap">
+        <span>💄</span>
+        <span class="service-badge">عرض محدود</span>
+      </div>
+      <div class="service-body">
+        <div class="service-name">مكياج احترافي</div>
+        <div class="service-desc">مكياج يومي، سهرات أو عروس — بريق طبيعي أو إطلالة درامية، الاختيار لك.</div>
+        <div class="service-footer">
+          <div class="service-price">من 150 DH</div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="scrollToForm('أظافر وناخن آرت')">
+      <div class="service-img-wrap"><span>💅</span></div>
+      <div class="service-body">
+        <div class="service-name">أظافر وناخن آرت</div>
+        <div class="service-desc">مانيكير، بديكير، جيل، وأشكال ناخن آرت أنيقة — أيدي وأقدام مثالية.</div>
+        <div class="service-footer">
+          <div class="service-price">من 80 DH</div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="scrollToForm('حمام مغربي')">
+      <div class="service-img-wrap">
+        <span>🛁</span>
+        <span class="service-badge">تجربة فريدة</span>
+      </div>
+      <div class="service-body">
+        <div class="service-name">حمام مغربي</div>
+        <div class="service-desc">تقشير بالصابون البلدي، غاسول وزيت الأرغان — تجربة تجديد كاملة للجسم والروح.</div>
+        <div class="service-footer">
+          <div class="service-price">من 200 DH</div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="scrollToForm('استشارة مجانية')">
+      <div class="service-img-wrap"><span>🌸</span></div>
+      <div class="service-body">
+        <div class="service-name">استشارة مجانية</div>
+        <div class="service-desc">مش عارفة من أين تبدئي؟ احجزي استشارة مجانية مع خبيرتنا ونحددوا برنامجك معاً.</div>
+        <div class="service-footer">
+          <div class="service-price">مجاناً 🎁</div>
+          <a class="service-btn" href="#leadForm">احجزي ←</a>
         </div>
       </div>
     </div>
@@ -1031,67 +669,46 @@
   </div>
 </section>
 
-<!-- HOURS & CONTACT -->
-<section class="info-section">
-  <div class="info-inner">
-
-    <div class="info-card">
-      <h3><span>🕐</span> Horaires d'Ouverture</h3>
-      <div class="hours-row"><span class="hours-day">Lundi – Vendredi</span><span class="hours-time">9h00 – 20h00</span></div>
-      <div class="hours-row"><span class="hours-day">Samedi</span><span class="hours-time">9h00 – 21h00</span></div>
-      <div class="hours-row"><span class="hours-day">Dimanche</span><span class="hours-time">10h00 – 18h00</span></div>
-    </div>
-
-    <div class="info-card">
-      <h3><span>📍</span> Nous Trouver</h3>
-      <div class="contact-row">
-        <span class="icon">📍</span>
-        <span>Maroc — Adresse complète à confirmer</span>
+<!-- BEFORE / AFTER -->
+<section class="ba-section">
+  <div class="ba-inner">
+    <div class="section-label">نتائج حقيقية</div>
+    <h2 class="section-title">قبل وبعد — <span class="accent">الفرق واضح</span></h2>
+    <p class="section-sub">نتائج عميلاتنا تتكلم عن نفسها — جمالك في أيدٍ أمينة ومتخصصة</p>
+    <div class="ba-cards">
+      <div class="ba-card">
+        <div class="ba-label-row"><span class="ba-lbl before">قبل</span><span class="ba-lbl after">بعد</span></div>
+        <div class="ba-imgs"><div class="ba-img-box">🌀</div><div class="ba-img-box">✨</div></div>
+        <div class="ba-title">بروتين الشعر</div>
+        <div class="ba-sub">من الشعر المجعد إلى ناعم كالحرير</div>
       </div>
-      <div class="contact-row">
-        <span class="icon">📞</span>
-        <div>
-          <a href="tel:+212XXXXXXXXX">+212 6XX XXX XXX</a>
-        </div>
+      <div class="ba-card">
+        <div class="ba-label-row"><span class="ba-lbl before">قبل</span><span class="ba-lbl after">بعد</span></div>
+        <div class="ba-imgs"><div class="ba-img-box">😐</div><div class="ba-img-box">🌟</div></div>
+        <div class="ba-title">مكياج احترافي</div>
+        <div class="ba-sub">إطلالة مضيئة وجذابة من أول لمسة</div>
       </div>
-      <div class="contact-row">
-        <span class="icon">💬</span>
-        <div>
-          <a href="https://wa.me/212XXXXXXXXX" target="_blank">WhatsApp — Message direct</a>
-        </div>
-      </div>
-      <div class="contact-row">
-        <span class="icon">📷</span>
-        <div>
-          <a href="#" target="_blank">Instagram — @maisonbeautyshehrazade</a>
-        </div>
+      <div class="ba-card">
+        <div class="ba-label-row"><span class="ba-lbl before">قبل</span><span class="ba-lbl after">بعد</span></div>
+        <div class="ba-imgs"><div class="ba-img-box">💭</div><div class="ba-img-box">💎</div></div>
+        <div class="ba-title">حمام مغربي</div>
+        <div class="ba-sub">جلد ناعم ومتجدد كأنك ولدت من جديد</div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section class="final-section">
-  <div class="final-inner">
-    <div class="section-eyebrow">✦ Votre Beauté Mérite le Meilleur</div>
-    <h2>
-      Prête à Vivre
-      <em>l'Expérience Shehrazade ?</em>
-    </h2>
-    <p>Réservez votre rendez-vous dès aujourd'hui et découvrez pourquoi nos clientes reviennent encore et encore. Votre transformation commence ici.</p>
-    <div class="final-btns">
-      <a href="#reservation" class="btn-primary">Réserver Maintenant →</a>
-      <a href="https://wa.me/212XXXXXXXXX" class="btn-wa" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp Direct
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>مستنياش — احجزي موعدك اليوم 🌸</h2>
+    <p>المواعيد محدودة وتمتلئ بسرعة. احجزي الآن وضمني مكانك مع خبيرتك المفضلة.</p>
+    <div class="cta-btns">
+      <a href="#leadForm" class="cta-btn">✨ احجزي موعدك مجاناً</a>
+      <a href="https://wa.me/212711113246" class="cta-btn-wa" target="_blank">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        واتساب مباشر
       </a>
-    </div>
-
-    <div class="ornament" style="margin-top: 52px; margin-bottom: 0;">
-      <div class="ornament-line"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line"></div>
     </div>
   </div>
 </section>
@@ -1099,95 +716,141 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div>
-      <img src="logo.png" alt="Maison Beauty Shehrazade" class="footer-logo" style="height:52px;width:auto;display:block;margin-bottom:8px" />
-      <div class="footer-brand">Maison Beauty <span>Shehrazade</span></div>
+    <div class="footer-top">
+
+      <div>
+        <div class="footer-logo-row">
+          <img src="logo.png" alt="Maison Beauty Shehrazade" />
+          <div class="footer-brand-name">Maison Beauty <span>Shehrazade</span></div>
+        </div>
+        <p class="footer-tagline">صالون تجميل نسائي احترافي — خبيرات في خدمتك</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>خدماتنا</h4>
+        <ul>
+          <li>💇‍♀️ بروتين الشعر</li>
+          <li>✂️ كوافور وتصفيف</li>
+          <li>💄 مكياج احترافي</li>
+          <li>💅 أظافر وناخن آرت</li>
+          <li>🛁 حمام مغربي</li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>تواصلي معنا</h4>
+        <div class="footer-contact-item">📞 <a href="tel:0711113246">07 11 11 32 46</a></div>
+        <div class="footer-contact-item">📱 <a href="https://wa.me/212711113246" target="_blank">واتساب</a></div>
+        <div class="footer-contact-item">📸 <a href="#" target="_blank">Instagram</a></div>
+        <div class="footer-contact-item">🕐 السبت – الخميس: 9h – 20h</div>
+      </div>
+
     </div>
-    <div class="footer-links">
-      <a class="footer-link" href="#">Accueil</a>
-      <a class="footer-link" href="#reservation">Réservation</a>
-      <a class="footer-link" href="https://wa.me/212XXXXXXXXX" target="_blank">WhatsApp</a>
-    </div>
-    <div class="footer-social">
-      <a href="#" target="_blank" title="Instagram">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-      </a>
-      <a href="https://wa.me/212XXXXXXXXX" target="_blank" title="WhatsApp">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      </a>
+    <div class="footer-bottom">
+      <span>© 2025 Maison Beauty Shehrazade — جميع الحقوق محفوظة · موقع بـ <a href="https://amraniads.com" target="_blank">AmraniAds</a></span>
+      <div class="footer-tags">
+        <span class="footer-tag">المغرب</span>
+        <span class="footer-tag">تجميل</span>
+        <span class="footer-tag">كوافور</span>
+        <span class="footer-tag">بروتين الشعر</span>
+        <span class="footer-tag">حمام مغربي</span>
+      </div>
     </div>
   </div>
-  <p class="footer-copy">
-    © 2025 Maison Beauty Shehrazade — Maroc 🇲🇦 &nbsp;·&nbsp;
-    Site réalisé par <a href="https://amraniads.com" target="_blank">AmraniAds</a>
-  </p>
 </footer>
 
-<!-- FLOATING WA (mobile) -->
-<a href="https://wa.me/212XXXXXXXXX" class="wa-float" target="_blank">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- FLOATING WA -->
+<a href="https://wa.me/212711113246" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <div id="toast"></div>
 
 <script>
+  function scrollToForm(service) {
+    document.getElementById('leadForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (service) {
+      document.getElementById('fservice').value = 'Shehrazade — ' + service;
+      const sel = document.getElementById('fserviceSelect');
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].text === service) { sel.selectedIndex = i; break; }
+      }
+    }
+  }
+
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3200);
+    setTimeout(() => t.classList.remove('show'), 3000);
   }
 
-  function genEventId() {
-    return 'ev_shehrazade_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+  function genEventId() { return 'ev_sheh_' + Date.now() + '_' + Math.random().toString(36).slice(2,9); }
+
+  function getCookie(name) {
+    const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : undefined;
   }
 
-  document.getElementById('salonForm').addEventListener('submit', async function(e) {
+  document.getElementById('bookingForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const form = e.target;
-    const btn  = document.getElementById('submitBtn');
-    const name    = form.name.value.trim();
-    const phone   = form.phone.value.trim();
-    const service = form.service.value;
-    const message = form.message.value.trim();
-    if (!name || !phone || !service) { showToast('⚠️ Veuillez remplir tous les champs obligatoires'); return; }
+    const btn   = document.getElementById('submitBtn');
+    const name  = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const service = document.getElementById('fservice').value || 'طلب حجز - Maison Beauty Shehrazade';
+
+    if (!name || !phone) { showToast('⚠️ يرجى ملء الاسم ورقم الواتساب'); return; }
+
     btn.disabled = true;
-    btn.textContent = '⏳ Envoi en cours...';
+    btn.textContent = '⏳ يتم الحجز...';
+
     const eventId = genEventId();
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { content_name: 'shehrazade-booking' }, { eventID: eventId });
+    }
+
     try {
       await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name, phone,
-          service: 'Shehrazade — ' + service,
-          message,
-          eventId,
+          name, phone, service, eventId,
           userAgent: navigator.userAgent,
           eventSourceUrl: location.href,
-          lang: 'FR',
+          fbp: getCookie('_fbp'),
+          fbc: getCookie('_fbc'),
+          lang: 'AR',
           salon: 'Maison Beauty Shehrazade'
         })
       });
     } catch (_) {}
+
     window.location.href = '/shehrazade/merci.html?eid=' + encodeURIComponent(eventId);
   });
 
-  /* Scroll reveal */
-  const obs = new IntersectionObserver(entries => {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(en => {
       if (en.isIntersecting) {
         en.target.style.opacity = '1';
         en.target.style.transform = 'translateY(0)';
       }
     });
-  }, { threshold: 0.06 });
+  }, { threshold: 0.10 });
 
-  document.querySelectorAll('.service-card, .why-card, .testi-card, .astat, .strip > .strip-inner > div').forEach(el => {
+  document.querySelectorAll('.why-card, .service-card, .ba-card, .review-item').forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .55s ease, transform .55s ease';
-    obs.observe(el);
+    el.style.transform = 'translateY(26px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
   });
 </script>
 </body>
