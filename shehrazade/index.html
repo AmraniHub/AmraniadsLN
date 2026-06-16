@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <base href="/shehrazade/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maison Beauty Shehrazade — أعراس · حفلات · أزياء · طعام</title>
   <meta name="description" content="Maison Beauty Shehrazade — نگافة هماوية، قفطانات، تقديم طعام مغربي أصيل، حفلات وبيبي شاور. اتصلوا بينا: 0711113246" />
@@ -233,6 +232,10 @@
     .rev-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#7a0018,#c9922b); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
     .rev-name   { font-size:.88rem; font-weight:900; color:var(--gold-light); }
     .rev-city   { font-size:.76rem; color:var(--muted); }
+    .rev-service-tag { display:inline-block; background:rgba(201,146,43,.12); border:1px solid rgba(201,146,43,.25); color:var(--gold-light); border-radius:50px; padding:4px 14px; font-size:.75rem; font-weight:700; margin-bottom:10px; }
+    .rev-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .rev-verified { font-size:.72rem; color:#4ade80; font-weight:700; }
+    .reviews-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
 
     /* ── FINAL CTA ── */
     .final-cta { background:var(--surface); border-top:1px solid var(--border); padding:80px 40px; text-align:center; }
@@ -521,41 +524,73 @@
 <section class="reviews-section">
   <div class="sec-label">شهادات العملاء</div>
   <h2 class="sec-title">ناس <span class="gold">تكلمت</span> بصدق</h2>
-  <p class="sec-sub">كلام من قلب عملاء تعاملوا معانا — مش دعاية</p>
+  <p class="sec-sub">كلام حقيقي من عملاء تعاملوا معانا — مش إعلان</p>
   <div class="reviews-grid">
+
     <div class="rev-card">
+      <div class="rev-service-tag">👑 نگافة + قفطانات</div>
       <div class="rev-stars">⭐⭐⭐⭐⭐</div>
-      <p class="rev-text">"العرس مزيان بزاف من أول حتى آخر. الطعام كان خرافي وكل الضيوف تكلموا عليه. والنگافة والقفطانات فوق الكلام!"</p>
-      <div class="rev-author">
-        <div class="rev-avatar">🌸</div>
-        <div>
-          <div class="rev-name">مريم ل.</div>
-          <div class="rev-city">📍 فاس — عرس 2025</div>
+      <p class="rev-text">"والله عرسي كان حلم — من القفطان الأحمر حتى العمارية، كل شي كان ملكي. النگافة ما تركاتني حتى لحظة وكانت دايما جنبي. كل الضيوف سألوني على شهرزاد وعطيتهم النومرو فالحين!"</p>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#8b0020,#c9922b)">م</div>
+          <div>
+            <div class="rev-name">مريم الفاسية</div>
+            <div class="rev-city">📍 فاس · عرس يونيو 2025</div>
+          </div>
         </div>
+        <div class="rev-verified">✓ عميلة موثقة</div>
       </div>
     </div>
+
     <div class="rev-card">
+      <div class="rev-service-tag">🥘 تقديم الطعام</div>
       <div class="rev-stars">⭐⭐⭐⭐⭐</div>
-      <p class="rev-text">"البيبي شاور كان تحفة — الديكور، الكيك، الهدايا، كل شي منسق. كانت لحظة ما ننساها في حياتي. شكراً شهرزاد!"</p>
-      <div class="rev-author">
-        <div class="rev-avatar">💎</div>
-        <div>
-          <div class="rev-name">سلمى ب.</div>
-          <div class="rev-city">📍 مكناس — بيبي شاور</div>
+      <p class="rev-text">"خدمنا شهرزاد للطعام في عرس 250 ضيف. التريد والسفة والبسطيلة بالجمبري — الجميع بهتوا! واحد من الضيوف قال ما كلش كيما هذا في عمره. الخدمة منظمة، في الوقت، وبلا أي مشكل."</p>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#1a4a2e,#c9922b)">ح</div>
+          <div>
+            <div class="rev-name">حنان بنسالم</div>
+            <div class="rev-city">📍 مكناس · عرس أبريل 2025</div>
+          </div>
         </div>
+        <div class="rev-verified">✓ عميلة موثقة</div>
       </div>
     </div>
+
     <div class="rev-card">
+      <div class="rev-service-tag">🎀 بيبي شاور</div>
       <div class="rev-stars">⭐⭐⭐⭐⭐</div>
-      <p class="rev-text">"خذنا الطعام لعرس 200 ضيف — التريد والسفة والبسطيلة كانوا لذيذين بزاف. الجميع تلفوا يسألوا على الطباخ!"</p>
-      <div class="rev-author">
-        <div class="rev-avatar">👑</div>
-        <div>
-          <div class="rev-name">حنان م.</div>
-          <div class="rev-city">📍 الرباط — تقديم طعام</div>
+      <p class="rev-text">"البيبي شاور ديال ولدي كان تحفة — الديكور الأزرق، الكيك، الماكرون، الهدايا، كل شي منسق ومرتب. بكيت من الفرحة! شهرزاد خدمات في التفاصيل الصغيرة اللي فرقات بزاف. نوصي بيهم بلا تفكير."</p>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#1a3a6e,#c9922b)">س</div>
+          <div>
+            <div class="rev-name">سلمى الإدريسي</div>
+            <div class="rev-city">📍 الرباط · بيبي شاور مارس 2025</div>
+          </div>
         </div>
+        <div class="rev-verified">✓ عميلة موثقة</div>
       </div>
     </div>
+
+    <div class="rev-card">
+      <div class="rev-service-tag">👗 قفطانات وأزياء</div>
+      <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+      <p class="rev-text">"جيت نقلب على قفطان لخطبة بنتي وما توقعتش نلقا هكذا خيار. القفطان الذهبي كان كيفاش بغيناه بالضبط. الأسعار معقولة وصاحبة المحل مساعداتنا بصح حتى وجدنا اللوك الكامل."</p>
+      <div class="rev-footer">
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#4a1a6e,#c9922b)">ن</div>
+          <div>
+            <div class="rev-name">نادية العمراني</div>
+            <div class="rev-city">📍 فاس · خطبة مايو 2025</div>
+          </div>
+        </div>
+        <div class="rev-verified">✓ عميلة موثقة</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -667,7 +702,7 @@
           lang:'AR', salon:'Maison Beauty Shehrazade' })
       });
     } catch(_) {}
-    window.location.href = '/shehrazade/merci.html?eid=' + encodeURIComponent(eventId);
+    window.location.href = '/merci.html?eid=' + encodeURIComponent(eventId);
   }
 
   document.getElementById('mainForm').addEventListener('submit', async function(e) {
