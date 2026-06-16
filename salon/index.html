@@ -5,7 +5,7 @@
   <base href="/salon/" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AmraniAds — نظام رقمي لصالونات التجميل | المغرب</title>
-  <meta name="description" content="نبني لصالونك نظام رقمي كامل يجلب عملاء جدد كل يوم — صفحة هبوط + إعلانات + تتبع. تسليم في 24 ساعة." />
+  <meta name="description" content="نجيبك +20 موعد جديد في 7 أيام — أو نردلك الفلوس كاملة. نظام رقمي متكامل لصالونك: صفحة هبوط + إعلانات Meta + تتبع. تسليم في 24 ساعة." />
   <link rel="icon" href="/logo.png" type="image/png"/>
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -55,10 +55,46 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
 
+    /* ── ANNOUNCEMENT BAR ── */
+    .announce-bar {
+      position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+      background: #0e1621;
+      border-bottom: 1px solid rgba(244,114,182,.2);
+      padding: 10px 20px 10px 70px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; flex-wrap: wrap;
+      transition: transform .35s ease;
+    }
+    .announce-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .announce-text {
+      color: rgba(255,255,255,.92); font-size: .85rem; font-weight: 600; line-height: 1.4;
+      text-align: center;
+    }
+    .announce-text strong { color: #4ade80; }
+    .announce-cta {
+      background: var(--grad-pink); color: #fff;
+      border: none; border-radius: 50px;
+      padding: 7px 18px; font-family: 'Cairo', sans-serif;
+      font-size: .82rem; font-weight: 900;
+      text-decoration: none; white-space: nowrap;
+      cursor: pointer; flex-shrink: 0;
+      box-shadow: 0 3px 14px rgba(232,85,154,.5);
+      transition: opacity .2s, transform .15s;
+    }
+    .announce-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .announce-close {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.55);
+      width: 28px; height: 28px; border-radius: 50%;
+      font-size: .85rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .announce-close:hover { background: rgba(255,255,255,.16); color: #fff; }
+
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.97);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--pink-border);
       padding: 0 24px; height: 60px;
@@ -76,43 +112,54 @@
     /* ── HERO ── */
     .hero {
       min-height: 100svh;
-      padding: 80px 20px 48px;
+      padding: 122px 20px 48px;
       display: flex; align-items: center; justify-content: center;
-      background:
-        radial-gradient(ellipse 80% 60% at 30% 40%, rgba(244,114,182,.13) 0%, transparent 65%),
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(167,139,250,.08) 0%, transparent 55%),
-        var(--bg);
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80') center / cover no-repeat;
+      filter: brightness(.28) saturate(1.1);
+    }
+    .hero-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(30,8,24,.92) 50%, rgba(30,8,24,.55) 100%);
     }
     .hero-inner {
       max-width: 1080px; width: 100%;
       display: flex; align-items: center; gap: 56px;
+      position: relative; z-index: 1;
     }
     .hero-text { flex: 1 1 480px; }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--pink-soft); border: 1px solid var(--pink-border);
-      color: var(--pink-bright); border-radius: 50px;
+      background: rgba(244,114,182,.15); border: 1px solid rgba(244,114,182,.35);
+      color: #f9a8d4; border-radius: 50px;
       padding: 6px 16px; font-size: .8rem; font-weight: 700; margin-bottom: 22px;
     }
     .hero-badge::before {
       content: ''; width: 7px; height: 7px; border-radius: 50%;
-      background: var(--pink-bright); animation: blink 1.6s infinite; flex-shrink: 0;
+      background: #f472b6; animation: blink 1.6s infinite; flex-shrink: 0;
     }
     @keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
 
     h1 {
       font-size: clamp(2rem, 5vw, 3.4rem);
       font-weight: 900; line-height: 1.18;
-      color: var(--text); margin-bottom: 18px;
+      color: #fff; margin-bottom: 18px;
     }
     h1 .gold-line {
-      color: var(--pink); display: block;
-      text-shadow: 0 0 40px rgba(232,85,154,.2);
+      color: #f472b6; display: block;
+      text-shadow: 0 0 40px rgba(244,114,182,.35);
+    }
+    h1 .guarantee-line {
+      color: #4ade80; display: block; font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+      margin-top: 6px;
     }
 
     .hero-sub {
-      font-size: 1.05rem; color: var(--muted);
+      font-size: 1.05rem; color: rgba(255,255,255,.78);
       max-width: 460px; margin-bottom: 28px; line-height: 1.85;
     }
 
@@ -121,8 +168,8 @@
     }
     .proof-item { display: flex; align-items: center; gap: 8px; }
     .proof-icon { font-size: 1rem; }
-    .proof-text { font-size: .85rem; color: var(--muted); }
-    .proof-text strong { color: var(--pink-bright); font-weight: 700; }
+    .proof-text { font-size: .85rem; color: rgba(255,255,255,.7); }
+    .proof-text strong { color: #f472b6; font-weight: 700; }
 
     /* ── HERO PRICE ROW ── */
     .hero-price-row {
@@ -131,43 +178,43 @@
     }
     .hero-price-tag {
       display: flex; align-items: baseline; gap: 5px;
-      background: var(--pink-soft); border: 1.5px solid var(--pink-border);
+      background: rgba(244,114,182,.15); border: 1.5px solid rgba(244,114,182,.35);
       border-radius: 50px; padding: 8px 18px;
     }
-    .hpt-from { font-size: .75rem; color: var(--muted); }
-    .hpt-num  { font-size: 1.55rem; font-weight: 900; color: var(--pink); line-height: 1; }
-    .hpt-cur  { font-size: .85rem; font-weight: 700; color: var(--pink); }
-    .hpt-note { font-size: .72rem; color: var(--muted); margin-right: 4px; }
+    .hpt-from { font-size: .75rem; color: rgba(255,255,255,.6); }
+    .hpt-num  { font-size: 1.55rem; font-weight: 900; color: #f472b6; line-height: 1; }
+    .hpt-cur  { font-size: .85rem; font-weight: 700; color: #f472b6; }
+    .hpt-note { font-size: .72rem; color: rgba(255,255,255,.5); margin-right: 4px; }
     .hero-pricing-btn {
       display: inline-flex; align-items: center;
-      background: transparent; border: 2px solid var(--pink-border);
-      color: var(--pink); border-radius: 50px; padding: 9px 22px;
+      background: transparent; border: 2px solid rgba(244,114,182,.4);
+      color: #f9a8d4; border-radius: 50px; padding: 9px 22px;
       font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 700;
       text-decoration: none; transition: background .2s, transform .15s;
     }
-    .hero-pricing-btn:hover { background: var(--pink-soft); transform: translateY(-2px); }
+    .hero-pricing-btn:hover { background: rgba(244,114,182,.15); transform: translateY(-2px); }
 
     /* ── FOUNDER CARD ── */
     .founder-card {
       display: flex; align-items: center; gap: 14px;
-      background: var(--card); border: 1.5px solid var(--pink-border);
+      background: rgba(255,255,255,.08); border: 1.5px solid rgba(244,114,182,.3);
       border-radius: 16px; padding: 14px 18px;
       max-width: 360px;
-      box-shadow: 0 4px 18px rgba(232,85,154,.08);
+      backdrop-filter: blur(10px);
     }
     .founder-img {
       width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
       object-position: center top;
-      flex-shrink: 0; border: 2.5px solid var(--pink);
+      flex-shrink: 0; border: 2.5px solid #f472b6;
     }
-    .founder-name  { font-weight: 900; font-size: .92rem; color: var(--text); }
-    .founder-title { font-size: .76rem; color: var(--muted); line-height: 1.4; margin: 3px 0; }
-    .founder-stats { display: flex; gap: 12px; font-size: .75rem; color: var(--pink); font-weight: 700; margin-top: 4px; }
+    .founder-name  { font-weight: 900; font-size: .92rem; color: #fff; }
+    .founder-title { font-size: .76rem; color: rgba(255,255,255,.65); line-height: 1.4; margin: 3px 0; }
+    .founder-stats { display: flex; gap: 12px; font-size: .75rem; color: #f472b6; font-weight: 700; margin-top: 4px; }
 
     /* ── FORM ── */
     .hero-form-col { flex: 0 0 360px; }
     .form-card {
-      background: var(--card);
+      background: rgba(255,255,255,.97);
       border-radius: 22px;
       border: 1px solid var(--pink-border);
       box-shadow: var(--shadow-lg), 0 0 0 1px rgba(244,114,182,.06);
@@ -226,18 +273,19 @@
       display: flex; flex-direction: column; gap: 10px;
     }
     .review-card {
-      background: var(--card); border: 1px solid var(--pink-border);
+      background: rgba(255,255,255,.06); border: 1px solid rgba(244,114,182,.2);
       border-radius: 14px; padding: 13px 15px;
       display: flex; align-items: flex-start; gap: 11px;
+      backdrop-filter: blur(8px);
     }
     .review-card img {
       width: 42px; height: 42px; border-radius: 50%; object-fit: cover;
       flex-shrink: 0; border: 2px solid rgba(244,114,182,.35);
     }
-    .review-name  { font-weight: 700; font-size: .83rem; color: var(--text); }
-    .review-stars { color: var(--pink-bright); font-size: .73rem; letter-spacing: 2px; margin: 2px 0; }
-    .review-text  { font-size: .79rem; color: var(--muted); line-height: 1.55; }
-    .review-loc   { font-size: .71rem; color: var(--pink); margin-top: 4px; opacity: .8; }
+    .review-name  { font-weight: 700; font-size: .83rem; color: #fff; }
+    .review-stars { color: #f472b6; font-size: .73rem; letter-spacing: 2px; margin: 2px 0; }
+    .review-text  { font-size: .79rem; color: rgba(255,255,255,.7); line-height: 1.55; }
+    .review-loc   { font-size: .71rem; color: #f472b6; margin-top: 4px; opacity: .8; }
 
     /* ── SECTION COMMONS ── */
     .section-eyebrow {
@@ -254,6 +302,50 @@
       text-align: center; color: var(--muted); font-size: .93rem;
       max-width: 520px; margin: 0 auto 44px; line-height: 1.7;
     }
+
+    /* ── PAIN SECTION ── */
+    .pain-section {
+      background: #0e1621;
+      padding: 72px 20px;
+      border-top: 1px solid rgba(244,114,182,.15);
+    }
+    .pain-inner { max-width: 960px; margin: 0 auto; }
+    .pain-title {
+      font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 900;
+      color: #fff; text-align: center; margin-bottom: 10px; line-height: 1.3;
+    }
+    .pain-title .red { color: #f87171; }
+    .pain-sub { text-align: center; color: rgba(255,255,255,.55); font-size: .93rem; max-width: 500px; margin: 0 auto 40px; }
+    .pain-grid {
+      display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center;
+      gap: 0; margin-bottom: 40px;
+    }
+    .pain-col { display: flex; flex-direction: column; gap: 10px; }
+    .pain-col.before .pain-item { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.25); }
+    .pain-col.after  .pain-item { background: rgba(74,222,128,.08); border-color: rgba(74,222,128,.25); }
+    .pain-item {
+      border-radius: 12px; border: 1px solid; padding: 12px 16px;
+      font-size: .88rem; color: rgba(255,255,255,.82);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pain-col.before .pain-icon-dot { color: #f87171; font-size: 1rem; flex-shrink: 0; }
+    .pain-col.after  .pain-icon-dot { color: #4ade80; font-size: 1rem; flex-shrink: 0; }
+    .pain-divider {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .pain-arrow {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--grad-pink);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1.2rem;
+      box-shadow: 0 4px 20px rgba(232,85,154,.5);
+    }
+    .pain-col-title {
+      font-size: .78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 14px; text-align: center;
+    }
+    .pain-col.before .pain-col-title { color: #f87171; }
+    .pain-col.after  .pain-col-title { color: #4ade80; }
 
     /* ── WHAT YOU GET ── */
     .what-section {
@@ -281,6 +373,48 @@
     }
     .what-title { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 8px; }
     .what-desc  { font-size: .86rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── RESULTS GALLERY (PROOF) ── */
+    .results-section {
+      padding: 80px 20px;
+      background: var(--bg);
+      border-top: 1px solid var(--pink-border);
+    }
+    .results-inner { max-width: 1060px; margin: 0 auto; }
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 22px; margin-top: 44px;
+    }
+    .result-card {
+      background: var(--card); border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--pink-border);
+      box-shadow: var(--shadow);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .result-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .result-img {
+      width: 100%; height: 200px; object-fit: cover; display: block;
+      background: linear-gradient(135deg, #fce4f3 0%, #ede9fe 100%);
+    }
+    .result-img-placeholder {
+      width: 100%; height: 200px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px;
+      font-size: 2.5rem;
+    }
+    .result-body { padding: 20px; }
+    .result-tag {
+      display: inline-block; background: var(--pink-soft);
+      border: 1px solid var(--pink-border); color: var(--pink-bright);
+      border-radius: 50px; padding: 3px 12px; font-size: .76rem; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .result-title { font-size: 1rem; font-weight: 900; color: var(--text); margin-bottom: 6px; }
+    .result-desc { font-size: .84rem; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .result-stats { display: flex; gap: 12px; }
+    .result-stat { text-align: center; flex: 1; }
+    .result-stat-num { font-size: 1.3rem; font-weight: 900; color: var(--pink-bright); display: block; }
+    .result-stat-lbl { font-size: .7rem; color: var(--muted); }
 
     /* ── CASE STUDY ── */
     .proof-section {
@@ -376,6 +510,62 @@
     .stat-num   { font-size: 2.8rem; font-weight: 900; color: #fff; display: block; line-height: 1; }
     .stat-label { font-size: .88rem; color: rgba(255,255,255,.82); margin-top: 6px; display: block; }
 
+    /* ── GUARANTEE ── */
+    .guarantee-section {
+      padding: 72px 20px;
+      background: linear-gradient(180deg, #fdf7fc 0%, #eff6ff 100%);
+      border-top: 1px solid var(--pink-border);
+    }
+    .guarantee-inner { max-width: 780px; margin: 0 auto; }
+    .guarantee-box {
+      background: #0e1621;
+      border-radius: 24px; padding: 44px 40px;
+      text-align: center; position: relative; overflow: hidden;
+      border: 1px solid rgba(74,222,128,.25);
+      box-shadow: 0 0 60px rgba(74,222,128,.08);
+    }
+    .guarantee-box::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(74,222,128,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .guarantee-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.3);
+      color: #4ade80; border-radius: 50px;
+      padding: 6px 18px; font-size: .8rem; font-weight: 700; margin-bottom: 20px;
+    }
+    .guarantee-icon {
+      font-size: 4rem; margin-bottom: 16px; display: block;
+      filter: drop-shadow(0 0 20px rgba(74,222,128,.4));
+    }
+    .guarantee-title {
+      font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; color: #fff;
+      margin-bottom: 14px; line-height: 1.3;
+    }
+    .guarantee-title .green { color: #4ade80; }
+    .guarantee-desc { font-size: .97rem; color: rgba(255,255,255,.68); line-height: 1.8; max-width: 560px; margin: 0 auto 28px; }
+    .guarantee-items {
+      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .guarantee-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .86rem; color: rgba(255,255,255,.78);
+    }
+    .guarantee-item .g-check { color: #4ade80; font-size: 1rem; }
+    .guarantee-cta {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: #fff; border: none; border-radius: 50px;
+      padding: 14px 36px; font-family: 'Cairo', sans-serif;
+      font-size: 1rem; font-weight: 900; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 6px 28px rgba(34,197,94,.45);
+      transition: opacity .2s, transform .15s;
+    }
+    .guarantee-cta:hover { opacity: .9; transform: translateY(-2px); }
+    .guarantee-fine { font-size: .75rem; color: rgba(255,255,255,.35); margin-top: 14px; }
+
     /* ── PACKAGES ── */
     .packages-section {
       padding: 80px 20px;
@@ -383,57 +573,6 @@
       border-top: 1px solid var(--pink-border);
     }
     .packages-inner { max-width: 1060px; margin: 0 auto; }
-    .packages-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 22px; margin-top: 44px;
-    }
-    .pkg-card {
-      background: var(--card); border-radius: 22px; padding: 30px 26px;
-      border: 1px solid var(--pink-border);
-      transition: transform .25s, box-shadow .25s; position: relative;
-      display: flex; flex-direction: column;
-    }
-    .pkg-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-    .pkg-card.featured {
-      border-color: var(--pink);
-      background: linear-gradient(160deg, #fce4f3 0%, #ede9fe 100%);
-      box-shadow: 0 0 0 1px rgba(244,114,182,.3), var(--shadow-lg);
-    }
-    .pkg-badge {
-      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--grad-pink); color: #fff; border-radius: 50px;
-      padding: 4px 18px; font-size: .77rem; font-weight: 700; white-space: nowrap;
-    }
-    .pkg-name  { font-size: 1.1rem; font-weight: 900; color: var(--text); margin-bottom: 6px; }
-    .pkg-desc  { font-size: .84rem; color: var(--muted); margin-bottom: 18px; }
-    .pkg-price {
-      font-size: 2.4rem; font-weight: 900; color: var(--pink-bright);
-      line-height: 1; margin-bottom: 4px;
-    }
-    .pkg-price span { font-size: .82rem; font-weight: 600; color: var(--muted); }
-    .pkg-billing { font-size: .77rem; color: var(--muted); margin-bottom: 22px; }
-    .pkg-features { list-style: none; flex: 1; }
-    .pkg-features li {
-      font-size: .86rem; color: var(--muted); padding: 7px 0;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-      display: flex; align-items: flex-start; gap: 10px;
-    }
-    .pkg-features li:last-child { border-bottom: none; }
-    .pkg-features .check { color: var(--pink-bright); flex-shrink: 0; margin-top: 2px; }
-    .pkg-cta {
-      margin-top: 22px; width: 100%; background: var(--grad-pink);
-      color: #fff; border: none; border-radius: 50px; padding: 13px;
-      font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 700;
-      cursor: pointer; text-decoration: none; text-align: center; display: block;
-      transition: opacity .2s, transform .15s;
-      box-shadow: 0 4px 20px rgba(232,85,154,.35);
-    }
-    .pkg-cta:hover  { opacity: .9; transform: translateY(-1px); }
-    .pkg-cta.outline {
-      background: transparent; border: 1.5px solid var(--pink-border);
-      color: var(--pink-bright); box-shadow: none;
-    }
-    .pkg-cta.outline:hover { background: var(--pink-soft); border-color: var(--pink); }
 
     /* ── FAQ ── */
     .faq-section { padding: 80px 20px; max-width: 860px; margin: 0 auto; }
@@ -496,22 +635,6 @@
     }
     .btn-wa:hover { opacity: .9; transform: translateY(-2px); }
 
-    /* ── FLOATING WA BUTTON (mobile) ── */
-    .wa-float {
-      display: none;
-      position: fixed; bottom: 20px; left: 20px; z-index: 200;
-      background: var(--green); color: #fff;
-      width: 56px; height: 56px; border-radius: 50%;
-      align-items: center; justify-content: center;
-      font-size: 1.6rem; text-decoration: none;
-      box-shadow: 0 4px 20px rgba(37,211,102,.5);
-      animation: wa-pulse 2.5s infinite;
-    }
-    @keyframes wa-pulse {
-      0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,.5); }
-      50%      { box-shadow: 0 4px 32px rgba(37,211,102,.85); }
-    }
-
     /* ── FOOTER ── */
     footer {
       background: #fce4f3; border-top: 1px solid var(--pink-border);
@@ -543,7 +666,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      .hero { padding: 72px 16px 44px; }
+      .hero { padding: 122px 16px 44px; }
       .hero-inner { flex-direction: column; gap: 36px; }
       .hero-form-col { width: 100%; flex: none; max-width: 480px; margin: 0 auto; }
       .hero-text { text-align: center; }
@@ -555,6 +678,9 @@
       .case-study-card { flex-direction: column; gap: 24px; padding: 24px 20px; }
       .case-divider { display: none; }
       .case-logo { flex: none; }
+      .pain-grid { grid-template-columns: 1fr; gap: 12px; }
+      .pain-divider { display: none; }
+      .guarantee-box { padding: 32px 24px; }
     }
 
     @media (max-width: 540px) {
@@ -566,15 +692,26 @@
       .packages-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .what-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
       .case-metrics { gap: 10px; }
       .metric { flex: 1 1 calc(50% - 5px); }
       .btn-gold, .btn-wa { width: 100%; justify-content: center; }
       .hero-form-col { max-width: 100%; }
       .form-card-top h2 { font-size: 1rem; }
+      .announce-bar { padding: 10px 56px 10px 60px; flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
 <body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar" id="announceBar">
+  <div class="announce-text">
+    <strong>استشارة مجانية</strong> — نجيبك <strong>+20 موعد</strong> في 7 أيام أو <strong>كاردو ليك فلوسك</strong> كاملة
+  </div>
+  <a href="#leadForm" class="announce-cta">احجز الآن — مجاناً ←</a>
+  <button class="announce-close" onclick="document.getElementById('announceBar').classList.add('hidden')" aria-label="إغلاق">✕</button>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -589,6 +726,8 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
   <div class="hero-inner">
 
     <div class="hero-text">
@@ -596,9 +735,10 @@
       <h1>
         صالونك يستاهل<br>
         <span class="gold-line">عملاء أكثر كل يوم</span>
+        <span class="guarantee-line">+20 موعد في 7 أيام — أو نردلك الفلوس</span>
       </h1>
       <p class="hero-sub">
-        نبني لك نظام رقمي كامل — صفحة هبوط احترافية، إعلانات ميتا، تتبع العملاء تلقائياً. كل ما يجي عميل جديد، تتوصل برسالة فورية على هاتفك.
+        نبني لك نظام رقمي كامل — صفحة هبوط، إعلانات ميتا، وتتبع تلقائي. كل عميل جديد يجيك إشعار فوري. ضمان كامل أو استرداد الفلوس.
       </p>
       <div class="hero-proof">
         <div class="proof-item"><span class="proof-icon">⚡</span><span class="proof-text">تسليم في <strong>24 ساعة</strong></span></div>
@@ -607,7 +747,6 @@
         <div class="proof-item"><span class="proof-icon">🎯</span><span class="proof-text"><strong>Meta Pixel + CAPI</strong> متصل</span></div>
       </div>
 
-      <!-- Price anchor + CTA -->
       <div class="hero-price-row">
         <div class="hero-price-tag">
           <span class="hpt-from">ابتداءً من</span>
@@ -618,7 +757,6 @@
         <a href="#packages" class="hero-pricing-btn">عرض الأسعار ↓</a>
       </div>
 
-      <!-- Founder card -->
       <div class="founder-card">
         <img src="founder.jpg" alt="عبد العالي العمراني" class="founder-img"/>
         <div class="founder-info">
@@ -636,7 +774,7 @@
       <div class="form-card" id="leadForm">
         <div class="form-card-top">
           <h2>🚀 احصل على استشارة مجانية</h2>
-          <p>بدون التزام — نتواصل معك خلال ساعات</p>
+          <p>+20 موعد في 7 أيام — أو نرد الفلوس</p>
         </div>
         <div class="form-body">
           <form id="agencyForm" novalidate>
@@ -675,18 +813,45 @@
             <div class="review-loc">مركز تجميل — الرباط</div>
           </div>
         </div>
-        <div class="review-card">
-          <img src="https://randomuser.me/api/portraits/women/61.jpg" loading="lazy" alt=""/>
-          <div>
-            <div class="review-name">هند البلوشي</div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-text">والله خدمة فوق الكلام! تسليم في 24 ساعة وإعلانات Meta مربوطة. نوصي بيهم بجوج يدين ✨</div>
-            <div class="review-loc">صالون نسائي — فاس</div>
-          </div>
-        </div>
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- PAIN SECTION (Hormozi: Agitate the pain) -->
+<section class="pain-section">
+  <div class="pain-inner">
+    <div class="pain-title">صالونات كثيرة <span class="red">تخسر عملاء</span> كل يوم</div>
+    <p class="pain-sub">ما الفرق بين صالون يمتلئ بالحجوزات وصالون يعاني من الفراغ؟ النظام الرقمي.</p>
+
+    <div class="pain-grid">
+      <div class="pain-col before">
+        <div class="pain-col-title">بدون نظام رقمي ❌</div>
+        <div class="pain-item"><span class="pain-icon-dot">✗</span>عملاء يبحثون عنك ويجدون المنافسة</div>
+        <div class="pain-item"><span class="pain-icon-dot">✗</span>حجوزات تضيع على واتساب بدون تتبع</div>
+        <div class="pain-item"><span class="pain-icon-dot">✗</span>لا تعرف من أين يأتي العميل</div>
+        <div class="pain-item"><span class="pain-icon-dot">✗</span>إعلانات بدون قياس — فلوس تضيع</div>
+        <div class="pain-item"><span class="pain-icon-dot">✗</span>كل يوم حر — لا رسائل، لا حجوزات</div>
+      </div>
+      <div class="pain-divider">
+        <div class="pain-arrow">←</div>
+      </div>
+      <div class="pain-col after">
+        <div class="pain-col-title">مع نظام AmraniAds ✓</div>
+        <div class="pain-item"><span class="pain-icon-dot">✓</span>صفحة احترافية تظهر في كل بحث</div>
+        <div class="pain-item"><span class="pain-icon-dot">✓</span>إشعار تيليغرام فوري لكل حجز جديد</div>
+        <div class="pain-item"><span class="pain-icon-dot">✓</span>كل عميل مسجل في Google Sheets</div>
+        <div class="pain-item"><span class="pain-icon-dot">✓</span>Meta Pixel + CAPI يتتبع كل شيء</div>
+        <div class="pain-item"><span class="pain-icon-dot">✓</span>+20 موعد في 7 أيام — مضمون</div>
+      </div>
+    </div>
+
+    <div style="text-align:center">
+      <a href="#leadForm" style="display:inline-flex;align-items:center;gap:10px;background:var(--grad-pink);color:#fff;border:none;border-radius:50px;padding:14px 34px;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:900;text-decoration:none;box-shadow:0 6px 28px rgba(232,85,154,.45);transition:opacity .2s,transform .15s">
+        ابدأ التحول الآن — مجاناً →
+      </a>
+    </div>
   </div>
 </section>
 
@@ -727,6 +892,70 @@
         <div class="what-title">تحسين Google Maps</div>
         <div class="what-desc">نحسّن ملف صالونك على خرائط غوغل — تظهر في نتائج البحث لما يدوّر العملاء في مدينتك</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS / PROOF GALLERY -->
+<section class="results-section">
+  <div class="results-inner">
+    <div class="section-eyebrow">✦ نتائج حقيقية</div>
+    <h2 class="section-title">شوفوا <span class="gold">اللي بنيناه فعلاً</span></h2>
+    <p class="section-sub">أعمال حقيقية — صفحات مشتغلة، أنظمة تتبع متصلة، وعملاء يحجزون كل يوم</p>
+
+    <div class="results-grid">
+
+      <div class="result-card">
+        <div class="result-img-placeholder" style="background:linear-gradient(135deg,#fce4f3,#ede9fe)">
+          <span>💅</span>
+          <span style="font-size:.9rem;font-weight:700;color:var(--pink)">Centre Solyra — طنجة</span>
+        </div>
+        <div class="result-body">
+          <span class="result-tag">✅ نظام مكتمل ومشتغل</span>
+          <div class="result-title">Centre Solyra — صالون تجميل نسائي</div>
+          <div class="result-desc">صفحة حجوزات + صفحة توظيف + Meta Pixel + CAPI + Telegram + Google Sheets CRM — كل شيء في 24 ساعة</div>
+          <div class="result-stats">
+            <div class="result-stat"><span class="result-stat-num">24h</span><span class="result-stat-lbl">وقت التسليم</span></div>
+            <div class="result-stat"><span class="result-stat-num">0 DH</span><span class="result-stat-lbl">تكلفة الاستضافة</span></div>
+            <div class="result-stat"><span class="result-stat-num">100%</span><span class="result-stat-lbl">تتبع تلقائي</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-img-placeholder" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+          <span>📱</span>
+          <span style="font-size:.9rem;font-weight:700;color:#3b82f6">Telegram Notification</span>
+        </div>
+        <div class="result-body">
+          <span class="result-tag" style="color:#3b82f6;background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.25)">⚡ إشعار فوري</span>
+          <div class="result-title">إشعار تلقائي على تيليغرام</div>
+          <div class="result-desc">لما يملأ عميل الفورم — تجيك رسالة فورية بالاسم والرقم والخدمة. كيفاش قبل ما تغلق الهاتف حتى</div>
+          <div class="result-stats">
+            <div class="result-stat"><span class="result-stat-num">0s</span><span class="result-stat-lbl">وقت الإشعار</span></div>
+            <div class="result-stat"><span class="result-stat-num">100%</span><span class="result-stat-lbl">موثوقية</span></div>
+            <div class="result-stat"><span class="result-stat-num">24/7</span><span class="result-stat-lbl">متاح دايماً</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-img-placeholder" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)">
+          <span>📊</span>
+          <span style="font-size:.9rem;font-weight:700;color:#16a34a">Google Sheets CRM</span>
+        </div>
+        <div class="result-body">
+          <span class="result-tag" style="color:#16a34a;background:rgba(22,163,74,.1);border-color:rgba(22,163,74,.25)">📋 CRM تلقائي</span>
+          <div class="result-title">جدول عملاء يتحدث تلقائياً</div>
+          <div class="result-desc">كل عميل يضيف نفسه في الجدول — الاسم، الرقم، الخدمة، التاريخ. شوفي كل عملاءك بنظرة واحدة</div>
+          <div class="result-stats">
+            <div class="result-stat"><span class="result-stat-num">∞</span><span class="result-stat-lbl">عدد العملاء</span></div>
+            <div class="result-stat"><span class="result-stat-num">0 DH</span><span class="result-stat-lbl">تكلفة شهرية</span></div>
+            <div class="result-stat"><span class="result-stat-num">لحظية</span><span class="result-stat-lbl">المزامنة</span></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -796,9 +1025,30 @@
 <section class="stats-band">
   <div class="stats-inner">
     <div><span class="stat-num">24h</span><span class="stat-label">متوسط وقت التسليم</span></div>
-    <div><span class="stat-num">100%</span><span class="stat-label">تتبع تلقائي للعملاء</span></div>
+    <div><span class="stat-num">+20</span><span class="stat-label">موعد مضمون في 7 أيام</span></div>
     <div><span class="stat-num">3x</span><span class="stat-label">متوسط زيادة الحجوزات</span></div>
     <div><span class="stat-num">0</span><span class="stat-label">خبرة تقنية مطلوبة</span></div>
+  </div>
+</section>
+
+<!-- GUARANTEE SECTION (Hormozi: Risk reversal) -->
+<section class="guarantee-section">
+  <div class="guarantee-inner">
+    <div class="guarantee-box">
+      <div class="guarantee-badge">🛡️ ضمان مكتوب — ليس مجرد كلام</div>
+      <span class="guarantee-icon">🎯</span>
+      <h2 class="guarantee-title">+20 موعد في 7 أيام<br><span class="green">أو نردلك الفلوس كاملة</span></h2>
+      <p class="guarantee-desc">
+        هذا ليس وعداً فارغاً. نحن نضع أموالنا على الطاولة. إذا شغّلنا نظامك وما وصلتك +20 موعد جديد في 7 أيام — نرد لك كل درهم دفعته. بدون أسئلة، بدون شروط.
+      </p>
+      <div class="guarantee-items">
+        <div class="guarantee-item"><span class="g-check">✓</span>استرداد كامل بدون أسئلة</div>
+        <div class="guarantee-item"><span class="g-check">✓</span>تسليم في 24 ساعة أو تستأمن</div>
+        <div class="guarantee-item"><span class="g-check">✓</span>ضمان مكتوب في العقد</div>
+      </div>
+      <a href="#leadForm" class="guarantee-cta">احصل على ضمانك — ابدأ مجاناً</a>
+      <p class="guarantee-fine">لماذا نضمن؟ لأننا واثقون من النتائج — وأنت لا يجب أن تخاطر بفلوسك.</p>
+    </div>
   </div>
 </section>
 
@@ -808,7 +1058,6 @@
     <div class="section-eyebrow">✦ العروض</div>
     <h2 class="section-title">إعلانات الفيسبوك <span class="gold">المضمونة</span> — خبرة 5 سنوات</h2>
 
-    <!-- Proof bar -->
     <div class="proof-bar">
       <div class="proof-item"><span class="proof-num">10x</span><span class="proof-lbl">عائد الاستثمار</span></div>
       <div class="proof-sep"></div>
@@ -819,13 +1068,11 @@
       <div class="proof-item"><span class="proof-num">5</span><span class="proof-lbl">سنوات خبرة</span></div>
     </div>
 
-    <!-- Pain line -->
     <div class="pain-line">
       <span class="pain-icon">⚠️</span>
       <span>كل يوم بلا إعلانات — عملاءك يذهبون للمنافسة.</span>
     </div>
 
-    <!-- Scarcity bar -->
     <div class="scarcity-bar">
       <span class="scarcity-dot"></span>
       <strong>تنبيه:</strong> متبقي فقط <strong id="spotsLeft">3</strong> أماكن هذا الشهر — بعدها نغلق التسجيل حتى الشهر القادم
@@ -864,7 +1111,6 @@
         <div class="pkg2-perday" style="color:rgba(255,255,255,.8)">= أقل من <strong style="color:#fff">4.5 DH في اليوم</strong></div>
         <div class="pkg2-billing" style="color:rgba(255,255,255,.65)">دفعة واحدة — تسليم في 24 ساعة</div>
 
-        <!-- Value stack -->
         <div class="value-stack">
           <div class="vs-title">🎁 ما تحصله:</div>
           <div class="vs-row"><span>صفحة هبوط احترافية</span><span class="vs-val">1,500 DH</span></div>
@@ -882,7 +1128,6 @@
 
     </div>
 
-    <!-- Add-on -->
     <div class="addon-bar">
       <div class="addon-icon">📈</div>
       <div>
@@ -896,7 +1141,6 @@
 </section>
 
 <style>
-  /* Proof bar */
   .proof-bar {
     display: grid;
     grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
@@ -912,7 +1156,6 @@
   .proof-bar .proof-lbl { font-size: .72rem; color: var(--muted); margin-top: 4px; text-align: center; }
   .proof-sep { width: 1px; height: 36px; background: var(--pink-border); }
 
-  /* Pain line */
   .pain-line {
     display: flex; align-items: center; gap: 10px;
     background: #fff8f8;
@@ -986,7 +1229,6 @@
   .ck    { color: var(--pink); font-weight: 900; font-size: .95rem; flex-shrink: 0; }
   .ck-no { color: #d1d5db; font-size: .95rem; flex-shrink: 0; }
 
-  /* Value stack */
   .value-stack {
     background: rgba(255,255,255,.12);
     border-radius: 14px;
@@ -1032,7 +1274,6 @@
     color: rgba(255,255,255,.7); margin-top: 10px;
   }
 
-  /* Add-on bar */
   .addon-bar {
     margin-top: 28px;
     background: var(--card);
@@ -1074,16 +1315,16 @@
         <div class="faq-a"><div class="faq-a-inner">لا إطلاقاً — أنت فقط تعطينا اسم صالونك وخدماتك وأسعارك. نحن نبني كل شيء ونسلمه جاهزاً.</div></div>
       </div>
       <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">كيف تعمل ضمانة الـ 20 موعد؟<span class="arrow">▾</span></button>
+        <div class="faq-a"><div class="faq-a-inner">نبني نظامك الرقمي الكامل ونشغّل الإعلانات. إذا لم تصل +20 موعد جديد خلال 7 أيام من إطلاق الإعلانات، نرد لك المبلغ كاملاً. هذا الضمان مكتوب في عقد التعاون بيننا.</div></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">كيف أعرف أن النظام يشتغل؟<span class="arrow">▾</span></button>
         <div class="faq-a"><div class="faq-a-inner">في كل مرة يملأ فيها عميل الفورم، توصلك رسالة فورية على تيليغرام باسمه ورقمه والخدمة. وفي نفس الوقت تُضاف صف جديد في Google Sheets تلقائياً.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">كم تكلف الإعلانات على Meta؟<span class="arrow">▾</span></button>
         <div class="faq-a"><div class="faq-a-inner">ميزانية الإعلانات منفصلة عن سعر الباقة — تدفعها مباشرة لـ Meta. نوصي بالبداية من 15–30 درهم يومياً. نحن نتكفل بالإدارة والتحسين.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">هل تشتغلون فقط مع صالونات التجميل؟<span class="arrow">▾</span></button>
-        <div class="faq-a"><div class="faq-a-inner">نتخصص في صالونات التجميل ومراكز العناية بالمرأة. لكن نظامنا يشتغل مع أي نشاط تجاري محلي يحتاج لجلب عملاء جدد.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">ما هي خطوات البداية؟<span class="arrow">▾</span></button>
@@ -1097,7 +1338,7 @@
 <section class="final-cta">
   <div class="final-cta-inner">
     <h2>جاهز تحول صالونك إلى<br><span>ماكينة حجوزات؟</span></h2>
-    <p>استشارة مجانية — بدون التزام — نتواصل معك خلال ساعات</p>
+    <p>+20 موعد في 7 أيام أو نرد الفلوس — استشارة مجانية بدون التزام</p>
     <div class="final-cta-btns">
       <a href="#leadForm" class="btn-gold">ابدأ الآن — مجاناً →</a>
       <a href="https://wa.me/212627716149" class="btn-wa" target="_blank">
@@ -1120,10 +1361,22 @@
   <p class="footer-copy">© 2025 AmraniAds — نظام رقمي لصالونات التجميل بالمغرب</p>
 </footer>
 
-
 <div id="toast"></div>
 
 <script>
+  /* Adjust hero padding based on announce bar visibility */
+  function syncHeroPadding() {
+    const bar = document.getElementById('announceBar');
+    const hero = document.querySelector('.hero');
+    const barH = bar.classList.contains('hidden') ? 0 : bar.offsetHeight;
+    hero.style.paddingTop = (60 + barH + 20) + 'px';
+  }
+  syncHeroPadding();
+  document.querySelector('.announce-close').addEventListener('click', () => {
+    setTimeout(syncHeroPadding, 400);
+  });
+  window.addEventListener('resize', syncHeroPadding);
+
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
@@ -1179,7 +1432,7 @@
     });
   }, { threshold: 0.08 });
 
-  document.querySelectorAll('.step-card, .pkg-card, .faq-item, .metric, .what-card').forEach(el => {
+  document.querySelectorAll('.step-card, .pkg-card-2, .faq-item, .metric, .what-card, .result-card, .pain-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(22px)';
     el.style.transition = 'opacity .5s ease, transform .5s ease';
