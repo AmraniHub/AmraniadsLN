@@ -152,71 +152,25 @@
     .value-item .vi-desc  { font-size: .78rem; color: var(--muted); margin-top: 2px; }
 
     /* form column */
-    .hero-form-col { flex: 0 0 340px; }
-
-    /* ── PHONE MOCKUP ── */
-    .phone-wrap {
-      position: sticky; top: 80px;
-      display: flex; justify-content: center;
-    }
-    .phone-frame {
-      width: 310px;
-      background: #07192e;
-      border-radius: 46px;
-      padding: 0 10px 18px;
-      box-shadow:
-        0 0 0 2px rgba(255,255,255,.06),
-        0 0 0 10px rgba(11,45,110,.22),
-        0 28px 70px rgba(11,45,110,.55);
-      position: relative;
-    }
-    .phone-notch {
-      width: 100px; height: 28px;
-      background: #07192e;
-      border-radius: 0 0 20px 20px;
-      margin: 0 auto 0;
-      display: flex; align-items: center; justify-content: center; gap: 7px;
-      position: relative; z-index: 3;
-    }
-    .phone-notch-pill {
-      width: 52px; height: 6px; border-radius: 50px;
-      background: rgba(255,255,255,.12);
-    }
-    .phone-notch-cam {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,.15);
-    }
-    .phone-screen {
-      background: var(--bg);
-      border-radius: 36px;
-      overflow: hidden;
-      max-height: 620px;
-      overflow-y: auto;
-      scrollbar-width: none;
-    }
-    .phone-screen::-webkit-scrollbar { display: none; }
-    .phone-header-img {
-      width: 100%; height: 150px;
-      object-fit: cover; object-position: center 15%;
-      display: block;
-    }
+    .hero-form-col { flex: 0 0 380px; }
 
     .form-card {
-      background: var(--surface); overflow: hidden;
-      border: none;
+      background: var(--surface); border-radius: 22px;
+      box-shadow: var(--shadow-lg); overflow: hidden;
+      border: 1px solid var(--border); position: sticky; top: 80px;
     }
     .form-card-top {
-      background: var(--grad); padding: 16px 20px; text-align: center;
+      background: var(--grad); padding: 20px 24px; text-align: center;
     }
-    .form-card-top h2 { color: #fff; font-size: 1rem; font-weight: 900; line-height: 1.35; }
-    .form-card-top p  { color: rgba(255,255,255,.82); font-size: .76rem; margin-top: 3px; }
-    .form-card-body { padding: 18px; }
+    .form-card-top h2 { color: #fff; font-size: 1.15rem; font-weight: 900; line-height: 1.35; }
+    .form-card-top p  { color: rgba(255,255,255,.82); font-size: .82rem; margin-top: 4px; }
+    .form-card-body { padding: 24px; }
 
-    .field { margin-bottom: 12px; }
-    .field label { display: block; font-size: .82rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: .85rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
     .field input, .field select {
       width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
-      padding: 10px 12px; font-family: 'Cairo', sans-serif; font-size: 16px;
+      padding: 12px 14px; font-family: 'Cairo', sans-serif; font-size: 16px;
       color: var(--text); background: #fff; outline: none;
       transition: border-color .2s, box-shadow .2s; appearance: none; -webkit-appearance: none;
     }
@@ -519,8 +473,9 @@
     @media (max-width: 920px) {
       nav { padding: 0 16px; }
       .hero { padding: 80px 16px 44px; }
-      .hero-inner { flex-direction: column; gap: 30px; }
-      .hero-text, .hero-form-col { width: 100%; flex: none; }
+      .hero-inner { flex-direction: column; gap: 24px; }
+      .hero-text  { width: 100%; flex: none; order: 2; }
+      .hero-form-col { width: 100%; flex: none; order: 1; }
       .form-card { position: static; }
       .why-section, .how-section, .reviews-section { padding: 56px 16px; }
       .pain-band, .stats-band, .offer-section, .guarantee-section, .final-cta, footer { padding: 56px 16px; }
@@ -598,7 +553,7 @@
           <div class="vi-icon">✅</div>
           <div>
             <div class="vi-title">ضمان مكتوب</div>
-            <div class="vi-desc">ما جبناش النتيجة؟ كنردو ليك فلوسك كاملة</div>
+            <div class="vi-desc">ما جبناش النتيجة في 7 أيام؟ الضمان المكتوب يحميك</div>
           </div>
         </div>
       </div>
@@ -630,24 +585,12 @@
     </div>
 
     <!-- FORM -->
-    <div class="hero-form-col" id="leadForm">
-      <div class="phone-wrap">
-      <div class="phone-frame">
-        <div class="phone-notch">
-          <div class="phone-notch-pill"></div>
-          <div class="phone-notch-cam"></div>
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-card-top">
+          <h2>🩺 احجز استشارتك المجانية</h2>
+          <p>تحليل مجاني لعيادتك · رد خلال ساعة</p>
         </div>
-        <div class="phone-screen">
-          <img
-            class="phone-header-img"
-            src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&auto=format&q=85"
-            alt="طبيبة مغربية"
-          />
-          <div class="form-card">
-            <div class="form-card-top">
-              <h2>🩺 احجز استشارتك المجانية</h2>
-              <p>تحليل مجاني لعيادتك · رد خلال ساعة</p>
-            </div>
         <div class="form-card-body">
           <form id="mainForm" novalidate>
             <div class="field">
@@ -686,14 +629,11 @@
                 <div class="mr-text">"المواعيد زادوا 94٪ في 3 أشهر. ضرورة لكل عيادة."</div>
               </div>
             </div>
-          </div>
-          </div><!-- /form-card -->
-        </div><!-- /phone-screen -->
-      </div><!-- /phone-frame -->
-      </div><!-- /phone-wrap -->
+        </div><!-- /form-card-body -->
+      </div><!-- /form-card -->
     </div><!-- /hero-form-col -->
 
-  </div>
+  </div><!-- /hero-inner -->
 </section>
 
 <div class="line-divider"></div>
