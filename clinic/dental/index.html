@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <base href="/clinic/dental/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسويق رقمي لعيادات الأسنان — AmraniAds</title>
+  <meta name="description" content="نجيبلك +20 موعد أسنان جديد في 7 أيام. حملات ميتا أدز مصممة خصيصاً لأطباء الأسنان في المغرب." />
+  <link rel="icon" href="/logo.png" type="image/png" />
+
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1431460799006849');
+  fbq('track','PageView');
+  fbq('track','ViewContent');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1431460799006849&ev=PageView&noscript=1"/></noscript>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0b2d6e;
+      --navy-mid:    #1048a0;
+      --teal:        #0891b2;
+      --teal-light:  #e0f7fa;
+      --green:       #059669;
+      --green-light: #d1fae5;
+      --bg:          #f0f9ff;
+      --surface:     #ffffff;
+      --surface2:    #f8faff;
+      --border:      rgba(8,145,178,.15);
+      --text:        #0a1628;
+      --muted:       #4a6080;
+      --grad:        linear-gradient(135deg, #0b2d6e 0%, #0891b2 100%);
+      --grad-green:  linear-gradient(135deg, #059669 0%, #34d399 100%);
+      --grad-soft:   linear-gradient(135deg, #e0f7fa 0%, #f0f9ff 60%, #e8f4fd 100%);
+      --shadow:      0 4px 24px rgba(11,45,110,.12);
+      --shadow-lg:   0 8px 48px rgba(11,45,110,.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--teal-light); }
+    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,45,110,.97); backdrop-filter: blur(14px);
+      padding: 0 40px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 20px rgba(11,45,110,.4);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .nav-logo-text { font-size: 1rem; font-weight: 900; line-height: 1.15; }
+    .nav-logo-text span:first-child { color: #fff; }
+    .nav-logo-text span:last-child  { color: #5eead4; font-size: .78rem; font-weight: 600; display: block; }
+    .nav-cta { background: var(--grad-green); color: #fff; border: none; border-radius: 50px; padding: 9px 22px; font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 900; cursor: pointer; text-decoration: none; transition: opacity .2s, transform .15s; white-space: nowrap; }
+    .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+
+    .hero { min-height: 100svh; padding: 96px 64px 60px; display: flex; align-items: center; justify-content: center; background: var(--grad-soft); position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(8,145,178,.1) 0%, transparent 70%); top: -200px; left: -150px; pointer-events: none; }
+    .hero-inner { max-width: 1100px; width: 100%; display: flex; align-items: center; gap: 56px; position: relative; z-index: 1; }
+    .hero-text { flex: 1 1 480px; }
+
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--teal-light); border: 1.5px solid rgba(8,145,178,.35); color: var(--navy); border-radius: 50px; padding: 5px 14px; font-size: .82rem; font-weight: 700; margin-bottom: 20px; }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: blink 1.8s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.25} }
+
+    h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.22; color: var(--navy); margin-bottom: 18px; }
+    h1 .teal  { color: var(--teal); }
+    h1 .green { color: var(--green); }
+
+    .hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 460px; margin-bottom: 28px; line-height: 1.85; }
+
+    .value-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px; }
+    .value-item { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+    .value-item .vi-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+    .value-item .vi-title { font-size: .88rem; font-weight: 900; color: var(--navy); }
+    .value-item .vi-desc  { font-size: .78rem; color: var(--muted); margin-top: 2px; }
+
+    .hero-form-col { flex: 0 0 380px; }
+    .form-card { background: var(--surface); border-radius: 22px; box-shadow: var(--shadow-lg); overflow: hidden; border: 1px solid var(--border); position: sticky; top: 80px; }
+    .form-card-top { background: var(--grad); padding: 20px 24px; text-align: center; }
+    .form-card-top h2 { color: #fff; font-size: 1.15rem; font-weight: 900; line-height: 1.35; }
+    .form-card-top p  { color: rgba(255,255,255,.82); font-size: .82rem; margin-top: 4px; }
+    .form-card-body { padding: 24px; }
+
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: .85rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .field input { width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 12px 14px; font-family: 'Cairo', sans-serif; font-size: 16px; color: var(--text); background: #fff; outline: none; transition: border-color .2s, box-shadow .2s; -webkit-appearance: none; }
+    .field input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,145,178,.13); }
+    .field input::placeholder { color: #aab8cc; }
+
+    .submit-btn { width: 100%; background: var(--grad-green); color: #fff; border: none; border-radius: 50px; padding: 15px 24px; font-family: 'Cairo', sans-serif; font-size: 1.05rem; font-weight: 900; cursor: pointer; transition: opacity .2s, transform .15s; box-shadow: 0 5px 24px rgba(5,150,105,.35); letter-spacing: .3px; }
+    .submit-btn:hover  { opacity: .9; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+    .form-note { text-align: center; font-size: .78rem; color: var(--muted); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .guarantee-mini { background: var(--green-light); border: 1.5px solid rgba(5,150,105,.25); border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: .82rem; color: #065f46; text-align: center; font-weight: 700; line-height: 1.5; }
+
+    .mini-reviews { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .mini-review { background: var(--surface2); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .mini-review .mr-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .mr-name  { font-size: .83rem; font-weight: 900; color: var(--navy); }
+    .mr-stars { color: #f59e0b; font-size: .75rem; }
+    .mr-text  { font-size: .78rem; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+
+    .line-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--teal), transparent); max-width: 600px; margin: 0 auto; }
+
+    .section-label { text-align: center; font-size: .78rem; font-weight: 700; color: var(--teal); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 10px; }
+    .section-title { text-align: center; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
+    .section-title .teal  { color: var(--teal); }
+    .section-title .green { color: var(--green); }
+    .section-sub { text-align: center; color: var(--muted); font-size: .95rem; margin-bottom: 46px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+
+    .pain-band { background: var(--navy); padding: 64px 40px; position: relative; overflow: hidden; }
+    .pain-band::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: rgba(8,145,178,.08); top: -200px; right: -100px; pointer-events: none; }
+    .pain-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .pain-inner .eyebrow { color: #5eead4; font-size: .82rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    .pain-inner h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; color: #fff; margin-bottom: 20px; line-height: 1.3; }
+    .pain-inner h2 em { color: #f87171; font-style: normal; }
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 36px; }
+    .pain-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 20px 18px; text-align: right; display: flex; align-items: flex-start; gap: 12px; }
+    .pain-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .pain-text { font-size: .9rem; color: rgba(255,255,255,.82); line-height: 1.6; }
+    .pain-text strong { color: #f87171; }
+
+    .why-section { max-width: 1060px; margin: 0 auto; padding: 70px 40px 40px; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+    .why-card { background: var(--surface); border-radius: 16px; padding: 26px 22px; text-align: center; border: 1.5px solid var(--border); transition: transform .25s, border-color .25s, box-shadow .25s; }
+    .why-card:hover { transform: translateY(-5px); border-color: var(--teal); box-shadow: var(--shadow-lg); }
+    .why-icon  { font-size: 2.4rem; margin-bottom: 12px; }
+    .why-title { font-size: .98rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .why-desc  { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+
+    .stats-band { background: var(--grad); padding: 60px 40px; position: relative; overflow: hidden; }
+    .stats-band::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,.06); top: -200px; left: -100px; }
+    .stats-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; text-align: center; position: relative; z-index: 1; }
+    .stat-number { font-size: 2.8rem; font-weight: 900; color: #fff; line-height: 1; display: block; }
+    .stat-label  { font-size: .9rem; color: rgba(255,255,255,.78); margin-top: 6px; display: block; }
+
+    .how-section { max-width: 960px; margin: 0 auto; padding: 70px 40px; }
+    .steps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 44px; }
+    .step { text-align: center; padding: 0 24px; position: relative; }
+    .step:not(:last-child)::after { content: '←'; position: absolute; top: 26px; left: -6px; font-size: 1.4rem; color: var(--teal); font-weight: 900; }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--grad); color: #fff; font-size: 1.4rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; box-shadow: 0 6px 20px rgba(8,145,178,.35); }
+    .step-title { font-size: 1rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+    .step-desc  { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    .offer-section { background: var(--navy); padding: 80px 40px; position: relative; overflow: hidden; }
+    .offer-section::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(8,145,178,.12) 0%, transparent 70%); bottom: -200px; right: -100px; pointer-events: none; }
+    .offer-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .offer-section .section-label { color: #5eead4; }
+    .offer-section .section-title { color: #fff; }
+    .offer-section .section-sub   { color: rgba(255,255,255,.7); }
+    .offer-card { background: rgba(255,255,255,.05); border: 1.5px solid rgba(8,145,178,.3); border-radius: 20px; overflow: hidden; margin-bottom: 14px; }
+    .offer-card-top { background: rgba(8,145,178,.15); padding: 18px 24px; display: flex; align-items: center; gap: 14px; }
+    .offer-card-top .o-icon { font-size: 1.9rem; flex-shrink: 0; }
+    .offer-card-top .o-label { font-size: .72rem; font-weight: 700; color: #5eead4; text-transform: uppercase; letter-spacing: .8px; }
+    .offer-card-top .o-title { font-size: 1.05rem; font-weight: 900; color: #fff; margin-top: 2px; }
+    .offer-card-body { padding: 14px 24px 18px; }
+    .offer-card-body p { font-size: .88rem; color: rgba(255,255,255,.72); line-height: 1.7; }
+    .offer-value { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; background: rgba(5,150,105,.2); border: 1px solid rgba(5,150,105,.35); border-radius: 50px; padding: 3px 12px; font-size: .78rem; font-weight: 700; color: #6ee7b7; }
+    .offer-value .val-crossed { text-decoration: line-through; opacity: .5; margin-left: 4px; }
+    .offer-total { background: var(--grad-green); border-radius: 18px; padding: 28px 32px; text-align: center; margin-top: 28px; box-shadow: 0 8px 40px rgba(5,150,105,.4); }
+    .offer-total .ot-label { font-size: .82rem; color: rgba(255,255,255,.8); font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .offer-total .ot-price { font-size: 3.2rem; font-weight: 900; color: #fff; line-height: 1.1; margin: 6px 0; }
+    .offer-total .ot-sub   { font-size: .9rem; color: rgba(255,255,255,.82); margin-bottom: 20px; }
+    .offer-total .ot-cta { display: inline-block; background: #fff; color: var(--green); border-radius: 50px; padding: 14px 36px; font-family: 'Cairo', sans-serif; font-size: 1.1rem; font-weight: 900; text-decoration: none; transition: transform .15s, box-shadow .2s; box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+    .offer-total .ot-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.25); }
+
+    .guarantee-section { padding: 72px 40px; max-width: 760px; margin: 0 auto; text-align: center; }
+    .guarantee-badge { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 90px; border-radius: 50%; background: var(--grad-green); font-size: 2.8rem; margin-bottom: 20px; box-shadow: 0 6px 30px rgba(5,150,105,.35); }
+    .guarantee-section h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; color: var(--navy); margin-bottom: 16px; line-height: 1.3; }
+    .guarantee-section h2 .green { color: var(--green); }
+    .guarantee-section p { font-size: 1rem; color: var(--muted); line-height: 1.9; max-width: 600px; margin: 0 auto; }
+    .guarantee-section p strong { color: var(--navy); }
+
+    .reviews-section { padding: 70px 40px; max-width: 1000px; margin: 0 auto; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+    .review-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; padding: 24px 22px; transition: transform .25s, box-shadow .25s; }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .review-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .review-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; border: 2px solid var(--teal-light); }
+    .review-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+    .review-name { font-size: .92rem; font-weight: 900; color: var(--navy); }
+    .review-spec { font-size: .78rem; color: var(--teal); font-weight: 700; }
+    .review-stars { color: #f59e0b; font-size: .85rem; margin-top: 2px; }
+    .review-text { font-size: .9rem; color: var(--muted); line-height: 1.75; font-style: italic; }
+    .review-result { display: inline-flex; align-items: center; gap: 5px; margin-top: 12px; background: var(--green-light); border-radius: 50px; padding: 4px 12px; font-size: .78rem; font-weight: 900; color: var(--green); }
+
+    .final-cta { background: var(--grad-soft); border-top: 1px solid var(--border); padding: 80px 40px; text-align: center; }
+    .final-cta-inner { max-width: 640px; margin: 0 auto; }
+    .final-cta h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 900; color: var(--navy); margin-bottom: 12px; line-height: 1.25; }
+    .final-cta h2 .teal  { color: var(--teal); }
+    .final-cta h2 .green { color: var(--green); }
+    .final-cta p { color: var(--muted); font-size: .98rem; margin-bottom: 36px; line-height: 1.8; }
+    .final-form { max-width: 440px; margin: 0 auto; }
+    .final-form .field input { background: var(--surface); }
+
+    .hero-img-card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow-lg); border: 1.5px solid var(--border); overflow: hidden; margin-top: 24px; }
+    .hero-img-card img { width: 100%; height: 220px; object-fit: cover; object-position: center; display: block; }
+    .hero-img-card-body { padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+    .hic-stat { flex: 1; text-align: center; }
+    .hic-stat-num { font-size: 1.6rem; font-weight: 900; color: var(--navy); line-height: 1; }
+    .hic-stat-label { font-size: .72rem; color: var(--muted); margin-top: 3px; }
+    .hic-divider { width: 1px; height: 40px; background: var(--border); }
+
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.08); padding: 44px 40px 24px; }
+    .footer-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 28px; }
+    .footer-brand-name { font-size: 1.1rem; font-weight: 900; color: #fff; }
+    .footer-brand-tag  { font-size: .82rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+    .footer-contact a  { display: block; color: rgba(255,255,255,.65); text-decoration: none; font-size: .88rem; margin-bottom: 6px; transition: color .2s; }
+    .footer-contact a:hover { color: #5eead4; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); margin-top: 28px; padding-top: 18px; font-size: .78rem; color: rgba(255,255,255,.4); text-align: center; max-width: 960px; margin-left: auto; margin-right: auto; }
+    .footer-bottom a { color: var(--teal); text-decoration: none; }
+
+    .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--navy); border-top: 2px solid var(--teal); padding: 14px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; transform: translateY(100%); transition: transform .4s cubic-bezier(.4,0,.2,1); box-shadow: 0 -4px 32px rgba(11,45,110,.35); }
+    .sticky-cta.visible { transform: translateY(0); }
+    .sticky-cta-text { color: rgba(255,255,255,.82); font-size: .9rem; font-weight: 600; }
+    .sticky-cta-text strong { color: #fff; }
+    .sticky-cta-btn { background: var(--grad-green); color: #fff; border: none; border-radius: 50px; padding: 11px 28px; font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 900; cursor: pointer; text-decoration: none; white-space: nowrap; transition: opacity .2s; box-shadow: 0 4px 18px rgba(5,150,105,.4); animation: pulse-cta 2.5s ease-in-out infinite; }
+    @keyframes pulse-cta { 0%,100%{box-shadow:0 4px 18px rgba(5,150,105,.4)}50%{box-shadow:0 4px 32px rgba(5,150,105,.75)} }
+
+    #toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: #fff; padding: 12px 28px; border-radius: 50px; font-size: .9rem; font-weight: 700; opacity: 0; transition: opacity .35s, transform .35s; pointer-events: none; z-index: 300; white-space: nowrap; }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 920px) {
+      nav { padding: 0 14px; }
+      .nav-logo-text span:last-child { display: none; }
+      .nav-cta { font-size: .82rem; padding: 8px 16px; }
+      .hero { padding: 80px 16px 44px; }
+      .hero-inner { flex-direction: column; gap: 24px; }
+      .hero-text  { width: 100%; flex: none; order: 2; }
+      .hero-form-col { width: 100%; flex: none; order: 1; }
+      .form-card { position: static; }
+      .why-section, .how-section, .reviews-section { padding: 56px 16px; }
+      .pain-band, .stats-band, .offer-section, .guarantee-section, .final-cta, footer { padding: 56px 16px; }
+      .steps-row { grid-template-columns: 1fr; gap: 24px; }
+      .step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 520px) {
+      h1 { font-size: 1.9rem; }
+      .value-strip { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .offer-total .ot-price { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="javascript:void(0)" class="nav-logo">
+    <div class="nav-logo-icon">🦷</div>
+    <div class="nav-logo-text">
+      <span>AmraniAds</span>
+      <span>تسويق عيادات الأسنان</span>
+    </div>
+  </a>
+  <a class="nav-cta" href="#leadForm">احجز استشارتك المجانية</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge"><span class="badge-dot"></span>🦷 خصيصاً لأطباء الأسنان في المغرب</div>
+      <h1>
+        مرضى الأسنان موجودون —<br>
+        <span class="teal">بس ما وصلوكش</span><br>
+        نحن <span class="green">نوصلهم ليك</span>
+      </h1>
+      <p class="hero-sub">
+        كثير من المرضى يتأجلوا موعد الأسنان بسبب الخوف أو لأنهم ما يعرفوش الطبيب المناسب. نحن نوصل ليهم برسالة الثقة الصحيحة ونحولهم لمواعيد حقيقية في عيادتك.
+      </p>
+      <div class="value-strip">
+        <div class="value-item">
+          <div class="vi-icon">🦷</div>
+          <div>
+            <div class="vi-title">+20 موعد/شهر</div>
+            <div class="vi-desc">مرضى أسنان جدد مضمونون</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="vi-icon">📅</div>
+          <div>
+            <div class="vi-title">7 أيام فقط</div>
+            <div class="vi-desc">من التعاقد لإطلاق الحملة</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="vi-icon">💬</div>
+          <div>
+            <div class="vi-title">70% أقل غياب</div>
+            <div class="vi-desc">تذكيرات واتساب أوتوماتيك</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="vi-icon">🛡️</div>
+          <div>
+            <div class="vi-title">ضمان مكتوب</div>
+            <div class="vi-desc">النتيجة أو كنردو ليك فلوسك</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-img-card">
+        <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=800&auto=format&q=80" alt="عيادة أسنان احترافية" loading="lazy" />
+        <div class="hero-img-card-body">
+          <div class="hic-stat"><div class="hic-stat-num">+28</div><div class="hic-stat-label">موعد/شهر متوسط</div></div>
+          <div class="hic-divider"></div>
+          <div class="hic-stat"><div class="hic-stat-num">+12</div><div class="hic-stat-label">عيادة أسنان شريكة</div></div>
+          <div class="hic-divider"></div>
+          <div class="hic-stat"><div class="hic-stat-num">7 أيام</div><div class="hic-stat-label">ضمان النتائج</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-card-top">
+          <h2>🦷 احجز استشارتك المجانية</h2>
+          <p>تحليل مجاني لعيادتك · رد خلال ساعة</p>
+        </div>
+        <div class="form-card-body">
+          <form id="mainForm" novalidate>
+            <div class="field">
+              <label for="fname">اسم الطبيب / العيادة</label>
+              <input type="text" id="fname" name="name" placeholder="د. كريم بنسودة" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="fphone">رقم الهاتف</label>
+              <input type="tel" id="fphone" name="phone" placeholder="06XXXXXXXX" required autocomplete="tel" />
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">احجز استشارتك المجانية الآن 🦷</button>
+          </form>
+          <p class="form-note">🔒 معلوماتك سرية — ما نشاركوهاش أبداً</p>
+          <div class="guarantee-mini">🛡️ ضمان استرداد كامل إذا ما جبناليكش +20 موعد في 7 أيام</div>
+          <div class="mini-reviews">
+            <div class="mini-review">
+              <div class="mr-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="د. سارة" /></div>
+              <div>
+                <div class="mr-name">د. سارة الحسيني</div>
+                <div class="mr-stars">⭐⭐⭐⭐⭐</div>
+                <div class="mr-text">"34 موعد أسنان جديد في الشهر الأول. العيادة ما عادت فارغة أبداً!"</div>
+              </div>
+            </div>
+            <div class="mini-review">
+              <div class="mr-avatar"><img src="https://randomuser.me/api/portraits/men/52.jpg" alt="د. خالد" /></div>
+              <div>
+                <div class="mr-name">د. خالد التميمي</div>
+                <div class="mr-stars">⭐⭐⭐⭐⭐</div>
+                <div class="mr-text">"مواعيد التقويم تضاعفت × 3 في شهرين. ما توقعتش هكذا!"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="line-divider"></div>
+
+<section class="pain-band">
+  <div class="pain-inner">
+    <div class="eyebrow">المشكلة الحقيقية لعيادات الأسنان</div>
+    <h2>عيادتك ممتازة — لكن <em>مرضاك المحتملون ما يعرفوكش</em></h2>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-icon">😨</div>
+        <div class="pain-text"><strong>الخوف من طبيب الأسنان</strong> يخلي المرضى يتأجلوا — ورسالتك التسويقية لازم تكسر هذا الخوف</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">💸</div>
+        <div class="pain-text">المريض يختار <strong>أرخص عيادة</strong> لأنه ما يعرفش الفرق — إعلانك المناسب يغير هذا</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📅</div>
+        <div class="pain-text"><strong>مواعيد فارغة</strong> في منتصف الأسبوع رغم امتلاء الجدول أيام أخرى — حملات مستهدفة تملأ الفراغات</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">🔄</div>
+        <div class="pain-text"><strong>نسبة الغياب مرتفعة</strong> — مريض يحجز ولا يأتي يكلفك وقتاً ومالاً. أتمتة الواتساب تحل هذا</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="section-label">لماذا AmraniAds لعيادات الأسنان</div>
+  <h2 class="section-title">نفهم <span class="teal">نفسية مريض الأسنان</span> —<br>ونحوله لموعد</h2>
+  <p class="section-sub">الإعلان لعيادة الأسنان مختلف تماماً عن غيره — يحتاج لغة الثقة والطمأنينة قبل أي شيء آخر</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-icon">😌</div><div class="why-title">إعلانات تبني الثقة</div><div class="why-desc">رسائل تطمّن المريض الخائف وتقنعه أن عيادتك آمنة ومريحة</div></div>
+    <div class="why-card"><div class="why-icon">📍</div><div class="why-title">استهداف منطقتك بدقة</div><div class="why-desc">نوصل فقط لمرضى محتملين بالقرب من عيادتك — بدون إضاعة ميزانية</div></div>
+    <div class="why-card"><div class="why-icon">🦷</div><div class="why-title">حملات لكل خدمة</div><div class="why-desc">تبييض، تقويم، زراعة، أسنان أطفال — حملة منفصلة ومحسّنة لكل خدمة</div></div>
+    <div class="why-card"><div class="why-icon">💬</div><div class="why-title">تذكير واتساب أوتوماتيك</div><div class="why-desc">يقلل الغياب 70% — المريض يتلقى تأكيد وتذكير قبل الموعد تلقائياً</div></div>
+    <div class="why-card"><div class="why-icon">⭐</div><div class="why-title">جمع التقييمات تلقائياً</div><div class="why-desc">بعد كل موعد، النظام يطلب تقييم Google تلقائياً — سمعتك تتحسن باستمرار</div></div>
+    <div class="why-card"><div class="why-icon">🛡️</div><div class="why-title">ضمان 20 موعد</div><div class="why-desc">+20 موعد جديد في 7 أيام أو كنردو ليك فلوسك كاملة بدون نقاش</div></div>
+  </div>
+</section>
+
+<section class="stats-band">
+  <div class="stats-inner">
+    <div><span class="stat-number">+28</span><span class="stat-label">موعد جديد شهرياً (متوسط)</span></div>
+    <div><span class="stat-number">+12</span><span class="stat-label">عيادة أسنان شريكة</span></div>
+    <div><span class="stat-number">70٪</span><span class="stat-label">تراجع نسبة الغياب</span></div>
+    <div><span class="stat-number">7 أيام</span><span class="stat-label">ضمان النتائج</span></div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="section-label">كيف نشتغلوا</div>
+  <h2 class="section-title">3 خطوات بسيطة —<br><span class="green">عيادتك تمتلئ</span></h2>
+  <p class="section-sub">بدون تعقيدات — نحن نتولى كل شيء</p>
+  <div class="steps-row">
+    <div class="step"><div class="step-num">١</div><div class="step-title">استشارة مجانية 30 دقيقة</div><div class="step-desc">نحلل عيادتك، خدماتك، منطقتك، ومنافسيك — خطة واضحة بدون التزام</div></div>
+    <div class="step"><div class="step-num">٢</div><div class="step-title">بناء النظام في 7 أيام</div><div class="step-desc">حملات مخصصة لكل خدمة، صفحة حجز، وأتمتة واتساب كاملة</div></div>
+    <div class="step"><div class="step-num">٣</div><div class="step-title">المواعيد تتدفق</div><div class="step-desc">مرضى جدد يصلونك يومياً — أنت تركز على علاجهم ونحن على جلبهم</div></div>
+  </div>
+</section>
+
+<div class="line-divider"></div>
+
+<section class="offer-section">
+  <div class="offer-inner">
+    <div class="section-label">العرض الكامل</div>
+    <h2 class="section-title">كل ما تحتاجه لتمتلئ عيادة الأسنان —<br>في باكيج واحد</h2>
+    <p class="section-sub">بدل ما تدفع لـ 4 جهات مختلفة، كل شي عندنا — وبضمان مكتوب</p>
+    <div class="offer-card">
+      <div class="offer-card-top"><div class="o-icon">🎯</div><div><div class="o-label">الأساس</div><div class="o-title">حملات ميتا لعيادة الأسنان</div></div></div>
+      <div class="offer-card-body"><p>إعلانات فيسبوك وإنستاغرام بلغة الطمأنينة والثقة — استهداف المرضى المحتملين في منطقتك بدقة، وحملات منفصلة لكل خدمة (تبييض، تقويم، زراعة).</p><span class="offer-value">🔥 قيمة السوق: <span class="val-crossed">3000 درهم/شهر</span></span></div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-card-top"><div class="o-icon">📄</div><div><div class="o-label">🎁 هدية ١</div><div class="o-title">صفحة حجز احترافية لعيادة الأسنان</div></div></div>
+      <div class="offer-card-body"><p>صفحة تبني الثقة وتقنع المريض الخائف — قبل/بعد، شهادات مرضى، شرح الإجراءات بوضوح، وزر حجز مباشر.</p><span class="offer-value">🔥 قيمة السوق: <span class="val-crossed">2500 درهم</span></span></div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-card-top"><div class="o-icon">💬</div><div><div class="o-label">🎁 هدية ٢</div><div class="o-title">أتمتة واتساب — تأكيد + تذكير + متابعة</div></div></div>
+      <div class="offer-card-body"><p>تأكيد فوري عند الحجز، تذكير 24 ساعة قبل الموعد، وطلب تقييم Google بعد الزيارة. يقلل الغياب 70% ويحسن سمعتك أونلاين.</p><span class="offer-value">🔥 قيمة السوق: <span class="val-crossed">1500 درهم</span></span></div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-card-top"><div class="o-icon">🎨</div><div><div class="o-label">🎁 هدية ٣</div><div class="o-title">تصميم محتوى إعلانات الأسنان</div></div></div>
+      <div class="offer-card-body"><p>تصاميم قبل/بعد احترافية، فيديوهات قصيرة لشرح الإجراءات، ونصوص إعلانية تطمّن وتقنع — بالدارجة والعربية.</p><span class="offer-value">🔥 قيمة السوق: <span class="val-crossed">1200 درهم</span></span></div>
+    </div>
+    <div class="offer-total">
+      <div class="ot-label">القيمة الإجمالية: 8200 درهم — سعرك اليوم</div>
+      <div class="ot-price">استشارة مجانية</div>
+      <div class="ot-sub">نحلل وضع عيادتك أولاً — إذا ما قدرناش نساعدك، كنقولك بوضوح</div>
+      <a href="#leadForm" class="ot-cta">احجز استشارتك المجانية الآن ←</a>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee-section">
+  <div class="guarantee-badge">🛡️</div>
+  <h2>ضمان <span class="green">+20 موعد</span> في 7 أيام — أو نرجع لك فلوسك</h2>
+  <p>نضمن ليك <strong>+20 موعد أسنان جديد في 7 أيام</strong> من إطلاق الحملة. إذا ما وصلناش — <strong>كنردو ليك كامل ما دفعتيه بدون نقاش ولا شروط</strong>. ثقتنا مبنية على نتائج +12 عيادة أسنان شريكة في المغرب.</p>
+</section>
+
+<section class="reviews-section">
+  <div class="section-label">شهادات أطباء الأسنان</div>
+  <h2 class="section-title">أطباء <span class="teal">أسنان يثقون</span> فينا</h2>
+  <p class="section-sub">نتائج حقيقية من عيادات أسنان في المغرب</p>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="د. سارة" /></div>
+        <div>
+          <div class="review-name">د. سارة الحسيني</div>
+          <div class="review-spec">طبيبة أسنان — الدار البيضاء</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <p class="review-text">"في الشهر الأول جاني 34 موعد أسنان جديد. كان عندي خوف من الإعلانات الإلكترونية، لكن النتيجة تكلمت. الآن عيادتي ممتلئة وعندي قائمة انتظار!"</p>
+      <span class="review-result">📈 +34 موعد في الشهر الأول</span>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar"><img src="https://randomuser.me/api/portraits/men/52.jpg" alt="د. خالد" /></div>
+        <div>
+          <div class="review-name">د. خالد التميمي</div>
+          <div class="review-spec">تقويم الأسنان — الرباط</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <p class="review-text">"خصصوا لي حملة خاصة للتقويم. في شهرين مواعيد التقويم تضاعفت × 3. الأتمتة على واتساب وفرت علي وقتاً كبيراً في التأكيدات اليومية."</p>
+      <span class="review-result">📈 ×3 مواعيد التقويم</span>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="د. فاطمة" /></div>
+        <div>
+          <div class="review-name">د. فاطمة الزهراء</div>
+          <div class="review-spec">أسنان الأطفال — مراكش</div>
+          <div class="review-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <p class="review-text">"الإعلانات المخصصة لأسنان الأطفال جلبت أمهات كثيرات. الرسالة التسويقية المبنية على الطمأنينة والأمان فرقت كثيراً. غياب المرضى انخفض 65% بعد أتمتة الواتساب."</p>
+      <span class="review-result">📈 65% أقل غياب</span>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>عيادة أسنانك تستحق<br><span class="teal">أكثر من هذا</span> —<br>ابدأ <span class="green">اليوم مجاناً</span></h2>
+    <p>استشارة مجانية 30 دقيقة — نحلل وضع عيادتك، ونقترح خطة واضحة لجلب مرضى أسنان جدد. بدون أي التزام.</p>
+    <div class="final-form">
+      <form id="finalForm" novalidate>
+        <div class="field">
+          <label for="fname2">اسم الطبيب / العيادة</label>
+          <input type="text" id="fname2" name="name" placeholder="د. كريم بنسودة" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="fphone2">رقم الهاتف</label>
+          <input type="tel" id="fphone2" name="phone" placeholder="06XXXXXXXX" required autocomplete="tel" />
+        </div>
+        <button type="submit" class="submit-btn">احجز استشارتك المجانية الآن 🦷</button>
+      </form>
+      <p class="form-note" style="margin-top:14px">🔒 معلوماتك سرية · رد خلال ساعة</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-name">AmraniAds — تسويق عيادات الأسنان</div>
+      <div class="footer-brand-tag">نظام مواعيد مستمر لأطباء الأسنان في المغرب</div>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:amrani4online@gmail.com">✉️ amrani4online@gmail.com</a>
+      <a href="/clinic/">← عيادات طبية عامة</a>
+      <a href="/clinic/aesthetic/">✨ عيادات التجميل</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2025 AmraniAds — <a href="https://amraniads.com">amraniads.com</a></div>
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-text"><strong>🦷 استشارة مجانية</strong> — +20 موعد أسنان في 7 أيام مضمون</span>
+  <a href="#leadForm" class="sticky-cta-btn" onclick="document.getElementById('stickyCta').classList.remove('visible')">احجز الآن ←</a>
+</div>
+<div id="toast"></div>
+
+<script>
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+  function genEventId(){return'ev_dental_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);}
+  function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined;}
+
+  async function handleSubmit(name,phone,service){
+    const eventId=genEventId();
+    if(typeof fbq!=='undefined') fbq('track','Lead',{content_name:'clinic-dental'},{eventID:eventId});
+    try{
+      await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,phone,service,eventId,pixelId:'1431460799006849',
+          userAgent:navigator.userAgent,eventSourceUrl:location.href,
+          fbp:getCookie('_fbp'),fbc:getCookie('_fbc'),lang:'AR',page:'clinic-dental'})});
+    }catch(_){}
+    window.location.href='/clinic/merci.html?eid='+encodeURIComponent(eventId);
+  }
+
+  document.getElementById('mainForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname').value.trim();
+    const phone=document.getElementById('fphone').value.trim();
+    if(!name||!phone){showToast('⚠️ يرجى ملء الاسم ورقم الهاتف');return;}
+    const btn=document.getElementById('submitBtn');btn.disabled=true;btn.textContent='⏳ جاري الإرسال...';
+    await handleSubmit(name,phone,'استشارة مجانية - عيادة أسنان');
+  });
+
+  document.getElementById('finalForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname2').value.trim();
+    const phone=document.getElementById('fphone2').value.trim();
+    if(!name||!phone){showToast('⚠️ يرجى ملء الاسم ورقم الهاتف');return;}
+    const btn=this.querySelector('button');btn.disabled=true;btn.textContent='⏳ جاري الإرسال...';
+    await handleSubmit(name,phone,'استشارة مجانية - أسنان CTA سفلي');
+  });
+
+  const stickyCta=document.getElementById('stickyCta');
+  window.addEventListener('scroll',()=>{stickyCta.classList.toggle('visible',window.scrollY>400);});
+
+  const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';}});},{threshold:0.07});
+  document.querySelectorAll('.why-card,.review-card,.pain-item,.value-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease,transform .5s ease';obs.observe(el);});
+</script>
+</body>
+</html>
