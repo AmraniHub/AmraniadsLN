@@ -42,11 +42,15 @@ module.exports = async function handler(req, res) {
     ? process.env.META_PIXEL_ID_EN
     : clientPixelId === process.env.META_PIXEL_ID_CLINIC
     ? process.env.META_PIXEL_ID_CLINIC
+    : clientPixelId === process.env.META_PIXEL_ID_AR
+    ? process.env.META_PIXEL_ID_AR
     : process.env.META_PIXEL_ID;
   const accessToken = clientPixelId === process.env.META_PIXEL_ID_EN
     ? process.env.META_ACCESS_TOKEN_EN
     : clientPixelId === process.env.META_PIXEL_ID_CLINIC
     ? process.env.META_ACCESS_TOKEN_CLINIC
+    : clientPixelId === process.env.META_PIXEL_ID_AR
+    ? process.env.META_ACCESS_TOKEN_AR
     : process.env.META_ACCESS_TOKEN;
 
   if (pixelId && accessToken) {
