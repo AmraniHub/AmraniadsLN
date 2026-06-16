@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <base href="/ar/" />
-  <title>AmraniAds — إعلانات تُحقق النتائج في المغرب</title>
+  <title>AmraniAds — متجر Shopify يبيع أو كريدو ليك فلوسك</title>
+  <meta name="description" content="نبني ونحسن متاجر Shopify للتجار المغاربة — معدل تحويل أعلى، مبيعات أكثر، أو نرجع لك فلوسك." />
   <link rel="icon" href="/logo.png" type="image/png"/>
 
-  <!-- ═══ META PIXEL ═══ replace PIXEL_ID with your real pixel ID -->
+  <!-- META PIXEL -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -17,16 +18,12 @@
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','1433989221062105');
   fbq('track','PageView');
-  fbq('track','ViewContent',{
-    content_name:'AmraniAds Landing Page',
-    content_category:'Marketing Agency Morocco',
-    currency:'MAD'
-  });
+  fbq('track','ViewContent',{content_name:'AmraniAds AR - Shopify',content_category:'Marketing Agency Morocco',currency:'MAD'});
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1433989221062105&ev=PageView&noscript=1"/></noscript>
 
-  <!-- ═══ GOOGLE ANALYTICS 4 ═══ replace GA_ID with your measurement ID -->
+  <!-- GOOGLE ANALYTICS 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
   <script>
     window.dataLayer=window.dataLayer||[];
@@ -43,19 +40,22 @@
 
     :root{
       --green:#22c55e;
+      --green-glow:rgba(34,197,94,.45);
       --dark-green:#075E54;
       --light-green:#dcfce7;
       --gold:#d97706;
+      --gold-light:#f59e0b;
       --bg:#f5f9f7;
+      --dark:#0a1612;
       --surface:#ffffff;
       --surface2:#eef4f1;
       --text:#0d1f1a;
       --muted:#4a6555;
+      --border:rgba(7,94,84,.15);
       --radius:14px;
     }
 
     html{scroll-behavior:smooth}
-
     body{
       font-family:'Cairo',sans-serif;
       background:var(--bg);
@@ -64,507 +64,865 @@
       overflow-x:hidden;
     }
 
+    /* ── ANNOUNCEMENT BAR ── */
+    .announce-bar{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:var(--dark);
+      padding:9px 20px;
+      display:flex;align-items:center;justify-content:center;gap:16px;
+      flex-wrap:wrap;
+    }
+    .announce-text{
+      color:rgba(255,255,255,.88);font-size:.82rem;font-weight:600;
+      text-align:center;
+    }
+    .announce-text strong{color:var(--green)}
+    .announce-btn{
+      background:var(--green);color:#000;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:.82rem;
+      border:none;border-radius:50px;padding:7px 18px;
+      text-decoration:none;white-space:nowrap;
+      transition:transform .15s,box-shadow .15s;
+      flex-shrink:0;
+    }
+    .announce-btn:hover{transform:scale(1.05);box-shadow:0 4px 16px var(--green-glow)}
+
     /* ── NAV ── */
     nav{
-      position:fixed;top:0;width:100%;z-index:100;
-      background:rgba(7,94,84,0.93);
-      backdrop-filter:blur(14px);
+      position:fixed;top:38px;width:100%;z-index:100;
+      background:rgba(10,22,18,0.95);
+      backdrop-filter:blur(16px);
       padding:13px 32px;
       display:flex;align-items:center;justify-content:space-between;
+      border-bottom:1px solid rgba(34,197,94,.12);
     }
-    .logo{font-size:1.35rem;font-weight:900;letter-spacing:-.5px}
-    .logo-a{color:#fff}
-    .logo-b{color:var(--green)}
+    .logo-wrap{display:flex;align-items:center;gap:9px;text-decoration:none}
+    .logo-wrap img{height:34px;width:auto}
+    .logo-name{font-family:sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.02em;line-height:1}
+    .logo-name .a{color:#fff}
+    .logo-name .b{color:var(--green)}
     .nav-cta{
       background:var(--green);color:#000;
-      font-family:'Cairo',sans-serif;font-weight:700;font-size:.88rem;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:.85rem;
       border:none;border-radius:50px;padding:8px 22px;cursor:pointer;
       text-decoration:none;transition:transform .15s,box-shadow .15s;
     }
-    .nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(37,211,102,.4)}
+    .nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 20px var(--green-glow)}
 
     /* ── HERO ── */
     .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      gap:48px;
-      padding:100px 64px 60px;
-      position:relative;
-      overflow:hidden;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 0%,rgba(34,197,94,.1) 0%,transparent 70%),
-        var(--bg);
+      min-height:100svh;
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;
     }
-    .hero::before,.hero::after{
-      content:'';position:absolute;border-radius:50%;pointer-events:none;
-      background:radial-gradient(circle,rgba(7,94,84,.06),transparent 70%);
-      animation:blob 7s ease-in-out infinite alternate;
+    .hero-bg{
+      position:absolute;inset:0;
+      background:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80&auto=format&fit=crop') center/cover no-repeat;
+      filter:brightness(.28) saturate(1.1);
     }
-    .hero::before{width:500px;height:500px;top:-100px;right:-150px}
-    .hero::after{width:380px;height:380px;bottom:-80px;left:-100px;animation-delay:3.5s}
-    @keyframes blob{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.15) rotate(6deg)}}
+    .hero-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(10,22,18,.92) 40%,rgba(7,94,84,.35) 100%);
+    }
+    .hero-inner{
+      max-width:1140px;width:100%;margin:0 auto;
+      padding:120px 40px 70px;
+      display:flex;align-items:flex-start;gap:52px;
+      position:relative;z-index:1;
+    }
+    .hero-text{flex:1 1 500px;min-width:0}
+    .hero-form-col{flex:0 0 360px;min-width:0}
 
-    .hero-text{flex:1.2;min-width:0}
-    .hero-form{flex:0.85;min-width:0}
-
-    .badge{
-      display:inline-block;
-      background:rgba(34,197,94,.12);border:1px solid var(--green);
-      color:var(--dark-green);font-size:.77rem;font-weight:700;
-      padding:4px 16px;border-radius:50px;margin-bottom:20px;
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);
+      color:var(--green);border-radius:50px;
+      padding:6px 16px;font-size:.79rem;font-weight:700;margin-bottom:20px;
     }
+    .eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 1.8s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
     .hero-text h1{
-      font-size:clamp(1.9rem,4.2vw,3.4rem);
-      font-weight:900;line-height:1.25;margin-bottom:16px;
+      font-size:clamp(2rem,4.5vw,3.5rem);
+      font-weight:900;line-height:1.2;color:#fff;margin-bottom:18px;
     }
     .hero-text h1 .gr{color:var(--green)}
-    .hero-text h1 .gd{color:var(--gold)}
-    .hero-text > p{
-      font-size:clamp(.92rem,1.8vw,1.1rem);
-      color:var(--muted);margin-bottom:28px;max-width:460px;
+    .hero-text h1 .gd{color:var(--gold-light)}
+    .hero-text h1 .rd{color:#f87171}
+
+    .hero-sub{
+      font-size:clamp(.9rem,1.8vw,1.07rem);
+      color:rgba(255,255,255,.75);
+      max-width:480px;margin-bottom:28px;line-height:1.85;
     }
-    .drive-statement{
-      font-size:clamp(1.3rem,2.8vw,1.75rem);
-      font-weight:900;
-      color:var(--dark-green);
+
+    .guarantee-box{
+      display:flex;align-items:flex-start;gap:14px;
       background:rgba(34,197,94,.08);
       border:1.5px solid rgba(34,197,94,.25);
-      border-radius:12px;
-      padding:16px 22px;
-      line-height:1.4;
+      border-radius:14px;padding:16px 20px;
+      margin-bottom:28px;max-width:480px;
     }
-    .drive-statement span{
-      color:var(--gold);
-      font-size:1.1em;
+    .guarantee-icon{font-size:2rem;flex-shrink:0;line-height:1}
+    .guarantee-text{color:rgba(255,255,255,.85);font-size:.88rem;line-height:1.6}
+    .guarantee-text strong{color:var(--green);font-size:1rem;display:block;margin-bottom:3px}
+
+    .hero-pills{display:flex;flex-wrap:wrap;gap:10px;max-width:480px}
+    .hpill{
+      display:flex;align-items:center;gap:6px;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);
+      color:rgba(255,255,255,.8);border-radius:50px;
+      padding:6px 14px;font-size:.8rem;font-weight:600;
     }
 
     /* ── FORM CARD ── */
     .form-card{
-      background:var(--surface);
-      border:1.5px solid rgba(7,94,84,.15);
-      border-radius:20px;
-      padding:34px 30px;
-      box-shadow:0 8px 40px rgba(7,94,84,.1),0 2px 8px rgba(0,0,0,.06);
-      position:relative;
+      background:rgba(10,22,18,.95);
+      border:1.5px solid rgba(34,197,94,.25);
+      border-radius:20px;overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 40px rgba(34,197,94,.08);
+      backdrop-filter:blur(16px);
+      position:sticky;top:96px;
     }
-    .form-card::before{
-      content:'';
-      position:absolute;top:0;left:0;right:0;height:3px;
-      background:linear-gradient(90deg,var(--green),var(--dark-green),var(--green));
-      border-radius:20px 20px 0 0;
+    .form-top{
+      background:linear-gradient(135deg,var(--dark-green),#0f3d36);
+      padding:22px 26px;text-align:center;
+      border-bottom:1px solid rgba(34,197,94,.2);
     }
-    .form-card-title{
-      font-size:1.2rem;font-weight:900;
-      text-align:center;margin-bottom:4px;
-    }
-    .form-card-title span{color:var(--green)}
-    .form-card-sub{
-      text-align:center;font-size:.8rem;color:var(--muted);
-      margin-bottom:22px;
-    }
+    .form-top h2{color:#fff;font-size:1.1rem;font-weight:900;line-height:1.4;margin-bottom:4px}
+    .form-top p{color:rgba(255,255,255,.65);font-size:.79rem}
+    .form-body{padding:24px 26px}
 
-    .form-group{margin-bottom:15px}
-    .form-group label{
-      display:block;font-weight:700;font-size:.83rem;
-      margin-bottom:6px;color:var(--dark-green);
+    .field{margin-bottom:16px}
+    .field label{
+      display:block;font-size:.83rem;font-weight:700;
+      color:var(--green);margin-bottom:7px;
     }
-    .form-group input,
-    .form-group select{
-      width:100%;padding:13px 15px;
-      background:#fff;border:1.5px solid rgba(7,94,84,.18);
-      border-radius:10px;color:var(--text);
-      font-family:'Cairo',sans-serif;
-      font-size:16px; /* 16px prevents iOS zoom */
+    .field input{
+      width:100%;padding:13px 16px;
+      background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(34,197,94,.2);
+      border-radius:10px;color:#fff;
+      font-family:'Cairo',sans-serif;font-size:16px;
       outline:none;transition:border-color .2s,box-shadow .2s;
-      direction:rtl;
-      -webkit-appearance:none;
+      direction:rtl;-webkit-appearance:none;
     }
-    .form-group input::placeholder{color:#9ab8a8}
-    .form-group input:focus,
-    .form-group select:focus{
+    .field input::placeholder{color:rgba(255,255,255,.3)}
+    .field input:focus{
       border-color:var(--green);
       box-shadow:0 0 0 3px rgba(34,197,94,.12);
+      background:rgba(255,255,255,.09);
     }
-    .form-group select option{background:#fff;color:var(--text)}
 
     .submit-btn{
       width:100%;padding:15px;
       background:var(--green);color:#000;
-      font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;
+      font-family:'Cairo',sans-serif;font-weight:900;font-size:1.05rem;
       border:none;border-radius:50px;cursor:pointer;
-      margin-top:6px;
       display:flex;align-items:center;justify-content:center;gap:8px;
       transition:transform .15s,box-shadow .15s,opacity .15s;
+      box-shadow:0 6px 28px rgba(34,197,94,.4);
+      letter-spacing:.2px;
     }
     .submit-btn:hover:not(:disabled){
       transform:translateY(-2px);
-      box-shadow:0 8px 28px rgba(37,211,102,.4);
+      box-shadow:0 10px 36px rgba(34,197,94,.55);
     }
     .submit-btn:active:not(:disabled){transform:scale(.98)}
-    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+    .submit-btn:disabled{opacity:.55;cursor:not-allowed}
 
-    .success-toast{
-      display:none;
-      background:rgba(34,197,94,.1);border:1px solid var(--green);
-      color:var(--dark-green);border-radius:10px;
-      padding:11px 14px;text-align:center;font-size:.87rem;
-      margin-top:12px;
+    .form-note{text-align:center;font-size:.75rem;color:rgba(255,255,255,.4);margin-top:10px}
+    .form-urgency{
+      background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.3);
+      border-radius:8px;padding:9px 14px;margin-top:13px;
+      font-size:.78rem;color:#fbbf24;text-align:center;font-weight:700;
     }
-    .success-toast.show{display:block}
 
-    /* ── VISUALS STRIP ── */
-    .visuals{
-      display:flex;gap:14px;flex-wrap:wrap;
-      justify-content:center;padding:20px 24px 48px;
+    /* ── REVIEWS under form ── */
+    .reviews-mini{margin-top:20px;display:flex;flex-direction:column;gap:11px}
+    .review-item{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(34,197,94,.12);
+      border-radius:14px;padding:13px 14px;
+      display:flex;align-items:flex-start;gap:11px;
     }
-    .vis-card{
-      background:var(--surface);border:1px solid rgba(7,94,84,.12);
-      border-radius:var(--radius);padding:26px 18px;
-      text-align:center;min-width:148px;max-width:188px;flex:1;
-      transition:transform .2s,border-color .2s,box-shadow .2s;
-      box-shadow:0 2px 12px rgba(7,94,84,.06);
+    .review-avatar{
+      width:42px;height:42px;border-radius:50%;
+      object-fit:cover;flex-shrink:0;
+      border:2px solid rgba(34,197,94,.3);
     }
-    .vis-card:hover{transform:translateY(-4px);border-color:var(--green);box-shadow:0 6px 24px rgba(34,197,94,.15)}
-    .vis-icon{font-size:2.4rem;margin-bottom:8px}
-    .vis-card strong{font-size:.88rem}
-    .vis-card p{font-size:.78rem;color:var(--muted);margin-top:4px}
+    .review-body{flex:1;min-width:0}
+    .review-name{font-weight:700;font-size:.82rem;color:#fff;margin-bottom:2px}
+    .review-stars{color:var(--gold-light);font-size:.76rem;letter-spacing:1px;margin-bottom:4px}
+    .review-text{font-size:.78rem;color:rgba(255,255,255,.6);line-height:1.5}
+    .review-label{font-size:.7rem;color:var(--green);opacity:.8;margin-top:4px}
 
-    /* ── SECTION ── */
-    .section{padding:80px 24px;max-width:960px;margin:0 auto}
-    .section-title{text-align:center;margin-bottom:48px}
-    .section-title h2{
-      font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;margin-bottom:10px;
+    /* ── STATS BAND ── */
+    .stats-band{
+      background:linear-gradient(135deg,var(--dark),#0d2e26);
+      padding:60px 24px;
+      border-top:1px solid rgba(34,197,94,.1);
     }
-    .section-title h2 span{color:var(--green)}
-    .section-title p{color:var(--muted);font-size:.95rem}
+    .stats-inner{
+      max-width:900px;margin:0 auto;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px;
+      text-align:center;
+    }
+    .stat-num{font-size:2.6rem;font-weight:900;color:var(--gold-light);display:block;line-height:1}
+    .stat-label{font-size:.85rem;color:rgba(255,255,255,.7);margin-top:7px;display:block}
 
-    /* ── STATS ── */
-    .stats-row{
-      display:flex;gap:20px;flex-wrap:wrap;justify-content:center;
-      padding:56px 24px;
-      background:linear-gradient(135deg,var(--dark-green),#0d1f1a);
+    /* ── SECTION COMMONS ── */
+    .section{padding:80px 24px;max-width:980px;margin:0 auto}
+    .sec-label{text-align:center;font-size:.75rem;font-weight:700;color:var(--dark-green);letter-spacing:1.8px;text-transform:uppercase;margin-bottom:8px}
+    .sec-title{text-align:center;font-size:clamp(1.65rem,3.5vw,2.4rem);font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.28}
+    .sec-title .gr{color:var(--dark-green)}
+    .sec-title .gd{color:var(--gold)}
+    .sec-sub{text-align:center;color:var(--muted);font-size:.93rem;margin-bottom:48px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.8}
+
+    /* ── PROBLEM SECTION ── */
+    .problems-bg{
+      background:linear-gradient(135deg,#fff8f0,#fff);
+      border-top:1px solid rgba(217,119,6,.12);
+      border-bottom:1px solid rgba(217,119,6,.12);
+      padding:72px 24px;
     }
-    .stat{text-align:center;flex:1;min-width:130px}
-    .stat-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
-    .stat-label{color:var(--light-green);font-size:.83rem;margin-top:4px}
+    .problems-grid{
+      max-width:900px;margin:0 auto;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;
+      margin-top:44px;
+    }
+    .prob-card{
+      background:#fff;border:1.5px solid rgba(217,119,6,.18);
+      border-radius:16px;padding:26px 20px;
+      box-shadow:0 2px 14px rgba(0,0,0,.06);
+      transition:transform .2s,box-shadow .2s;
+    }
+    .prob-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(217,119,6,.12)}
+    .prob-icon{font-size:2.2rem;margin-bottom:12px}
+    .prob-card h3{font-size:1rem;font-weight:700;color:#7c2d12;margin-bottom:8px}
+    .prob-card p{font-size:.83rem;color:#78350f;line-height:1.6}
+    .prob-stat{
+      display:inline-block;margin-top:10px;
+      background:#fef3c7;border:1px solid #fcd34d;
+      border-radius:50px;padding:3px 12px;
+      font-size:.75rem;font-weight:700;color:#92400e;
+    }
 
     /* ── SERVICES ── */
     .services-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+      display:grid;gap:20px;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     }
     .service-card{
-      background:var(--surface);border:1px solid rgba(7,94,84,.1);
-      border-radius:var(--radius);padding:28px 22px;
-      box-shadow:0 2px 12px rgba(7,94,84,.06);
+      background:var(--surface);
+      border:1.5px solid var(--border);
+      border-radius:18px;padding:30px 24px;
+      box-shadow:0 2px 14px rgba(7,94,84,.06);
       transition:transform .2s,border-color .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
     }
+    .service-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,var(--green),var(--dark-green));
+      opacity:0;transition:opacity .2s;
+    }
+    .service-card:hover::before{opacity:1}
     .service-card:hover{
-      transform:translateY(-5px);border-color:var(--green);
-      box-shadow:0 8px 28px rgba(34,197,94,.18);
+      transform:translateY(-5px);border-color:rgba(34,197,94,.3);
+      box-shadow:0 10px 32px rgba(34,197,94,.12);
     }
-    .service-icon{font-size:2.1rem;margin-bottom:12px}
-    .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-    .service-card p{color:var(--muted);font-size:.86rem}
+    .service-card.primary{border-color:rgba(34,197,94,.25)}
+    .service-card.secondary{border-color:rgba(7,94,84,.12)}
+    .service-badge{
+      display:inline-block;margin-bottom:14px;
+      padding:4px 14px;border-radius:50px;font-size:.73rem;font-weight:700;
+    }
+    .badge-primary{background:rgba(34,197,94,.12);color:var(--dark-green);border:1px solid rgba(34,197,94,.25)}
+    .badge-secondary{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+    .badge-addon{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+    .service-icon{font-size:2.4rem;margin-bottom:14px;display:block}
+    .service-card h3{font-size:1.15rem;font-weight:900;margin-bottom:10px;color:var(--text)}
+    .service-card p{color:var(--muted);font-size:.86rem;line-height:1.65;margin-bottom:14px}
+    .service-list{list-style:none;padding:0}
+    .service-list li{
+      font-size:.82rem;color:var(--muted);
+      padding:4px 0;display:flex;align-items:flex-start;gap:8px;
+    }
+    .service-list li::before{content:'✓';color:var(--green);font-weight:900;flex-shrink:0;margin-top:2px}
+
+    /* ── PROCESS ── */
+    .process-bg{
+      background:linear-gradient(135deg,var(--dark),#0d2e26);
+      padding:80px 24px;
+    }
+    .process-inner{max-width:860px;margin:0 auto}
+    .process-inner .sec-title{color:#fff}
+    .process-inner .sec-sub{color:rgba(255,255,255,.6)}
+    .process-inner .sec-label{color:var(--green)}
+    .steps-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;
+      margin-top:10px;
+    }
+    .step{text-align:center;position:relative}
+    .step-num{
+      width:56px;height:56px;border-radius:50%;
+      background:rgba(34,197,94,.12);border:2px solid rgba(34,197,94,.3);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;font-weight:900;color:var(--green);
+      margin:0 auto 14px;
+    }
+    .step h4{font-size:.95rem;font-weight:900;color:#fff;margin-bottom:6px}
+    .step p{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.6}
 
     /* ── REVIEWS ── */
-    .reviews-mini{
-      margin-top:18px;display:flex;flex-direction:column;gap:12px;
+    .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}
+    .rev-card{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:16px;padding:22px;
+      box-shadow:0 2px 12px rgba(7,94,84,.06);
     }
-    .review-item{
-      background:var(--surface2);
-      border:1px solid rgba(7,94,84,.1);
-      border-radius:14px;
-      padding:13px 14px;
-      display:flex;align-items:flex-start;gap:12px;
+    .rev-stars{color:var(--gold-light);font-size:1rem;margin-bottom:10px}
+    .rev-text{font-size:.88rem;color:var(--muted);line-height:1.72;margin-bottom:14px;font-style:italic}
+    .rev-tag{
+      display:inline-block;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);
+      color:var(--dark-green);border-radius:50px;padding:3px 12px;
+      font-size:.72rem;font-weight:700;margin-bottom:10px;
     }
-    .review-avatar{
-      width:46px;height:46px;border-radius:50%;
-      object-fit:cover;flex-shrink:0;
-      border:2px solid rgba(37,211,102,.35);
+    .rev-author{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+    .rev-avatar-img{
+      width:40px;height:40px;border-radius:50%;
+      object-fit:cover;border:2px solid rgba(34,197,94,.25);flex-shrink:0;
     }
-    .review-body{flex:1;min-width:0}
-    .review-name{font-weight:700;font-size:.85rem;margin-bottom:2px}
-    .review-stars{color:var(--gold);font-size:.78rem;letter-spacing:1px;margin-bottom:5px}
-    .review-text{font-size:.8rem;color:var(--muted);line-height:1.55}
-    .review-label{font-size:.72rem;color:var(--dark-green);opacity:.7;margin-top:4px}
+    .rev-name{font-size:.85rem;font-weight:900;color:var(--text)}
+    .rev-city{font-size:.74rem;color:var(--muted)}
+    .rev-verified{font-size:.7rem;color:var(--green);font-weight:700;margin-top:4px}
 
-    /* ── FLOATING WHATSAPP ── */
-    .wa-float{display:none !important}
-    .wa-float-show{
-      position:fixed;bottom:24px;left:24px;z-index:999;
-      background:var(--green);color:#000;
-      width:58px;height:58px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      box-shadow:0 6px 24px rgba(37,211,102,.5);
-      text-decoration:none;
-      transition:transform .15s,box-shadow .15s;
+    /* ── FINAL CTA SECTION ── */
+    .final-cta-section{
+      background:linear-gradient(135deg,#f0fdf4,#ecfdf5);
+      border-top:1px solid rgba(34,197,94,.15);
+      border-bottom:1px solid rgba(34,197,94,.15);
+      padding:80px 24px;
     }
-    .wa-float:hover{transform:scale(1.1);box-shadow:0 10px 32px rgba(37,211,102,.65)}
-    .wa-float svg{width:30px;height:30px}
+    .final-cta-inner{max-width:640px;margin:0 auto;text-align:center}
+    .final-cta-inner h2{
+      font-size:clamp(1.65rem,3.5vw,2.4rem);font-weight:900;
+      color:var(--text);margin-bottom:14px;line-height:1.3;
+    }
+    .final-cta-inner h2 .gr{color:var(--dark-green)}
+    .final-cta-inner p{color:var(--muted);font-size:.97rem;margin-bottom:36px;line-height:1.8}
+
+    .final-form{
+      background:var(--surface);border:1.5px solid rgba(34,197,94,.2);
+      border-radius:20px;padding:32px 28px;
+      box-shadow:0 8px 40px rgba(34,197,94,.08);
+      text-align:right;
+    }
+    .final-form .field label{color:var(--dark-green)}
+    .final-form .field input{
+      background:#fff;border:1.5px solid rgba(7,94,84,.18);
+      color:var(--text);
+    }
+    .final-form .field input::placeholder{color:#9ab8a8}
+    .final-form .field input:focus{border-color:var(--green)}
+    .final-form-note{text-align:center;font-size:.75rem;color:var(--muted);margin-top:10px}
 
     /* ── FOOTER ── */
     footer{
-      text-align:center;padding:32px 24px;
-      color:var(--muted);font-size:.84rem;
-      border-top:1px solid rgba(7,94,84,.1);
-      background:var(--surface2);
+      background:var(--dark);
+      padding:40px 32px 28px;
+      border-top:1px solid rgba(34,197,94,.08);
     }
-    footer span{color:var(--dark-green)}
+    .footer-inner{
+      max-width:960px;margin:0 auto;
+      display:flex;justify-content:space-between;align-items:flex-start;
+      flex-wrap:wrap;gap:28px;
+    }
+    .footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .footer-logo-row img{height:36px;width:auto}
+    .footer-brand{font-size:.95rem;font-weight:900;color:#fff}
+    .footer-tag{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:4px}
+    .footer-links a{
+      display:block;color:rgba(255,255,255,.5);text-decoration:none;
+      font-size:.84rem;margin-bottom:6px;transition:color .2s;
+    }
+    .footer-links a:hover{color:var(--green)}
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.06);
+      margin-top:28px;padding-top:18px;
+      font-size:.75rem;color:rgba(255,255,255,.35);
+      text-align:center;max-width:960px;margin-left:auto;margin-right:auto;
+    }
+    footer span.gr{color:var(--green)}
 
     /* ── RESPONSIVE ── */
-    @media(max-width:860px){
-      .hero{
+    @media(max-width:900px){
+      .announce-bar{padding:8px 14px;gap:10px}
+      .announce-text{font-size:.77rem}
+      nav{top:48px;padding:11px 16px}
+      .hero-inner{
         flex-direction:column;
-        padding:88px 20px 40px;
+        padding:108px 16px 48px;
         gap:28px;
-        text-align:center;
+        align-items:stretch;
       }
-      .hero-text>p{margin-left:auto;margin-right:auto}
-      .trust-list{align-items:center}
-      .hero-form{width:100%}
-      nav{padding:12px 18px}
+      .hero-text{order:2;text-align:center}
+      .hero-form-col{order:1;flex:none;width:100%}
+      .hero-pills{justify-content:center}
+      .guarantee-box{max-width:100%;margin-left:auto;margin-right:auto}
+      .hero-sub{margin-left:auto;margin-right:auto}
+      .form-card{position:static}
+      .section{padding:60px 16px}
+      .process-bg{padding:60px 16px}
+      footer{padding:32px 16px 20px}
     }
-    @media(max-width:480px){
-      .form-card{padding:24px 16px}
-      .hero-text h1{font-size:1.85rem}
-      .logo{font-size:1.2rem}
+    @media(max-width:500px){
+      .announce-bar{flex-direction:column;gap:8px;padding:10px 14px}
+      .stats-inner{grid-template-columns:repeat(2,1fr)}
+      .hero-text h1{font-size:1.9rem}
+      .final-form{padding:24px 18px}
+    }
+    @media(max-width:860px){
+      .hero-text>p{margin-left:auto;margin-right:auto}
     }
   </style>
 </head>
 <body>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar">
+  <span class="announce-text">
+    استشارة مجانية — <strong>نزيد مبيعات متجرك على Shopify</strong> أو كريدو ليك فلوسك بالكامل ←
+  </span>
+  <a href="#leadForm" class="announce-btn">احجز الآن — مجانًا ←</a>
+</div>
+
 <!-- NAV -->
 <nav>
-  <a href="/" style="display:flex;align-items:center;gap:9px;text-decoration:none">
-    <img src="/logo.png" alt="AmraniAds" style="height:36px;width:auto;display:block"/>
-    <span style="font-family:sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:-.02em;line-height:1">
-      <span style="color:#1e2a3a">Amrani</span><span style="color:#00c8e0">Ads</span>
-    </span>
+  <a href="/" class="logo-wrap">
+    <img src="/logo.png" alt="AmraniAds"/>
+    <span class="logo-name"><span class="a">Amrani</span><span class="b">Ads</span></span>
   </a>
-  <a href="#leadForm" class="nav-cta">ابدأ الآن →</a>
+  <a href="#leadForm" class="nav-cta">ابدأ الآن ←</a>
 </nav>
 
-<!-- ═══ HERO + FORM ═══ -->
-<section class="hero" id="hero">
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
 
-  <!-- Left: text -->
-  <div class="hero-text">
-    <div class="badge">🇲🇦 خصيصاً للمتاجر الإلكترونية في المغرب</div>
-    <h1>
-      إعلانات تُحقق المبيعات،<br/>
-      <span class="gr">نتائج تظهر</span> في <span class="gd">حسابك</span>
-    </h1>
-    <p>
-      خدمات إعلانات ميتا، تحسين شوبيفاي، وبناء المواقع —
-      مصممة خصيصاً لنماذج الدفع عند الاستلام في المغرب
-    </p>
-    <div class="drive-statement">
-      🚀 ضاعف مبيعاتك <span>×100</span> — ابدأ اليوم
-    </div>
-  </div>
+  <div class="hero-inner">
 
-  <!-- Right: form -->
-  <div class="hero-form">
-    <div class="form-card">
-      <div class="form-card-title">📩 أرسل <span>طلبك</span> الآن</div>
-      <div class="form-card-sub">تسليم خلال 24 ساعة — بدون أي التزام</div>
-
-      <form id="leadForm" novalidate>
-        <div class="form-group">
-          <label for="name">الاسم الكريم</label>
-          <input
-            type="text" id="name"
-            placeholder="محمد، عبدالله، ..."
-            required autocomplete="name"
-          />
+    <!-- FORM (order:1 on mobile = appears first) -->
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-top">
+          <h2>📩 احجز استشارتك المجانية</h2>
+          <p>رد خلال ساعة · بدون أي التزام</p>
         </div>
-        <div class="form-group">
-          <label for="phone">رقم واتساب</label>
-          <input
-            type="tel" id="phone"
-            placeholder="06XXXXXXXX"
-            required autocomplete="tel"
-          />
-        </div>
-        <div class="form-group">
-          <label for="service">الخدمة المطلوبة</label>
-          <select id="service" required>
-            <option value="" disabled selected>— اختر الخدمة —</option>
-            <option value="إعلانات ميتا (Meta Ads)">🎯 إعلانات ميتا (Meta Ads)</option>
-            <option value="تحسين شوبيفاي (Shopify)">🛍️ تحسين شوبيفاي (Shopify)</option>
-            <option value="بناء الموقع الإلكتروني">🌐 بناء الموقع الإلكتروني</option>
-            <option value="الباقة الكاملة">✨ الباقة الكاملة (كل الخدمات)</option>
-          </select>
-        </div>
-
-        <button type="submit" class="submit-btn" id="submitBtn">
-          <span id="btnText">إرسال الطلب</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
-
-        <div class="success-toast" id="successToast">
-          ✅ تم إرسال طلبك بنجاح! سنتواصل معك قريباً.
-        </div>
-      </form>
-    </div>
-
-    <!-- Reviews -->
-    <div class="reviews-mini">
-      <div class="review-item">
-        <img class="review-avatar"
-             src="https://randomuser.me/api/portraits/women/44.jpg"
-             alt="سارة" loading="lazy"/>
-        <div class="review-body">
-          <div class="review-name">سارة المريني</div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">شكران بزاف! كنت كنخسر فلوس على الإعلانات وماشي واصل ليا حتى حاجة. من بعد AmraniAds طلباتي تضاعفات 🔥</div>
-          <div class="review-label">متجر COD — تطوان</div>
+        <div class="form-body">
+          <form id="mainForm" novalidate>
+            <div class="field">
+              <label for="fname">الاسم الكريم</label>
+              <input type="text" id="fname" name="name"
+                placeholder="محمد، يوسف، فاطمة..."
+                required autocomplete="name"/>
+            </div>
+            <div class="field">
+              <label for="fphone">رقم الهاتف</label>
+              <input type="tel" id="fphone" name="phone"
+                placeholder="06XXXXXXXX"
+                required autocomplete="tel"/>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span id="btnText">احجز استشارتي المجانية</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <p class="form-note">🔒 معلوماتك سرية — بدون إزعاج</p>
+          <div class="form-urgency">⚡ أماكن محدودة هذا الأسبوع — احجز الآن</div>
         </div>
       </div>
-      <div class="review-item">
-        <img class="review-avatar"
-             src="https://randomuser.me/api/portraits/women/26.jpg"
-             alt="نادية" loading="lazy"/>
-        <div class="review-body">
-          <div class="review-name">نادية الحسيني</div>
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">والله خدمة فوق الكلام! هوما كيديرو كولشي من A لـ Z، أنا غير كنتبع النتائج. نصح بيهم بجوج يدين 💯</div>
-          <div class="review-label">Dropshipping — كازابلانكا</div>
+
+      <!-- Mini reviews under form -->
+      <div class="reviews-mini">
+        <div class="review-item">
+          <img class="review-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارة" loading="lazy"/>
+          <div class="review-body">
+            <div class="review-name">سارة المريني</div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">"متجرنا كان بطيء وما كيبيعش — بعد التحسين مع AmraniAds وصلنا لـ 3.4% conversion rate 🔥"</div>
+            <div class="review-label">Shopify Optimization — تطوان</div>
+          </div>
+        </div>
+        <div class="review-item">
+          <img class="review-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="كريم" loading="lazy"/>
+          <div class="review-body">
+            <div class="review-name">كريم الحسيني</div>
+            <div class="review-stars">★★★★★</div>
+            <div class="review-text">"من صفر لمتجر كامل في 12 يوم — أول شهر جبنا 180 طلبية بدون حتى إعلانات!"</div>
+            <div class="review-label">Shopify Store — كازابلانكا</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- TEXT (order:2 on mobile = appears second) -->
+    <div class="hero-text">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>🇲🇦 خصيصاً للتجار المغاربة على Shopify</div>
+      <h1>
+        متجرك على Shopify<br/>
+        يضيّع <span class="rd">مبيعات حقيقية</span><br/>
+        كل يوم — <span class="gr">نحن نوقف هذا</span>
+      </h1>
+      <p class="hero-sub">
+        إذا كان معدل تحويل متجرك أقل من 2%، أو كان تحميله بطيئاً،
+        أو أن صفحات المنتج ما كتبيعش وحدها —
+        هذا مش مشكل الإعلانات، هذا مشكل المتجر.
+        ونحن نحله.
+      </p>
+      <div class="guarantee-box">
+        <div class="guarantee-icon">🛡️</div>
+        <div class="guarantee-text">
+          <strong>ضمان النتائج أو كريدو ليك فلوسك</strong>
+          نزيد مبيعاتك خلال 30 يوم من تحسين متجرك —
+          أو نرجع لك 100% من قيمة الخدمة. بدون نقاش.
+        </div>
+      </div>
+      <div class="hero-pills">
+        <span class="hpill">🛍️ بناء Shopify من الصفر</span>
+        <span class="hpill">⚡ تحسين السرعة والتحويل</span>
+        <span class="hpill">🎯 Meta Ads مدمجة</span>
+        <span class="hpill">📦 COD مغرب</span>
+        <span class="hpill">🌐 مواقع مخصصة</span>
+      </div>
+    </div>
+
+  </div>
 </section>
 
-<!-- VISUAL CARDS -->
-<div class="visuals">
-  <div class="vis-card">
-    <div class="vis-icon">💵</div>
-    <strong>عائد حقيقي بالدرهم</strong>
-    <p>عائد على الاستثمار واضح على كل درهم تُنفقه</p>
-  </div>
-  <div class="vis-card">
-    <div class="vis-icon">📦</div>
-    <strong>الدفع عند الاستلام</strong>
-    <p>طلبيات للتسليم إلى باب العميل في أنحاء المغرب</p>
-  </div>
-  <div class="vis-card">
-    <div class="vis-icon">💬</div>
-    <strong>عملاء عبر واتساب</strong>
-    <p>يصلك العميل مباشرةً عبر واتساب دون وسيط</p>
-  </div>
-  <div class="vis-card">
-    <div class="vis-icon">📈</div>
-    <strong>نمو متسارع وحقيقي</strong>
-    <p>من أول طلبية إلى مئات الطلبيات شهرياً</p>
-  </div>
-</div>
-
 <!-- STATS -->
-<div class="stats-row">
-  <div class="stat">
-    <div class="stat-num">+200</div>
-    <div class="stat-label">حملة إعلانية ناجحة</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">3×</div>
-    <div class="stat-label">متوسط العائد على الإنفاق الإعلاني</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">100%</div>
-    <div class="stat-label">تركيز على السوق المغربي</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">COD</div>
-    <div class="stat-label">متخصصون في نموذج الدفع عند الاستلام</div>
+<div class="stats-band">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">+150</span>
+      <span class="stat-label">متجر Shopify أطلقناه</span>
+    </div>
+    <div>
+      <span class="stat-num">3.2%</span>
+      <span class="stat-label">متوسط معدل التحويل (vs 1.4% المعيار)</span>
+    </div>
+    <div>
+      <span class="stat-num">+200%</span>
+      <span class="stat-label">متوسط زيادة المبيعات في 90 يوم</span>
+    </div>
+    <div>
+      <span class="stat-num">14 يوم</span>
+      <span class="stat-label">من الصفر لمتجر جاهز للبيع</span>
+    </div>
   </div>
 </div>
 
-<!-- SERVICES -->
+<!-- ═══ PROBLEM SECTION ═══ -->
+<div class="problems-bg">
+  <div style="max-width:980px;margin:0 auto">
+    <div class="sec-label">المشكلة الحقيقية</div>
+    <h2 class="sec-title">لماذا متجرك <span class="gd">لا يبيع</span> رغم الإعلانات؟</h2>
+    <p class="sec-sub">معظم التجار يرمون فلوسهم في الإعلانات وهم ما عرفوش أن المشكل في المتجر — لا في الإعلان.</p>
+    <div class="problems-grid">
+      <div class="prob-card">
+        <div class="prob-icon">🐢</div>
+        <h3>المتجر بطيء التحميل</h3>
+        <p>كل ثانية تأخير في التحميل تكلفك 7% من المبيعات. عميلك بيخرج قبل ما يشوف المنتج.</p>
+        <span class="prob-stat">70% من الزوار يغادرون خلال 3 ثوانٍ</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📄</div>
+        <h3>صفحات منتج ضعيفة</h3>
+        <p>صور رديئة، وصف فارغ، لا trust signals — عميلك يقارن أسعارك مع غيرك ويروح.</p>
+        <span class="prob-stat">خسارة 60% من العملاء المهتمين</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">🛒</div>
+        <h3>Checkout مربك</h3>
+        <p>خطوات كثيرة، لا COD واضح، لا ضمان — عميلك يهمل السلة في آخر لحظة.</p>
+        <span class="prob-stat">68% معدل هجران السلة في المغرب</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📱</div>
+        <h3>ليس محسّناً للموبايل</h3>
+        <p>92% من المتسوقين المغاربة يستخدمون الهاتف — إذا متجرك ما كيمشيش زين فيه، خسرت.</p>
+        <span class="prob-stat">92% من الشراء عبر الموبايل</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
 <div class="section" id="services">
-  <div class="section-title">
-    <h2>ما الذي <span>نقدمه</span> لك</h2>
-    <p>كل خدمة مصممة خصيصاً للتاجر الإلكتروني المغربي العامل بنظام الدفع عند الاستلام</p>
-  </div>
+  <div class="sec-label">ما نقدمه لك</div>
+  <h2 class="sec-title">خدماتنا — <span class="gr">Shopify أولاً</span></h2>
+  <p class="sec-sub">نركز على Shopify لأن مشاكله واضحة، وحلها يتربط مباشرة بعدد طلبياتك ومعدل تحويلك وقيمة الطلب الواحد.</p>
+
   <div class="services-grid">
-    <div class="service-card">
-      <div class="service-icon">🎯</div>
-      <h3>Meta Ads</h3>
-      <p>حملات إعلانية مستهدفة على فيسبوك وإنستغرام — تجلب عملاء عبر واتساب، لا نقرات فارغة</p>
+
+    <!-- PRIMARY 1 -->
+    <div class="service-card primary">
+      <span class="service-badge badge-primary">⭐ الأكثر طلباً</span>
+      <span class="service-icon">🛍️</span>
+      <h3>بناء متجر Shopify من الصفر</h3>
+      <p>متجر احترافي جاهز للبيع في 7–14 يوم — مُحسَّن للتحويل من اليوم الأول.</p>
+      <ul class="service-list">
+        <li>ثيم سريع ومخصص للسوق المغربي</li>
+        <li>20+ منتج مُعبأ بصور واحترافية</li>
+        <li>إعداد الدفع عند الاستلام (COD) بالكامل</li>
+        <li>تكامل مع شركات الشحن المغربية</li>
+        <li>صفحات منتج تُقنع وتبيع وحدها</li>
+        <li>إعداد سياسة الإرجاع والشحن</li>
+      </ul>
     </div>
-    <div class="service-card">
-      <div class="service-icon">🛍️</div>
-      <h3>Shopify Optimization</h3>
-      <p>تحسين شامل للمتجر لتحويل كل زائر إلى طلبية — سرعة التحميل، تجربة المستخدم، ومعدل التحويل</p>
+
+    <!-- PRIMARY 2 -->
+    <div class="service-card primary">
+      <span class="service-badge badge-primary">🔥 نتائج في 30 يوم</span>
+      <span class="service-icon">⚡</span>
+      <h3>تحسين متجر Shopify موجود</h3>
+      <p>نحلل متجرك الحالي، نكتشف أين تضيع مبيعاتك، ونصلح كل شيء.</p>
+      <ul class="service-list">
+        <li>تحليل كامل لمسار الشراء (CRO Audit)</li>
+        <li>تحسين سرعة التحميل (+40 نقطة PageSpeed)</li>
+        <li>إعادة هيكلة صفحات المنتج</li>
+        <li>تحسين تجربة الموبايل بالكامل</li>
+        <li>تقليل معدل هجران السلة</li>
+        <li>A/B testing للعناصر الرئيسية</li>
+      </ul>
     </div>
+
+    <!-- COMPLEMENTARY -->
     <div class="service-card">
-      <div class="service-icon">🌐</div>
-      <h3>بناء المواقع</h3>
-      <p>صفحات هبوط سريعة ومصممة للتحويل — مع زر واتساب مباشر لإتمام الطلبية</p>
+      <span class="service-badge badge-addon">🎯 مدمجة مع Shopify</span>
+      <span class="service-icon">📢</span>
+      <h3>Meta Ads للمتجر</h3>
+      <p>حملات إعلانية مستهدفة تجلب مشترين جاهزين — لا نقرات فارغة، لا تافهين.</p>
+      <ul class="service-list">
+        <li>استهداف المشترين المغاربة بدقة</li>
+        <li>إعلانات COD محسّنة للتحويل</li>
+        <li>Pixel + CAPI إعداد احترافي</li>
+        <li>تتبع كل درهم تنفقه</li>
+      </ul>
+    </div>
+
+    <!-- UPSELL -->
+    <div class="service-card secondary">
+      <span class="service-badge badge-secondary">للعلامات الكبيرة</span>
+      <span class="service-icon">🌐</span>
+      <h3>موقع مخصص بكود</h3>
+      <p>لمن تجاوز Shopify ويحتاج أداءً وتخصيصاً لا محدوداً — لوح تحكم، API، سرعة استثنائية.</p>
+      <ul class="service-list">
+        <li>أداء أسرع × 3 من أي ثيم Shopify</li>
+        <li>تخصيص كامل بلا قيود</li>
+        <li>تكامل مع أي نظام خارجي</li>
+        <li>يبدأ من 250 طلبية/شهر</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PROCESS ═══ -->
+<div class="process-bg">
+  <div class="process-inner">
+    <div class="sec-label" style="color:var(--green)">كيف نعمل</div>
+    <h2 class="sec-title" style="color:#fff">من <span style="color:var(--green)">المكالمة الأولى</span> حتى أول طلبية</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.6)">عملية واضحة، لا مفاجآت، لا تأخير.</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">١</div>
+        <h4>استشارة مجانية</h4>
+        <p>30 دقيقة نحللك متجرك أو فكرتك ونحدد الفرص الكبيرة</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٢</div>
+        <h4>تشخيص وخطة عمل</h4>
+        <p>نقدم لك تقريراً كاملاً + خارطة طريق واضحة بالأولويات</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٣</div>
+        <h4>التنفيذ في 14 يوم</h4>
+        <p>بناء أو تحسين كامل مع تحديثات يومية — بدون انتظار</p>
+      </div>
+      <div class="step">
+        <div class="step-num">٤</div>
+        <h4>نتائج مقيسة</h4>
+        <p>تقرير شهري واضح: conversion rate، AOV، ROAS، وكل ما يهم</p>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- FLOATING WHATSAPP BUTTON -->
-<a class="wa-float"
-   href="https://wa.me/212627716149?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%2C%20%D8%A3%D9%88%D8%AF%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20AmraniAds%20%F0%9F%9A%80"
-   target="_blank" aria-label="واتساب">
-  <svg viewBox="0 0 24 24" fill="currentColor">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.121 1.534 5.856L.057 23.571a.75.75 0 0 0 .92.92l5.715-1.477A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.002-1.373l-.36-.213-3.727.977.993-3.635-.235-.375A9.818 9.818 0 1 1 12 21.818z"/>
-  </svg>
-</a>
+<!-- ═══ REVIEWS ═══ -->
+<div class="section">
+  <div class="sec-label">شهادات العملاء</div>
+  <h2 class="sec-title">ناس <span class="gr">تكلمت</span> بصدق</h2>
+  <p class="sec-sub">نتائج حقيقية من تجار مغاربة يعملون بنظام COD — مش وعود فارغة</p>
+  <div class="reviews-grid">
+
+    <div class="rev-card">
+      <div class="rev-tag">🛍️ Shopify Optimization</div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"متجرنا كان يجيب 0.8% conversion rate — بعد شهر واحد مع AmraniAds وصلنا لـ 3.4%. هذا معناه 4× أكثر طلبيات من نفس عدد الزوار. الفرق كبير جداً!"</p>
+      <div class="rev-author">
+        <img class="rev-avatar-img" src="https://randomuser.me/api/portraits/women/44.jpg" alt="سارة" loading="lazy"/>
+        <div>
+          <div class="rev-name">سارة المريني</div>
+          <div class="rev-city">📍 تطوان · متجر إكسسوارات</div>
+          <div class="rev-verified">✓ عميلة موثقة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-card">
+      <div class="rev-tag">🛍️ Shopify من الصفر</div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"كنت عندي فكرة بس ما عرفتش من فين نبدأ. في 12 يوم عندي متجر كامل على Shopify، أول شهر جبنا 180 طلبية COD. ما توقعتش هذا بهذه السرعة!"</p>
+      <div class="rev-author">
+        <img class="rev-avatar-img" src="https://randomuser.me/api/portraits/men/32.jpg" alt="كريم" loading="lazy"/>
+        <div>
+          <div class="rev-name">كريم الحسيني</div>
+          <div class="rev-city">📍 كازابلانكا · متجر منتجات منزلية</div>
+          <div class="rev-verified">✓ عميل موثق</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rev-card">
+      <div class="rev-tag">📢 Meta Ads + Shopify</div>
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"كنت نخسر فلوس على الإعلانات وما كنت نفهمش ليه. بعد ما حسنوا المتجر ووصلوا الإعلانات، ROAS تاعنا وصل لـ 4.2x. واضح الفرق بين مجرد إعلانات وبين عمل حقيقي."</p>
+      <div class="rev-author">
+        <img class="rev-avatar-img" src="https://randomuser.me/api/portraits/women/26.jpg" alt="نادية" loading="lazy"/>
+        <div>
+          <div class="rev-name">نادية الفاسي</div>
+          <div class="rev-city">📍 فاس · Dropshipping COD</div>
+          <div class="rev-verified">✓ عميلة موثقة</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ FINAL CTA + FORM (before footer) ═══ -->
+<div class="final-cta-section">
+  <div class="final-cta-inner">
+    <h2>متجرك يستحق <span class="gr">أكثر من هذا</span></h2>
+    <p>احجز استشارتك المجانية الآن — 30 دقيقة نحددك فيها بالضبط أين تضيع مبيعاتك وكيف نوقف هذا خلال 30 يوم.</p>
+
+    <div class="final-form" id="finalFormWrap">
+      <form id="finalForm" novalidate>
+        <div class="field">
+          <label for="fname2">الاسم الكريم</label>
+          <input type="text" id="fname2" name="name"
+            placeholder="محمد، يوسف، فاطمة..."
+            required autocomplete="name"/>
+        </div>
+        <div class="field">
+          <label for="fphone2">رقم الهاتف</label>
+          <input type="tel" id="fphone2" name="phone"
+            placeholder="06XXXXXXXX"
+            required autocomplete="tel"/>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn2" style="background:var(--dark-green);box-shadow:0 6px 28px rgba(7,94,84,.35)">
+          <span id="btnText2">احجز استشارتي المجانية ←</span>
+        </button>
+      </form>
+      <p class="final-form-note">🔒 معلوماتك سرية · رد خلال ساعة · بدون أي التزام</p>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 <span>AmraniAds</span> — تطوان، المغرب 🇲🇦</p>
-  <p style="margin-top:6px;font-size:.77rem">متخصصون في التجارة الإلكترونية المغربية — Meta Ads · Shopify · Web</p>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo-row">
+        <img src="/logo.png" alt="AmraniAds"/>
+        <div>
+          <div class="footer-brand">AmraniAds</div>
+          <div class="footer-tag">Shopify · Meta Ads · Web — المغرب</div>
+        </div>
+      </div>
+      <div class="footer-tag" style="margin-top:8px">📍 تطوان، المغرب 🇲🇦</div>
+    </div>
+    <div class="footer-links">
+      <a href="#leadForm">احجز استشارة مجانية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="/en.html">English</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 <span class="gr">AmraniAds</span> — متخصصون في Shopify والتجارة الإلكترونية المغربية
+  </div>
 </footer>
 
 <script>
-  document.getElementById('leadForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  function genEventId(){return'lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
 
-    const name    = document.getElementById('name').value.trim();
-    const phone   = document.getElementById('phone').value.trim();
-    const service = document.getElementById('service').value;
-    if (!name || !phone || !service) return;
+  async function submitLead(name,phone,source,btnEl,txtEl){
+    btnEl.disabled=true;
+    txtEl.textContent='⏳ جارٍ الإرسال...';
+    const eventId=genEventId();
 
-    const btn     = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    btn.disabled  = true;
-    btnText.textContent = 'جارٍ الإرسال...';
-
-    const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
-
-    // 1 ── Meta Pixel (browser-side)
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', {
-        content_name: service, content_category: 'AmraniAds Morocco', currency: 'MAD', value: 0
-      }, { eventID: eventId });
+    if(typeof fbq!=='undefined'){
+      fbq('track','Lead',{
+        content_name:'Shopify - '+source,
+        content_category:'AmraniAds Morocco',
+        currency:'MAD',value:0
+      },{eventID:eventId});
     }
-
-    // 2 ── Google Analytics 4
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'generate_lead', { event_category: 'form_submission', event_label: service, currency: 'MAD', value: 0 });
+    if(typeof gtag!=='undefined'){
+      gtag('event','generate_lead',{event_category:'form_submission',event_label:source,currency:'MAD',value:0});
     }
-
-    // 3 ── Single server call: CAPI + Telegram + Sheets
-    try {
-      await fetch('/api/submit', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, service, eventId, userAgent: navigator.userAgent, eventSourceUrl: location.href })
+    try{
+      await fetch('/api/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,phone,service:'Shopify - '+source,eventId,userAgent:navigator.userAgent,eventSourceUrl:location.href})
       });
-    } catch (_) {}
+    }catch(_){}
+    window.location.href='/ar/success.html?eid='+encodeURIComponent(eventId);
+  }
 
-    // Redirect to success page
-    window.location.href = '/ar/success.html?eid=' + encodeURIComponent(eventId);
+  document.getElementById('mainForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname').value.trim();
+    const phone=document.getElementById('fphone').value.trim();
+    if(!name||!phone)return;
+    await submitLead(name,phone,'Hero Form',
+      document.getElementById('submitBtn'),
+      document.getElementById('btnText'));
+  });
+
+  document.getElementById('finalForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname2').value.trim();
+    const phone=document.getElementById('fphone2').value.trim();
+    if(!name||!phone)return;
+    await submitLead(name,phone,'Final CTA',
+      document.getElementById('submitBtn2'),
+      document.getElementById('btnText2'));
+  });
+
+  /* Scroll-in animations */
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)'}
+    });
+  },{threshold:0.07});
+  document.querySelectorAll('.prob-card,.service-card,.rev-card,.step').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(22px)';
+    el.style.transition='opacity .5s ease,transform .5s ease';
+    obs.observe(el);
   });
 </script>
 
