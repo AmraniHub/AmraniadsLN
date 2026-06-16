@@ -20,6 +20,13 @@ module.exports = async function handler(req, res) {
     name,
     phone,
     service,
+    city,
+    destination,
+    tripDate,
+    seats,
+    price,
+    type,
+    notes,
     eventId,
     pixelId: clientPixelId,
     userAgent,
@@ -33,9 +40,13 @@ module.exports = async function handler(req, res) {
   // Route to the correct pixel + token based on which page submitted the form
   const pixelId = clientPixelId === process.env.META_PIXEL_ID_EN
     ? process.env.META_PIXEL_ID_EN
+    : clientPixelId === process.env.META_PIXEL_ID_CLINIC
+    ? process.env.META_PIXEL_ID_CLINIC
     : process.env.META_PIXEL_ID;
   const accessToken = clientPixelId === process.env.META_PIXEL_ID_EN
     ? process.env.META_ACCESS_TOKEN_EN
+    : clientPixelId === process.env.META_PIXEL_ID_CLINIC
+    ? process.env.META_ACCESS_TOKEN_CLINIC
     : process.env.META_ACCESS_TOKEN;
 
   if (pixelId && accessToken) {
@@ -86,7 +97,9 @@ module.exports = async function handler(req, res) {
 
     // Detect source page from URL
     const srcUrl = String(eventSourceUrl || '');
-    const source = srcUrl.includes('/salon')             ? '💅 Salon'
+    const source = srcUrl.includes('/rihlaSprinter')     ? '🚌 Rihla Sprinter'
+                 : srcUrl.includes('/clinic')            ? '🏥 Clinic'
+                 : srcUrl.includes('/salon')             ? '💅 Salon'
                  : srcUrl.includes('/novatech')          ? '🖥️ NovaTech'
                  : srcUrl.includes('/rentalcars')         ? '🚗 Location Voiture'
                  : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
@@ -95,12 +108,24 @@ module.exports = async function handler(req, res) {
                  : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
                  : '🌍 Main Website (Foreign)';
 
-    const msg =
-      `🆕 <b>طلب جديد — ${source}</b>\n\n` +
-      `👤 الاسم: ${name}\n` +
-      `📱 الواتساب: <code>${phone}</code>\n` +
-      `🎯 الخدمة: ${service}\n` +
-      `🕐 ${now}`;
+    const isRihla = srcUrl.includes('/rihlaSprinter');
+    const msg = isRihla
+      ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
+        `👤 الاسم: ${name || '—'}\n` +
+        `📱 الواتساب: <code>${phone || '—'}</code>\n` +
+        `📍 المدينة: ${city || '—'}\n` +
+        `🗺️ الوجهة: ${destination || '—'}\n` +
+        `📅 التاريخ: ${tripDate || '—'}\n` +
+        `🪑 البلايص: ${seats || '—'}\n` +
+        `💰 الثمن/شخص: ${price ? price + ' DH' : '—'}\n` +
+        `🚌 النوع: ${type || '—'}\n` +
+        `📝 ملاحظات: ${notes || '—'}\n` +
+        `🕐 ${now}`
+      : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
+        `👤 الاسم: ${name}\n` +
+        `📱 الواتساب: <code>${phone}</code>\n` +
+        `🎯 الخدمة: ${service}\n` +
+        `🕐 ${now}`;
 
     try {
       const r = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -114,8 +139,9 @@ module.exports = async function handler(req, res) {
 
   // ── 3. CRM — route to correct Google Sheet per niche ─
   const srcUrl2   = String(eventSourceUrl || '');
-  const scriptUrl = srcUrl2.includes('/salon')      ? process.env.SALON_SCRIPT_URL
-                  : srcUrl2.includes('/rentalcars') ? process.env.RENTALCARS_SCRIPT_URL
+  const scriptUrl = srcUrl2.includes('/rihlaSprinter') ? process.env.RIHLA_SCRIPT_URL
+                  : srcUrl2.includes('/salon')          ? process.env.SALON_SCRIPT_URL
+                  : srcUrl2.includes('/rentalcars')     ? process.env.RENTALCARS_SCRIPT_URL
                   : process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
   if (scriptUrl) {
@@ -124,13 +150,20 @@ module.exports = async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({
-          timestamp: new Date().toISOString(),
-          name:      name      || '',
-          phone:     phone     || '',
-          service:   service   || '',
-          source:    source    || '',
-          eventId:   eventId   || '',
-          campaign:  req.body?.campaign || '',
+          timestamp:   new Date().toISOString(),
+          name:        name        || '',
+          phone:       phone       || '',
+          service:     service     || '',
+          source:      source      || '',
+          eventId:     eventId     || '',
+          campaign:    req.body?.campaign || '',
+          city:        city        || '',
+          destination: destination || '',
+          tripDate:    tripDate    || '',
+          seats:       seats       || '',
+          price:       price       || '',
+          type:        type        || '',
+          notes:       notes       || '',
         })
       });
       results.sheets = 'sent';
