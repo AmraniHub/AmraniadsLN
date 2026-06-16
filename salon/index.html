@@ -50,38 +50,40 @@
       color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
+      padding-bottom: 60px;
     }
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
 
-    /* ── ANNOUNCEMENT BAR ── */
+    /* ── ANNOUNCEMENT BAR (bottom sticky) ── */
     .announce-bar {
-      position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
       background: #0e1621;
-      border-bottom: 1px solid rgba(244,114,182,.2);
-      padding: 10px 20px 10px 70px;
+      border-top: 1px solid rgba(244,114,182,.25);
+      padding: 12px 56px 12px 56px;
       display: flex; align-items: center; justify-content: center;
-      gap: 14px; flex-wrap: wrap;
+      gap: 16px; flex-wrap: wrap;
       transition: transform .35s ease;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.35);
     }
-    .announce-bar.hidden { transform: translateY(-100%); pointer-events: none; }
+    .announce-bar.hidden { transform: translateY(100%); pointer-events: none; }
     .announce-text {
-      color: rgba(255,255,255,.92); font-size: .85rem; font-weight: 600; line-height: 1.4;
+      color: rgba(255,255,255,.92); font-size: .88rem; font-weight: 600; line-height: 1.4;
       text-align: center;
     }
     .announce-text strong { color: #4ade80; }
     .announce-cta {
       background: var(--grad-pink); color: #fff;
       border: none; border-radius: 50px;
-      padding: 7px 18px; font-family: 'Cairo', sans-serif;
-      font-size: .82rem; font-weight: 900;
+      padding: 9px 22px; font-family: 'Cairo', sans-serif;
+      font-size: .88rem; font-weight: 900;
       text-decoration: none; white-space: nowrap;
       cursor: pointer; flex-shrink: 0;
-      box-shadow: 0 3px 14px rgba(232,85,154,.5);
+      box-shadow: 0 4px 18px rgba(232,85,154,.55);
       transition: opacity .2s, transform .15s;
     }
-    .announce-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .announce-cta:hover { opacity: .9; transform: translateY(-2px); }
     .announce-close {
       position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
       background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.55);
@@ -112,7 +114,7 @@
     /* ── HERO ── */
     .hero {
       min-height: 100svh;
-      padding: 122px 20px 48px;
+      padding: 80px 20px 48px;
       display: flex; align-items: center; justify-content: center;
       position: relative; overflow: hidden;
     }
@@ -715,7 +717,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="/" class="nav-logo">
+  <a href="#" class="nav-logo">
     <img src="/logo.png" alt="AmraniAds" style="height:34px;width:auto;display:block"/>
     <span style="font-family:sans-serif;font-size:1.1rem;font-weight:800;line-height:1">
       <span style="color:#1e1b2e">Amrani</span><span style="color:#e8559a">Ads</span>
@@ -1341,10 +1343,6 @@
     <p>+20 موعد في 7 أيام أو نرد الفلوس — استشارة مجانية بدون التزام</p>
     <div class="final-cta-btns">
       <a href="#leadForm" class="btn-gold">ابدأ الآن — مجاناً →</a>
-      <a href="https://wa.me/212627716149" class="btn-wa" target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        واتساب مباشر
-      </a>
     </div>
   </div>
 </section>
@@ -1355,7 +1353,7 @@
     <div class="footer-logo">Amrani<span>Ads</span> — المغرب 🇲🇦</div>
     <div class="footer-links">
       <a class="footer-link" href="#leadForm">ابدأ الآن</a>
-      <a class="footer-link" href="https://wa.me/212627716149" target="_blank">واتساب</a>
+      <a class="footer-link" href="#packages">الأسعار</a>
     </div>
   </div>
   <p class="footer-copy">© 2025 AmraniAds — نظام رقمي لصالونات التجميل بالمغرب</p>
@@ -1364,18 +1362,16 @@
 <div id="toast"></div>
 
 <script>
-  /* Adjust hero padding based on announce bar visibility */
-  function syncHeroPadding() {
+  /* Adjust body padding-bottom when announce bar is closed */
+  function syncBodyPadding() {
     const bar = document.getElementById('announceBar');
-    const hero = document.querySelector('.hero');
-    const barH = bar.classList.contains('hidden') ? 0 : bar.offsetHeight;
-    hero.style.paddingTop = (60 + barH + 20) + 'px';
+    document.body.style.paddingBottom = bar.classList.contains('hidden') ? '0' : bar.offsetHeight + 'px';
   }
-  syncHeroPadding();
+  syncBodyPadding();
   document.querySelector('.announce-close').addEventListener('click', () => {
-    setTimeout(syncHeroPadding, 400);
+    setTimeout(syncBodyPadding, 400);
   });
-  window.addEventListener('resize', syncHeroPadding);
+  window.addEventListener('resize', syncBodyPadding);
 
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
