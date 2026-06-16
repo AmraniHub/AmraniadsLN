@@ -15,10 +15,14 @@
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','1431460799006849');
   fbq('track','PageView');
-  fbq('track','Lead');
+  // Fire Lead only when redirected from form (eid param present), with eventID for CAPI deduplication
+  (function() {
+    const eid = new URLSearchParams(location.search).get('eid');
+    if (eid) fbq('track', 'Lead', { content_name: 'clinic-medical' }, { eventID: eid });
+  })();
   </script>
   <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1431460799006849&ev=Lead&noscript=1"/></noscript>
+  src="https://www.facebook.com/tr?id=1431460799006849&ev=PageView&noscript=1"/></noscript>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
