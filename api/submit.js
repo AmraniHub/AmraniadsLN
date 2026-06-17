@@ -128,8 +128,7 @@ module.exports = async function handler(req, res) {
       `👤 الاسم: ${name || '—'}\n` +
       `📱 الهاتف: <code>${phone || '—'}</code>\n` +
       `🎯 الخدمة: ${service || '—'}\n` +
-      `🕐 ${now}\n` +
-      `🔗 ${srcUrl}`
+      `🕐 ${now}`
     : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
       `👤 الاسم: ${name}\n` +
       `📱 الواتساب: <code>${phone}</code>\n` +
