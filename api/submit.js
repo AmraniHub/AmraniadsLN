@@ -53,6 +53,7 @@ module.exports = async function handler(req, res) {
     ? process.env.META_ACCESS_TOKEN_AR
     : process.env.META_ACCESS_TOKEN;
 
+  // Fire Meta CAPI non-blocking (don't await) so Telegram always fires fast
   if (pixelId && accessToken) {
     const parts    = String(name || '').trim().split(/\s+/);
     const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
@@ -79,13 +80,11 @@ module.exports = async function handler(req, res) {
     };
     if (testCode) payload.test_event_code = testCode;
 
-    try {
-      const r = await fetch(
-        `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`,
-        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
-      );
-      results.capi = await r.json();
-    } catch (e) { results.capi = { error: e.message }; }
+    fetch(
+      `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+    ).then(r => r.json()).then(j => { results.capi = j; }).catch(e => { results.capi = { error: e.message }; });
+
   }
 
   // ── 2. Telegram notification ──────────────────────────

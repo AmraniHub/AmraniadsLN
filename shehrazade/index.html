@@ -689,8 +689,11 @@
   async function submitLead(name, phone, service, btnEl) {
     const eventId = genEventId();
     if (typeof fbq !== 'undefined') fbq('track','Lead',{content_name:'shehrazade'},{eventID:eventId});
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 8000);
     try {
       await fetch('https://amraniads.com/api/submit', {
+        signal: ctrl.signal,
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ name, phone, service, eventId,
           userAgent: navigator.userAgent, eventSourceUrl: location.href,
@@ -698,6 +701,7 @@
           lang:'AR', salon:'Maison Beauty Shehrazade' })
       });
     } catch(_) {}
+    clearTimeout(timer);
     window.location.href = '/merci.html?eid=' + encodeURIComponent(eventId);
   }
 
