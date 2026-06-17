@@ -690,7 +690,7 @@
     const eventId = genEventId();
     if (typeof fbq !== 'undefined') fbq('track','Lead',{content_name:'shehrazade'},{eventID:eventId});
     try {
-      await fetch('/api/submit', {
+      await fetch('https://amraniads.com/api/submit', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ name, phone, service, eventId,
           userAgent: navigator.userAgent, eventSourceUrl: location.href,
