@@ -89,63 +89,81 @@ module.exports = async function handler(req, res) {
   }
 
   // ── 2. Telegram notification ──────────────────────────
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId   = process.env.TELEGRAM_CHAT_ID;
+  const srcUrl = String(eventSourceUrl || '');
+  const source = srcUrl.includes('shehrazade')         ? '👑 Maison Beauty Shehrazade'
+               : srcUrl.includes('/rihlaSprinter')     ? '🚌 Rihla Sprinter'
+               : srcUrl.includes('/clinic')            ? '🏥 Clinic'
+               : srcUrl.includes('/salon')             ? '💅 Salon'
+               : srcUrl.includes('/novatech')          ? '🖥️ NovaTech'
+               : srcUrl.includes('/rentalcars')        ? '🚗 Location Voiture'
+               : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
+               : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
+               : srcUrl.includes('/en')                ? '🇬🇧 English Page'
+               : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
+               : '🌍 Main Website (Foreign)';
 
-  if (botToken && chatId) {
-    const now = new Date().toLocaleString('fr-MA', {
-      timeZone: 'Africa/Casablanca',
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
+  const now = new Date().toLocaleString('fr-MA', {
+    timeZone: 'Africa/Casablanca',
+    day: '2-digit', month: '2-digit', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
 
-    // Detect source page from URL
-    const srcUrl = String(eventSourceUrl || '');
-    const source = srcUrl.includes('/rihlaSprinter')     ? '🚌 Rihla Sprinter'
-                 : srcUrl.includes('/clinic')            ? '🏥 Clinic'
-                 : srcUrl.includes('/salon')             ? '💅 Salon'
-                 : srcUrl.includes('/novatech')          ? '🖥️ NovaTech'
-                 : srcUrl.includes('/rentalcars')         ? '🚗 Location Voiture'
-                 : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
-                 : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
-                 : srcUrl.includes('/en')                ? '🇬🇧 English Page'
-                 : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
-                 : '🌍 Main Website (Foreign)';
+  const isRihla      = srcUrl.includes('/rihlaSprinter');
+  const isShehrazade = srcUrl.includes('shehrazade');
 
-    const isRihla = srcUrl.includes('/rihlaSprinter');
-    const msg = isRihla
-      ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
-        `👤 الاسم: ${name || '—'}\n` +
-        `📱 الواتساب: <code>${phone || '—'}</code>\n` +
-        `📍 المدينة: ${city || '—'}\n` +
-        `🗺️ الوجهة: ${destination || '—'}\n` +
-        `📅 التاريخ: ${tripDate || '—'}\n` +
-        `🪑 البلايص: ${seats || '—'}\n` +
-        `💰 الثمن/شخص: ${price ? price + ' DH' : '—'}\n` +
-        `🚌 النوع: ${type || '—'}\n` +
-        `📝 ملاحظات: ${notes || '—'}\n` +
-        `🕐 ${now}`
-      : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
-        `👤 الاسم: ${name}\n` +
-        `📱 الواتساب: <code>${phone}</code>\n` +
-        `🎯 الخدمة: ${service}\n` +
-        `🕐 ${now}`;
+  const msg = isRihla
+    ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
+      `👤 الاسم: ${name || '—'}\n` +
+      `📱 الواتساب: <code>${phone || '—'}</code>\n` +
+      `📍 المدينة: ${city || '—'}\n` +
+      `🗺️ الوجهة: ${destination || '—'}\n` +
+      `📅 التاريخ: ${tripDate || '—'}\n` +
+      `🪑 البلايص: ${seats || '—'}\n` +
+      `💰 الثمن/شخص: ${price ? price + ' DH' : '—'}\n` +
+      `🚌 النوع: ${type || '—'}\n` +
+      `📝 ملاحظات: ${notes || '—'}\n` +
+      `🕐 ${now}`
+    : isShehrazade
+    ? `👑 <b>ليد جديد — Maison Beauty Shehrazade</b>\n\n` +
+      `👤 الاسم: ${name || '—'}\n` +
+      `📱 الهاتف: <code>${phone || '—'}</code>\n` +
+      `🎯 الخدمة: ${service || '—'}\n` +
+      `🕐 ${now}\n` +
+      `🔗 ${srcUrl}`
+    : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
+      `👤 الاسم: ${name}\n` +
+      `📱 الواتساب: <code>${phone}</code>\n` +
+      `🎯 الخدمة: ${service}\n` +
+      `🕐 ${now}`;
 
+  const sendTelegram = async (token, chatId) => {
+    if (!token || !chatId) return;
     try {
-      const r = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: 'HTML' })
       });
-      results.telegram = await r.json();
-    } catch (e) { results.telegram = { error: e.message }; }
+      return await r.json();
+    } catch (e) { return { error: e.message }; }
+  };
+
+  if (isShehrazade) {
+    // Send to both Shehrazade bots simultaneously
+    const [r1, r2] = await Promise.all([
+      sendTelegram(process.env.TELEGRAM_BOT_TOKEN_1, process.env.TELEGRAM_CHAT_ID_1),
+      sendTelegram(process.env.TELEGRAM_BOT_TOKEN_2, process.env.TELEGRAM_CHAT_ID_2),
+    ]);
+    results.telegram = { bot1: r1, bot2: r2 };
+  } else {
+    results.telegram = await sendTelegram(process.env.TELEGRAM_BOT_TOKEN, process.env.TELEGRAM_CHAT_ID);
   }
 
   // ── 3. CRM — route to correct Google Sheet per niche ─
-  const srcUrl2   = String(eventSourceUrl || '');
-  const scriptUrl = srcUrl2.includes('/rihlaSprinter') ? process.env.RIHLA_SCRIPT_URL
-                  : srcUrl2.includes('/salon')          ? process.env.SALON_SCRIPT_URL
-                  : srcUrl2.includes('/rentalcars')     ? process.env.RENTALCARS_SCRIPT_URL
+  const scriptUrl = srcUrl.includes('shehrazade')      ? process.env.SHEHRAZADE_SCRIPT_URL
+                  : srcUrl.includes('/rihlaSprinter')   ? process.env.RIHLA_SCRIPT_URL
+                  : srcUrl.includes('/salon')           ? process.env.SALON_SCRIPT_URL
+                  : srcUrl.includes('/rentalcars')      ? process.env.RENTALCARS_SCRIPT_URL
                   : process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
   if (scriptUrl) {
