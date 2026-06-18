@@ -822,6 +822,7 @@
 <script>
   function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
   function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined;}
+  function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined;}
   function genEventId(){return'lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
 
   async function submitLead(name,phone,source,btnEl,txtEl){
@@ -843,7 +844,7 @@
       await fetch('/api/submit',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name,phone,service:'Shopify - '+source,eventId,pixelId:'1602449311511386',userAgent:navigator.userAgent,eventSourceUrl:location.href})
+        body:JSON.stringify({name,phone,service:'Shopify - '+source,eventId,pixelId:'1602449311511386',userAgent:navigator.userAgent,eventSourceUrl:location.href,fbp:getCookie('_fbp'),fbc:getFbc()})
       });
     }catch(_){}
     window.location.href='/ar/success.html?eid='+encodeURIComponent(eventId);

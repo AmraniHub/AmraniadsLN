@@ -530,6 +530,13 @@
   function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
   function genEventId(){return'ev_dental_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);}
   function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined;}
+  function getFbc(){
+    const cookie=getCookie('_fbc');
+    if(cookie)return cookie;
+    const fbclid=new URLSearchParams(location.search).get('fbclid');
+    if(fbclid)return'fb.1.'+Date.now()+'.'+fbclid;
+    return undefined;
+  }
 
   async function handleSubmit(name,phone,service){
     const eventId=genEventId();
@@ -538,7 +545,7 @@
       await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({name,phone,service,eventId,pixelId:'1431460799006849',
           userAgent:navigator.userAgent,eventSourceUrl:location.href,
-          fbp:getCookie('_fbp'),fbc:getCookie('_fbc'),lang:'AR',page:'clinic-dental'})});
+          fbp:getCookie('_fbp'),fbc:getFbc(),lang:'AR',page:'clinic-dental'})});
     }catch(_){}
     window.location.href='/clinic/merci.html?eid='+encodeURIComponent(eventId);
   }
