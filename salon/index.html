@@ -110,6 +110,8 @@
       text-decoration: none; transition: opacity .2s, transform .15s;
     }
     .nav-cta:hover { opacity: .88; transform: translateY(-1px); }
+    .nav-wa { display:flex; align-items:center; gap:6px; background:#25D366; color:#fff; font-family:'Cairo',sans-serif; font-weight:900; font-size:.82rem; border-radius:50px; padding:8px 16px; text-decoration:none; transition:transform .15s,box-shadow .15s; white-space:nowrap; }
+    .nav-wa:hover { transform:scale(1.05); box-shadow:0 4px 16px rgba(37,211,102,.45); }
 
     /* ── HERO ── */
     .hero {
@@ -723,7 +725,10 @@
       <span style="color:#1e1b2e">Amrani</span><span style="color:#e8559a">Ads</span>
     </span>
   </a>
-  <a class="nav-cta" href="#leadForm">استشارة مجانية →</a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="https://wa.me/212627716149" class="nav-wa" target="_blank">💬 واتساب</a>
+    <a class="nav-cta" href="#leadForm">استشارة مجانية →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -793,6 +798,7 @@
             </button>
           </form>
           <p class="form-note">🔒 معلوماتك سرية — سنتواصل معك عبر الواتساب</p>
+          <p class="form-note" style="margin-top:8px">أو تواصل مباشرة: <a href="https://wa.me/212627716149" target="_blank" style="color:#25D366;font-weight:700;text-decoration:none">💬 +212627716149</a></p>
         </div>
       </div>
 
@@ -1354,6 +1360,7 @@
     <div class="footer-links">
       <a class="footer-link" href="#leadForm">ابدأ الآن</a>
       <a class="footer-link" href="#packages">الأسعار</a>
+      <a class="footer-link" href="https://wa.me/212627716149" target="_blank" style="color:#25D366;font-weight:700">💬 +212627716149</a>
     </div>
   </div>
   <p class="footer-copy">© 2025 AmraniAds — نظام رقمي لصالونات التجميل بالمغرب</p>
