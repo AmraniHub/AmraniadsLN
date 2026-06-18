@@ -73,6 +73,8 @@
     .nav-logo-text span:last-child  { color: #5eead4; font-size: .78rem; font-weight: 600; display: block; }
     .nav-cta { background: var(--grad-green); color: #fff; border: none; border-radius: 50px; padding: 9px 22px; font-family: 'Cairo', sans-serif; font-size: .9rem; font-weight: 900; cursor: pointer; text-decoration: none; transition: opacity .2s, transform .15s; white-space: nowrap; }
     .nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+    .nav-wa { display:flex; align-items:center; gap:6px; background:#25D366; color:#fff; font-family:'Cairo',sans-serif; font-weight:900; font-size:.82rem; border-radius:50px; padding:8px 16px; text-decoration:none; transition:transform .15s,box-shadow .15s; white-space:nowrap; }
+    .nav-wa:hover { transform:scale(1.05); box-shadow:0 4px 16px rgba(37,211,102,.45); }
 
     .hero { min-height: 100svh; padding: 96px 64px 60px; display: flex; align-items: center; justify-content: center; background: var(--grad-soft); position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(8,145,178,.1) 0%, transparent 70%); top: -200px; left: -150px; pointer-events: none; }
@@ -278,7 +280,10 @@
       <span>تسويق عيادات الأسنان</span>
     </div>
   </a>
-  <a class="nav-cta" href="#leadForm">احجز استشارتك المجانية</a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="https://wa.me/212627716149" class="nav-wa" target="_blank">💬 واتساب</a>
+    <a class="nav-cta" href="#leadForm">احجز استشارتك المجانية</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -513,6 +518,7 @@
     </div>
     <div class="footer-contact">
       <a href="mailto:amrani4online@gmail.com">✉️ amrani4online@gmail.com</a>
+      <a href="https://wa.me/212627716149" target="_blank" style="color:#25D366;font-weight:700">💬 واتساب مباشر</a>
       <a href="/clinic/">← عيادات طبية عامة</a>
       <a href="/clinic/aesthetic/">✨ عيادات التجميل</a>
     </div>
