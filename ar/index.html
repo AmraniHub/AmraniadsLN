@@ -488,6 +488,8 @@
     @media(max-width:860px){
       .hero-text>p{margin-left:auto;margin-right:auto}
     }
+    #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:#0a1612;color:#fff;padding:12px 28px;border-radius:50px;font-size:.9rem;font-weight:700;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:400;white-space:nowrap;border:1.5px solid rgba(34,197,94,.3);}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   </style>
 </head>
 <body>
@@ -818,6 +820,8 @@
 </footer>
 
 <script>
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+  function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined;}
   function genEventId(){return'lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
 
   async function submitLead(name,phone,source,btnEl,txtEl){
@@ -849,7 +853,7 @@
     e.preventDefault();
     const name=document.getElementById('fname').value.trim();
     const phone=document.getElementById('fphone').value.trim();
-    if(!name||!phone)return;
+    if(!name||!phone){showToast('⚠️ يرجى ملء الاسم ورقم الهاتف');return;}
     await submitLead(name,phone,'Hero Form',
       document.getElementById('submitBtn'),
       document.getElementById('btnText'));
@@ -859,7 +863,7 @@
     e.preventDefault();
     const name=document.getElementById('fname2').value.trim();
     const phone=document.getElementById('fphone2').value.trim();
-    if(!name||!phone)return;
+    if(!name||!phone){showToast('⚠️ يرجى ملء الاسم ورقم الهاتف');return;}
     await submitLead(name,phone,'Final CTA',
       document.getElementById('submitBtn2'),
       document.getElementById('btnText2'));
@@ -877,6 +881,6 @@
     obs.observe(el);
   });
 </script>
-
+<div id="toast"></div>
 </body>
 </html>
