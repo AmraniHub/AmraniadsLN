@@ -110,6 +110,10 @@
     .guarantee-mini { background: var(--green-light); border: 1.5px solid rgba(5,150,105,.25); border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: .82rem; color: #065f46; text-align: center; font-weight: 700; line-height: 1.5; }
 
     .mini-reviews { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+    .photo-strip { margin-top: 16px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+    .photo-strip::-webkit-scrollbar { display: none; }
+    .photo-strip img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 2px solid var(--teal-light); transition: transform .2s; }
+    .photo-strip img:hover { transform: scale(1.06); }
     .mini-review { background: var(--surface2); border-radius: 12px; padding: 12px 14px; border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
     .mini-review .mr-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--grad); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; overflow: hidden; }
     .mini-review .mr-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
@@ -363,6 +367,12 @@
                 <div class="mr-text">"مواعيد التقويم تضاعفت ×3 في شهرين — نتيجة تجاوزت توقعاتي!"</div>
               </div>
             </div>
+          <div class="photo-strip">
+            <img src="/clinic/dental/assets/dentist1.jpg" alt="عيادة أسنان" />
+            <img src="/clinic/dental/assets/dentist2.jpg" alt="طبيب أسنان" />
+            <img src="/clinic/dental/assets/dentist3.jpg" alt="عيادة أسنان" />
+            <img src="/clinic/dental/assets/dentist4.jpg" alt="طبيب أسنان" />
+            <img src="/clinic/dental/assets/dentist5.jpg" alt="عيادة أسنان" />
           </div>
         </div>
       </div>
