@@ -39,14 +39,18 @@ module.exports = async function handler(req, res) {
 
   // ── 1. Meta CAPI ──────────────────────────────────────
   // Route to the correct pixel + token based on which page submitted the form
-  const pixelId = clientPixelId === process.env.META_PIXEL_ID_EN
+  const pixelId = clientPixelId === process.env.META_PIXEL_ID_SHEHRAZADE
+    ? process.env.META_PIXEL_ID_SHEHRAZADE
+    : clientPixelId === process.env.META_PIXEL_ID_EN
     ? process.env.META_PIXEL_ID_EN
     : clientPixelId === process.env.META_PIXEL_ID_CLINIC
     ? process.env.META_PIXEL_ID_CLINIC
     : clientPixelId === process.env.META_PIXEL_ID_AR
     ? process.env.META_PIXEL_ID_AR
     : process.env.META_PIXEL_ID;
-  const accessToken = clientPixelId === process.env.META_PIXEL_ID_EN
+  const accessToken = clientPixelId === process.env.META_PIXEL_ID_SHEHRAZADE
+    ? process.env.META_ACCESS_TOKEN_SHEHRAZADE
+    : clientPixelId === process.env.META_PIXEL_ID_EN
     ? process.env.META_ACCESS_TOKEN_EN
     : clientPixelId === process.env.META_PIXEL_ID_CLINIC
     ? process.env.META_ACCESS_TOKEN_CLINIC
