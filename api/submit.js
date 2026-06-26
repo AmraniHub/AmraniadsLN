@@ -80,15 +80,18 @@ module.exports = async function handler(req, res) {
           client_ip_address: clientIp  || undefined,
           client_user_agent: userAgent || undefined,
         },
-        custom_data: { content_name: service, content_category: 'Lead', currency: 'MAD', value: 0 }
+        custom_data: { content_name: service, currency: 'MAD', value: 500 }
       }]
     };
     if (testCode) payload.test_event_code = testCode;
 
-    fetch(
-      `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`,
-      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
-    ).then(r => r.json()).then(j => { results.capi = j; }).catch(e => { results.capi = { error: e.message }; });
+    try {
+      const capiRes = await fetch(
+        `https://graph.facebook.com/v20.0/${pixelId}/events?access_token=${accessToken}`,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+      );
+      results.capi = await capiRes.json();
+    } catch (e) { results.capi = { error: e.message }; }
 
   }
 
