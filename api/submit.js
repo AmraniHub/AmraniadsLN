@@ -103,7 +103,8 @@ module.exports = async function handler(req, res) {
                : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
                : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
                : srcUrl.includes('/en')                ? '🇬🇧 English Page'
-               : srcUrl.includes('/ar')                ? '🇲🇦 Arabic Page'
+               : srcUrl.includes('/shopify')           ? '🛍️ Shopify Landing'
+               : srcUrl.includes('/ar')                ? '🛍️ Shopify Landing'
                : '🌍 Main Website (Foreign)';
 
   const now = new Date().toLocaleString('fr-MA', {
