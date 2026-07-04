@@ -48,6 +48,7 @@ module.exports = async function handler(req, res) {
   if (process.env.META_PIXEL_ID_EN)           tokenMap[process.env.META_PIXEL_ID_EN]           = process.env.META_ACCESS_TOKEN_EN;
   if (process.env.META_PIXEL_ID_CLINIC)       tokenMap[process.env.META_PIXEL_ID_CLINIC]       = process.env.META_ACCESS_TOKEN_CLINIC;
   if (process.env.META_PIXEL_ID_AR)           tokenMap[process.env.META_PIXEL_ID_AR]           = process.env.META_ACCESS_TOKEN_AR;
+  if (process.env.META_PIXEL_ID_SHOPIFY)      tokenMap[process.env.META_PIXEL_ID_SHOPIFY]      = process.env.META_ACCESS_TOKEN_SHOPIFY;
   const accessToken = (pixelId && tokenMap[pixelId]) || process.env.META_ACCESS_TOKEN;
 
   // Fire Meta CAPI non-blocking (don't await) so Telegram always fires fast
