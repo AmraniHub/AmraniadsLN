@@ -38,25 +38,17 @@ module.exports = async function handler(req, res) {
   const results = {};
 
   // ── 1. Meta CAPI ──────────────────────────────────────
-  // Route to the correct pixel + token based on which page submitted the form
-  const pixelId = clientPixelId === process.env.META_PIXEL_ID_SHEHRAZADE
-    ? process.env.META_PIXEL_ID_SHEHRAZADE
-    : clientPixelId === process.env.META_PIXEL_ID_EN
-    ? process.env.META_PIXEL_ID_EN
-    : clientPixelId === process.env.META_PIXEL_ID_CLINIC
-    ? process.env.META_PIXEL_ID_CLINIC
-    : clientPixelId === process.env.META_PIXEL_ID_AR
-    ? process.env.META_PIXEL_ID_AR
-    : process.env.META_PIXEL_ID;
-  const accessToken = clientPixelId === process.env.META_PIXEL_ID_SHEHRAZADE
-    ? process.env.META_ACCESS_TOKEN_SHEHRAZADE
-    : clientPixelId === process.env.META_PIXEL_ID_EN
-    ? process.env.META_ACCESS_TOKEN_EN
-    : clientPixelId === process.env.META_PIXEL_ID_CLINIC
-    ? process.env.META_ACCESS_TOKEN_CLINIC
-    : clientPixelId === process.env.META_PIXEL_ID_AR
-    ? process.env.META_ACCESS_TOKEN_AR
-    : process.env.META_ACCESS_TOKEN;
+  // Use clientPixelId directly — it comes from our own trusted pages.
+  // Look up a specific token per pixel; fall back to the default token
+  // so CAPI always fires even if a pixel-specific token isn't configured.
+  const pixelId = clientPixelId || process.env.META_PIXEL_ID;
+  const tokenMap = {};
+  if (process.env.META_PIXEL_ID)              tokenMap[process.env.META_PIXEL_ID]              = process.env.META_ACCESS_TOKEN;
+  if (process.env.META_PIXEL_ID_SHEHRAZADE)   tokenMap[process.env.META_PIXEL_ID_SHEHRAZADE]   = process.env.META_ACCESS_TOKEN_SHEHRAZADE;
+  if (process.env.META_PIXEL_ID_EN)           tokenMap[process.env.META_PIXEL_ID_EN]           = process.env.META_ACCESS_TOKEN_EN;
+  if (process.env.META_PIXEL_ID_CLINIC)       tokenMap[process.env.META_PIXEL_ID_CLINIC]       = process.env.META_ACCESS_TOKEN_CLINIC;
+  if (process.env.META_PIXEL_ID_AR)           tokenMap[process.env.META_PIXEL_ID_AR]           = process.env.META_ACCESS_TOKEN_AR;
+  const accessToken = (pixelId && tokenMap[pixelId]) || process.env.META_ACCESS_TOKEN;
 
   // Fire Meta CAPI non-blocking (don't await) so Telegram always fires fast
   if (pixelId && accessToken) {
@@ -106,6 +98,7 @@ module.exports = async function handler(req, res) {
                : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
                : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
                : srcUrl.includes('/en')                ? '🇬🇧 English Page'
+               : srcUrl.includes('/shopify-fr')        ? '🛍️🇫🇷 Shopify FR Landing'
                : srcUrl.includes('/shopify')           ? '🛍️ Shopify Landing'
                : srcUrl.includes('/ar')                ? '🛍️ Shopify Landing'
                : '🌍 Main Website (Foreign)';
