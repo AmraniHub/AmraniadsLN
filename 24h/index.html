@@ -117,6 +117,24 @@
 
     .form-note{text-align:center;font-size:.76rem;color:var(--muted);margin-top:14px}
 
+    /* PRICING */
+    .pricing{max-width:1040px;margin:56px auto 0;padding:0 20px}
+    .pricing-title{text-align:center;font-size:1.5rem;font-weight:900;color:var(--dark);margin-bottom:8px}
+    .pricing-sub{text-align:center;font-size:.88rem;color:var(--muted);margin-bottom:36px}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .price-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:22px 18px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
+    .price-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(10,22,18,.1);border-color:rgba(34,197,94,.3)}
+    .price-card.featured{border-color:var(--green);box-shadow:0 8px 28px rgba(34,197,94,.14)}
+    .price-badge{align-self:flex-start;background:var(--green-l);color:var(--green-d);font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:50px;margin-bottom:12px}
+    .price-icon{font-size:1.6rem;margin-bottom:10px}
+    .price-name{font-size:.96rem;font-weight:900;color:var(--dark);margin-bottom:6px;line-height:1.3}
+    .price-desc{font-size:.79rem;color:var(--muted);line-height:1.6;margin-bottom:16px;flex:1}
+    .price-amount{font-size:1.5rem;font-weight:900;color:var(--green-d);line-height:1}
+    .price-amount .usd{font-size:.85rem;color:var(--muted);font-weight:700}
+    .price-extra{font-size:.74rem;color:var(--muted);margin-top:4px;margin-bottom:14px}
+    .price-cta{display:block;text-align:center;background:var(--dark);color:#fff;font-family:inherit;font-weight:800;font-size:.82rem;padding:11px;border-radius:10px;text-decoration:none;transition:background .15s}
+    .price-cta:hover{background:var(--green-d)}
+
     /* HOW IT WORKS */
     .how{max-width:900px;margin:0 auto;padding:40px 20px 20px}
     .how-title{text-align:center;font-size:1.5rem;font-weight:900;color:var(--dark);margin-bottom:40px}
@@ -148,9 +166,13 @@
     #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0a1612;color:#fff;padding:12px 26px;border-radius:50px;font-size:.87rem;font-weight:700;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:400;white-space:nowrap;border:1.5px solid rgba(34,197,94,.3)}
     #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+    @media(max-width:760px){
+      .pricing-grid{grid-template-columns:1fr 1fr}
+    }
     @media(max-width:600px){
       .how-grid{grid-template-columns:1fr;gap:26px}
       .nav-row{flex-wrap:wrap}
+      .pricing-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -171,7 +193,7 @@
   <b>2 minutes</b> pour répondre · <b>0€</b> pour l'appel de diagnostic · <b>Sans engagement</b>
 </div>
 
-<div class="funnel-wrap">
+<div class="funnel-wrap" id="funnelTop">
   <div class="funnel-card">
     <div class="progress-row">
       <span></span>
@@ -268,6 +290,49 @@
       </div>
 
     </form>
+  </div>
+</div>
+
+<div class="pricing">
+  <h2 class="pricing-title">Nos tarifs</h2>
+  <p class="pricing-sub">Prix fixes, sans surprise — payable en DH ou en $ (1$ = 10 DH)</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <span class="price-badge">Boutique</span>
+      <span class="price-icon">🛍️</span>
+      <div class="price-name">Boutique Shopify prête à l'emploi</div>
+      <div class="price-desc">Boutique personnalisée, thème rapide, produits chargés, prête à recevoir du trafic publicitaire.</div>
+      <div class="price-amount">900 DH <span class="usd">(~90 $)</span></div>
+      <div class="price-extra">Paiement unique</div>
+      <a href="#funnelTop" class="price-cta">Choisir →</a>
+    </div>
+    <div class="price-card featured">
+      <span class="price-badge">Sur mesure</span>
+      <span class="price-icon">✨</span>
+      <div class="price-name">Boutique personnalisée haut de gamme</div>
+      <div class="price-desc">Branding renforcé, design sur mesure selon vos exigences — pour une marque qui veut se démarquer.</div>
+      <div class="price-amount">1 400 DH <span class="usd">(~140 $)</span></div>
+      <div class="price-extra">Paiement unique</div>
+      <a href="#funnelTop" class="price-cta">Choisir →</a>
+    </div>
+    <div class="price-card">
+      <span class="price-badge">CRM</span>
+      <span class="price-icon">📋</span>
+      <div class="price-name">CRM lié à votre boutique Shopify</div>
+      <div class="price-desc">Centralise vos leads et commandes, assigne-les à un agent de confirmation, suit chaque client — téléphone et produits organisés au même endroit.</div>
+      <div class="price-amount">1 500 DH <span class="usd">(~150 $)</span></div>
+      <div class="price-extra">Une fois codé + 40 DH (~4 $) / mois hébergement</div>
+      <a href="#funnelTop" class="price-cta">Choisir →</a>
+    </div>
+    <div class="price-card">
+      <span class="price-badge">Chatbot IA</span>
+      <span class="price-icon">🤖</span>
+      <div class="price-name">Chatbot IA pour votre site</div>
+      <div class="price-desc">Répond aux visiteurs et convertit les questions en commandes automatiquement, 24h/24.</div>
+      <div class="price-amount">800 DH <span class="usd">(~80 $)</span></div>
+      <div class="price-extra">Une fois codé + 120 DH (~12 $) / mois maintenance & hébergement</div>
+      <a href="#funnelTop" class="price-cta">Choisir →</a>
+    </div>
   </div>
 </div>
 
