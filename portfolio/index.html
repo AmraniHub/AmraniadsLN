@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos réalisations — Boutiques Shopify livrées — AmraniAds</title>
+  <meta name="description" content="Découvrez les boutiques Shopify livrées par AmraniAds — e-commerce, dropshipping, produits digitaux et sites d'affiliation, en France, en Europe, aux USA et au Maroc." />
+  <link rel="icon" href="/logo.png" type="image/png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#22c55e;
+      --green-d:#16a34a;
+      --green-l:#dcfce7;
+      --dark:#0a1612;
+      --muted:#5b6b64;
+      --bg:#ffffff;
+      --bg2:#f6f9f7;
+      --border:#e3ebe6;
+      --shadow:0 4px 24px rgba(10,22,18,.07);
+      --shadow-lg:0 12px 48px rgba(10,22,18,.14);
+      --radius:16px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);line-height:1.7}
+    a{color:inherit}
+    .container{max-width:1160px;margin:0 auto;padding:0 24px}
+
+    /* NAV */
+    nav{position:sticky;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:72px;display:flex;align-items:center;padding:0 28px}
+    .nav-inner{max-width:1160px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{height:28px;width:auto}
+    .nav-logo-text{font-size:1.2rem;font-weight:900;color:var(--dark);letter-spacing:-.02em}
+    .nav-logo-text span{color:var(--green)}
+    .nav-cta{background:var(--dark);color:#fff;padding:11px 22px;border-radius:50px;font-size:.88rem;font-weight:800;text-decoration:none;transition:background .2s,transform .15s}
+    .nav-cta:hover{background:var(--green-d);transform:translateY(-1px)}
+
+    /* HEADER */
+    .page-head{padding:64px 24px 20px;text-align:center;background:linear-gradient(160deg,#f0fdf4 0%,#ffffff 60%)}
+    .sec-label{text-align:center;font-size:.76rem;font-weight:700;color:var(--green-d);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:10px}
+    .page-head h1{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:900;color:var(--dark);margin-bottom:14px;line-height:1.2}
+    .page-head h1 .gr{color:var(--green)}
+    .page-head p{color:var(--muted);font-size:1rem;max-width:560px;margin:0 auto;line-height:1.85}
+
+    /* GRID */
+    .sites{padding:56px 0 100px}
+    .sites-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+
+    /* SITE CARD */
+    .site-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+    .site-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .slider{position:relative;aspect-ratio:16/10;background:var(--bg2);overflow:hidden}
+    .slider-track{display:flex;height:100%;transition:transform .35s ease}
+    .slider-slide{flex:0 0 100%;height:100%}
+    .slider-slide img{width:100%;height:100%;object-fit:cover;display:block}
+    .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(10,22,18,.55);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:background .15s}
+    .slider-arrow:hover{background:rgba(10,22,18,.8)}
+    .slider-arrow.prev{left:10px}
+    .slider-arrow.next{right:10px}
+    .slider-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+    .slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;transition:background .15s,width .15s}
+    .slider-dot.active{background:#fff;width:16px;border-radius:4px}
+    .site-body{padding:18px 20px}
+    .site-name{font-size:1.02rem;font-weight:900;color:var(--dark);margin-bottom:4px}
+    .site-link{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:var(--green-d);text-decoration:none}
+    .site-link:hover{text-decoration:underline}
+
+    /* EMPTY / PLACEHOLDER STATE */
+    .site-card.placeholder{border-style:dashed;border-color:#c9d6cf}
+    .placeholder .slider{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--muted)}
+    .placeholder .ph-icon{font-size:1.8rem;opacity:.5}
+    .placeholder .ph-text{font-size:.85rem;font-weight:700;color:var(--muted)}
+
+    .sites-empty-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:.9rem;margin-top:8px}
+
+    /* CTA */
+    .cta{padding:80px 24px;background:linear-gradient(135deg,var(--dark) 0%,#0d2518 100%);text-align:center}
+    .cta h2{color:#fff;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:900;margin-bottom:14px}
+    .cta h2 .gr{color:var(--green)}
+    .cta p{color:rgba(255,255,255,.6);font-size:.98rem;margin-bottom:30px}
+    .btn-white{background:#fff;color:var(--dark);font-weight:900;font-size:.96rem;padding:15px 30px;border-radius:50px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+    .btn-white:hover{transform:translateY(-2px)}
+
+    footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;font-size:.8rem;padding:26px 16px}
+    footer a{color:var(--green);text-decoration:none;font-weight:700}
+
+    @media(max-width:760px){
+      nav{padding:0 16px}
+      .sites-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="/logo.png" alt="AmraniAds"/>
+      <span class="nav-logo-text">Amrani<span>Ads</span></span>
+    </a>
+    <a href="/24h/" class="nav-cta">Démarrer mon projet →</a>
+  </div>
+</nav>
+
+<div class="page-head">
+  <div class="sec-label">Portfolio</div>
+  <h1>Nos <span class="gr">réalisations</span> Shopify</h1>
+  <p>Un aperçu des boutiques livrées à nos clients — e-commerce, dropshipping, produits digitaux et sites d'affiliation.</p>
+</div>
+
+<div class="sites">
+  <div class="container">
+    <div class="sites-grid" id="sitesGrid"></div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>Votre boutique pourrait être <span class="gr">la prochaine</span></h2>
+  <p>Répondez à quelques questions sur votre projet — on revient vers vous avec un plan clair, sans engagement.</p>
+  <a href="/24h/" class="btn-white">Démarrer mon projet →</a>
+</div>
+
+<footer>
+  © 2025 AmraniAds — <a href="/">Retour à l'accueil</a>
+</footer>
+
+<script>
+  // ── Sanity config ──────────────────────────────────────
+  // Project ID connected to amraniads' Sanity project (dataset "production", public).
+  // Content is added/edited via the Sanity Studio — no code changes needed.
+  const SANITY_PROJECT_ID = '9bzgkubr';
+  const SANITY_DATASET = 'production';
+
+  async function fetchSites(){
+    if(!SANITY_PROJECT_ID) return [];
+    try{
+      const query = encodeURIComponent(
+        '*[_type=="portfolioSite"]|order(_createdAt desc){name,url,"images":images[].asset->url}'
+      );
+      const res = await fetch(`https://${SANITY_PROJECT_ID}.api.sanity.io/v2023-01-01/data/query/${SANITY_DATASET}?query=${query}`);
+      const json = await res.json();
+      return Array.isArray(json.result) ? json.result : [];
+    }catch(e){
+      console.error('Sanity fetch failed', e);
+      return [];
+    }
+  }
+
+  function buildSlider(images, siteName){
+    const wrap = document.createElement('div');
+    wrap.className = 'slider';
+
+    const track = document.createElement('div');
+    track.className = 'slider-track';
+    images.forEach(src=>{
+      const slide = document.createElement('div');
+      slide.className = 'slider-slide';
+      const img = document.createElement('img');
+      img.src = src; img.alt = siteName; img.loading = 'lazy';
+      slide.appendChild(img);
+      track.appendChild(slide);
+    });
+    wrap.appendChild(track);
+
+    if(images.length > 1){
+      let idx = 0;
+      const go = n=>{
+        idx = (n + images.length) % images.length;
+        track.style.transform = `translateX(-${idx*100}%)`;
+        wrap.querySelectorAll('.slider-dot').forEach((d,i)=>d.classList.toggle('active', i===idx));
+      };
+      const prev = document.createElement('button');
+      prev.className = 'slider-arrow prev'; prev.textContent='‹';
+      prev.addEventListener('click', ()=>go(idx-1));
+      const next = document.createElement('button');
+      next.className = 'slider-arrow next'; next.textContent='›';
+      next.addEventListener('click', ()=>go(idx+1));
+      wrap.appendChild(prev); wrap.appendChild(next);
+
+      const dots = document.createElement('div');
+      dots.className = 'slider-dots';
+      images.forEach((_,i)=>{
+        const d = document.createElement('span');
+        d.className = 'slider-dot' + (i===0 ? ' active' : '');
+        d.addEventListener('click', ()=>go(i));
+        dots.appendChild(d);
+      });
+      wrap.appendChild(dots);
+    }
+    return wrap;
+  }
+
+  function renderPlaceholders(grid, count){
+    for(let i=0;i<count;i++){
+      const card = document.createElement('div');
+      card.className = 'site-card placeholder';
+      card.innerHTML = `
+        <div class="slider">
+          <span class="ph-icon">🖼️</span>
+          <span class="ph-text">Réalisation à venir</span>
+        </div>
+        <div class="site-body">
+          <div class="site-name">Bientôt disponible</div>
+        </div>`;
+      grid.appendChild(card);
+    }
+    const note = document.createElement('p');
+    note.className = 'sites-empty-note';
+    note.textContent = "Nos réalisations arrivent bientôt — écrivez-nous sur WhatsApp pour voir des exemples en attendant.";
+    grid.appendChild(note);
+  }
+
+  function renderSites(sites){
+    const grid = document.getElementById('sitesGrid');
+    grid.innerHTML = '';
+    if(!sites.length){ renderPlaceholders(grid, 3); return; }
+
+    sites.forEach(site=>{
+      const card = document.createElement('div');
+      card.className = 'site-card';
+
+      const images = (site.images && site.images.length) ? site.images : [];
+      if(images.length){
+        card.appendChild(buildSlider(images, site.name || ''));
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'slider';
+        ph.innerHTML = '<span class="ph-icon">🖼️</span>';
+        card.appendChild(ph);
+      }
+
+      const body = document.createElement('div');
+      body.className = 'site-body';
+      const name = document.createElement('div');
+      name.className = 'site-name';
+      name.textContent = site.name || 'Boutique Shopify';
+      body.appendChild(name);
+      if(site.url){
+        const link = document.createElement('a');
+        link.className = 'site-link';
+        link.href = site.url; link.target = '_blank'; link.rel = 'noopener';
+        link.textContent = 'Visiter le site ↗';
+        body.appendChild(link);
+      }
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+  }
+
+  fetchSites().then(renderSites);
+</script>
+</body>
+</html>

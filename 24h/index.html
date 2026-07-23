@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <base href="/24h/" />
+  <title>Créez votre boutique Shopify — AmraniAds</title>
+  <meta name="description" content="Répondez à quelques questions sur votre projet Shopify — e-commerce, dropshipping, produits digitaux ou affiliation — et recevez un plan d'action gratuit sous 24h." />
+  <link rel="icon" href="/logo.png" type="image/png"/>
+
+  <!-- META PIXEL — même pixel que les autres pages Shopify AmraniAds -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1038098258910639');
+  fbq('track','PageView');
+  fbq('track','ViewContent',{content_name:'AmraniAds — Boutique Shopify Funnel International'});
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1038098258910639&ev=PageView&noscript=1"/></noscript>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-127KF5ZQCH',{send_page_view:true});
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#22c55e;
+      --green-d:#16a34a;
+      --green-l:#dcfce7;
+      --dark:#0a1612;
+      --gold:#f59e0b;
+      --bg:#f6f9f7;
+      --surface:#ffffff;
+      --text:#0d1f1a;
+      --muted:#5b6b64;
+      --border:#e3ebe6;
+      --radius:16px;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+    .top-bar{background:var(--dark);color:rgba(255,255,255,.82);text-align:center;font-size:.82rem;font-weight:600;padding:10px 16px}
+    .top-bar strong{color:var(--green)}
+
+    header.hero-top{max-width:640px;margin:0 auto;padding:40px 20px 8px;text-align:center}
+    .logo-row{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:26px}
+    .logo-row img{height:28px;width:auto}
+    .logo-row span{font-size:1.1rem;font-weight:900;color:var(--dark)}
+    .logo-row span b{color:var(--green)}
+    h1{font-size:clamp(1.7rem,4.5vw,2.3rem);font-weight:900;line-height:1.25;color:var(--dark);margin-bottom:14px}
+    h1 .gr{color:var(--green)}
+    .hero-sub{color:var(--muted);font-size:.98rem;max-width:480px;margin:0 auto;line-height:1.8}
+
+    /* TRUST BADGES ROW */
+    .trust-badges{max-width:760px;margin:26px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 20px;text-align:center;font-size:.78rem;color:var(--muted);font-weight:700;letter-spacing:.2px}
+    .trust-badges b{color:var(--dark)}
+
+    /* FUNNEL CARD */
+    .funnel-wrap{max-width:640px;margin:28px auto 60px;padding:0 20px}
+    .funnel-card{background:var(--surface);border:1.5px solid var(--border);border-radius:22px;box-shadow:0 20px 60px rgba(10,22,18,.09);overflow:hidden}
+    .progress-row{display:flex;align-items:center;justify-content:space-between;padding:16px 26px 0}
+    .progress-pct{font-size:.78rem;font-weight:800;color:var(--muted)}
+    .progress-track{height:6px;background:var(--border);border-radius:6px;margin:10px 26px 0;overflow:hidden}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green-d));border-radius:6px;transition:width .35s ease;width:20%}
+
+    .step{padding:26px 26px 28px;display:none}
+    .step.active{display:block;animation:fadeIn .35s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+    .step-q{font-size:1.15rem;font-weight:900;color:var(--dark);margin-bottom:6px}
+    .step-hint{font-size:.83rem;color:var(--muted);margin-bottom:20px}
+
+    .opt-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+    .opt-btn{
+      display:flex;align-items:center;gap:12px;
+      text-align:left;width:100%;padding:15px 18px;
+      background:var(--bg);border:1.5px solid var(--border);border-radius:12px;
+      font-family:inherit;font-size:.94rem;font-weight:700;color:var(--dark);
+      cursor:pointer;transition:border-color .15s,background .15s,transform .1s;
+    }
+    .opt-btn .ico{font-size:1.25rem;flex-shrink:0}
+    .opt-btn:hover{border-color:var(--green);background:#fff}
+    .opt-btn.selected{border-color:var(--green);background:var(--green-l);color:var(--green-d)}
+
+    .nav-row{display:flex;gap:10px}
+    .btn-back{flex:0 0 auto;background:var(--bg);border:1.5px solid var(--border);color:var(--muted);font-family:inherit;font-weight:700;font-size:.88rem;padding:15px 20px;border-radius:12px;cursor:pointer;transition:border-color .15s,color .15s}
+    .btn-back:hover{border-color:var(--dark);color:var(--dark)}
+    .btn-next{flex:1;background:var(--green);color:#fff;border:none;font-family:inherit;font-weight:800;font-size:.96rem;padding:16px 20px;border-radius:12px;cursor:pointer;transition:background .15s,transform .1s;box-shadow:0 8px 24px rgba(34,197,94,.32)}
+    .btn-next:hover:not(:disabled){background:var(--green-d);transform:translateY(-1px)}
+    .btn-next:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+    /* FORM STEP */
+    .field{margin-bottom:16px}
+    .field label{display:block;font-size:.83rem;font-weight:800;color:var(--dark);margin-bottom:7px}
+    .field input{
+      width:100%;padding:14px 16px;background:var(--bg);
+      border:1.5px solid var(--border);border-radius:12px;color:var(--text);
+      font-family:inherit;font-size:16px;outline:none;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .field input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.14);background:#fff}
+    .field-note{font-size:.75rem;color:var(--muted);margin-top:6px}
+
+    .form-note{text-align:center;font-size:.76rem;color:var(--muted);margin-top:14px}
+
+    /* HOW IT WORKS */
+    .how{max-width:900px;margin:0 auto;padding:40px 20px 20px}
+    .how-title{text-align:center;font-size:1.5rem;font-weight:900;color:var(--dark);margin-bottom:40px}
+    .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .how-step{text-align:center}
+    .how-num{width:48px;height:48px;border-radius:50%;background:var(--green-l);color:var(--green-d);font-weight:900;font-size:1.15rem;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+    .how-step h4{font-size:.96rem;font-weight:900;color:var(--dark);margin-bottom:7px}
+    .how-step p{font-size:.83rem;color:var(--muted);line-height:1.7}
+
+    /* TESTIMONIAL */
+    .testi-single{max-width:640px;margin:52px auto 0;padding:0 20px;text-align:center}
+    .testi-single .stars{color:var(--gold);font-size:1.1rem;letter-spacing:3px;margin-bottom:14px}
+    .testi-single blockquote{font-size:1.05rem;font-style:italic;color:var(--text);line-height:1.85;margin-bottom:14px}
+    .testi-single .who{font-size:.85rem;color:var(--muted);font-weight:700}
+
+    /* FAQ */
+    .faq{max-width:700px;margin:64px auto 0;padding:0 20px 80px}
+    .faq-title{text-align:center;font-size:1.5rem;font-weight:900;color:var(--dark);margin-bottom:30px}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-q{width:100%;text-align:left;background:none;border:none;padding:19px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:inherit;font-size:.94rem;font-weight:800;color:var(--dark)}
+    .faq-q .plus{font-size:1.2rem;color:var(--green);transition:transform .25s;flex-shrink:0}
+    .faq-item.open .faq-q .plus{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-a p{padding:0 4px 19px;font-size:.87rem;color:var(--muted);line-height:1.75}
+
+    footer.foot{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;font-size:.78rem;padding:26px 16px}
+    footer.foot a{color:var(--green);text-decoration:none;font-weight:700}
+
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0a1612;color:#fff;padding:12px 26px;border-radius:50px;font-size:.87rem;font-weight:700;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:400;white-space:nowrap;border:1.5px solid rgba(34,197,94,.3)}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    @media(max-width:600px){
+      .how-grid{grid-template-columns:1fr;gap:26px}
+      .nav-row{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">⭐ 4.9/5 · <strong>+150 boutiques Shopify lancées</strong> · ✓ Sans engagement · ✓ Réponse sous 24h</div>
+
+<header class="hero-top">
+  <a href="/" class="logo-row" style="text-decoration:none">
+    <img src="/logo.png" alt="AmraniAds"/>
+    <span>Amrani<b>Ads</b></span>
+  </a>
+  <h1>Votre boutique Shopify <span class="gr">commence ici</span></h1>
+  <p class="hero-sub">Répondez à quelques questions sur votre projet — recevez un plan d'action gratuit et sans engagement sous 24h.</p>
+</header>
+
+<div class="trust-badges">
+  <b>2 minutes</b> pour répondre · <b>0€</b> pour l'appel de diagnostic · <b>Sans engagement</b>
+</div>
+
+<div class="funnel-wrap">
+  <div class="funnel-card">
+    <div class="progress-row">
+      <span></span>
+      <span class="progress-pct" id="progressPct">Étape 1 / 5</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+    <form id="funnelForm" novalidate>
+
+      <!-- STEP 1 — PROJECT TYPE -->
+      <div class="step active" data-step="1">
+        <div class="step-q">Quel type de projet voulez-vous lancer ?</div>
+        <div class="step-hint">Choisissez l'option qui correspond le mieux à votre projet</div>
+        <div class="opt-grid" data-field="niche">
+          <button type="button" class="opt-btn" data-value="E-commerce / marque propre"><span class="ico">🛍️</span> E-commerce / marque propre</button>
+          <button type="button" class="opt-btn" data-value="Dropshipping"><span class="ico">📦</span> Dropshipping</button>
+          <button type="button" class="opt-btn" data-value="Produits digitaux / formations"><span class="ico">💻</span> Produits digitaux / formations</button>
+          <button type="button" class="opt-btn" data-value="Site d'affiliation"><span class="ico">🔗</span> Site d'affiliation</button>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-next" id="next1" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — MARKET -->
+      <div class="step" data-step="2">
+        <div class="step-q">Où allez-vous vendre principalement ?</div>
+        <div class="step-hint">Ça nous aide à adapter langue, devise et logistique</div>
+        <div class="opt-grid" data-field="market">
+          <button type="button" class="opt-btn" data-value="France"><span class="ico">🇫🇷</span> France</button>
+          <button type="button" class="opt-btn" data-value="Europe"><span class="ico">🇪🇺</span> Europe</button>
+          <button type="button" class="opt-btn" data-value="USA"><span class="ico">🇺🇸</span> USA</button>
+          <button type="button" class="opt-btn" data-value="Maroc"><span class="ico">🇲🇦</span> Maroc</button>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-back" data-back="1">← Retour</button>
+          <button type="button" class="btn-next" id="next2" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — EXISTING STORE -->
+      <div class="step" data-step="3">
+        <div class="step-q">Avez-vous déjà une boutique Shopify ?</div>
+        <div class="step-hint">Aucun mauvais choix — on s'adapte aux deux cas</div>
+        <div class="opt-grid" data-field="existing">
+          <button type="button" class="opt-btn" data-value="Non, je pars de zéro"><span class="ico">🆕</span> Non, je pars de zéro</button>
+          <button type="button" class="opt-btn" data-value="Oui, je veux l'améliorer"><span class="ico">🔄</span> Oui, je veux l'améliorer</button>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-back" data-back="2">← Retour</button>
+          <button type="button" class="btn-next" id="next3" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4 — BUDGET -->
+      <div class="step" data-step="4">
+        <div class="step-q">Quel budget avez-vous prévu pour ce projet ?</div>
+        <div class="step-hint">Une estimation suffit — ça reste confidentiel</div>
+        <div class="opt-grid" data-field="budget">
+          <button type="button" class="opt-btn" data-value="Moins de 1 000€"><span class="ico">💶</span> Moins de 1 000€</button>
+          <button type="button" class="opt-btn" data-value="1 000€ – 3 000€"><span class="ico">💶</span> 1 000€ – 3 000€</button>
+          <button type="button" class="opt-btn" data-value="3 000€ – 10 000€"><span class="ico">💶</span> 3 000€ – 10 000€</button>
+          <button type="button" class="opt-btn" data-value="Plus de 10 000€"><span class="ico">💶</span> Plus de 10 000€</button>
+          <button type="button" class="opt-btn" data-value="Je ne sais pas encore"><span class="ico">🤔</span> Je ne sais pas encore</button>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-back" data-back="3">← Retour</button>
+          <button type="button" class="btn-next" id="next4" disabled>Suivant →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5 — CONTACT -->
+      <div class="step" data-step="5">
+        <div class="step-q">Presque terminé — où vous joindre ?</div>
+        <div class="step-hint">On vous contacte sous 24h avec un plan d'action gratuit</div>
+        <div class="field">
+          <label for="fname">Prénom</label>
+          <input type="text" id="fname" name="name" placeholder="Julien, Camille, Marc..." required autocomplete="name"/>
+        </div>
+        <div class="field">
+          <label for="femail">Email</label>
+          <input type="email" id="femail" name="email" placeholder="vous@exemple.com" required autocomplete="email"/>
+        </div>
+        <div class="field">
+          <label for="fphone">Téléphone / WhatsApp</label>
+          <input type="tel" id="fphone" name="phone" placeholder="+33 6 12 34 56 78" required autocomplete="tel"/>
+          <div class="field-note">Avec l'indicatif pays — ex: +33, +32, +41, +1</div>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-back" data-back="4">← Retour</button>
+          <button type="submit" class="btn-next" id="submitBtn">Envoyer ma demande →</button>
+        </div>
+        <p class="form-note">🔒 Vos données sont confidentielles — sans spam</p>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="how">
+  <h2 class="how-title">Comment ça fonctionne ?</h2>
+  <div class="how-grid">
+    <div class="how-step">
+      <div class="how-num">1</div>
+      <h4>Répondez au questionnaire</h4>
+      <p>2 minutes — aucun document requis, zéro frais</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">2</div>
+      <h4>Un conseiller vous rappelle</h4>
+      <p>Sous 24h — on qualifie votre projet et votre budget</p>
+    </div>
+    <div class="how-step">
+      <div class="how-num">3</div>
+      <h4>Votre boutique est construite</h4>
+      <p>Design, développement et intégrations publicitaires — livrée en moins de 15 jours</p>
+    </div>
+  </div>
+</div>
+
+<div class="testi-single">
+  <div class="stars">★★★★★</div>
+  <blockquote>"Boutique livrée en 12 jours, pixel et CAPI configurés parfaitement dès le premier jour. On a pu lancer nos pubs vers la France immédiatement."</blockquote>
+  <div class="who">Yassine El Idrissi — Dropshipping, Casablanca, Maroc</div>
+</div>
+
+<div class="faq">
+  <h2 class="faq-title">Questions fréquentes</h2>
+  <div class="faq-item">
+    <button class="faq-q">Est-ce vraiment gratuit et sans engagement ?<span class="plus">+</span></button>
+    <div class="faq-a"><p>Oui. Le questionnaire et l'appel de diagnostic sont gratuits. Vous recevez un plan d'action clair avant de décider quoi que ce soit.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Que faites-vous de mes données personnelles ?<span class="plus">+</span></button>
+    <div class="faq-a"><p>Elles servent uniquement à préparer votre appel de diagnostic et ne sont jamais revendues à des tiers.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Je n'ai pas encore de produits ni de fournisseurs, est-ce grave ?<span class="plus">+</span></button>
+    <div class="faq-a"><p>Non — beaucoup de nos clients démarrent de zéro. On vous guide aussi sur ce point pendant l'appel de diagnostic.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q">Combien de temps prend l'installation de ma boutique ?<span class="plus">+</span></button>
+    <div class="faq-a"><p>En moyenne moins de 15 jours entre le premier appel et une boutique prête à recevoir du trafic publicitaire.</p></div>
+  </div>
+</div>
+
+<footer class="foot">
+  © 2025 AmraniAds — <a href="/">Retour à l'accueil</a>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  const state={niche:'',market:'',existing:'',budget:''};
+  const steps=document.querySelectorAll('.step');
+  const totalSteps=steps.length;
+
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+  function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined}
+  function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined}
+  function genEventId(){return'lead_shopify_intl_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
+
+  function goTo(n){
+    steps.forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===n));
+    document.getElementById('progressPct').textContent='Étape '+n+' / '+totalSteps;
+    document.getElementById('progressFill').style.width=(n/totalSteps*100)+'%';
+    window.scrollTo({top:document.querySelector('.funnel-wrap').offsetTop-20,behavior:'smooth'});
+  }
+
+  document.querySelectorAll('.opt-grid').forEach(grid=>{
+    const field=grid.dataset.field;
+    grid.querySelectorAll('.opt-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        grid.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[field]=btn.dataset.value;
+        const stepEl=grid.closest('.step');
+        const nextBtn=stepEl.querySelector('.btn-next');
+        if(nextBtn) nextBtn.disabled=false;
+      });
+    });
+  });
+
+  document.getElementById('next1').addEventListener('click',()=>goTo(2));
+  document.getElementById('next2').addEventListener('click',()=>goTo(3));
+  document.getElementById('next3').addEventListener('click',()=>goTo(4));
+  document.getElementById('next4').addEventListener('click',()=>goTo(5));
+  document.querySelectorAll('[data-back]').forEach(btn=>{
+    btn.addEventListener('click',()=>goTo(Number(btn.dataset.back)));
+  });
+
+  document.getElementById('funnelForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname').value.trim();
+    const email=document.getElementById('femail').value.trim();
+    const phone=document.getElementById('fphone').value.trim();
+    if(!name||!email||!phone){showToast('⚠️ Merci de remplir tous les champs');return}
+
+    const submitBtn=document.getElementById('submitBtn');
+    submitBtn.disabled=true;
+    submitBtn.textContent='⏳ Envoi en cours...';
+
+    const eventId=genEventId();
+    const notes='Niche: '+state.niche+' | Marché: '+state.market+' | Boutique existante: '+state.existing+' | Budget: '+state.budget;
+
+    if(typeof fbq!=='undefined'){
+      fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
+    }
+    if(typeof gtag!=='undefined'){
+      gtag('event','generate_lead',{event_category:'form_submission',event_label:'Boutique Shopify International'});
+    }
+
+    try{
+      await fetch('/api/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          name,phone,email,
+          service:'Boutique Shopify — International',
+          notes,
+          eventId,
+          pixelId:'1038098258910639',
+          userAgent:navigator.userAgent,
+          eventSourceUrl:location.href,
+          fbp:getCookie('_fbp'),
+          fbc:getFbc()
+        })
+      });
+    }catch(_){}
+
+    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId);
+  });
+
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.closest('.faq-item');
+      const ans=item.querySelector('.faq-a');
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+      if(!wasOpen){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px'}
+    });
+  });
+</script>
+</body>
+</html>

@@ -20,6 +20,7 @@ module.exports = async function handler(req, res) {
   const {
     name,
     phone,
+    email,
     service,
     city,
     destination,
@@ -49,6 +50,7 @@ module.exports = async function handler(req, res) {
   if (process.env.META_PIXEL_ID_CLINIC)       tokenMap[process.env.META_PIXEL_ID_CLINIC]       = process.env.META_ACCESS_TOKEN_CLINIC;
   if (process.env.META_PIXEL_ID_AR)           tokenMap[process.env.META_PIXEL_ID_AR]           = process.env.META_ACCESS_TOKEN_AR;
   if (process.env.META_PIXEL_ID_SHOPIFY)      tokenMap[process.env.META_PIXEL_ID_SHOPIFY]      = process.env.META_ACCESS_TOKEN_SHOPIFY;
+  if (process.env.META_PIXEL_ID_SHOPIFY_INTL) tokenMap[process.env.META_PIXEL_ID_SHOPIFY_INTL] = process.env.META_ACCESS_TOKEN_SHOPIFY_INTL;
   const accessToken = (pixelId && tokenMap[pixelId]) || process.env.META_ACCESS_TOKEN;
 
   // Fire Meta CAPI non-blocking (don't await) so Telegram always fires fast
@@ -66,6 +68,7 @@ module.exports = async function handler(req, res) {
         action_source:    'website',
         user_data: {
           ph: [sha256(normalizePhone(phone))].filter(Boolean),
+          em: [sha256(email)].filter(Boolean),
           fn: [sha256(parts[0])].filter(Boolean),
           ln: parts[1] ? [sha256(parts[1])] : [],
           fbp: fbp || undefined,
@@ -98,6 +101,7 @@ module.exports = async function handler(req, res) {
                : srcUrl.includes('/rentalcars')        ? '🚗 Location Voiture'
                : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
                : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
+               : srcUrl.includes('/24h')                ? '🌍🛍️ Boutique Shopify — International'
                : srcUrl.includes('/en')                ? '🇬🇧 English Page'
                : srcUrl.includes('/shopify-fr')        ? '🛍️🇫🇷 Shopify FR Landing'
                : srcUrl.includes('/shopify')           ? '🛍️ Shopify Landing'
@@ -110,8 +114,9 @@ module.exports = async function handler(req, res) {
     hour: '2-digit', minute: '2-digit'
   });
 
-  const isRihla      = srcUrl.includes('/rihlaSprinter');
-  const isShehrazade = srcUrl.includes('shehrazade');
+  const isRihla       = srcUrl.includes('/rihlaSprinter');
+  const isShehrazade  = srcUrl.includes('shehrazade');
+  const isShopifyIntl = srcUrl.includes('/24h');
 
   const msg = isRihla
     ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
@@ -130,6 +135,13 @@ module.exports = async function handler(req, res) {
       `👤 الاسم: ${name || '—'}\n` +
       `📱 الهاتف: <code>${phone || '—'}</code>\n` +
       `🎯 الخدمة: ${service || '—'}\n` +
+      `🕐 ${now}`
+    : isShopifyIntl
+    ? `🌍🛍️ <b>NOUVEAU LEAD — Boutique Shopify (International)</b>\n\n` +
+      `👤 Prénom: ${name || '—'}\n` +
+      `📧 Email: ${email || '—'}\n` +
+      `📱 Téléphone: <code>${phone || '—'}</code>\n` +
+      `📝 Détails: ${notes || '—'}\n` +
       `🕐 ${now}`
     : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
       `👤 الاسم: ${name}\n` +
@@ -156,6 +168,12 @@ module.exports = async function handler(req, res) {
       sendTelegram(process.env.TELEGRAM_BOT_TOKEN_2, process.env.TELEGRAM_CHAT_ID_2),
     ]);
     results.telegram = { bot1: r1, bot2: r2 };
+  } else if (isShopifyIntl) {
+    // Separate bot/chat for international Shopify leads if configured, else falls back to the default bot
+    results.telegram = await sendTelegram(
+      process.env.TELEGRAM_BOT_TOKEN_SHOPIFY_INTL || process.env.TELEGRAM_BOT_TOKEN,
+      process.env.TELEGRAM_CHAT_ID_SHOPIFY_INTL   || process.env.TELEGRAM_CHAT_ID
+    );
   } else {
     results.telegram = await sendTelegram(process.env.TELEGRAM_BOT_TOKEN, process.env.TELEGRAM_CHAT_ID);
   }
@@ -165,6 +183,7 @@ module.exports = async function handler(req, res) {
                   : srcUrl.includes('/rihlaSprinter')   ? process.env.RIHLA_SCRIPT_URL
                   : srcUrl.includes('/salon')           ? process.env.SALON_SCRIPT_URL
                   : srcUrl.includes('/rentalcars')      ? process.env.RENTALCARS_SCRIPT_URL
+                  : isShopifyIntl                       ? (process.env.SHOPIFY_INTL_SCRIPT_URL || process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL)
                   : process.env.GOOGLE_SCRIPT_URL || process.env.SHEETS_URL;
 
   if (scriptUrl) {
@@ -176,6 +195,7 @@ module.exports = async function handler(req, res) {
           timestamp:   new Date().toISOString(),
           name:        name        || '',
           phone:       phone       || '',
+          email:       email       || '',
           service:     service     || '',
           source:      source      || '',
           eventId:     eventId     || '',

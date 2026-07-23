@@ -1,301 +1,287 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AmraniAds — وكالة تسويق رقمي · المغرب</title>
-  <meta name="description" content="AmraniAds — وكالة تسويق رقمي متخصصة في المغرب. ميتا أدز، متاجر شوبيفاي، عيادات، صالونات، تأجير سيارات وأكثر. نتائج مضمونة في 7 أيام." />
-  <link rel="icon" href="/logo.png" type="image/png" />
+  <title>AmraniAds — Agence Shopify pour marques France · Europe · USA</title>
+  <meta name="description" content="AmraniAds construit des boutiques Shopify qui vendent : e-commerce, dropshipping, produits digitaux, sites d'affiliation. Design, développement et intégrations publicitaires pour marques en France, en Europe, aux États-Unis et au Maroc." />
+  <link rel="icon" href="/logo.png" type="image/png"/>
+  <link rel="canonical" href="https://amraniads.com/" />
 
+  <!-- META PIXEL -->
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
   n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
   (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','1659781648561847');fbq('track','PageView');
+  fbq('init','1038098258910639');
+  fbq('track','PageView');
+  fbq('track','ViewContent',{content_name:'AmraniAds — Shopify International Home'});
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1038098258910639&ev=PageView&noscript=1"/></noscript>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-127KF5ZQCH"></script>
+  <script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js',new Date());
+    gtag('config','G-127KF5ZQCH',{send_page_view:true});
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --green:    #22c55e;
-      --green-d:  #16a34a;
-      --green-l:  #dcfce7;
-      --green-xl: #f0fdf4;
-      --dark:     #0f172a;
-      --dark2:    #1e293b;
-      --muted:    #64748b;
-      --gold:     #f59e0b;
-      --bg:       #ffffff;
-      --bg2:      #f8fafc;
-      --border:   #e2e8f0;
-      --shadow:   0 4px 24px rgba(15,23,42,.07);
-      --shadow-lg:0 12px 48px rgba(15,23,42,.13);
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --green:#22c55e;
+      --green-d:#16a34a;
+      --green-l:#dcfce7;
+      --dark:#0a1612;
+      --dark2:#0f2b22;
+      --gold:#f59e0b;
+      --muted:#5b6b64;
+      --bg:#ffffff;
+      --bg2:#f6f9f7;
+      --border:#e3ebe6;
+      --shadow:0 4px 24px rgba(10,22,18,.07);
+      --shadow-lg:0 12px 48px rgba(10,22,18,.14);
+      --radius:16px;
     }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);line-height:1.7;overflow-x:hidden}
+    a{color:inherit}
+    .container{max-width:1160px;margin:0 auto;padding:0 24px}
 
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--dark); line-height: 1.75; overflow-x: hidden; }
-    body.en-mode { font-family: 'Inter', sans-serif; }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 3px; }
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:72px;display:flex;align-items:center;padding:0 28px}
+    .nav-inner{max-width:1160px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo img{height:28px;width:auto}
+    .nav-logo-text{font-size:1.2rem;font-weight:900;color:var(--dark);letter-spacing:-.02em}
+    .nav-logo-text span{color:var(--green)}
+    .nav-links{display:flex;align-items:center;gap:30px}
+    .nav-links a{text-decoration:none;color:var(--muted);font-size:.92rem;font-weight:600;transition:color .15s}
+    .nav-links a:hover{color:var(--green)}
+    .nav-cta{background:var(--dark);color:#fff!important;padding:11px 22px;border-radius:50px;font-size:.88rem!important;font-weight:800!important;transition:background .2s,transform .15s!important}
+    .nav-cta:hover{background:var(--green-d)!important;transform:translateY(-1px)}
+    .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px}
 
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    /* HERO */
+    .hero{min-height:100svh;padding:140px 24px 80px;display:flex;align-items:center;background:linear-gradient(160deg,#f0fdf4 0%,#ffffff 45%,#f6f9f7 100%);position:relative;overflow:hidden}
+    .blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
+    .blob-1{width:700px;height:700px;background:radial-gradient(circle,rgba(34,197,94,.18),transparent 65%);top:-260px;left:-160px}
+    .blob-2{width:520px;height:520px;background:radial-gradient(circle,rgba(245,158,11,.1),transparent 65%);bottom:-120px;right:-100px}
+    .hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1;width:100%;display:flex;align-items:flex-start;gap:56px}
+    .hero-text{flex:1 1 520px;min-width:0}
+    .hero-form-col{flex:0 0 380px;min-width:0}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--green-l);border:1px solid rgba(34,197,94,.28);color:var(--green-d);border-radius:50px;padding:6px 16px;font-size:.82rem;font-weight:700;margin-bottom:26px}
+    .eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.8s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+    .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:900;line-height:1.14;letter-spacing:-.02em;color:var(--dark);margin-bottom:20px}
+    .hero h1 .gr{color:var(--green)}
+    .hero-sub{font-size:1.05rem;color:var(--muted);max-width:540px;margin-bottom:32px;line-height:1.85}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;font-family:inherit;font-weight:800;font-size:1rem;padding:16px 32px;border-radius:50px;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 10px 32px rgba(34,197,94,.32)}
+    .btn-primary:hover{background:var(--green-d);transform:translateY(-2px);box-shadow:0 14px 40px rgba(34,197,94,.4)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--dark);font-family:inherit;font-weight:700;font-size:1rem;padding:15px 30px;border-radius:50px;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,color .2s}
+    .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+    .hero-trust{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+    .trust-avatars{display:flex}
+    .trust-avatars img{width:34px;height:34px;border-radius:50%;border:2px solid #fff;margin-left:-9px;object-fit:cover}
+    .trust-avatars img:first-child{margin-left:0}
+    .trust-sep{width:1px;height:26px;background:var(--border)}
+    .trust-item{display:flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);font-weight:600}
+    .trust-dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
 
-    /* ── LANG TOGGLE ── */
-    .lang-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-      height: 36px; background: var(--dark);
-      display: flex; align-items: center; justify-content: flex-end;
-      padding: 0 28px; gap: 6px;
+    /* HERO FORM CARD */
+    .form-card{background:var(--dark);border:1.5px solid rgba(34,197,94,.25);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(10,22,18,.28),0 0 40px rgba(34,197,94,.08);position:sticky;top:96px}
+    .form-top{background:linear-gradient(135deg,#0f2b22,#0a1612);padding:22px 26px;text-align:center;border-bottom:1px solid rgba(34,197,94,.2)}
+    .form-top h2{color:#fff;font-size:1.05rem;font-weight:900;line-height:1.4;margin-bottom:4px}
+    .form-top p{color:rgba(255,255,255,.6);font-size:.78rem}
+    .form-body{padding:24px 26px}
+    .field{margin-bottom:15px}
+    .field label{display:block;font-size:.8rem;font-weight:700;color:var(--green);margin-bottom:6px}
+    .field input{width:100%;padding:13px 15px;background:rgba(255,255,255,.06);border:1.5px solid rgba(34,197,94,.2);border-radius:10px;color:#fff;font-family:inherit;font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s}
+    .field input::placeholder{color:rgba(255,255,255,.3)}
+    .field input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.14);background:rgba(255,255,255,.09)}
+    .submit-btn{width:100%;padding:15px;background:var(--green);color:#fff;font-family:inherit;font-weight:800;font-size:1rem;border:none;border-radius:50px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,transform .15s,opacity .15s;box-shadow:0 6px 28px rgba(34,197,94,.35)}
+    .submit-btn:hover:not(:disabled){background:var(--green-d);transform:translateY(-2px)}
+    .submit-btn:disabled{opacity:.55;cursor:not-allowed}
+    .form-note{text-align:center;font-size:.74rem;color:rgba(255,255,255,.4);margin-top:12px}
+    #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:12px 26px;border-radius:50px;font-size:.87rem;font-weight:700;opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;z-index:400;white-space:nowrap;border:1.5px solid rgba(34,197,94,.3)}
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* TICKER */
+    .ticker{background:var(--dark);padding:14px 0;overflow:hidden}
+    .ticker-track{display:flex;gap:40px;animation:ticker 32s linear infinite;white-space:nowrap;width:max-content}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .tick{color:rgba(255,255,255,.55);font-size:.86rem;font-weight:600;flex-shrink:0;display:flex;align-items:center;gap:10px}
+    .tick b{color:rgba(255,255,255,.9)}
+    .tick-sep{color:var(--green)}
+
+    /* SECTION HEADERS */
+    .sec-label{text-align:center;font-size:.76rem;font-weight:700;color:var(--green-d);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:10px}
+    .sec-title{text-align:center;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:900;color:var(--dark);line-height:1.2;margin-bottom:14px}
+    .sec-title .gr{color:var(--green)}
+    .sec-sub{text-align:center;font-size:1rem;color:var(--muted);max-width:560px;margin:0 auto 52px;line-height:1.85}
+
+    /* SERVICES / NICHES */
+    .niches{padding:96px 0}
+    .niches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .ncard{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:30px 26px;transition:transform .25s,box-shadow .25s,border-color .25s}
+    .ncard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(34,197,94,.3)}
+    .ncard-icon{font-size:2.1rem;margin-bottom:16px;display:block}
+    .ncard h3{font-size:1.08rem;font-weight:900;color:var(--dark);margin-bottom:9px;line-height:1.35}
+    .ncard p{font-size:.87rem;color:var(--muted);line-height:1.7}
+
+    /* PORTFOLIO / SHOWCASE SLIDER */
+    .portfolio{padding:96px 0;background:var(--bg2)}
+    .showcase-slider{position:relative;max-width:960px;margin:0 auto;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);border:1.5px solid var(--border)}
+    .showcase-track{display:flex;transition:transform .4s ease}
+    .showcase-slide{flex:0 0 100%}
+    .showcase-slide img{width:100%;display:block}
+    .showcase-arrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(10,22,18,.6);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.2rem;transition:background .15s}
+    .showcase-arrow:hover{background:rgba(10,22,18,.85)}
+    .showcase-arrow.prev{left:14px}
+    .showcase-arrow.next{right:14px}
+    .showcase-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px}
+    .showcase-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer;transition:background .15s,width .15s}
+    .showcase-dot.active{background:#fff;width:22px;border-radius:5px}
+    .portfolio-note{text-align:center;font-size:.83rem;color:var(--muted);margin-top:28px}
+
+    /* PROCESS */
+    .process{padding:96px 0;background:var(--bg2)}
+    .proc-steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;gap:16px}
+    .proc-step{padding:28px 22px;text-align:center;position:relative}
+    .proc-step:not(:last-child)::after{content:'';position:absolute;top:48px;right:-8px;width:36px;height:2px;background:linear-gradient(to right,var(--green),transparent)}
+    .proc-num{width:52px;height:52px;border-radius:50%;background:#fff;border:2px solid var(--green);color:var(--green);font-size:1.25rem;font-weight:900;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 4px 16px rgba(34,197,94,.2)}
+    .proc-step h3{font-size:1rem;font-weight:900;margin-bottom:8px;color:var(--dark)}
+    .proc-step p{font-size:.84rem;color:var(--muted);line-height:1.65}
+
+    /* STATS */
+    .stats{padding:76px 0;background:var(--dark)}
+    .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+    .stat-n{font-size:2.8rem;font-weight:900;color:var(--gold);display:block;line-height:1}
+    .stat-l{font-size:.87rem;color:rgba(255,255,255,.6);margin-top:9px;display:block}
+
+    /* WHY */
+    .why{padding:96px 0}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:52px}
+    .why-list{display:flex;flex-direction:column;gap:16px}
+    .why-item{display:flex;align-items:flex-start;gap:14px;padding:18px;background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;transition:border-color .2s,box-shadow .2s}
+    .why-item:hover{border-color:var(--green);box-shadow:0 4px 20px rgba(34,197,94,.1)}
+    .why-ico{width:42px;height:42px;border-radius:11px;background:var(--green-l);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+    .why-ttl{font-size:.95rem;font-weight:900;margin-bottom:3px}
+    .why-dsc{font-size:.83rem;color:var(--muted);line-height:1.6}
+    .why-card{background:var(--dark);border-radius:20px;padding:32px}
+    .why-card h3{font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:8px}
+    .why-card p{font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:22px}
+    .stack-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+    .stack-ico{font-size:1.15rem;flex-shrink:0}
+    .stack-lbl{font-size:.85rem;color:rgba(255,255,255,.85);font-weight:700}
+    .stack-sub{font-size:.75rem;color:rgba(255,255,255,.4);margin-left:auto}
+
+    /* TESTIMONIALS */
+    .testi{padding:96px 0;background:var(--bg2)}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+    .testi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+    .testi-stars{color:var(--gold);font-size:.82rem;letter-spacing:2px;margin-bottom:13px}
+    .testi-text{font-size:.9rem;color:#243b32;line-height:1.8;font-style:italic;margin-bottom:18px}
+    .testi-author{display:flex;align-items:center;gap:10px}
+    .testi-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--green-l);flex-shrink:0}
+    .testi-name{font-weight:900;font-size:.88rem}
+    .testi-role{font-size:.76rem;color:var(--muted)}
+
+    /* FAQ */
+    .faq{padding:96px 0}
+    .faq-list{max-width:760px;margin:44px auto 0}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-q{width:100%;text-align:left;background:none;border:none;padding:22px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:inherit;font-size:.98rem;font-weight:800;color:var(--dark)}
+    .faq-q .plus{font-size:1.3rem;color:var(--green);transition:transform .25s;flex-shrink:0}
+    .faq-item.open .faq-q .plus{transform:rotate(45deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+    .faq-a p{padding:0 4px 22px;font-size:.9rem;color:var(--muted);line-height:1.8;max-width:660px}
+
+    /* CTA */
+    .cta{padding:96px 0;background:linear-gradient(135deg,var(--dark) 0%,#0d2518 100%);position:relative;overflow:hidden}
+    .cta::before{content:'';position:absolute;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(34,197,94,.14),transparent 65%);top:-260px;right:-160px;pointer-events:none}
+    .cta-inner{max-width:700px;margin:0 auto;text-align:center;position:relative;z-index:1}
+    .cta-inner h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;color:#fff;margin-bottom:16px;line-height:1.18}
+    .cta-inner h2 .gr{color:var(--green)}
+    .cta-inner p{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:36px;line-height:1.85}
+    .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn-white{background:#fff;color:var(--dark);font-family:inherit;font-weight:900;font-size:.98rem;padding:16px 32px;border-radius:50px;text-decoration:none;transition:transform .15s,box-shadow .2s;box-shadow:0 10px 32px rgba(0,0,0,.25);display:inline-flex;align-items:center;gap:8px}
+    .btn-white:hover{transform:translateY(-2px)}
+    .btn-outline-w{background:transparent;color:rgba(255,255,255,.75);font-family:inherit;font-weight:700;font-size:.98rem;padding:15px 30px;border-radius:50px;text-decoration:none;border:1.5px solid rgba(255,255,255,.22);display:inline-flex;align-items:center;gap:8px;transition:border-color .2s,color .2s}
+    .btn-outline-w:hover{border-color:var(--green);color:var(--green)}
+
+    /* FOOTER */
+    footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.07);padding:56px 28px 26px}
+    .footer-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px}
+    .footer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .footer-logo-row img{height:28px;width:auto}
+    .footer-brand-name{font-size:1.1rem;font-weight:900;color:#fff}
+    .footer-brand-name span{color:var(--green)}
+    .footer-brand-tag{font-size:.83rem;color:rgba(255,255,255,.4);line-height:1.75;max-width:260px}
+    .footer-col h4{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.9px;margin-bottom:15px}
+    .footer-col a{display:block;color:rgba(255,255,255,.62);text-decoration:none;font-size:.87rem;margin-bottom:9px;transition:color .15s}
+    .footer-col a:hover{color:var(--green)}
+    .footer-bottom{max-width:1160px;margin:36px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+    .footer-bottom p{font-size:.78rem;color:rgba(255,255,255,.3)}
+    .footer-bottom a{color:var(--green);text-decoration:none;font-size:.78rem;font-weight:700}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      nav{padding:0 16px}
+      .nav-links{display:none}
+      .hamburger{display:flex}
+      .hero-inner{flex-direction:column;gap:32px}
+      .hero-text{order:2;text-align:center}
+      .hero-form-col{order:1;flex:none;width:100%}
+      .form-card{position:static}
+      .hero-sub{margin-left:auto;margin-right:auto}
+      .hero-ctas{justify-content:center}
+      .hero-trust{justify-content:center}
+      .niches-grid{grid-template-columns:1fr 1fr}
+      .proc-steps{grid-template-columns:repeat(2,1fr)}
+      .proc-step::after{display:none}
+      .stats-inner{grid-template-columns:repeat(2,1fr)}
+      .why-grid{grid-template-columns:1fr;gap:36px}
+      .testi-grid{grid-template-columns:1fr 1fr}
+      .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
     }
-    .lang-btn {
-      background: transparent; border: 1px solid rgba(255,255,255,.2);
-      color: rgba(255,255,255,.6); font-family: inherit; font-size: .75rem;
-      font-weight: 700; padding: 3px 12px; border-radius: 50px; cursor: pointer;
-      transition: background .2s, color .2s, border-color .2s;
-      letter-spacing: .3px;
-    }
-    .lang-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
-    .lang-btn:not(.active):hover { border-color: rgba(255,255,255,.5); color: #fff; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 36px; left: 0; right: 0; z-index: 200;
-      background: rgba(255,255,255,.96); backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border); height: 64px;
-      display: flex; align-items: center; padding: 0 28px;
-    }
-    .nav-inner { max-width: 1160px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo-box { width: 36px; height: 36px; background: var(--green); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .nav-logo-box svg { width: 18px; height: 18px; fill: #fff; }
-    .nav-logo-text { font-size: 1.18rem; font-weight: 900; color: var(--dark); }
-    .nav-logo-text span { color: var(--green); }
-    .nav-links { display: flex; align-items: center; gap: 26px; }
-    .nav-links a { text-decoration: none; color: var(--muted); font-size: .9rem; font-weight: 600; transition: color .15s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta { background: var(--dark); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-size: .86rem !important; font-weight: 900 !important; transition: background .2s !important; }
-    .nav-cta:hover { background: var(--green-d) !important; }
-    .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100svh; padding: 120px 24px 80px;
-      display: flex; align-items: center;
-      background: linear-gradient(145deg, #f0fdf4 0%, #ffffff 50%, #f8fafc 100%);
-      position: relative; overflow: hidden;
-    }
-    .blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
-    .blob-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(34,197,94,.18), transparent 65%); top: -250px; left: -150px; }
-    .blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(245,158,11,.1), transparent 65%); bottom: -100px; right: -100px; }
-    .hero-inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; width: 100%; }
-
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--green-l); border: 1px solid rgba(34,197,94,.25); color: var(--green-d); border-radius: 50px; padding: 5px 14px; font-size: .8rem; font-weight: 700; margin-bottom: 24px; }
-    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.8s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.2} }
-
-    .hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.1; letter-spacing: -.01em; color: var(--dark); margin-bottom: 22px; max-width: 800px; }
-    .hero h1 .green { color: var(--green); }
-    .hero-sub { font-size: 1.08rem; color: var(--muted); max-width: 560px; margin-bottom: 40px; line-height: 1.85; }
-
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; font-family: inherit; font-weight: 900; font-size: .95rem; padding: 14px 28px; border-radius: 50px; text-decoration: none; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 8px 28px rgba(34,197,94,.3); }
-    .btn-primary:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(34,197,94,.4); }
-    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--dark); font-family: inherit; font-weight: 700; font-size: .95rem; padding: 13px 26px; border-radius: 50px; text-decoration: none; border: 1.5px solid var(--border); transition: border-color .2s, color .2s; }
-    .btn-ghost:hover { border-color: var(--green); color: var(--green); }
-
-    .hero-trust { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .trust-avatars { display: flex; }
-    .trust-avatars img { width: 33px; height: 33px; border-radius: 50%; border: 2px solid #fff; margin-right: -9px; object-fit: cover; }
-    html[dir=rtl] .trust-avatars img { margin-right: 0; margin-left: -9px; }
-    .trust-avatars img:last-child { margin: 0; }
-    .trust-sep { width: 1px; height: 26px; background: var(--border); }
-    .trust-item { display: flex; align-items: center; gap: 6px; font-size: .83rem; color: var(--muted); font-weight: 600; }
-    .trust-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
-
-    /* ── TICKER ── */
-    .ticker { background: var(--dark); padding: 13px 0; overflow: hidden; }
-    .ticker-track { display: flex; gap: 40px; animation: ticker-ar 35s linear infinite; white-space: nowrap; }
-    html[dir=ltr] .ticker-track { animation-name: ticker-en; }
-    @keyframes ticker-ar { from{transform:translateX(0)} to{transform:translateX(50%)} }
-    @keyframes ticker-en { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-    .tick { color: rgba(255,255,255,.55); font-size: .85rem; font-weight: 600; flex-shrink: 0; display: flex; align-items: center; gap: 10px; }
-    .tick b { color: rgba(255,255,255,.88); }
-    .tick-sep { color: var(--green); }
-
-    /* ── SECTION HEADERS ── */
-    .sec-label { text-align: center; font-size: .74rem; font-weight: 700; color: var(--green-d); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 10px; }
-    .sec-title { text-align: center; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; color: var(--dark); line-height: 1.18; margin-bottom: 12px; }
-    .sec-title .green { color: var(--green); }
-    .sec-sub { text-align: center; font-size: .98rem; color: var(--muted); max-width: 520px; margin: 0 auto 52px; line-height: 1.8; }
-
-    /* ── NICHES ── */
-    .niches { padding: 88px 0; }
-    .niches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .ncard {
-      background: var(--bg); border: 1.5px solid var(--border); border-radius: 18px;
-      overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column;
-      transition: transform .25s, box-shadow .25s, border-color .25s;
-    }
-    .ncard:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .ncard img { width: 100%; height: 170px; object-fit: cover; display: block; }
-    .ncard.featured { grid-column: span 2; }
-    .ncard.featured img { height: 240px; }
-    .ncard-body { padding: 20px 20px 14px; flex: 1; }
-    .ncard-badge { display: inline-flex; align-items: center; gap: 5px; border-radius: 50px; padding: 3px 10px; font-size: .7rem; font-weight: 700; margin-bottom: 9px; }
-    .ncard h3 { font-size: 1.05rem; font-weight: 900; color: var(--dark); margin-bottom: 6px; line-height: 1.3; }
-    .ncard p { font-size: .84rem; color: var(--muted); line-height: 1.65; }
-    .ncard-foot { padding: 12px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .ncard-stat { font-size: .77rem; font-weight: 600; color: var(--muted); }
-    .ncard-stat strong { color: var(--dark); }
-    .ncard-arrow { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg2); border: 1.5px solid var(--border); font-size: .85rem; transition: background .2s, border-color .2s, color .2s; }
-    .ncard:hover .ncard-arrow { background: var(--green); border-color: var(--green); color: #fff; }
-
-    /* badge colors */
-    .b-ecom  { background:#fef3c7; color:#92400e; }
-    .b-med   { background:#dbeafe; color:#1e40af; }
-    .b-dent  { background:#e0f2fe; color:#0369a1; }
-    .b-aest  { background:#fce7f3; color:#9d174d; }
-    .b-sal   { background:#fdf2f8; color:#9d174d; }
-    .b-rent  { background:#f0fdf4; color:#166534; }
-    .b-trans { background:#fff7ed; color:#9a3412; }
-    .b-web   { background:#ede9fe; color:#5b21b6; }
-
-    /* card hover border color */
-    .c-ecom:hover  { border-color:#f59e0b; }
-    .c-med:hover   { border-color:#3b82f6; }
-    .c-dent:hover  { border-color:#0ea5e9; }
-    .c-aest:hover  { border-color:#e11d48; }
-    .c-sal:hover   { border-color:#db2777; }
-    .c-rent:hover  { border-color:var(--green); }
-    .c-trans:hover { border-color:#f97316; }
-    .c-web:hover   { border-color:#7c3aed; }
-
-    /* ── PROCESS ── */
-    .process { padding: 88px 0; background: var(--bg2); }
-    .proc-steps { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 52px; }
-    .proc-step { padding: 28px 24px; text-align: center; position: relative; }
-    .proc-step:not(:last-child)::after { content: ''; position: absolute; top: 48px; left: 0; width: 2px; height: 36px; background: linear-gradient(to bottom, var(--green), transparent); }
-    html[dir=ltr] .proc-step:not(:last-child)::after { left: auto; right: 0; }
-    .proc-num { width: 52px; height: 52px; border-radius: 50%; background: #fff; border: 2px solid var(--green); color: var(--green); font-size: 1.25rem; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 4px 16px rgba(34,197,94,.2); }
-    .proc-step h3 { font-size: .98rem; font-weight: 900; margin-bottom: 7px; color: var(--dark); }
-    .proc-step p  { font-size: .83rem; color: var(--muted); line-height: 1.65; }
-
-    /* ── STATS ── */
-    .stats { padding: 72px 0; background: var(--dark); }
-    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
-    .stat-n { font-size: 3rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
-    .stat-l { font-size: .88rem; color: #94a3b8; margin-top: 8px; display: block; }
-
-    /* ── WHY ── */
-    .why { padding: 88px 0; }
-    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 52px; }
-    .why-list { display: flex; flex-direction: column; gap: 16px; }
-    .why-item { display: flex; align-items: flex-start; gap: 14px; padding: 18px; background: var(--bg2); border: 1.5px solid var(--border); border-radius: 14px; transition: border-color .2s, box-shadow .2s; }
-    .why-item:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(34,197,94,.1); }
-    .why-ico { width: 42px; height: 42px; border-radius: 11px; background: var(--green-l); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
-    .why-ttl { font-size: .94rem; font-weight: 900; margin-bottom: 3px; }
-    .why-dsc { font-size: .82rem; color: var(--muted); line-height: 1.6; }
-    .why-card { background: var(--dark); border-radius: 20px; padding: 30px; }
-    .why-card h3 { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 8px; }
-    .why-card p  { font-size: .85rem; color: #94a3b8; line-height: 1.7; margin-bottom: 22px; }
-    .stack-row { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.06); border-radius: 10px; padding: 11px 14px; margin-bottom: 8px; }
-    .stack-ico { font-size: 1.15rem; flex-shrink: 0; }
-    .stack-lbl { font-size: .84rem; color: rgba(255,255,255,.82); font-weight: 700; }
-    .stack-sub { font-size: .74rem; color: #6b7280; margin-right: auto; }
-    html[dir=ltr] .stack-sub { margin-right: 0; margin-left: auto; }
-    .stack-pill { background: var(--green); color: #fff; border-radius: 50px; padding: 2px 10px; font-size: .68rem; font-weight: 700; white-space: nowrap; }
-
-    /* ── TESTIMONIALS ── */
-    .testi { padding: 88px 0; background: var(--bg2); }
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
-    .testi-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: var(--shadow); }
-    .testi-stars { color: var(--gold); font-size: .8rem; letter-spacing: 2px; margin-bottom: 12px; }
-    .testi-text  { font-size: .9rem; color: var(--dark2); line-height: 1.75; font-style: italic; margin-bottom: 18px; }
-    .testi-author { display: flex; align-items: center; gap: 10px; }
-    .testi-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--green-l); flex-shrink: 0; }
-    .testi-name { font-weight: 900; font-size: .87rem; }
-    .testi-role { font-size: .75rem; color: var(--muted); }
-
-    /* ── CTA ── */
-    .cta { padding: 88px 0; background: linear-gradient(135deg, var(--dark) 0%, #0d2518 100%); position: relative; overflow: hidden; }
-    .cta::before { content: ''; position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(34,197,94,.12), transparent 65%); top: -250px; right: -150px; pointer-events: none; }
-    .cta-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
-    .cta-inner h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 900; color: #fff; margin-bottom: 14px; line-height: 1.15; }
-    .cta-inner h2 .green { color: var(--green); }
-    .cta-inner p { color: #94a3b8; font-size: .98rem; margin-bottom: 34px; line-height: 1.85; }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-white { background: #fff; color: var(--dark); font-family: inherit; font-weight: 900; font-size: .95rem; padding: 14px 28px; border-radius: 50px; text-decoration: none; transition: transform .15s, box-shadow .2s; box-shadow: 0 8px 28px rgba(0,0,0,.2); display: inline-flex; align-items: center; gap: 8px; }
-    .btn-white:hover { transform: translateY(-2px); }
-    .btn-outline-w { background: transparent; color: rgba(255,255,255,.75); font-family: inherit; font-weight: 700; font-size: .95rem; padding: 13px 26px; border-radius: 50px; text-decoration: none; border: 1.5px solid rgba(255,255,255,.2); display: inline-flex; align-items: center; gap: 8px; transition: border-color .2s, color .2s; }
-    .btn-outline-w:hover { border-color: var(--green); color: var(--green); }
-
-    /* ── FOOTER ── */
-    footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.07); padding: 52px 28px 24px; }
-    .footer-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
-    .footer-brand-name { font-size: 1.1rem; font-weight: 900; color: #fff; margin-bottom: 9px; }
-    .footer-brand-name span { color: var(--green); }
-    .footer-brand-tag { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 220px; }
-    .footer-col h4 { font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 14px; }
-    .footer-col a { display: block; color: rgba(255,255,255,.62); text-decoration: none; font-size: .85rem; margin-bottom: 8px; transition: color .15s; }
-    .footer-col a:hover { color: var(--green); }
-    .footer-bottom { max-width: 1160px; margin: 36px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .footer-bottom p { font-size: .77rem; color: rgba(255,255,255,.3); }
-    .footer-bottom a { color: var(--green); text-decoration: none; font-size: .77rem; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      nav { padding: 0 16px; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero h1 { font-size: clamp(2rem, 7vw, 3rem); }
-      .niches-grid { grid-template-columns: 1fr 1fr; }
-      .ncard.featured { grid-column: span 1; }
-      .ncard.featured img { height: 170px; }
-      .proc-steps { grid-template-columns: repeat(2, 1fr); }
-      .stats-inner { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: 1fr; }
-      .testi-grid { grid-template-columns: 1fr 1fr; }
-      .footer-inner { grid-template-columns: 1fr 1fr; gap: 30px; }
-    }
-    @media (max-width: 600px) {
-      .hero { padding: 108px 16px 60px; }
-      .niches-grid { grid-template-columns: 1fr; }
-      .testi-grid { grid-template-columns: 1fr; }
-      .proc-steps { grid-template-columns: 1fr; }
-      .proc-step::after { display: none !important; }
-      .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+    @media(max-width:600px){
+      .hero{padding:120px 16px 60px}
+      .niches-grid{grid-template-columns:1fr}
+      .portfolio-grid{grid-template-columns:1fr}
+      .testi-grid{grid-template-columns:1fr}
+      .proc-steps{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr;gap:26px}
     }
   </style>
 </head>
 <body>
 
-<!-- LANG BAR -->
-<div class="lang-bar">
-  <button class="lang-btn active" id="btnAr" onclick="setLang('ar')">🇲🇦 العربية</button>
-  <button class="lang-btn" id="btnEn" onclick="setLang('en')">🇬🇧 English</button>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="javascript:void(0)" class="nav-logo">
-      <div class="nav-logo-box"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+    <a href="#" class="nav-logo">
+      <img src="/logo.png" alt="AmraniAds"/>
       <span class="nav-logo-text">Amrani<span>Ads</span></span>
     </a>
     <div class="nav-links">
-      <a href="#niches" data-ar="خدماتنا" data-en="Services">خدماتنا</a>
-      <a href="#process" data-ar="منهجيّتنا" data-en="Process">منهجيّتنا</a>
-      <a href="#why" data-ar="لماذا نحن" data-en="Why Us">لماذا نحن</a>
-      <a href="#contact" class="nav-cta" data-ar="احجز مجاناً" data-en="Book Free Call">احجز مجاناً</a>
+      <a href="#services">Services</a>
+      <a href="/portfolio/">Réalisations</a>
+      <a href="#methode">Méthode</a>
+      <a href="#faq">FAQ</a>
+      <a href="/24h/" class="nav-cta">Démarrer mon projet →</a>
     </div>
-    <button class="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" onclick="window.location.href='/24h/'"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -304,406 +290,425 @@
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
   <div class="hero-inner">
-    <div class="eyebrow"><span class="eyebrow-dot"></span><span data-ar="وكالة تسويق رقمي — المغرب" data-en="Performance Marketing Agency · Morocco">وكالة تسويق رقمي — المغرب</span></div>
-    <h1>
-      <span data-ar='نبني لك <span class="green">منظومة اكتساب عملاء</span><br>تعمل على مدار الساعة — في 7 أيام' data-en='We Build <span class="green">Client Systems</span> That<br>Work 24/7 — in 7 Days'>نبني لك <span class="green">منظومة اكتساب عملاء</span><br>تعمل على مدار الساعة — في 7 أيام</span>
-    </h1>
-    <p class="hero-sub" data-ar="حملات إعلانية على منصة ميتا، متاجر شوبيفاي، وصفحات هبوط تُحوّل الزوار إلى عملاء — مُصمَّمة خصيصاً لقطاعك في المغرب. نتائج مضمونة كتابةً أو نُعيد إليك مبلغك كاملاً." data-en="Meta Ads campaigns, Shopify stores, and conversion-first landing pages — built specifically for your niche in Morocco. Written results guarantee or your money back.">حملات ميتا أدز، متاجر شوبيفاي، وصفحات هبوط تحول الزوار لعملاء — مصممة خصيصاً لنيشك في المغرب. نتائج مضمونة بالكتابة أو كنردو ليك فلوسك.</p>
-    <div class="hero-ctas">
-      <a href="#niches" class="btn-primary" data-ar="اكتشف خدماتنا ←" data-en="See What We Do →">اكتشف خدماتنا ←</a>
-      <a href="#contact" class="btn-ghost" data-ar="استشارة مجانية" data-en="Free Strategy Call">استشارة مجانية</a>
-    </div>
-    <div class="hero-trust">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="trust-avatars">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="" />
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" />
-          <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="" />
-          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="" />
-        </div>
-        <span class="trust-item" data-ar="+30 عميل يثقون في AmraniAds" data-en="+30 clients trust AmraniAds">+30 عميل يثقون في AmraniAds</span>
+
+    <div class="hero-text">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>🇫🇷 🇪🇺 🇺🇸 🇲🇦 Agence Shopify pour marques France · Europe · USA · Maroc</div>
+      <h1>On construit des boutiques Shopify <span class="gr">qui vendent</span> — pas juste qui existent</h1>
+      <p class="hero-sub">
+        E-commerce, dropshipping, produits digitaux ou sites d'affiliation : on conçoit, on développe et on connecte votre boutique Shopify pour qu'elle convertisse dès le premier jour — prête à recevoir du trafic publicitaire.
+      </p>
+      <div class="hero-ctas">
+        <a href="/24h/" class="btn-primary">Démarrer mon projet Shopify →</a>
+        <a href="#services" class="btn-ghost">Voir nos services</a>
       </div>
-      <div class="trust-sep"></div>
-      <span class="trust-item"><span class="trust-dot"></span><span data-ar="نتائج مضمونة في 7 أيام" data-en="7-day results guarantee">نتائج مضمونة في 7 أيام</span></span>
-      <div class="trust-sep"></div>
-      <span class="trust-item" data-ar="🇲🇦 مقرنا فاس، المغرب" data-en="🇲🇦 Based in Fes, Morocco">🇲🇦 مقرنا فاس، المغرب</span>
+      <div class="hero-trust">
+        <div class="trust-avatars">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt=""/>
+          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt=""/>
+          <img src="https://randomuser.me/api/portraits/women/22.jpg" alt=""/>
+          <img src="https://randomuser.me/api/portraits/men/61.jpg" alt=""/>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item"><span class="trust-dot"></span>+150 boutiques Shopify lancées</div>
+        <div class="trust-sep"></div>
+        <div class="trust-item"><span class="trust-dot"></span>Clients en France, Europe, USA & Maroc</div>
+      </div>
     </div>
+
+    <div class="hero-form-col">
+      <div class="form-card" id="leadForm">
+        <div class="form-top">
+          <h2>📩 Démarrez votre projet Shopify</h2>
+          <p>Réponse sous 24h · Sans engagement</p>
+        </div>
+        <div class="form-body">
+          <form id="mainForm" novalidate>
+            <div class="field">
+              <label for="fname">Prénom</label>
+              <input type="text" id="fname" name="name" placeholder="Julien, Camille, Marc..." required autocomplete="name"/>
+            </div>
+            <div class="field">
+              <label for="femail">Email</label>
+              <input type="email" id="femail" name="email" placeholder="vous@exemple.com" required autocomplete="email"/>
+            </div>
+            <div class="field">
+              <label for="fphone">Téléphone / WhatsApp</label>
+              <input type="tel" id="fphone" name="phone" placeholder="+33 6 12 34 56 78" required autocomplete="tel"/>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              <span id="btnText">Envoyer ma demande</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
+          <p class="form-note">🔒 Vos données sont confidentielles — sans spam</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- TICKER -->
 <div class="ticker">
-  <div class="ticker-track">
-    <span class="tick"><b data-ar="ميتا أدز" data-en="Meta Ads">ميتا أدز</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="متاجر شوبيفاي" data-en="Shopify Stores">متاجر شوبيفاي</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="تسويق العيادات" data-en="Clinic Marketing">تسويق العيادات</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="صالونات الجمال" data-en="Beauty Salons">صالونات الجمال</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="تأجير السيارات" data-en="Car Rental">تأجير السيارات</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="أتمتة واتساب" data-en="WhatsApp Automation">أتمتة واتساب</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="CAPI سيرفر سايد" data-en="Server-Side CAPI">CAPI سيرفر سايد</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="ضمان النتائج" data-en="Results Guarantee">ضمان النتائج</b><span class="tick-sep">✦</span></span>
-    <!-- duplicate for loop -->
-    <span class="tick"><b data-ar="ميتا أدز" data-en="Meta Ads">ميتا أدز</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="متاجر شوبيفاي" data-en="Shopify Stores">متاجر شوبيفاي</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="تسويق العيادات" data-en="Clinic Marketing">تسويق العيادات</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="صالونات الجمال" data-en="Beauty Salons">صالونات الجمال</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="تأجير السيارات" data-en="Car Rental">تأجير السيارات</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="أتمتة واتساب" data-en="WhatsApp Automation">أتمتة واتساب</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="CAPI سيرفر سايد" data-en="Server-Side CAPI">CAPI سيرفر سايد</b><span class="tick-sep">✦</span></span>
-    <span class="tick"><b data-ar="ضمان النتائج" data-en="Results Guarantee">ضمان النتائج</b><span class="tick-sep">✦</span></span>
+  <div class="ticker-track" id="tickerTrack">
+    <span class="tick"><b>Dropshipping</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>E-commerce & marque propre</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Produits digitaux</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Sites d'affiliation</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Print on Demand</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Formations & coaching</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Abonnements</b><span class="tick-sep">•</span></span>
+    <span class="tick"><b>Refonte Shopify</b><span class="tick-sep">•</span></span>
   </div>
 </div>
 
-<!-- NICHES -->
-<section class="niches" id="niches">
+<!-- SERVICES -->
+<div class="niches" id="services">
   <div class="container">
-    <div class="sec-label" data-ar="القطاعات التي نخدمها" data-en="Industries We Serve">القطاعات التي نخدمها</div>
-    <h2 class="sec-title"><span data-ar='وكالة واحدة — <span class="green">كل القطاعات</span>' data-en='One Agency — <span class="green">Every Niche</span>'>وكالة واحدة — <span class="green">كل القطاعات</span></span></h2>
-    <p class="sec-sub" data-ar="نتخصص في عدد محدود من القطاعات لتكون كل حملة مبنيةً على منهج مُجرَّب — لا تخمين ولا محاولات عشوائية." data-en="We specialize in a handful of industries so every campaign is built on a proven playbook — not guesswork.">نتخصص في عدد محدود من القطاعات حتى تكون كل حملة مبنية على playbook مجرب — مش تجارب وخطأ.</p>
+    <div class="sec-label">Ce qu'on construit</div>
+    <h2 class="sec-title">Une boutique Shopify pour <span class="gr">chaque type de projet</span></h2>
+    <p class="sec-sub">On ne fait pas que du template — chaque boutique est pensée pour son business model, son marché et son trafic publicitaire.</p>
     <div class="niches-grid">
-
-      <a href="/ar/" class="ncard c-ecom featured">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&auto=format&q=80" alt="Shopify E-commerce Morocco" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-ecom" data-ar="🛍️ إيكوميرس · شوبيفاي" data-en="🛍️ E-Commerce · Shopify">🛍️ إيكوميرس · شوبيفاي</span>
-          <h3 data-ar="متاجر شوبيفاي COD + ميتا أدز" data-en="COD Shopify Stores + Meta Ads">متاجر شوبيفاي COD + ميتا أدز</h3>
-          <p data-ar="نبني ونحسّن متاجر شوبيفاي للبائعين المغاربة بنظام الدفع عند الاستلام — مع حملات ميتا أدز ROAS عالي. إعداد Pixel و CAPI كاملاً." data-en="We build and optimize Shopify stores for Moroccan COD sellers — then drive qualified buyers with high-ROAS Meta Ads. Full Pixel + CAPI setup included.">نبني ونحسّن متاجر شوبيفاي للبائعين المغاربة بنظام الدفع عند الاستلام — مع حملات ميتا أدز ROAS عالي. إعداد Pixel و CAPI كاملاً.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat" data-ar="متوسط ROAS <strong>×3.2</strong> · إطلاق في <strong>7 أيام</strong>" data-en="Avg. ROAS <strong>×3.2</strong> · Launch in <strong>7 days</strong>">متوسط ROAS <strong>×3.2</strong> · إطلاق في <strong>7 أيام</strong></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/clinic/" class="ncard c-med">
-        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&auto=format&q=80" alt="Clinic" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-med" data-ar="🏥 عيادات طبية" data-en="🏥 Medical Clinics">🏥 عيادات طبية</span>
-          <h3 data-ar="عيادات طبية عامة" data-en="General Medical Clinics">عيادات طبية عامة</h3>
-          <p data-ar="نظام اكتساب مرضى جدد مع أتمتة واتساب وتذكيرات المواعيد." data-en="Patient acquisition funnels + WhatsApp automation + appointment reminders.">نظام اكتساب مرضى جدد مع أتمتة واتساب وتذكيرات المواعيد.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><strong data-ar="+30" data-en="+30">+30</strong> <span data-ar="مريض/شهر" data-en="patients/month">مريض/شهر</span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/clinic/dental/" class="ncard c-dent">
-        <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&auto=format&q=80" alt="Dental" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-dent" data-ar="🦷 عيادات الأسنان" data-en="🦷 Dental Clinics">🦷 عيادات الأسنان</span>
-          <h3 data-ar="عيادات الأسنان" data-en="Dental Clinics">عيادات الأسنان</h3>
-          <p data-ar="حملات لكل خدمة: تبييض، تقويم، زراعة. تخفيض الغياب بـ 70%." data-en="Per-service campaigns: whitening, braces, implants. 70% fewer no-shows.">حملات لكل خدمة: تبييض، تقويم، زراعة. تخفيض الغياب بـ 70%.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><strong>+28</strong> <span data-ar="موعد/شهر" data-en="appts/month">موعد/شهر</span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/clinic/aesthetic/" class="ncard c-aest">
-        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&q=80" alt="Aesthetic" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-aest" data-ar="✨ عيادات التجميل" data-en="✨ Aesthetic Clinics">✨ عيادات التجميل</span>
-          <h3 data-ar="عيادات التجميل والليزر" data-en="Aesthetic & Laser Clinics">عيادات التجميل والليزر</h3>
-          <p data-ar="إعلانات قبل/بعد لبوتوكس وفيلر وليزر + إدارة ريلز إنستاغرام." data-en="Before/after ads for Botox, filler, laser + Instagram Reels management.">إعلانات قبل/بعد لبوتوكس وفيلر وليزر + إدارة ريلز إنستاغرام.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><strong>+20</strong> <span data-ar="عميل/شهر" data-en="clients/month">عميل/شهر</span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/salon/" class="ncard c-sal">
-        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&q=80" alt="Salon" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-sal" data-ar="💅 صالونات التجميل" data-en="💅 Beauty Salons">💅 صالونات التجميل</span>
-          <h3 data-ar="صالونات الشعر والجمال" data-en="Hair & Beauty Salons">صالونات الشعر والجمال</h3>
-          <p data-ar="صفحات حجز + ميتا أدز محلية + أتمتة تذكير + جمع آراء جوجل." data-en="Booking pages + local Meta Ads + reminder automation + Google reviews.">صفحات حجز + ميتا أدز محلية + أتمتة تذكير + جمع آراء جوجل.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><strong>+25</strong> <span data-ar="حجز/شهر" data-en="bookings/month">حجز/شهر</span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/rentalcars/" class="ncard c-rent">
-        <img src="https://images.unsplash.com/photo-1485291571150-772bcfc10da5?w=600&auto=format&q=80" alt="Car Rental" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-rent" data-ar="🚗 تأجير السيارات" data-en="🚗 Car Rental">🚗 تأجير السيارات</span>
-          <h3 data-ar="Location de Voiture" data-en="Car Rental Agencies">Location de Voiture</h3>
-          <p data-ar="حجوزات مباشرة بدون عمولة OTA. Pixel + CAPI + صفحة هبوط." data-en="Direct bookings with zero OTA commission. Full Pixel + CAPI + landing page.">حجوزات مباشرة بدون عمولة OTA. Pixel + CAPI + صفحة هبوط.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><span data-ar="حجز مباشر — <strong>0% عمولة</strong>" data-en="Direct bookings — <strong>0% commission</strong>">حجز مباشر — <strong>0% عمولة</strong></span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/rihlaSprinter/" class="ncard c-trans">
-        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&auto=format&q=80" alt="Transport" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-trans" data-ar="🚌 النقل" data-en="🚌 Transport">🚌 النقل</span>
-          <h3 data-ar="رحلة سبرينتر" data-en="Rihla Sprinter">رحلة سبرينتر</h3>
-          <p data-ar="نظام حجز سبرينتر وباص — واتساب فيرست مع تأكيد فوري واختيار المقاعد." data-en="Sprinter & bus booking system — WhatsApp-first with instant confirmation and seat selection.">نظام حجز سبرينتر وباص — واتساب فيرست مع تأكيد فوري واختيار المقاعد.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><span data-ar="تأكيد <strong>فوري</strong> واتساب" data-en="Instant WhatsApp <strong>confirmation</strong>">تأكيد <strong>فوري</strong> واتساب</span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
-      <a href="/en/" class="ncard c-web">
-        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&auto=format&q=80" alt="Web Dev" loading="lazy" />
-        <div class="ncard-body">
-          <span class="ncard-badge b-web" data-ar="💻 مواقع وتطبيقات" data-en="💻 Web & Apps">💻 مواقع وتطبيقات</span>
-          <h3 data-ar="مواقع مخصصة وتطبيقات" data-en="Custom Websites & Apps">مواقع مخصصة وتطبيقات</h3>
-          <p data-ar="مواقع احترافية، تطبيقات أندرويد، لوحات تحكم، وشات بوت AI — لمن يحتاج أكثر من قالب." data-en="Bespoke sites, Android apps, dashboards, and AI chatbots — for businesses that need more than a template.">مواقع احترافية، تطبيقات أندرويد، لوحات تحكم، وشات بوت AI — لمن يحتاج أكثر من قالب.</p>
-        </div>
-        <div class="ncard-foot">
-          <span class="ncard-stat"><span data-ar="من التصميم <strong>للإطلاق في 14 يوم</strong>" data-en="Design to <strong>live in 14 days</strong>">من التصميم <strong>للإطلاق في 14 يوم</strong></span></span>
-          <span class="ncard-arrow">←</span>
-        </div>
-      </a>
-
+      <div class="ncard">
+        <span class="ncard-icon">📦</span>
+        <h3>Boutique Dropshipping clé en main</h3>
+        <p>Thème rapide, fournisseurs connectés, pages produit qui convainquent — prête à scaler avec vos publicités dès le lancement.</p>
+      </div>
+      <div class="ncard">
+        <span class="ncard-icon">🛍️</span>
+        <h3>E-commerce & marque propre</h3>
+        <p>Boutique premium pour votre propre marque — branding, fiches produit, checkout optimisé et intégrations logistiques.</p>
+      </div>
+      <div class="ncard">
+        <span class="ncard-icon">💻</span>
+        <h3>Produits digitaux & formations</h3>
+        <p>Vente d'ebooks, templates, formations ou abonnements — livraison automatique, paiements sécurisés, zéro friction.</p>
+      </div>
+      <div class="ncard">
+        <span class="ncard-icon">🔗</span>
+        <h3>Sites d'affiliation & comparateurs</h3>
+        <p>Structure pensée SEO et conversion pour rediriger vers vos offres partenaires avec un design qui inspire confiance.</p>
+      </div>
+      <div class="ncard">
+        <span class="ncard-icon">🔄</span>
+        <h3>Refonte & migration Shopify</h3>
+        <p>Votre boutique existe déjà mais elle ne convertit pas ? On audite, on redesign et on optimise la vitesse et le tunnel d'achat.</p>
+      </div>
+      <div class="ncard">
+        <span class="ncard-icon">🎯</span>
+        <h3>Shopify + Ads intégrées</h3>
+        <p>Pixel Meta, CAPI, Google Ads et TikTok configurés proprement dès le départ pour que chaque euro dépensé soit mesuré.</p>
+      </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- PORTFOLIO -->
+<div class="portfolio" id="realisations">
+  <div class="container">
+    <div class="sec-label">Aperçu</div>
+    <h2 class="sec-title">Le genre de boutique <span class="gr">qu'on construit</span></h2>
+    <p class="sec-sub">Un aperçu du style et des résultats qu'on vise pour chaque boutique — design premium, données de vente en temps réel, intégrations publicitaires natives.</p>
+    <div class="showcase-slider" id="showcaseSlider">
+      <div class="showcase-track" id="showcaseTrack">
+        <div class="showcase-slide"><img src="/assets/showcase/showcase-1.png" alt="Exemple de boutique Shopify AmraniAds — design premium"/></div>
+        <div class="showcase-slide"><img src="/assets/showcase/showcase-2.png" alt="Exemple de boutique Shopify AmraniAds — analyse concurrentielle et conversion"/></div>
+      </div>
+      <button type="button" class="showcase-arrow prev" id="showcasePrev">‹</button>
+      <button type="button" class="showcase-arrow next" id="showcaseNext">›</button>
+      <div class="showcase-dots" id="showcaseDots">
+        <span class="showcase-dot active" data-i="0"></span>
+        <span class="showcase-dot" data-i="1"></span>
+      </div>
+    </div>
+    <p class="portfolio-note">Envie de voir les boutiques réelles livrées à nos clients ? <a href="/portfolio/" style="color:var(--green-d);font-weight:700;text-decoration:none">Voir nos réalisations →</a></p>
+  </div>
+</div>
 
 <!-- PROCESS -->
-<section class="process" id="process">
+<div class="process" id="methode">
   <div class="container">
-    <div class="sec-label" data-ar="منهجيّتنا" data-en="How It Works">منهجيّتنا</div>
-    <h2 class="sec-title"><span data-ar='من الصفر إلى <span class="green">تدفّق مستمر للعملاء</span> في 7 أيام' data-en='From Zero to <span class="green">Leads Flowing</span> in 7 Days'>من الصفر إلى <span class="green">تدفّق مستمر للعملاء</span> في 7 أيام</span></h2>
-    <p class="sec-sub" data-ar="منهجية واضحة ومُجرَّبة — دون إجراءات تهيئة مطوّلة أو جداول زمنية مبهمة." data-en="A clear, repeatable process — no lengthy onboarding, no vague timelines.">منهجية واضحة ومُجرَّبة — دون إجراءات تهيئة مطوّلة أو جداول زمنية مبهمة.</p>
+    <div class="sec-label">Notre méthode</div>
+    <h2 class="sec-title">De l'idée à la <span class="gr">première vente</span></h2>
+    <p class="sec-sub">Un processus clair en 4 étapes, sans surprise et sans jargon technique à gérer vous-même.</p>
     <div class="proc-steps">
       <div class="proc-step">
-        <div class="proc-num">١</div>
-        <h3 data-ar="مكالمة مجانية 30 دقيقة" data-en="Free 30-Min Call">مكالمة مجانية 30 دقيقة</h3>
-        <p data-ar="نُحلّل وضعك الراهن والمنافسين، ونحدد النتائج الممكنة في قطاعك بالمغرب." data-en="We audit your current situation, competition, and what results are realistic for your niche.">نُحلّل وضعك الراهن والمنافسين، ونحدد النتائج الممكنة في قطاعك بالمغرب.</p>
+        <div class="proc-num">1</div>
+        <h3>Consultation gratuite</h3>
+        <p>On qualifie votre projet — niche, marché cible, budget — pour vous proposer la bonne approche.</p>
       </div>
       <div class="proc-step">
-        <div class="proc-num">٢</div>
-        <h3 data-ar="بناء مسار التحويل الكامل" data-en="Full Funnel Build">بناء مسار التحويل الكامل</h3>
-        <p data-ar="نُنشئ صفحة الهبوط، نُهيّئ Pixel + CAPI، نصمم المحتوى الإعلاني، ونربط أتمتة واتساب." data-en="We build your landing page, set up Pixel + CAPI, craft ad creatives, and wire WhatsApp automation.">نُنشئ صفحة الهبوط، نُهيّئ Pixel + CAPI، نصمم المحتوى الإعلاني، ونربط أتمتة واتساب.</p>
+        <div class="proc-num">2</div>
+        <h3>Stratégie & design</h3>
+        <p>Structure de la boutique, branding, sélection produits et maquette validée avec vous.</p>
       </div>
       <div class="proc-step">
-        <div class="proc-num">٣</div>
-        <h3 data-ar="إطلاق وتحسين يومي" data-en="Launch & Daily Optimize">إطلاق وتحسين يومي</h3>
-        <p data-ar="تنطلق الحملات ويبدأ العملاء في التدفّق. نُحسّن يومياً خلال الأسبوع الأول لضمان تحقيق الهدف." data-en="Campaigns go live, leads start flowing. We optimize daily in week one to hit the guaranteed target.">تنطلق الحملات ويبدأ العملاء في التدفّق. نُحسّن يومياً خلال الأسبوع الأول لضمان تحقيق الهدف.</p>
+        <div class="proc-num">3</div>
+        <h3>Développement & intégrations</h3>
+        <p>Build Shopify complet — paiement, logistique, pixels publicitaires, emailing.</p>
       </div>
       <div class="proc-step">
-        <div class="proc-num">٤</div>
-        <h3 data-ar="تقارير وتطوير مستمر" data-en="Report & Scale">تقارير وتطوير مستمر</h3>
-        <p data-ar="تقارير أسبوعية، واختبار A/B مستمر، وعقد شهري يُديم النموّ ويُضاعفه." data-en="Weekly performance reports, ongoing A/B testing, and a monthly retainer that compounds growth.">تقارير أسبوعية، واختبار A/B مستمر، وعقد شهري يُديم النموّ ويُضاعفه.</p>
+        <div class="proc-num">4</div>
+        <h3>Lancement & scaling</h3>
+        <p>Votre boutique est prête à recevoir du trafic — on reste disponible pour ajuster et scaler.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- STATS -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-inner">
-      <div><span class="stat-n">+30</span><span class="stat-l" data-ar="عميل نشط في المغرب" data-en="Active clients across Morocco">عميل نشط في المغرب</span></div>
-      <div><span class="stat-n">×3.2</span><span class="stat-l" data-ar="متوسط ROAS على ميتا أدز" data-en="Average ROAS on Meta Ads">متوسط ROAS على ميتا أدز</span></div>
-      <div><span class="stat-n">7</span><span class="stat-l" data-ar="أيام ضمان أول نتيجة" data-en="Days to first results — guaranteed">أيام ضمان أول نتيجة</span></div>
-      <div><span class="stat-n">8</span><span class="stat-l" data-ar="قطاعات بمنهج مُجرَّب" data-en="Industries with proven playbooks">قطاعات بـ playbook مجرب</span></div>
-    </div>
+<div class="stats" id="resultats">
+  <div class="container stats-inner">
+    <div><span class="stat-n">+150</span><span class="stat-l">Boutiques Shopify lancées</span></div>
+    <div><span class="stat-n">4</span><span class="stat-l">Marchés desservis — France, Europe, USA, Maroc</span></div>
+    <div><span class="stat-n">&lt;15j</span><span class="stat-l">Délai moyen de livraison</span></div>
+    <div><span class="stat-n">24/7</span><span class="stat-l">Support pendant le lancement</span></div>
   </div>
-</section>
+</div>
 
 <!-- WHY -->
-<section class="why" id="why">
+<div class="why">
   <div class="container">
-    <div class="sec-label" data-ar="لماذا AmraniAds" data-en="Why AmraniAds">لماذا AmraniAds</div>
-    <h2 class="sec-title"><span data-ar='لسنا وكالةً عاديةً — <span class="green">نتائج مضمونة</span>' data-en='Not a Generic Agency — <span class="green">Guaranteed Results</span>'>مش وكالة عادية — <span class="green">نتائج مضمونة</span></span></h2>
-    <p class="sec-sub" data-ar="معظم الوكالات تكتفي بإدارة إعلاناتك. نحن نبني منظومةً متكاملةً بضمان مكتوب." data-en="Most agencies just run your ads. We build a full system with a written guarantee.">معظم الوكالات تديرك. نحن نبني نظاماً كاملاً بضمان مكتوب.</p>
+    <div class="sec-label">Pourquoi AmraniAds</div>
+    <h2 class="sec-title">Ni freelance isolé, <span class="gr">ni agence trop lente</span></h2>
+    <p class="sec-sub">Une petite équipe spécialisée Shopify, rapide à exécuter, avec les intégrations publicitaires déjà maîtrisées.</p>
     <div class="why-grid">
       <div class="why-list">
         <div class="why-item">
+          <div class="why-ico">⚡</div>
+          <div>
+            <div class="why-ttl">Livraison rapide</div>
+            <div class="why-dsc">Boutique prête à vendre en moins de 15 jours en moyenne — pas des mois d'allers-retours.</div>
+          </div>
+        </div>
+        <div class="why-item">
           <div class="why-ico">🎯</div>
           <div>
-            <div class="why-ttl" data-ar="Playbooks مخصصة لكل قطاع" data-en="Niche-Specific Playbooks">Playbooks مخصصة لكل قطاع</div>
-            <div class="why-dsc" data-ar="لكل قطاع قوالب إعلانية وعناصر جذب وصفحات هبوط مُجرَّبة على عشرات العملاء — لا تُبنى من الصفر في كل مرة." data-en="Every niche has proven ad templates, hooks, and pages — refined across dozens of similar clients, not built from scratch.">كل نيش عنده قوالب إعلانات وهوكس وصفحات مجربة — مش مبنية من الصفر معك.</div>
+            <div class="why-ttl">Pensée conversion, pas juste esthétique</div>
+            <div class="why-dsc">Chaque page est construite pour transformer le trafic publicitaire en commandes.</div>
           </div>
         </div>
         <div class="why-item">
-          <div class="why-ico">📡</div>
+          <div class="why-ico">🔌</div>
           <div>
-            <div class="why-ttl" data-ar="Meta Pixel + CAPI كامل" data-en="Full Meta Pixel + CAPI">Meta Pixel + CAPI كامل</div>
-            <div class="why-dsc" data-ar="Conversions API من جانب الخادم على كل مسار تحويل — لا تستطيع أدوات الحجب أو نظام iOS تعطيل التتبّع أو رفع تكلفة الاكتساب." data-en="Server-side CAPI on every funnel — so iOS blockers and ad blockers can't break your tracking or inflate CPA.">Conversions API من السيرفر على كل فانيل — حتى ad blockers و iOS ما يكسروش تراكينغك.</div>
+            <div class="why-ttl">Intégrations publicitaires natives</div>
+            <div class="why-dsc">Meta Pixel, CAPI, Google Ads et TikTok configurés correctement dès le lancement.</div>
           </div>
         </div>
         <div class="why-item">
-          <div class="why-ico">🛡️</div>
+          <div class="why-ico">🌍</div>
           <div>
-            <div class="why-ttl" data-ar="ضمان مكتوب بالنتائج" data-en="Written Results Guarantee">ضمان مكتوب بالنتائج</div>
-            <div class="why-dsc" data-ar="نضع الهدف كتابةً. إن لم نحقّقه خلال 7 أيام، نُعيد إليك مبلغك كاملاً دون أي نقاش." data-en="We put the target in writing. If we don't hit it in 7 days — full refund, no questions asked.">نكتب الهدف. إذا ما وصلناش في 7 أيام — كنردو ليك فلوسك كاملة بدون نقاش.</div>
-          </div>
-        </div>
-        <div class="why-item">
-          <div class="why-ico">🇲🇦</div>
-          <div>
-            <div class="why-ttl" data-ar="استراتيجية مغربية 100%" data-en="100% Morocco-First Strategy">استراتيجية مغربية 100%</div>
-            <div class="why-dsc" data-ar="محتوى إعلاني موجَّه للمستهلك المغربي، نظام الدفع عند الاستلام، واتساب كقناة تحويل رئيسية — نعرف السوق المغربية من الداخل." data-en="Darija copy, COD logistics, WhatsApp as primary channel, Moroccan consumer behavior — we know the market from inside.">كوبي بالدارجة، COD، واتساب كقناة رئيسية، سلوك المستهلك المغربي — نعرفه من الداخل.</div>
+            <div class="why-ttl">Habitués aux marchés FR, EU, US & Maroc</div>
+            <div class="why-dsc">Paiements, langues, devises et logistique adaptés à votre marché cible.</div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="why-card">
-          <h3 data-ar="Tech Stack الكامل" data-en="Our Full Tech Stack">Tech Stack الكامل</h3>
-          <p data-ar="كل عميل يحصل على منظومة متكاملة — لا إعلانات وحسب." data-en="Every client gets a full integrated system — not just ads.">كل عميل يحصل على نظام متكامل — مش بس إعلانات.</p>
-          <div class="stack-row"><span class="stack-ico">📘</span><span class="stack-lbl">Meta Ads Manager</span><span class="stack-sub" data-ar="حملات + محتوى إبداعي" data-en="Campaigns + Creative">حملات + كريتيف</span><span class="stack-pill" data-ar="أساسي" data-en="Core">أساسي</span></div>
-          <div class="stack-row"><span class="stack-ico">📡</span><span class="stack-lbl">Meta CAPI</span><span class="stack-sub" data-ar="من جانب الخادم" data-en="Server-Side Events">سيرفر سايد</span><span class="stack-pill" data-ar="دائماً" data-en="Always On">دائماً</span></div>
-          <div class="stack-row"><span class="stack-ico">🛍️</span><span class="stack-lbl">Shopify</span><span class="stack-sub" data-ar="متجر الدفع عند الاستلام + تحسين" data-en="COD store + optimization">متجر COD + تحسين</span><span class="stack-pill" data-ar="تجارة إلكترونية" data-en="E-com">تجارة إلكترونية</span></div>
-          <div class="stack-row"><span class="stack-ico">💬</span><span class="stack-lbl" data-ar="أتمتة واتساب" data-en="WhatsApp Automation">أتمتة واتساب</span><span class="stack-sub" data-ar="عملاء محتملون + تذكيرات" data-en="Leads + Reminders">عملاء + تذكيرات</span><span class="stack-pill" data-ar="جميع القطاعات" data-en="All Niches">كل النيشات</span></div>
-          <div class="stack-row"><span class="stack-ico">📊</span><span class="stack-lbl">Google Sheets CRM</span><span class="stack-sub" data-ar="عملاء مسجلين تلقائياً" data-en="Auto-logged leads">عملاء مسجلين تلقائياً</span><span class="stack-pill" data-ar="مشمول" data-en="Included">مشمول</span></div>
-          <div class="stack-row"><span class="stack-ico">🤖</span><span class="stack-lbl" data-ar="روبوت محادثة ذكي" data-en="AI Chatbot">روبوت محادثة ذكي</span><span class="stack-sub" data-ar="تأهيل العملاء على مدار الساعة" data-en="24/7 lead qualification">تأهيل عملاء 24/7</span><span class="stack-pill" data-ar="إضافي" data-en="Add-on">إضافي</span></div>
-        </div>
+      <div class="why-card">
+        <h3>Notre stack</h3>
+        <p>Les mêmes outils que les boutiques Shopify qui scalent réellement.</p>
+        <div class="stack-row"><span class="stack-ico">🛍️</span><span class="stack-lbl">Shopify</span><span class="stack-sub">Plateforme</span></div>
+        <div class="stack-row"><span class="stack-ico">💳</span><span class="stack-lbl">Stripe / PayPal / Shopify Payments</span><span class="stack-sub">Paiement</span></div>
+        <div class="stack-row"><span class="stack-ico">📣</span><span class="stack-lbl">Meta Ads / Google Ads / TikTok</span><span class="stack-sub">Acquisition</span></div>
+        <div class="stack-row"><span class="stack-ico">✉️</span><span class="stack-lbl">Klaviyo</span><span class="stack-sub">Email & SMS</span></div>
+        <div class="stack-row"><span class="stack-ico">📦</span><span class="stack-lbl">Fournisseurs EU/US</span><span class="stack-sub">Logistique</span></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- TESTIMONIALS -->
-<section class="testi">
+<div class="testi">
   <div class="container">
-    <div class="sec-label" data-ar="نتائج العملاء" data-en="Client Results">نتائج العملاء</div>
-    <h2 class="sec-title"><span data-ar='أعمال حقيقية. <span class="green">أرقام حقيقية.</span>' data-en='Real Businesses. <span class="green">Real Numbers.</span>'>أعمال حقيقية. <span class="green">أرقام حقيقية.</span></span></h2>
-    <p class="sec-sub" data-ar="من فاس إلى الدار البيضاء — يُحقّق عملاؤنا نتائج قابلة للقياس منذ الأسبوع الأول." data-en="From Fes to Casablanca — our clients see measurable results within the first week.">من فاس لكازا — عملاؤنا يشوفون نتائج قابلة للقياس في الأسبوع الأول.</p>
+    <div class="sec-label">Ils nous ont fait confiance</div>
+    <h2 class="sec-title">Des boutiques <span class="gr">lancées et rentables</span></h2>
     <div class="testi-grid">
       <div class="testi-card">
-        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text" data-ar='"كان متجرنا يستقطب الزوار دون تحقيق مبيعات. أعادت AmraniAds بناء مسار التحويل وهيّأت CAPI، فحققنا ×3.8 في العائد على الإنفاق خلال الشهر الأول. غيّرت طريقتنا في العمل بنظام الدفع عند الاستلام كلياً."' data-en='"Our Shopify store was getting traffic but no sales. AmraniAds rebuilt the funnel, set up CAPI, and in month one we hit ×3.8 ROAS. Completely changed how we do COD."'>"متجرنا كان يجيب traffic بدون بيع. AmraniAds بنا الفانيل من جديد، عدّو CAPI، وفي الشهر الأول وصلنا ×3.8 ROAS. غيّر طريقة كنديرو بيه COD."</p>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Boutique livrée en 12 jours, pixel et CAPI configurés parfaitement dès le premier jour. On a pu lancer nos pubs vers la France immédiatement."</p>
         <div class="testi-author">
-          <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" />
-          <div><div class="testi-name" data-ar="ياسين بنجلون" data-en="Yassine Benjelloun">ياسين بنجلون</div><div class="testi-role" data-ar="صاحب متجر شوبيفاي · الدار البيضاء" data-en="Shopify Store Owner · Casablanca">صاحب متجر شوبيفاي · الدار البيضاء</div></div>
+          <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/54.jpg" alt=""/>
+          <div><div class="testi-name">Yassine El Idrissi</div><div class="testi-role">Dropshipping — Casablanca, Maroc</div></div>
         </div>
       </div>
       <div class="testi-card">
-        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text" data-ar='"كنت أعتمد على الإحالات حصراً. بعد الإطلاق مع AmraniAds، تلقّيت 34 استفساراً من مرضى جدد في غضون 10 أيام. وفّرت لي أتمتة واتساب ساعتين يومياً."' data-en='"I was relying on referrals only. After launching with AmraniAds, my clinic had 34 new patient inquiries in 10 days. The WhatsApp automation saved me 2 hours a day."'>"كنت نعتمد على الإحالات فقط. بعد الإطلاق مع AmraniAds، جاتني 34 استفسار مريض في 10 أيام. الأتمتة ديال واتساب وفرت عليا ساعتين في اليوم."</p>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Enfin une équipe qui comprend le e-commerce et pas juste le design. Ma boutique de formations vend en automatique en Europe depuis le lancement."</p>
         <div class="testi-author">
-          <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="" />
-          <div><div class="testi-name" data-ar="د. هاجر العلوي" data-en="Dr. Hajar Alaoui">د. هاجر العلوي</div><div class="testi-role" data-ar="طبيبة عامة · فاس" data-en="General Practitioner · Fes">طبيبة عامة · فاس</div></div>
+          <img class="testi-avatar" src="https://randomuser.me/api/portraits/women/33.jpg" alt=""/>
+          <div><div class="testi-name">Sara Bennani</div><div class="testi-role">Produits digitaux — Rabat, Maroc</div></div>
         </div>
       </div>
       <div class="testi-card">
-        <div class="testi-stars">⭐⭐⭐⭐⭐</div>
-        <p class="testi-text" data-ar='"يجلب لنا مسار تأجير السيارات 15 إلى 20 حجزاً مباشراً أسبوعياً — لم نعد ندفع 25% لمنصات الحجز الوسيطة. كان العائد على الاستثمار في الشهر الأول فوق التوقعات تماماً."' data-en='"The car rental funnel gets us 15-20 direct bookings a week — no more paying 25% to OTAs. ROI in month one was beyond what I expected."'>"الفانيل ديال تأجير السيارات جابلنا 15-20 حجز مباشر في الأسبوع — ما عدناش كندفعو 25% لـ OTA. ROI في الشهر الأول كان ما كنتوقعوش."</p>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Communication fluide, boutique adaptée au marché français dès le départ, checkout impeccable. Très professionnel."</p>
         <div class="testi-author">
-          <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/76.jpg" alt="" />
-          <div><div class="testi-name" data-ar="كريم وزاني" data-en="Karim Ouazzani">كريم وزاني</div><div class="testi-role" data-ar="وكالة تأجير سيارات · مراكش" data-en="Car Rental Agency · Marrakech">وكالة تأجير سيارات · مراكش</div></div>
+          <img class="testi-avatar" src="https://randomuser.me/api/portraits/men/23.jpg" alt=""/>
+          <div><div class="testi-name">Julien Moreau</div><div class="testi-role">E-commerce — Lyon, France</div></div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<!-- FAQ -->
+<div class="faq" id="faq">
+  <div class="container">
+    <div class="sec-label">Questions fréquentes</div>
+    <h2 class="sec-title">Ce que vous devez <span class="gr">savoir avant de démarrer</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Combien coûte la création d'une boutique Shopify avec vous ?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Ça dépend de votre projet — dropshipping, marque propre ou produits digitaux n'ont pas les mêmes besoins. Répondez à quelques questions rapides sur notre page de démarrage et on vous donne un chiffrage adapté lors de l'appel gratuit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Combien de temps prend la création de ma boutique ?<span class="plus">+</span></button>
+        <div class="faq-a"><p>En moyenne moins de 15 jours entre le premier appel et une boutique prête à recevoir du trafic publicitaire, selon la complexité du projet.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Gérez-vous aussi les publicités après le lancement ?<span class="plus">+</span></button>
+        <div class="faq-a"><p>On configure toutes les intégrations publicitaires (Pixel, CAPI, catalogues) dès la construction. La gestion des campagnes elle-même peut être discutée séparément selon vos besoins.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Travaillez-vous avec des clients hors de France ?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Oui — nos clients sont en France, en Europe, aux États-Unis et au Maroc. On adapte langue, devise, moyens de paiement et logistique à votre marché cible.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Suis-je propriétaire de ma boutique une fois livrée ?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Oui, entièrement. La boutique Shopify vous appartient — vous gardez un accès complet administrateur dès la livraison.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CTA -->
-<section class="cta" id="contact">
+<div class="cta">
   <div class="cta-inner">
-    <h2><span data-ar='هل أنتَ مستعدٌّ لبناء <span class="green">منظومة اكتساب عملاء</span> فعّالة؟' data-en='Ready to Build a <span class="green">Lead System</span> That Works?'>جاهز تبني <span class="green">نظام عملاء</span> يشتغل؟</span></h2>
-    <p data-ar="احجز مكالمةً استراتيجية مجانية لمدة 30 دقيقة. سنُحلّل وضعك الحالي، ونستعرض ما هو ممكن في قطاعك، ونُقدّم لك خطة واضحة — دون عروض ترويجية ودون ضغط." data-en="Book a free 30-minute strategy call. We'll audit your situation, show what's possible in your niche, and give you a clear plan — no pitch, no pressure.">احجز مكالمة مجانية 30 دقيقة. نحلل وضعك، نشوفوا ما هو الممكن في نيشك، ونعطيك خطة واضحة — بدون pitch وبدون ضغط.</p>
+    <h2>Prêt à lancer votre <span class="gr">boutique Shopify</span> ?</h2>
+    <p>Répondez à quelques questions rapides sur votre projet — on revient vers vous avec un plan clair, sans engagement.</p>
     <div class="cta-btns">
-      <a href="/ar/" class="btn-white" data-ar="🇲🇦 التجارة الإلكترونية / شوبيفاي ←" data-en="🇲🇦 E-com / Shopify →">🇲🇦 إيكوميرس / شوبيفاي ←</a>
-      <a href="/en/" class="btn-outline-w" data-ar="🇬🇧 الصفحة الإنجليزية ←" data-en="🇬🇧 English Agency Page →">🇬🇧 الصفحة الإنجليزية ←</a>
+      <a href="/24h/" class="btn-white">Démarrer mon projet →</a>
+      <a href="https://wa.me/212627716149" target="_blank" class="btn-outline-w">💬 Discuter sur WhatsApp</a>
     </div>
-    <p style="color:rgba(255,255,255,.35);font-size:.78rem;margin-top:20px;">
-      <span data-ar="أو راسلنا مباشرة:" data-en="Or email us:">أو راسلنا مباشرة:</span>
-      <a href="mailto:amrani4online@gmail.com" style="color:var(--green);text-decoration:none;margin-right:4px;">amrani4online@gmail.com</a>
-    </p>
   </div>
-</section>
+</div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand-name">Amrani<span>Ads</span></div>
-      <p class="footer-brand-tag" data-ar="وكالة تسويق رقمي متخصصة للأعمال المغربية. ميتا أدز، شوبيفاي، وأنظمة تحويل تجلب عملاء حقيقيين." data-en="Performance marketing agency for Moroccan businesses. Meta Ads, Shopify, and conversion systems that generate real leads.">وكالة تسويق رقمي متخصصة للأعمال المغربية. ميتا أدز، شوبيفاي، وأنظمة تحويل تجلب عملاء حقيقيين.</p>
+      <div class="footer-logo-row">
+        <img src="/logo.png" alt="AmraniAds"/>
+        <div class="footer-brand-name">Amrani<span>Ads</span></div>
+      </div>
+      <p class="footer-brand-tag">Agence Shopify pour marques e-commerce, dropshipping, produits digitaux et sites d'affiliation — France, Europe, USA & Maroc.</p>
     </div>
     <div class="footer-col">
-      <h4 data-ar="الخدمات" data-en="Services">الخدمات</h4>
-      <a href="/ar/" data-ar="التجارة الإلكترونية / شوبيفاي" data-en="E-commerce / Shopify">التجارة الإلكترونية / شوبيفاي</a>
-      <a href="/clinic/" data-ar="عيادات طبية" data-en="Medical Clinics">عيادات طبية</a>
-      <a href="/clinic/dental/" data-ar="عيادات الأسنان" data-en="Dental Clinics">عيادات الأسنان</a>
-      <a href="/clinic/aesthetic/" data-ar="عيادات التجميل" data-en="Aesthetic Clinics">عيادات التجميل</a>
-      <a href="/salon/" data-ar="صالونات الجمال" data-en="Beauty Salons">صالونات الجمال</a>
+      <h4>Navigation</h4>
+      <a href="#services">Services</a>
+      <a href="#methode">Méthode</a>
+      <a href="#resultats">Résultats</a>
+      <a href="#faq">FAQ</a>
     </div>
     <div class="footer-col">
-      <h4 data-ar="المزيد" data-en="More">المزيد</h4>
-      <a href="/rentalcars/" data-ar="تأجير السيارات" data-en="Car Rental">تأجير السيارات</a>
-      <a href="/rihlaSprinter/" data-ar="رحلة سبرينتر" data-en="Rihla Sprinter">رحلة سبرينتر</a>
-      <a href="/en/" data-ar="مواقع ومتطبيقات" data-en="Web & Apps">مواقع وتطبيقات</a>
+      <h4>Services</h4>
+      <a href="/24h/">Créer ma boutique</a>
+      <a href="#services">Dropshipping</a>
+      <a href="#services">Produits digitaux</a>
+      <a href="#services">Sites d'affiliation</a>
     </div>
     <div class="footer-col">
-      <h4 data-ar="الوكالة" data-en="Company">الوكالة</h4>
-      <a href="/en/" data-ar="من نحن (EN)" data-en="About Us (EN)">من نحن (EN)</a>
-      <a href="mailto:amrani4online@gmail.com">amrani4online@gmail.com</a>
-      <a href="https://wa.me/212600000000" data-ar="واتساب" data-en="WhatsApp">واتساب</a>
+      <h4>Contact</h4>
+      <a href="https://wa.me/212627716149" target="_blank">💬 WhatsApp</a>
+      <a href="/24h/">Démarrer un projet</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p data-ar="© 2025 AmraniAds — فاس، المغرب. جميع الحقوق محفوظة." data-en="© 2025 AmraniAds — Fes, Morocco. All rights reserved.">© 2025 AmraniAds — فاس، المغرب. جميع الحقوق محفوظة.</p>
-    <a href="/en/" data-ar="الصفحة الإنجليزية" data-en="English Page">الصفحة الإنجليزية</a>
+    <p>© 2025 AmraniAds — Agence Shopify internationale</p>
+    <a href="/24h/">Démarrer mon projet →</a>
   </div>
 </footer>
 
+<div id="toast"></div>
+
 <script>
-  /* ── LANG SWITCHER ── */
-  let currentLang = 'ar';
+  const track=document.getElementById('tickerTrack');
+  track.innerHTML+=track.innerHTML;
 
-  // Initialize all text from data-ar on load
-  document.addEventListener('DOMContentLoaded', () => setLang('ar'));
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+  function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined}
+  function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined}
+  function genEventId(){return'lead_home_fr_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
 
-  function setLang(lang) {
-    currentLang = lang;
-    const isAr = lang === 'ar';
+  document.getElementById('mainForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const name=document.getElementById('fname').value.trim();
+    const email=document.getElementById('femail').value.trim();
+    const phone=document.getElementById('fphone').value.trim();
+    if(!name||!email||!phone){showToast('⚠️ Merci de remplir tous les champs');return}
 
-    // html dir + lang
-    document.documentElement.setAttribute('lang', lang);
-    document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
-    document.body.classList.toggle('en-mode', !isAr);
+    const submitBtn=document.getElementById('submitBtn');
+    const btnText=document.getElementById('btnText');
+    submitBtn.disabled=true;
+    btnText.textContent='⏳ Envoi en cours...';
 
-    // toggle active button
-    document.getElementById('btnAr').classList.toggle('active', isAr);
-    document.getElementById('btnEn').classList.toggle('active', !isAr);
+    const eventId=genEventId();
+    if(typeof fbq!=='undefined'){
+      fbq('track','Lead',{content_name:'Shopify Home FR - Hero Form',value:0},{eventID:eventId});
+    }
+    if(typeof gtag!=='undefined'){
+      gtag('event','generate_lead',{event_category:'form_submission',event_label:'Shopify Home FR - Hero Form'});
+    }
+    try{
+      await fetch('/api/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          name,phone,email,
+          service:'Boutique Shopify — Home FR',
+          eventId,
+          pixelId:'1038098258910639',
+          userAgent:navigator.userAgent,
+          eventSourceUrl:location.href,
+          fbp:getCookie('_fbp'),
+          fbc:getFbc()
+        })
+      });
+    }catch(_){}
+    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId);
+  });
 
-    // swap all data-ar / data-en text nodes
-    document.querySelectorAll('[data-ar]').forEach(el => {
-      const val = el.getAttribute('data-' + lang);
-      if (!val) return;
-      // for elements that contain HTML (h1 spans, etc.) use innerHTML
-      if (val.includes('<')) { el.innerHTML = val; }
-      else { el.textContent = val; }
+  (function(){
+    const track = document.getElementById('showcaseTrack');
+    const dots = document.querySelectorAll('#showcaseDots .showcase-dot');
+    const slides = document.querySelectorAll('#showcaseTrack .showcase-slide');
+    let i = 0;
+    function go(n){
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (i*100) + '%)';
+      dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+    }
+    document.getElementById('showcasePrev').addEventListener('click', ()=>go(i-1));
+    document.getElementById('showcaseNext').addEventListener('click', ()=>go(i+1));
+    dots.forEach(d=>d.addEventListener('click', ()=>go(Number(d.dataset.i))));
+    setInterval(()=>go(i+1), 6000);
+  })();
+
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item=btn.closest('.faq-item');
+      const ans=item.querySelector('.faq-a');
+      const wasOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null});
+      if(!wasOpen){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px'}
     });
+  });
 
-    // ncard arrows direction
-    document.querySelectorAll('.ncard-arrow').forEach(el => {
-      el.textContent = isAr ? '←' : '→';
-    });
-
-    // page title
-    document.title = isAr
-      ? 'AmraniAds — وكالة تسويق رقمي · المغرب'
-      : 'AmraniAds — Performance Marketing Agency · Morocco';
-
-    // ticker direction
-    document.querySelector('.ticker-track').style.animationName = isAr ? 'ticker-ar' : 'ticker-en';
-  }
-
-  /* ── SCROLL ANIMATIONS ── */
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting) { en.target.style.opacity = '1'; en.target.style.transform = 'translateY(0)'; }
-    });
-  }, { threshold: 0.05 });
-
-  document.querySelectorAll('.ncard, .why-item, .testi-card, .proc-step').forEach(el => {
-    el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)'}});
+  },{threshold:0.08});
+  document.querySelectorAll('.ncard,.proc-step,.testi-card,.why-item').forEach(el=>{
+    el.style.opacity='0';el.style.transform='translateY(20px)';
+    el.style.transition='opacity .5s ease,transform .5s ease';
     obs.observe(el);
   });
 </script>
