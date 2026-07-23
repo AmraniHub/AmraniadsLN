@@ -475,6 +475,15 @@
     window.scrollTo({top:document.querySelector('.funnel-wrap').offsetTop-20,behavior:'smooth'});
   }
 
+  // Auto-scroll new visitors straight into the form after a brief look at the headline
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      const wrap=document.querySelector('.funnel-wrap');
+      if(!wrap) return;
+      window.scrollTo({top:wrap.offsetTop-20, behavior:'smooth'});
+    }, 1200);
+  });
+
   document.querySelectorAll('.opt-grid').forEach(grid=>{
     const field=grid.dataset.field;
     grid.querySelectorAll('.opt-btn').forEach(btn=>{
