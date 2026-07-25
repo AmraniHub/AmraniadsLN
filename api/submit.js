@@ -101,6 +101,7 @@ module.exports = async function handler(req, res) {
                : srcUrl.includes('/rentalcars')        ? '🚗 Location Voiture'
                : srcUrl.includes('/location-voiture')  ? '🚗 Location Voiture'
                : srcUrl.includes('/dhb')               ? '💍 ماكينات الذهب والفضة'
+               : srcUrl.includes('/en24h')              ? '🌍🛍️ Shopify Store — International (EN)'
                : srcUrl.includes('/24h')                ? '🌍🛍️ Boutique Shopify — International'
                : srcUrl.includes('/en')                ? '🇬🇧 English Page'
                : srcUrl.includes('/shopify-fr')        ? '🛍️🇫🇷 Shopify FR Landing'
@@ -114,9 +115,10 @@ module.exports = async function handler(req, res) {
     hour: '2-digit', minute: '2-digit'
   });
 
-  const isRihla       = srcUrl.includes('/rihlaSprinter');
-  const isShehrazade  = srcUrl.includes('shehrazade');
-  const isShopifyIntl = srcUrl.includes('/24h');
+  const isRihla         = srcUrl.includes('/rihlaSprinter');
+  const isShehrazade    = srcUrl.includes('shehrazade');
+  const isShopifyIntlEn = srcUrl.includes('/en24h');
+  const isShopifyIntl   = srcUrl.includes('/24h') || isShopifyIntlEn;
 
   const msg = isRihla
     ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
@@ -137,12 +139,19 @@ module.exports = async function handler(req, res) {
       `🎯 الخدمة: ${service || '—'}\n` +
       `🕐 ${now}`
     : isShopifyIntl
-    ? `🌍🛍️ <b>NOUVEAU LEAD — Boutique Shopify (International)</b>\n\n` +
-      `👤 Prénom: ${name || '—'}\n` +
-      `📧 Email: ${email || '—'}\n` +
-      `📱 Téléphone: <code>${phone || '—'}</code>\n` +
-      `📝 Détails: ${notes || '—'}\n` +
-      `🕐 ${now}`
+    ? (isShopifyIntlEn
+      ? `🌍🛍️ <b>NEW LEAD — Shopify Store (International, EN)</b>\n\n` +
+        `👤 First name: ${name || '—'}\n` +
+        `📧 Email: ${email || '—'}\n` +
+        `📱 Phone: <code>${phone || '—'}</code>\n` +
+        `📝 Details: ${notes || '—'}\n` +
+        `🕐 ${now}`
+      : `🌍🛍️ <b>NOUVEAU LEAD — Boutique Shopify (International)</b>\n\n` +
+        `👤 Prénom: ${name || '—'}\n` +
+        `📧 Email: ${email || '—'}\n` +
+        `📱 Téléphone: <code>${phone || '—'}</code>\n` +
+        `📝 Détails: ${notes || '—'}\n` +
+        `🕐 ${now}`)
     : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
       `👤 الاسم: ${name}\n` +
       `📱 الواتساب: <code>${phone}</code>\n` +
