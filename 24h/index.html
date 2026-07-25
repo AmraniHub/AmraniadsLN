@@ -437,6 +437,7 @@
   function getCookie(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):undefined}
   function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined}
   function genEventId(){return'lead_shopify_intl_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
+  function genPurchaseEventId(){return'purchase_shopify_intl_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
 
   function goTo(n){
     steps.forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===n));
@@ -486,10 +487,12 @@
     submitBtn.textContent='⏳ Envoi en cours...';
 
     const eventId=genEventId();
+    const purchaseEventId=genPurchaseEventId();
     const notes='Niche: '+state.niche+' | Marché: '+state.market+' | Boutique existante: '+state.existing;
 
     if(typeof fbq!=='undefined'){
       fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
+      fbq('track','Purchase',{content_name:'Boutique Shopify International',value:500,currency:'MAD'},{eventID:purchaseEventId});
     }
     if(typeof gtag!=='undefined'){
       gtag('event','generate_lead',{event_category:'form_submission',event_label:'Boutique Shopify International'});
@@ -504,6 +507,7 @@
           service:'Boutique Shopify — International',
           notes,
           eventId,
+          purchaseEventId,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
@@ -513,7 +517,7 @@
       });
     }catch(_){}
 
-    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId);
+    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId);
   });
 
   document.querySelectorAll('.faq-q').forEach(btn=>{

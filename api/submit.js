@@ -30,6 +30,7 @@ module.exports = async function handler(req, res) {
     type,
     notes,
     eventId,
+    purchaseEventId,
     pixelId: clientPixelId,
     userAgent,
     eventSourceUrl,
@@ -37,6 +38,10 @@ module.exports = async function handler(req, res) {
     fbc,
   } = req.body || {};
   const results = {};
+
+  const srcUrl          = String(eventSourceUrl || '');
+  const isShopifyIntlEn = srcUrl.includes('/en24h');
+  const isShopifyIntl   = srcUrl.includes('/24h') || isShopifyIntlEn;
 
   // ── 1. Meta CAPI ──────────────────────────────────────
   // Use clientPixelId directly — it comes from our own trusted pages.
@@ -59,26 +64,43 @@ module.exports = async function handler(req, res) {
     const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
     const testCode = process.env.META_TEST_EVENT_CODE;
 
-    const payload = {
-      data: [{
-        event_name:       'Lead',
+    const userData = {
+      ph: [sha256(normalizePhone(phone))].filter(Boolean),
+      em: [sha256(email)].filter(Boolean),
+      fn: [sha256(parts[0])].filter(Boolean),
+      ln: parts[1] ? [sha256(parts[1])] : [],
+      fbp: fbp || undefined,
+      fbc: fbc || undefined,
+      client_ip_address: clientIp  || undefined,
+      client_user_agent: userAgent || undefined,
+    };
+
+    const events = [{
+      event_name:       'Lead',
+      event_time:       Math.floor(Date.now() / 1000),
+      event_id:         eventId,
+      event_source_url: eventSourceUrl,
+      action_source:    'website',
+      user_data:        userData,
+      custom_data: { content_name: service, currency: 'MAD', value: 500 }
+    }];
+
+    // Shopify Intl funnels (24h/en24h) run under an Advantage+ Sales campaign,
+    // which only optimizes toward purchase-type events — fire a matching
+    // Purchase alongside Lead so the campaign has a signal to bid against.
+    if (isShopifyIntl && purchaseEventId) {
+      events.push({
+        event_name:       'Purchase',
         event_time:       Math.floor(Date.now() / 1000),
-        event_id:         eventId,
+        event_id:         purchaseEventId,
         event_source_url: eventSourceUrl,
         action_source:    'website',
-        user_data: {
-          ph: [sha256(normalizePhone(phone))].filter(Boolean),
-          em: [sha256(email)].filter(Boolean),
-          fn: [sha256(parts[0])].filter(Boolean),
-          ln: parts[1] ? [sha256(parts[1])] : [],
-          fbp: fbp || undefined,
-          fbc: fbc || undefined,
-          client_ip_address: clientIp  || undefined,
-          client_user_agent: userAgent || undefined,
-        },
+        user_data:        userData,
         custom_data: { content_name: service, currency: 'MAD', value: 500 }
-      }]
-    };
+      });
+    }
+
+    const payload = { data: events };
     if (testCode) payload.test_event_code = testCode;
 
     try {
@@ -92,7 +114,6 @@ module.exports = async function handler(req, res) {
   }
 
   // ── 2. Telegram notification ──────────────────────────
-  const srcUrl = String(eventSourceUrl || '');
   const source = srcUrl.includes('shehrazade')         ? '👑 Maison Beauty Shehrazade'
                : srcUrl.includes('/rihlaSprinter')     ? '🚌 Rihla Sprinter'
                : srcUrl.includes('/clinic')            ? '🏥 Clinic'
@@ -115,10 +136,8 @@ module.exports = async function handler(req, res) {
     hour: '2-digit', minute: '2-digit'
   });
 
-  const isRihla         = srcUrl.includes('/rihlaSprinter');
-  const isShehrazade    = srcUrl.includes('shehrazade');
-  const isShopifyIntlEn = srcUrl.includes('/en24h');
-  const isShopifyIntl   = srcUrl.includes('/24h') || isShopifyIntlEn;
+  const isRihla      = srcUrl.includes('/rihlaSprinter');
+  const isShehrazade = srcUrl.includes('shehrazade');
 
   const msg = isRihla
     ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +

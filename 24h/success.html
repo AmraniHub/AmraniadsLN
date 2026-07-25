@@ -18,9 +18,14 @@
   <script>
     window.addEventListener('load',function(){
       if(typeof fbq==='undefined')return;
-      var eid=new URLSearchParams(window.location.search).get('eid');
+      var params=new URLSearchParams(window.location.search);
+      var eid=params.get('eid');
+      var peid=params.get('peid');
       var opts=eid?{eventID:eid}:{};
       fbq('track','Lead',{content_name:'Boutique Shopify International - confirmation'},opts);
+      if(peid){
+        fbq('track','Purchase',{content_name:'Boutique Shopify International - confirmation',value:500,currency:'MAD'},{eventID:peid});
+      }
     });
   </script>
 
