@@ -96,7 +96,7 @@ module.exports = async function handler(req, res) {
         event_source_url: eventSourceUrl,
         action_source:    'website',
         user_data:        userData,
-        custom_data: { content_name: service, currency: 'MAD', value: 500 }
+        custom_data: { content_name: service }
       });
     }
 

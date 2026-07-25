@@ -491,7 +491,7 @@
 
     if(typeof fbq!=='undefined'){
       fbq('track','Lead',{content_name:'Shopify Store International (EN)',value:0},{eventID:eventId});
-      fbq('track','Purchase',{content_name:'Shopify Store International (EN)',value:500,currency:'MAD'},{eventID:purchaseEventId});
+      fbq('track','Purchase',{content_name:'Shopify Store International (EN)'},{eventID:purchaseEventId});
     }
     if(typeof gtag!=='undefined'){
       gtag('event','generate_lead',{event_category:'form_submission',event_label:'Shopify Store International (EN)'});

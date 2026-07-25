@@ -492,7 +492,7 @@
 
     if(typeof fbq!=='undefined'){
       fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
-      fbq('track','Purchase',{content_name:'Boutique Shopify International',value:500,currency:'MAD'},{eventID:purchaseEventId});
+      fbq('track','Purchase',{content_name:'Boutique Shopify International'},{eventID:purchaseEventId});
     }
     if(typeof gtag!=='undefined'){
       gtag('event','generate_lead',{event_category:'form_submission',event_label:'Boutique Shopify International'});
