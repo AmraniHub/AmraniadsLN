@@ -323,21 +323,6 @@
   </div>
 </div>
 
-<div class="showcase-wrap">
-  <div class="showcase-slider" id="showcaseSlider">
-    <div class="showcase-track" id="showcaseTrack">
-      <div class="showcase-slide"><img src="/assets/showcase/showcase-1.jpg" alt="Exemple de boutique Shopify AmraniAds — design premium"/></div>
-      <div class="showcase-slide"><img src="/assets/showcase/showcase-2.jpg" alt="Exemple de boutique Shopify AmraniAds — analyse concurrentielle et conversion"/></div>
-    </div>
-    <button type="button" class="showcase-arrow prev" id="showcasePrev">‹</button>
-    <button type="button" class="showcase-arrow next" id="showcaseNext">›</button>
-    <div class="showcase-dots" id="showcaseDots">
-      <span class="showcase-dot active" data-i="0"></span>
-      <span class="showcase-dot" data-i="1"></span>
-    </div>
-  </div>
-</div>
-
 <div class="pricing">
   <h2 class="pricing-title">Nos tarifs</h2>
   <p class="pricing-sub">Prix fixes, sans surprise — payable en DH ou en $ (1$ = 10 DH)</p>
@@ -443,21 +428,6 @@
 <div id="toast"></div>
 
 <script>
-  (function(){
-    const track = document.getElementById('showcaseTrack');
-    const dots = document.querySelectorAll('#showcaseDots .showcase-dot');
-    const slides = document.querySelectorAll('#showcaseTrack .showcase-slide');
-    let i = 0;
-    function go(n){
-      i = (n + slides.length) % slides.length;
-      track.style.transform = 'translateX(-' + (i*100) + '%)';
-      dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
-    }
-    document.getElementById('showcasePrev').addEventListener('click', ()=>go(i-1));
-    document.getElementById('showcaseNext').addEventListener('click', ()=>go(i+1));
-    dots.forEach(d=>d.addEventListener('click', ()=>go(Number(d.dataset.i))));
-    setInterval(()=>go(i+1), 6000);
-  })();
 
   const state={niche:'',market:'',existing:''};
   const steps=document.querySelectorAll('.step');
