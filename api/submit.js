@@ -31,6 +31,7 @@ module.exports = async function handler(req, res) {
     notes,
     eventId,
     purchaseEventId,
+    skipMetaEvents,
     pixelId: clientPixelId,
     userAgent,
     eventSourceUrl,
@@ -59,7 +60,9 @@ module.exports = async function handler(req, res) {
   const accessToken = (pixelId && tokenMap[pixelId]) || process.env.META_ACCESS_TOKEN;
 
   // Fire Meta CAPI non-blocking (don't await) so Telegram always fires fast
-  if (pixelId && accessToken) {
+  // Skip entirely for a client-flagged repeat submission (same phone already sent this browser session) —
+  // still let Telegram/CRM below log it so the team sees the resubmission.
+  if (pixelId && accessToken && !skipMetaEvents) {
     const parts    = String(name || '').trim().split(/\s+/);
     const clientIp = (req.headers['x-forwarded-for'] || '').split(',')[0].trim();
     const testCode = process.env.META_TEST_EVENT_CODE;

@@ -438,6 +438,9 @@
   function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined}
   function genEventId(){return'lead_shopify_intl_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
   function genPurchaseEventId(){return'purchase_shopify_intl_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
+  const SENT_PHONES_KEY='amrani_shopify_intl_meta_sent_phones';
+  function getSentPhones(){try{return JSON.parse(localStorage.getItem(SENT_PHONES_KEY)||'[]')}catch(_){return[]}}
+  function markPhoneSent(phone,list){try{list.push(phone);localStorage.setItem(SENT_PHONES_KEY,JSON.stringify(list))}catch(_){}}
 
   function goTo(n){
     steps.forEach(s=>s.classList.toggle('active',Number(s.dataset.step)===n));
@@ -488,11 +491,18 @@
 
     const eventId=genEventId();
     const purchaseEventId=genPurchaseEventId();
-    const notes='Niche: '+state.niche+' | Marché: '+state.market+' | Boutique existante: '+state.existing;
+    const normalizedPhone=phone.replace(/\D/g,'');
+    const sentPhones=getSentPhones();
+    const isDuplicate=sentPhones.includes(normalizedPhone);
+    let notes='Niche: '+state.niche+' | Marché: '+state.market+' | Boutique existante: '+state.existing;
+    if(isDuplicate) notes='[REPEAT] '+notes;
 
-    if(typeof fbq!=='undefined'){
-      fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
-      fbq('track','Purchase',{content_name:'Boutique Shopify International'},{eventID:purchaseEventId});
+    if(!isDuplicate){
+      if(typeof fbq!=='undefined'){
+        fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
+        fbq('track','Purchase',{content_name:'Boutique Shopify International'},{eventID:purchaseEventId});
+      }
+      markPhoneSent(normalizedPhone,sentPhones);
     }
     if(typeof gtag!=='undefined'){
       gtag('event','generate_lead',{event_category:'form_submission',event_label:'Boutique Shopify International'});
@@ -508,6 +518,7 @@
           notes,
           eventId,
           purchaseEventId,
+          skipMetaEvents:isDuplicate,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
@@ -517,7 +528,7 @@
       });
     }catch(_){}
 
-    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId);
+    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0');
   });
 
   document.querySelectorAll('.faq-q').forEach(btn=>{

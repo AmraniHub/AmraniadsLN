@@ -19,6 +19,7 @@
     window.addEventListener('load',function(){
       if(typeof fbq==='undefined')return;
       var params=new URLSearchParams(window.location.search);
+      if(params.get('dup')==='1')return;
       var eid=params.get('eid');
       var peid=params.get('peid');
       var opts=eid?{eventID:eid}:{};
