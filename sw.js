@@ -1,6 +1,6 @@
 // AmraniAds Service Worker — PWA + Push Notifications
 const CACHE_NAME = 'amraniads-v1';
-const OFFLINE_URLS = ['/salon/dashboard/', '/rentalcars/dashboard/', '/dashboard/'];
+const OFFLINE_URLS = ['/salon/dashboard/', '/rentalcars/dashboard/'];
 
 // Install: cache shell pages
 self.addEventListener('install', event => {
@@ -60,7 +60,7 @@ self.addEventListener('push', event => {
       icon:    '/icons/icon-192.png',
       badge:   '/icons/icon-192.png',
       tag:     data.tag     || 'lead-notification',
-      data:    { url: data.url || '/dashboard/' },
+      data:    { url: data.url || '/' },
       actions: [
         { action: 'view', title: '👀 Voir' },
         { action: 'wa',   title: '💬 WhatsApp' }

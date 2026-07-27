@@ -1178,29 +1178,29 @@
     nums.forEach(n=>io.observe(n));
   })();
 
-  /* ---- Gentle nudge into the form, but never fight the user ---- */
-  (function(){
-    let userMoved=false;
-    const mark=function(){userMoved=true};
-    window.addEventListener('wheel',mark,{passive:true,once:true});
-    window.addEventListener('touchstart',mark,{passive:true,once:true});
-    window.addEventListener('keydown',mark,{once:true});
-    window.addEventListener('load',function(){
-      setTimeout(function(){
-        if(userMoved||window.pageYOffset>40) return;
-        const card=document.querySelector('.funnel-card');
-        if(!card) return;
-        const y=card.getBoundingClientRect().top+window.pageYOffset-80;
-        window.scrollTo({top:y,behavior:'smooth'});
-      },2200);
-    });
-  })();
+  /* ---- Auto-scroll every visitor straight into the form on load/refresh ---- */
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      const card=document.querySelector('.funnel-card');
+      if(!card) return;
+      const y=card.getBoundingClientRect().top+window.pageYOffset-80;
+      window.scrollTo({top:y,behavior:'smooth'});
+    },1200);
+  });
+
+  // Hide the sticky mobile CTA once the visitor starts filling the funnel —
+  // it's redundant screen space once they're already answering questions.
+  function hideMobileCta(){
+    const bar=document.querySelector('.mobile-cta-bar');
+    if(bar) bar.style.display='none';
+  }
 
   document.querySelectorAll('.opt-grid').forEach(grid=>{
     const field=grid.dataset.field;
     const isMulti=grid.dataset.multi==='true';
     grid.querySelectorAll('.opt-btn').forEach(btn=>{
       btn.addEventListener('click',()=>{
+        hideMobileCta();
         const stepEl=grid.closest('.step');
         const nextBtn=stepEl.querySelector('.btn-next');
 
