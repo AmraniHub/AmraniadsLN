@@ -98,5 +98,38 @@ export default async function handler(req, res) {
     }
   }
 
-  return res.status(200).json({ ok: results.every(Boolean), parts: results.length });
+  // ── Also persist to the Sheet (kind:'brief') so /admin's dashboard can list it ──
+  const scriptUrl = process.env.SHOPIFY_INTL_SCRIPT_URL;
+  let sheetOk = null;
+  if (scriptUrl) {
+    const plainBlocks = (Array.isArray(sections) ? sections : [])
+      .map((sec) => {
+        const items = (sec && Array.isArray(sec.items) ? sec.items : [])
+          .filter((it) => it && String(it.value || '').trim() !== '');
+        if (!items.length) return '';
+        return `${sec.title}\n` + items.map((it) => `  • ${it.label}: ${it.value}`).join('\n');
+      })
+      .filter(Boolean)
+      .join('\n\n');
+
+    try {
+      const r = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          kind: 'brief',
+          name: client.name || '',
+          ref: client.id || '',
+          plan: client.plan || '',
+          brief: plainBlocks || '(no fields filled)',
+        }),
+        signal: AbortSignal.timeout(8000),
+      });
+      sheetOk = r.ok;
+    } catch (e) {
+      sheetOk = false;
+    }
+  }
+
+  return res.status(200).json({ ok: results.every(Boolean), parts: results.length, sheet: sheetOk });
 }

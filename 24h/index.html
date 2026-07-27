@@ -230,7 +230,6 @@
     <span>amrani<b>ads</b></span>
   </a>
   <div class="top-nav-btns">
-    <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="btn-wa">💬 +212 627 716 149</a>
     <a href="#funnelTop" class="btn-form-cta">Remplir le formulaire →</a>
   </div>
 </div>
@@ -497,6 +496,10 @@
     let notes='Niche: '+state.niche+' | Marché: '+state.market+' | Boutique existante: '+state.existing;
     if(isDuplicate) notes='[REPEAT] '+notes;
 
+    const briefCfg={n:name,id:normalizedPhone};
+    const briefCode=btoa(unescape(encodeURIComponent(JSON.stringify(briefCfg))));
+    const briefUrl=location.origin+'/brief/?c='+encodeURIComponent(briefCode);
+
     if(!isDuplicate){
       if(typeof fbq!=='undefined'){
         fbq('track','Lead',{content_name:'Boutique Shopify International',value:0},{eventID:eventId});
@@ -519,6 +522,7 @@
           eventId,
           purchaseEventId,
           skipMetaEvents:isDuplicate,
+          briefUrl,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
@@ -528,7 +532,7 @@
       });
     }catch(_){}
 
-    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0');
+    window.location.href='/24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0')+'&bc='+encodeURIComponent(briefCode);
   });
 
   document.querySelectorAll('.faq-q').forEach(btn=>{

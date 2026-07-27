@@ -98,6 +98,20 @@
     .step-text strong{color:rgba(255,255,255,.9)}
     .wa-btn{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:800;font-size:.9rem;padding:13px 24px;border-radius:50px;text-decoration:none;margin-bottom:18px;transition:transform .15s}
     .wa-btn:hover{transform:translateY(-2px)}
+    .brief-cta{
+      display:none;
+      background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.28);
+      border-radius:16px;padding:20px 20px 22px;margin-bottom:26px;text-align:left;
+    }
+    .brief-cta .bc-title{font-size:.86rem;font-weight:800;color:var(--green);margin-bottom:6px}
+    .brief-cta .bc-sub{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:16px}
+    .brief-btn{
+      display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+      background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;
+      font-weight:800;font-size:.92rem;padding:14px;border-radius:12px;text-decoration:none;
+      box-shadow:0 10px 28px rgba(34,197,94,.32);transition:transform .15s;
+    }
+    .brief-btn:hover{transform:translateY(-2px)}
     .back{color:rgba(255,255,255,.4);font-size:.87rem;text-decoration:none;display:inline-block;margin-top:4px;transition:color .15s}
     .back:hover{color:var(--green)}
     @media(max-width:480px){.card{padding:36px 18px}h1{font-size:1.5rem}}
@@ -128,10 +142,25 @@
     </div>
   </div>
 
+  <div class="brief-cta" id="briefCta">
+    <div class="bc-title">🚀 Ready to start now?</div>
+    <div class="bc-sub">Tell us your brand name, colours and products (about 7 minutes) — the sooner we have it, the sooner we can start building.</div>
+    <a href="#" id="briefLink" class="brief-btn">🧾 Tell us about your brand →</a>
+  </div>
+
   <a href="https://wa.me/212627716149" target="_blank" class="wa-btn">💬 Message us on WhatsApp</a>
   <br/>
   <a href="/" class="back">← Back to home</a>
 </div>
+
+<script>
+  (function(){
+    var bc=new URLSearchParams(window.location.search).get('bc');
+    if(!bc) return;
+    document.getElementById('briefLink').href='/brief/?c='+encodeURIComponent(bc);
+    document.getElementById('briefCta').style.display='block';
+  })();
+</script>
 
 </body>
 </html>

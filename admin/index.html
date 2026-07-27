@@ -129,6 +129,32 @@
     #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     @media(max-width:520px){.row2{grid-template-columns:1fr}}
+
+    /* ---------- TABS ---------- */
+    .tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:20px;width:fit-content}
+    .tabBtn{padding:9px 18px;border-radius:9px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .2s var(--ease)}
+    .tabBtn.on{background:linear-gradient(135deg,var(--g-500),var(--g-600));color:#fff}
+    .view{display:none}
+    .view.on{display:block}
+
+    /* ---------- DATA TABLE ---------- */
+    .dataCard{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-md)}
+    .dataHead{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .dataHead h2{font-size:1rem}
+    .subTabs{display:flex;gap:6px}
+    .subTab{padding:6px 14px;border-radius:50px;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;border:1.5px solid var(--border);background:var(--bg);color:var(--muted)}
+    .subTab.on{border-color:var(--g-500);background:var(--g-tint);color:#166534}
+    .refreshBtn{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;font-size:.8rem}
+    .tableWrap{overflow-x:auto;max-height:64vh;overflow-y:auto}
+    table{width:100%;border-collapse:collapse;font-size:.82rem}
+    thead{position:sticky;top:0;background:#eff6ff;z-index:1}
+    th{padding:9px 12px;text-align:left;font-size:.71rem;font-weight:800;color:#166534;border-bottom:1px solid var(--border);white-space:nowrap}
+    td{padding:9px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top;max-width:280px}
+    td.wrap{white-space:pre-wrap;word-break:break-word;min-width:320px;max-width:520px}
+    tr:hover td{background:var(--g-tint-2)}
+    .waPill{color:#166534;text-decoration:none;font-weight:700}
+    .waPill:hover{text-decoration:underline}
+    .emptyRow{text-align:center;padding:40px 16px;color:var(--muted)}
   </style>
 </head>
 <body>
@@ -154,6 +180,12 @@
     <button class="logout" onclick="doLogout()">↩ Déconnexion</button>
   </div>
 
+  <div class="tabs">
+    <button class="tabBtn on" id="tab-gen" onclick="showTab('gen')">🧾 Lien du brief</button>
+    <button class="tabBtn" id="tab-data" onclick="showTab('data')">📋 Leads &amp; Briefs</button>
+  </div>
+
+  <div class="view on" id="view-gen">
   <div class="card">
     <h2>🧾 Lien du brief de création</h2>
     <p class="hint">Pour un client qui a déjà payé/validé : il remplit les couleurs, le nom de marque, l'adresse, les produits… et tout arrive sur le bot Telegram « brief ».</p>
@@ -188,12 +220,35 @@
       </div>
     </div>
   </div>
+  </div>
+
+  <div class="view" id="view-data">
+    <div class="dataCard">
+      <div class="dataHead">
+        <div class="subTabs">
+          <button class="subTab on" id="sub-leads" onclick="showDataTab('leads')">📋 Leads (Shopify EN/FR)</button>
+          <button class="subTab" id="sub-briefs" onclick="showDataTab('briefs')">🧾 Briefs</button>
+        </div>
+        <button class="refreshBtn" onclick="loadDataTab(true)">🔄 Actualiser</button>
+      </div>
+      <h2 style="padding:0 18px;margin-top:14px;font-size:.82rem;color:var(--muted);font-weight:600" id="dataStatus">Chargement…</h2>
+      <div class="tableWrap">
+        <table>
+          <thead id="dataThead"></thead>
+          <tbody id="dataTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
 const DEFAULT_PW = 'amrani2025admin';
+// Must match DASHBOARD_READ_TOKEN in Vercel and READ_TOKEN in the Apps Script.
+// Only reachable after the password gate above, same trust boundary as before.
+const DASHBOARD_READ_TOKEN = 'QTQY851xwBKrTPtIS_C_Y2cSu0UVO1Eo';
 
 function doLogin(){
   const v = document.getElementById('pwInput').value;
@@ -216,6 +271,78 @@ function doLogout(){
     document.getElementById('app').style.display='block';
   }
 })();
+
+// ── TOP TABS ──────────────────────────────────────────────────
+let currentDataTab = 'leads';
+let dataLoadedOnce = { leads:false, briefs:false };
+
+function showTab(name){
+  document.getElementById('tab-gen').classList.toggle('on', name==='gen');
+  document.getElementById('tab-data').classList.toggle('on', name==='data');
+  document.getElementById('view-gen').classList.toggle('on', name==='gen');
+  document.getElementById('view-data').classList.toggle('on', name==='data');
+  if (name === 'data' && !dataLoadedOnce[currentDataTab]) loadDataTab(false);
+}
+
+function showDataTab(tab){
+  currentDataTab = tab;
+  document.getElementById('sub-leads').classList.toggle('on', tab==='leads');
+  document.getElementById('sub-briefs').classList.toggle('on', tab==='briefs');
+  if (!dataLoadedOnce[tab]) loadDataTab(false);
+  else renderCached(tab);
+}
+
+const dataCache = { leads:null, briefs:null };
+
+async function loadDataTab(forceRefresh){
+  const tab = currentDataTab;
+  const statusEl = document.getElementById('dataStatus');
+  statusEl.textContent = 'Chargement…';
+  try {
+    const r = await fetch('/api/leads-list?tab=' + tab + '&token=' + encodeURIComponent(DASHBOARD_READ_TOKEN));
+    const data = await r.json();
+    if (data.error === 'unauthorized') { statusEl.textContent = '⚠️ Token invalide — vérifiez DASHBOARD_READ_TOKEN'; return; }
+    if (data.configured === false) { statusEl.textContent = '⚠️ SHOPIFY_INTL_SCRIPT_URL non configuré'; return; }
+    dataCache[tab] = data.rows || [];
+    dataLoadedOnce[tab] = true;
+    renderCached(tab);
+  } catch (e) {
+    statusEl.textContent = '⚠️ Erreur de connexion : ' + e.message;
+  }
+}
+
+function renderCached(tab){
+  const rows = dataCache[tab] || [];
+  const statusEl = document.getElementById('dataStatus');
+  const thead = document.getElementById('dataThead');
+  const tbody = document.getElementById('dataTbody');
+
+  statusEl.textContent = rows.length + ' ' + (tab==='leads' ? 'lead(s)' : 'brief(s)');
+
+  if (!rows.length){
+    thead.innerHTML = '';
+    tbody.innerHTML = '<tr><td class="emptyRow">Aucune donnée pour l\'instant.</td></tr>';
+    return;
+  }
+
+  const cols = Object.keys(rows[0]);
+  thead.innerHTML = '<tr>' + cols.map(c => `<th>${escHtml(c)}</th>`).join('') + '</tr>';
+
+  tbody.innerHTML = rows.map(row => {
+    return '<tr>' + cols.map(c => {
+      const v = row[c];
+      if (c === 'Lien WhatsApp' && row['WhatsApp']) {
+        return `<td><a class="waPill" href="https://wa.me/${escHtml(String(row['WhatsApp']))}" target="_blank">💬 WhatsApp</a></td>`;
+      }
+      const wrapCls = (c === 'Notes' || c === 'Brief') ? ' class="wrap"' : '';
+      return `<td${wrapCls}>${escHtml(v == null ? '' : String(v))}</td>`;
+    }).join('') + '</tr>';
+  }).join('');
+}
+
+function escHtml(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 
 function toast(msg){
   const t=document.getElementById('toast');

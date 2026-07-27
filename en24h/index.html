@@ -682,7 +682,6 @@
     </a>
     <div class="nav-actions">
       <a href="#pricing" class="btn btn-ghost-l">Pricing</a>
-      <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="btn btn-wa">💬 WhatsApp</a>
       <a href="#funnelTop" class="btn btn-primary" style="font-size:.8rem;padding:9px 18px">Get started</a>
     </div>
   </div>
@@ -709,7 +708,6 @@
 
     <div class="hero-cta-row reveal reveal-d3">
       <a href="#funnelTop" class="btn btn-primary btn-hero">Start my free plan →</a>
-      <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="btn btn-hero-2">💬 Talk to us now</a>
     </div>
 
     <div class="chips reveal reveal-d4">
@@ -1054,7 +1052,6 @@
     <p class="reveal reveal-d1">Takes 2 minutes. Free action plan within 24h. No commitment, no card required.</p>
     <div class="final-row reveal reveal-d2">
       <a href="#funnelTop" class="btn btn-primary btn-hero">Start my free plan →</a>
-      <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="btn btn-hero-2">💬 Message us on WhatsApp</a>
     </div>
   </div>
 </section>
@@ -1270,6 +1267,11 @@
     }
     if(isDuplicate) notes='[REPEAT] '+notes;
 
+    const briefCfg={n:name,id:normalizedPhone};
+    if(state.plan) briefCfg.p=state.plan;
+    const briefCode=btoa(unescape(encodeURIComponent(JSON.stringify(briefCfg))));
+    const briefUrl=location.origin+'/brief/?c='+encodeURIComponent(briefCode);
+
     if(!isDuplicate){
       if(typeof fbq!=='undefined'){
         fbq('track','Lead',{content_name:'Shopify Store International (EN)',value:0},{eventID:eventId});
@@ -1300,6 +1302,7 @@
             deposit:quote.deposit,
             monthly:quote.monthly
           }:null,
+          briefUrl,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
@@ -1309,7 +1312,7 @@
       });
     }catch(_){}
 
-    window.location.href='/en24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0');
+    window.location.href='/en24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0')+'&bc='+encodeURIComponent(briefCode);
   });
 
   document.querySelectorAll('.faq-q').forEach(btn=>{
