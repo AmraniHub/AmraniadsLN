@@ -155,6 +155,45 @@
     .waPill{color:#166534;text-decoration:none;font-weight:700}
     .waPill:hover{text-decoration:underline}
     .emptyRow{text-align:center;padding:40px 16px;color:var(--muted)}
+
+    /* ---------- BRIEF CARDS ---------- */
+    .briefCards{padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px;max-height:64vh;overflow-y:auto}
+    .briefCard{
+      border:1.5px solid var(--border);border-radius:14px;padding:14px 16px;
+      display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+      cursor:pointer;transition:border-color .2s var(--ease),background .2s var(--ease);
+    }
+    .briefCard:hover{border-color:#86efac;background:var(--g-tint2,#effdf4)}
+    .bc-left{display:flex;align-items:center;gap:12px;min-width:0}
+    .bc-avatar{
+      width:38px;height:38px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,var(--g-500),var(--g-600));color:#fff;
+      display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;
+    }
+    .bc-info{min-width:0}
+    .bc-name{font-weight:800;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+    .bc-sub{font-size:.76rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+    .bc-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+    .bc-date{font-size:.74rem;color:var(--muted)}
+    .bc-plan{background:var(--g-tint);color:#166534;font-size:.71rem;font-weight:700;padding:4px 10px;border-radius:50px;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+    .bc-view{background:var(--d-800);color:#fff;font-size:.76rem;font-weight:700;padding:7px 14px;border-radius:50px;white-space:nowrap}
+
+    /* ---------- MODAL ---------- */
+    .modalOverlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(6,26,18,.55);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px}
+    .modalOverlay.on{display:flex}
+    .modalBox{background:var(--surface);border-radius:var(--r-lg);max-width:620px;width:100%;max-height:85vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);overflow:hidden}
+    .modalHead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px 22px;border-bottom:1px solid var(--border)}
+    .modalClient{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.1rem}
+    .modalMeta{font-size:.8rem;color:var(--muted);margin-top:4px}
+    .modalClose{background:var(--bg);border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:.9rem;flex-shrink:0}
+    .modalBody{padding:18px 22px 24px;overflow-y:auto}
+    .mSection{margin-bottom:18px}
+    .mSection:last-child{margin-bottom:0}
+    .mSection h4{font-size:.78rem;font-weight:800;color:#166534;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--g-tint)}
+    .mItem{display:flex;gap:10px;padding:5px 0;font-size:.86rem;line-height:1.5}
+    .mItem .k{color:var(--muted);flex:0 0 42%}
+    .mItem .v{font-weight:600;flex:1;word-break:break-word}
+    .mSwatch{display:inline-block;width:13px;height:13px;border-radius:4px;border:1px solid rgba(0,0,0,.15);vertical-align:-2px;margin-right:6px}
   </style>
 </head>
 <body>
@@ -232,13 +271,30 @@
         <button class="refreshBtn" onclick="loadDataTab(true)">🔄 Actualiser</button>
       </div>
       <h2 style="padding:0 18px;margin-top:14px;font-size:.82rem;color:var(--muted);font-weight:600" id="dataStatus">Chargement…</h2>
-      <div class="tableWrap">
+
+      <div class="tableWrap" id="leadsTableWrap">
         <table>
           <thead id="dataThead"></thead>
           <tbody id="dataTbody"></tbody>
         </table>
       </div>
+
+      <div class="briefCards" id="briefCards" style="display:none"></div>
     </div>
+  </div>
+</div>
+
+<!-- BRIEF DETAIL MODAL -->
+<div class="modalOverlay" id="briefModal" onclick="if(event.target===this)closeBriefModal()">
+  <div class="modalBox">
+    <div class="modalHead">
+      <div>
+        <div class="modalClient" id="mClient">—</div>
+        <div class="modalMeta" id="mMeta">—</div>
+      </div>
+      <button class="modalClose" onclick="closeBriefModal()">✕</button>
+    </div>
+    <div class="modalBody" id="mBody"></div>
   </div>
 </div>
 
@@ -314,10 +370,25 @@ async function loadDataTab(forceRefresh){
 function renderCached(tab){
   const rows = dataCache[tab] || [];
   const statusEl = document.getElementById('dataStatus');
-  const thead = document.getElementById('dataThead');
-  const tbody = document.getElementById('dataTbody');
+  const tableWrap = document.getElementById('leadsTableWrap');
+  const cardsWrap = document.getElementById('briefCards');
 
   statusEl.textContent = rows.length + ' ' + (tab==='leads' ? 'lead(s)' : 'brief(s)');
+
+  if (tab === 'briefs'){
+    tableWrap.style.display = 'none';
+    cardsWrap.style.display = 'flex';
+    renderBriefCards(rows);
+  } else {
+    cardsWrap.style.display = 'none';
+    tableWrap.style.display = 'block';
+    renderLeadsTable(rows);
+  }
+}
+
+function renderLeadsTable(rows){
+  const thead = document.getElementById('dataThead');
+  const tbody = document.getElementById('dataTbody');
 
   if (!rows.length){
     thead.innerHTML = '';
@@ -334,10 +405,88 @@ function renderCached(tab){
       if (c === 'Lien WhatsApp' && row['WhatsApp']) {
         return `<td><a class="waPill" href="https://wa.me/${escHtml(String(row['WhatsApp']))}" target="_blank">💬 WhatsApp</a></td>`;
       }
-      const wrapCls = (c === 'Notes' || c === 'Brief') ? ' class="wrap"' : '';
+      const wrapCls = (c === 'Notes') ? ' class="wrap"' : '';
       return `<td${wrapCls}>${escHtml(v == null ? '' : String(v))}</td>`;
     }).join('') + '</tr>';
   }).join('');
+}
+
+// ── BRIEFS: card list + detail modal ──────────────────────────
+let briefRows = [];
+
+function renderBriefCards(rows){
+  briefRows = rows;
+  const wrap = document.getElementById('briefCards');
+  if (!rows.length){
+    wrap.innerHTML = '<div class="emptyRow">Aucun brief pour l\'instant.</div>';
+    return;
+  }
+  wrap.innerHTML = rows.map((row, i) => {
+    const name = row['Client'] || '—';
+    const initial = escHtml(name.trim().charAt(0).toUpperCase() || '?');
+    const ref = row['Ref'] ? `Ref: ${escHtml(row['Ref'])}` : '';
+    const plan = row['Plan'] || '';
+    return `<div class="briefCard" onclick="openBriefModal(${i})">
+      <div class="bc-left">
+        <div class="bc-avatar">${initial}</div>
+        <div class="bc-info">
+          <div class="bc-name">${escHtml(name)}</div>
+          <div class="bc-sub">${ref}</div>
+        </div>
+      </div>
+      <div class="bc-right">
+        ${plan ? `<span class="bc-plan">${escHtml(plan)}</span>` : ''}
+        <span class="bc-date">${escHtml(row['Date'] || '')}</span>
+        <span class="bc-view">Voir →</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Parses the flattened "Title\n  • Label: Value\n  • Label: Value\n\nTitle2\n..." text
+// (built by api/brief.js) back into { title, items:[{label,value}] } sections.
+function parseBriefText(text){
+  const blocks = String(text || '').split(/\n\s*\n/).map(b => b.trim()).filter(Boolean);
+  return blocks.map(block => {
+    const lines = block.split('\n');
+    const title = lines[0].trim();
+    const items = lines.slice(1).map(l => {
+      const m = l.match(/^\s*•\s*([^:]+):\s*(.*)$/);
+      return m ? { label: m[1].trim(), value: m[2].trim() } : null;
+    }).filter(Boolean);
+    return { title, items };
+  }).filter(s => s.items.length);
+}
+
+function isHexColor(v){ return /^#[0-9a-fA-F]{6}$/.test(String(v).trim()); }
+
+function openBriefModal(i){
+  const row = briefRows[i];
+  if (!row) return;
+  document.getElementById('mClient').textContent = row['Client'] || '—';
+  const metaBits = [row['Ref'] && ('Ref: ' + row['Ref']), row['Plan'], row['Date']].filter(Boolean);
+  document.getElementById('mMeta').textContent = metaBits.join(' · ') || '—';
+
+  const sections = parseBriefText(row['Brief']);
+  const body = document.getElementById('mBody');
+  if (!sections.length){
+    body.innerHTML = '<div class="emptyRow">Aucun détail disponible.</div>';
+  } else {
+    body.innerHTML = sections.map(sec => `
+      <div class="mSection">
+        <h4>${escHtml(sec.title)}</h4>
+        ${sec.items.map(it => `
+          <div class="mItem">
+            <span class="k">${escHtml(it.label)}</span>
+            <span class="v">${isHexColor(it.value) ? `<span class="mSwatch" style="background:${escHtml(it.value)}"></span>` : ''}${escHtml(it.value)}</span>
+          </div>`).join('')}
+      </div>`).join('');
+  }
+  document.getElementById('briefModal').classList.add('on');
+}
+
+function closeBriefModal(){
+  document.getElementById('briefModal').classList.remove('on');
 }
 
 function escHtml(s){
