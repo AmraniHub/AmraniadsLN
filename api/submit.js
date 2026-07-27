@@ -32,6 +32,7 @@ module.exports = async function handler(req, res) {
     eventId,
     purchaseEventId,
     skipMetaEvents,
+    pricing,
     pixelId: clientPixelId,
     userAgent,
     eventSourceUrl,
@@ -142,6 +143,21 @@ module.exports = async function handler(req, res) {
   const isRihla      = srcUrl.includes('/rihlaSprinter');
   const isShehrazade = srcUrl.includes('shehrazade');
 
+  // Quote breakdown (Shopify Intl EN funnel) — plans chosen, total, 30% deposit
+  const money = (n, cur) => `${Number(n).toLocaleString('en-US')} ${cur} (~$${Math.round(Number(n) / 10).toLocaleString('en-US')})`;
+  let quoteBlock = '';
+  if (pricing && Number(pricing.total) > 0) {
+    const cur = pricing.currency || 'MAD';
+    const lines = (Array.isArray(pricing.items) ? pricing.items : [])
+      .map(i => `   • ${i.name} — ${Number(i.price).toLocaleString('en-US')} ${cur}`)
+      .join('\n');
+    quoteBlock =
+      `\n\n🧾 <b>Selected plans</b>\n${lines}` +
+      `\n💰 Total: <b>${money(pricing.total, cur)}</b>` +
+      `\n🔐 Deposit ${pricing.depositPct || 30}%: <b>${money(pricing.deposit, cur)}</b>` +
+      (Number(pricing.monthly) > 0 ? `\n🔁 Then monthly: <b>${money(pricing.monthly, cur)}</b>` : '');
+  }
+
   const msg = isRihla
     ? `🚌 <b>طلب جديد — Rihla Sprinter</b>\n\n` +
       `👤 الاسم: ${name || '—'}\n` +
@@ -166,8 +182,9 @@ module.exports = async function handler(req, res) {
         `👤 First name: ${name || '—'}\n` +
         `📧 Email: ${email || '—'}\n` +
         `📱 Phone: <code>${phone || '—'}</code>\n` +
-        `📝 Details: ${notes || '—'}\n` +
-        `🕐 ${now}`
+        `📝 Details: ${notes || '—'}` +
+        quoteBlock +
+        `\n🕐 ${now}`
       : `🌍🛍️ <b>NOUVEAU LEAD — Boutique Shopify (International)</b>\n\n` +
         `👤 Prénom: ${name || '—'}\n` +
         `📧 Email: ${email || '—'}\n` +

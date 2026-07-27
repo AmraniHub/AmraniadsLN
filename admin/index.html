@@ -925,6 +925,46 @@
             <div style="color:var(--muted);font-size:.85rem">Aucun portail généré pour l'instant.</div>
           </div>
         </div>
+
+        <!-- ── BRIEF LINK GENERATOR ─────────────────────────── -->
+        <div style="background:var(--card);border:1px solid #86efac;border-radius:18px;padding:28px 24px;max-width:600px;margin-top:22px">
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px;color:var(--text)">🧾 Lien du brief de création</h3>
+          <p style="font-size:.83rem;color:var(--muted);line-height:1.6;margin-bottom:18px">
+            Pour un client qui a déjà payé/validé : il remplit les couleurs, le nom de marque, l'adresse, les produits… et tout arrive sur le bot Telegram « brief ».
+          </p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:#166534;display:block;margin-bottom:5px">Nom du client</label>
+              <input id="bg-name" type="text" placeholder="ex: Yassine El Idrissi" style="width:100%;border:1.5px solid #86efac;border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+            </div>
+            <div>
+              <label style="font-size:.78rem;font-weight:700;color:#166534;display:block;margin-bottom:5px">Réf. / ID <span style="font-weight:400;color:var(--muted)">(optionnel)</span></label>
+              <input id="bg-id" type="text" placeholder="ex: ye-2026-07" style="width:100%;border:1.5px solid #86efac;border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+            </div>
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="font-size:.78rem;font-weight:700;color:#166534;display:block;margin-bottom:5px">Formule choisie <span style="font-weight:400;color:var(--muted)">(optionnel)</span></label>
+            <input id="bg-plan" type="text" placeholder="ex: Premium custom store + CRM" style="width:100%;border:1.5px solid #86efac;border-radius:10px;padding:10px 12px;font-family:Cairo,sans-serif;font-size:.9rem;color:var(--text);background:var(--bg);outline:none"/>
+          </div>
+          <button onclick="generateBriefLink()" style="background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border:none;border-radius:50px;padding:12px 28px;font-family:Cairo,sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;width:100%">
+            🧾 Générer le lien du brief
+          </button>
+
+          <div id="bg-result" style="display:none;margin-top:20px">
+            <label style="font-size:.75rem;font-weight:700;color:#166534;display:block;margin-bottom:5px">Lien personnalisé</label>
+            <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:16px">
+              <textarea id="bg-url" readonly rows="2" style="flex:1;border:1.5px solid #86efac;border-radius:10px;padding:10px 12px;font-family:monospace;font-size:.78rem;color:var(--text);background:#f0fdf4;outline:none;resize:none;word-break:break-all"></textarea>
+              <button onclick="copyField('bg-url')" style="background:#dcfce7;border:1px solid #86efac;color:#166534;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:.8rem;font-weight:700;white-space:nowrap">📋 Copier</button>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:14px 16px">
+              <div style="font-size:.8rem;font-weight:700;color:#166534;margin-bottom:8px">💬 Message WhatsApp</div>
+              <div id="bg-wa-msg" style="font-size:.83rem;color:#374151;line-height:1.7;white-space:pre-wrap"></div>
+              <button onclick="copyField('bg-wa-msg',true)" style="margin-top:10px;background:#25D366;color:#fff;border:none;border-radius:50px;padding:8px 20px;font-family:Cairo,sans-serif;font-size:.82rem;font-weight:700;cursor:pointer">
+                💬 Copier le message WA
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- SETUP -->
@@ -2189,6 +2229,49 @@ function copyField(id, isText) {
   const el = document.getElementById(id);
   const txt = isText ? el.textContent : el.value;
   navigator.clipboard.writeText(txt).then(() => toast('✅ Copié !'));
+}
+
+// ── BRIEF LINK GENERATOR ─────────────────────────────────────
+// Builds /brief/?c=<base64> so the form greets the client by name
+// and tags the submission with their ref + chosen plan.
+function generateBriefLink() {
+  const name = document.getElementById('bg-name').value.trim();
+  const id   = document.getElementById('bg-id').value.trim();
+  const plan = document.getElementById('bg-plan').value.trim();
+
+  if (!name) { toast('⚠️ Entrez le nom du client'); return; }
+
+  const cfg = { n: name };
+  if (id)   cfg.id = id;
+  if (plan) cfg.p  = plan;
+
+  // base64 that survives UTF-8 names (accents, arabic…)
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify(cfg))));
+  const url  = 'https://amraniads.com/brief/?c=' + encodeURIComponent(code);
+
+  const waMsg =
+`Bonjour ${name} 👋
+
+Pour lancer la création de votre boutique, remplissez ce petit formulaire (environ 7 minutes) :
+
+🔗 ${url}
+
+Vous y indiquez :
+• le nom et les couleurs de votre marque
+• vos coordonnées et réseaux
+• vos produits, paiements et livraison
+• le style de design que vous aimez
+
+💡 Vos réponses s'enregistrent automatiquement — vous pouvez fermer et reprendre plus tard.
+
+📎 Ensuite, envoyez-nous ici votre logo et vos photos produits.
+
+— AmraniAds`;
+
+  document.getElementById('bg-url').value        = url;
+  document.getElementById('bg-wa-msg').textContent = waMsg;
+  document.getElementById('bg-result').style.display = 'block';
+  toast('✅ Lien du brief généré');
 }
 
 function renderSavedPortals() {

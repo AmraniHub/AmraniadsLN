@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <base href="/brief/" />
+  <title>Your Store Build Brief — AmraniAds</title>
+  <meta name="theme-color" content="#061a12" />
+  <link rel="icon" href="/assets/brand/amraniads-icon.png" type="image/png"/>
+  <link rel="apple-touch-icon" href="/assets/brand/amraniads-icon.png"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --g-300:#6ee7a7;--g-400:#34d399;--g-500:#22c55e;--g-600:#16a34a;--g-700:#15803d;
+      --g-tint:#dcfce7;--g-tint-2:#effdf4;
+      --d-900:#04120d;--d-800:#061a12;--d-700:#0a2419;
+      --gold:#fbbf24;--wa:#25D366;
+      --bg:#f4f8f6;--bg-2:#eaf2ee;--surface:#fff;
+      --text:#0b1f18;--muted:#5d7169;--border:#e2ebe6;--border-2:#d5e3dc;
+      --r-sm:12px;--r-md:16px;--r-lg:22px;
+      --shadow-sm:0 2px 10px rgba(6,26,18,.05);
+      --shadow-md:0 10px 34px rgba(6,26,18,.09);
+      --shadow-lg:0 26px 70px rgba(6,26,18,.14);
+      --ease:cubic-bezier(.22,.9,.3,1);
+    }
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+    h1,h2,h3,.disp{font-family:'Plus Jakarta Sans','Inter',sans-serif;letter-spacing:-.02em}
+    img{max-width:100%;display:block}
+
+    /* ---------- HEADER ---------- */
+    .top{
+      position:relative;overflow:hidden;background:var(--d-800);
+      padding:26px 20px 74px;text-align:center;isolation:isolate;
+    }
+    .top::before{
+      content:'';position:absolute;inset:0;z-index:-1;
+      background:
+        radial-gradient(58% 60% at 50% -10%,rgba(34,197,94,.30),transparent 66%),
+        radial-gradient(40% 44% at 88% 20%,rgba(52,211,153,.16),transparent 70%);
+    }
+    .brand{display:inline-flex;align-items:center;gap:9px;text-decoration:none;margin-bottom:20px}
+    .brand img{height:32px;width:auto;filter:drop-shadow(0 2px 8px rgba(52,211,153,.3))}
+    .brand span{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.05rem;font-weight:800;color:#fff}
+    .brand span b{color:var(--g-400)}
+    .top h1{font-size:clamp(1.5rem,4.2vw,2.15rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:11px}
+    .top h1 .grad{background:linear-gradient(120deg,var(--g-300),var(--g-500));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .top p{color:rgba(255,255,255,.68);font-size:.96rem;max-width:520px;margin:0 auto;line-height:1.7}
+    .hello{
+      display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;
+      background:rgba(52,211,153,.13);border:1px solid rgba(52,211,153,.3);
+      color:var(--g-300);font-size:.79rem;font-weight:700;padding:7px 15px;border-radius:50px;
+    }
+
+    /* ---------- CARD ---------- */
+    .shell{max-width:720px;margin:-56px auto 60px;padding:0 18px;position:relative;z-index:5}
+    .card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+      box-shadow:var(--shadow-lg);overflow:hidden;position:relative;
+    }
+    .card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:4px;z-index:2;
+      background:linear-gradient(90deg,var(--g-500),var(--g-300),var(--g-500));
+      background-size:200% 100%;animation:sg 4.5s linear infinite;
+    }
+    @keyframes sg{0%{background-position:0 50%}100%{background-position:200% 50%}}
+
+    .head{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .head-t{font-size:.83rem;font-weight:700}
+    .head-t span{color:var(--muted);font-weight:500}
+    .badge{font-size:.72rem;font-weight:800;color:var(--g-600);background:var(--g-tint);padding:4px 11px;border-radius:50px;white-space:nowrap}
+    .track{height:7px;background:var(--bg-2);border-radius:50px;margin:12px 24px 0;overflow:hidden}
+    .fill{height:100%;border-radius:50px;width:14%;background:linear-gradient(90deg,var(--g-500),var(--g-400));transition:width .5s var(--ease);box-shadow:0 0 12px rgba(34,197,94,.5)}
+
+    /* step dots */
+    .dots{display:flex;gap:5px;padding:14px 24px 0;flex-wrap:wrap}
+    .dot{
+      flex:1;min-width:26px;height:4px;border-radius:50px;background:var(--bg-2);
+      transition:background .35s var(--ease);cursor:pointer;
+    }
+    .dot.done{background:var(--g-400)}
+    .dot.cur{background:var(--g-600)}
+
+    .sec{display:none;padding:22px 24px 26px;animation:in .4s var(--ease)}
+    .sec.active{display:block}
+    @keyframes in{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
+
+    .sec-ico{font-size:1.5rem;margin-bottom:8px;line-height:1}
+    .sec h2{font-size:1.22rem;font-weight:800;margin-bottom:5px;line-height:1.3}
+    .sec-hint{font-size:.85rem;color:var(--muted);margin-bottom:20px}
+
+    /* ---------- FIELDS ---------- */
+    .f{margin-bottom:16px}
+    .f label{display:block;font-size:.82rem;font-weight:700;margin-bottom:7px}
+    .f label .opt{color:var(--muted);font-weight:500;font-size:.76rem}
+    .f input[type=text],.f input[type=tel],.f input[type=email],.f input[type=url],.f textarea,.f select{
+      width:100%;padding:13px 15px;background:var(--bg);border:1.5px solid var(--border);
+      border-radius:var(--r-sm);color:var(--text);font-family:inherit;font-size:16px;outline:none;
+      transition:border-color .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);
+    }
+    .f textarea{min-height:92px;resize:vertical;line-height:1.65}
+    .f input::placeholder,.f textarea::placeholder{color:#9aaba3}
+    .f input:focus,.f textarea:focus,.f select:focus{border-color:var(--g-500);box-shadow:0 0 0 4px rgba(34,197,94,.13);background:#fff}
+    .f-note{font-size:.75rem;color:var(--muted);margin-top:6px}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+    /* chips (single + multi) */
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      display:inline-flex;align-items:center;gap:7px;padding:10px 15px;
+      background:var(--surface);border:1.5px solid var(--border);border-radius:50px;
+      font-family:inherit;font-size:.87rem;font-weight:600;color:var(--text);cursor:pointer;
+      transition:all .2s var(--ease);
+    }
+    .chip:hover{border-color:var(--g-400);background:var(--g-tint-2);transform:translateY(-1px)}
+    .chip.on{border-color:var(--g-500);background:var(--g-tint);color:var(--g-700);box-shadow:0 0 0 3px rgba(34,197,94,.12)}
+    .chip.on::before{content:'✓';font-weight:800;color:var(--g-600)}
+
+    /* colour pickers */
+    .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .col-f{text-align:center}
+    .col-f input[type=color]{
+      width:100%;height:56px;border:1.5px solid var(--border);border-radius:var(--r-sm);
+      background:var(--bg);cursor:pointer;padding:4px;
+    }
+    .col-f .cl{display:block;font-size:.76rem;font-weight:700;margin-bottom:6px}
+    .col-f .hex{
+      width:100%;margin-top:6px;text-align:center;font-family:ui-monospace,Menlo,monospace;
+      font-size:.76rem!important;padding:7px 4px!important;text-transform:uppercase;
+    }
+
+    /* live preview */
+    .prev{
+      margin-top:18px;border:1.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;
+      box-shadow:var(--shadow-sm);
+    }
+    .prev-lbl{
+      font-size:.71rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+      color:var(--muted);padding:9px 13px;background:var(--bg);border-bottom:1px solid var(--border);
+    }
+    #pvBar{padding:13px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:background .3s}
+    #pvName{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:.98rem;transition:color .3s}
+    #pvBtn{font-size:.74rem;font-weight:800;padding:7px 15px;border-radius:50px;transition:all .3s}
+    #pvBody{padding:15px;background:#fff;display:flex;gap:11px;align-items:center}
+    #pvSwatch{width:44px;height:44px;border-radius:10px;flex-shrink:0;transition:background .3s}
+    #pvBody p{font-size:.8rem;color:var(--muted);line-height:1.5}
+
+    /* nav */
+    .nav{display:flex;gap:10px;margin-top:24px}
+    .b-back{
+      flex:0 0 auto;background:var(--surface);border:1.5px solid var(--border);color:var(--muted);
+      font-family:inherit;font-weight:700;font-size:.88rem;padding:14px 19px;border-radius:var(--r-sm);cursor:pointer;
+      transition:all .2s var(--ease);
+    }
+    .b-back:hover{border-color:var(--muted);color:var(--text);background:var(--bg)}
+    .b-next{
+      position:relative;overflow:hidden;flex:1;border:none;cursor:pointer;
+      background:linear-gradient(135deg,var(--g-500),var(--g-600));color:#fff;
+      font-family:inherit;font-weight:800;font-size:.96rem;padding:15px 20px;border-radius:var(--r-sm);
+      box-shadow:0 14px 40px rgba(34,197,94,.32);transition:transform .2s var(--ease),box-shadow .2s var(--ease),opacity .2s;
+    }
+    .b-next::after{
+      content:'';position:absolute;top:0;left:-70%;width:45%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);
+      transform:skewX(-20deg);transition:left .6s var(--ease);
+    }
+    .b-next:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 18px 44px rgba(34,197,94,.42)}
+    .b-next:hover:not(:disabled)::after{left:130%}
+    .b-next:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
+
+    .saved{
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      font-size:.75rem;color:var(--muted);margin-top:13px;opacity:0;transition:opacity .3s;
+    }
+    .saved.on{opacity:1}
+
+    /* assets callout */
+    .callout{
+      background:var(--g-tint-2);border:1px solid var(--g-tint);border-radius:var(--r-md);
+      padding:18px;margin-bottom:18px;
+    }
+    .callout h3{font-size:.94rem;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+    .callout p{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:14px}
+    .callout ul{margin:0 0 14px 18px;font-size:.85rem;color:var(--muted);line-height:1.8}
+    .wa-btn{
+      display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;
+      font-weight:800;font-size:.86rem;padding:12px 20px;border-radius:50px;text-decoration:none;
+      box-shadow:0 6px 18px rgba(37,211,102,.3);transition:transform .2s var(--ease),box-shadow .2s var(--ease);
+    }
+    .wa-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,211,102,.42)}
+
+    /* review */
+    .rev{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);padding:6px 16px;margin-bottom:18px;max-height:290px;overflow-y:auto}
+    .rev-s{padding:12px 0;border-bottom:1px dashed var(--border)}
+    .rev-s:last-child{border-bottom:none}
+    .rev-s h4{font-size:.78rem;font-weight:800;color:var(--g-700);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+    .rev-i{display:flex;gap:10px;font-size:.83rem;padding:2px 0;line-height:1.55}
+    .rev-i .k{color:var(--muted);flex:0 0 44%}
+    .rev-i .v{font-weight:600;flex:1;word-break:break-word}
+    .rev-empty{font-size:.83rem;color:var(--muted);font-style:italic;padding:12px 0}
+
+    /* success */
+    .done-wrap{display:none;padding:44px 26px;text-align:center}
+    .done-wrap.on{display:block;animation:in .45s var(--ease)}
+    .done-ic{
+      width:78px;height:78px;border-radius:50%;margin:0 auto 22px;
+      background:var(--g-tint);border:2px solid var(--g-500);
+      display:flex;align-items:center;justify-content:center;font-size:2.1rem;
+      animation:pop .5s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+    .done-wrap h2{font-size:1.5rem;font-weight:800;margin-bottom:11px}
+    .done-wrap h2 span{color:var(--g-600)}
+    .done-wrap p{color:var(--muted);font-size:.94rem;line-height:1.8;max-width:400px;margin:0 auto 26px}
+
+    #toast{
+      position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(22px);
+      background:var(--d-800);color:#fff;padding:13px 24px;border-radius:50px;
+      font-size:.86rem;font-weight:600;opacity:0;pointer-events:none;z-index:500;
+      transition:opacity .35s var(--ease),transform .35s var(--ease);
+      border:1px solid rgba(52,211,153,.35);box-shadow:0 12px 36px rgba(0,0,0,.3);
+      max-width:calc(100vw - 32px);text-align:center;
+    }
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .foot{text-align:center;font-size:.79rem;color:var(--muted);padding:0 20px 44px}
+    .foot a{color:var(--g-600);font-weight:700;text-decoration:none}
+
+    @media(max-width:600px){
+      .top{padding:22px 16px 66px}
+      .shell{padding:0 14px;margin-top:-50px}
+      .sec{padding:20px 17px 22px}
+      .head{padding:18px 17px 0}
+      .track{margin:11px 17px 0}
+      .dots{padding:13px 17px 0}
+      .row2{grid-template-columns:1fr}
+      .cols{grid-template-columns:1fr;gap:14px}
+      .col-f input[type=color]{height:48px}
+      #toast{bottom:16px}
+    }
+    :focus-visible{outline:3px solid var(--g-400);outline-offset:2px}
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+      html{scroll-behavior:auto}
+    }
+  </style>
+</head>
+<body>
+
+<div class="top">
+  <a href="/" class="brand">
+    <img src="/assets/brand/amraniads-icon.png" alt="AmraniAds"/>
+    <span>amrani<b>ads</b></span>
+  </a>
+  <div id="helloBox" class="hello" style="display:none"></div>
+  <h1>Your store <span class="grad">build brief</span></h1>
+  <p>Tell us how your store should look and work. Takes about 7 minutes — your answers save automatically as you go.</p>
+</div>
+
+<div class="shell">
+  <div class="card">
+
+    <div id="formArea">
+      <div class="head">
+        <span class="head-t">Store build brief <span>· saves automatically</span></span>
+        <span class="badge" id="badge">Section 1 / 7</span>
+      </div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="dots" id="dots"></div>
+
+      <form id="briefForm" novalidate>
+
+        <!-- 1 — BRAND -->
+        <section class="sec active" data-sec="1">
+          <div class="sec-ico">🎨</div>
+          <h2>Your brand</h2>
+          <p class="sec-hint">The identity we'll build the whole store around.</p>
+
+          <div class="f">
+            <label for="brandName">Brand / store name</label>
+            <input type="text" id="brandName" data-label="Brand name" placeholder="e.g. Luxora, NordStyle, Amber&amp;Co" required/>
+          </div>
+          <div class="f">
+            <label for="tagline">Tagline <span class="opt">— optional</span></label>
+            <input type="text" id="tagline" data-label="Tagline" placeholder="e.g. Elegance, reinvented."/>
+          </div>
+          <div class="f">
+            <label>Do you already own a domain?</label>
+            <div class="chips" data-single="domainStatus" data-label="Domain status">
+              <button type="button" class="chip" data-v="Yes, I own it">Yes, I own it</button>
+              <button type="button" class="chip" data-v="No, I need one">No, I need one</button>
+              <button type="button" class="chip" data-v="Not sure">Not sure</button>
+            </div>
+          </div>
+          <div class="f">
+            <label for="domain">Domain name <span class="opt">— or the one you'd like</span></label>
+            <input type="text" id="domain" data-label="Domain" placeholder="e.g. luxora.com"/>
+          </div>
+
+          <div class="f">
+            <label>Brand colours</label>
+            <div class="cols">
+              <div class="col-f">
+                <span class="cl">Primary</span>
+                <input type="color" id="c1" value="#22c55e"/>
+                <input type="text" class="hex" id="c1x" data-label="Primary colour" value="#22C55E" maxlength="7"/>
+              </div>
+              <div class="col-f">
+                <span class="cl">Secondary</span>
+                <input type="color" id="c2" value="#0a2419"/>
+                <input type="text" class="hex" id="c2x" data-label="Secondary colour" value="#0A2419" maxlength="7"/>
+              </div>
+              <div class="col-f">
+                <span class="cl">Accent</span>
+                <input type="color" id="c3" value="#fbbf24"/>
+                <input type="text" class="hex" id="c3x" data-label="Accent colour" value="#FBBF24" maxlength="7"/>
+              </div>
+            </div>
+            <div class="f-note">Not sure? Leave the defaults — we'll propose a palette that fits your niche.</div>
+
+            <div class="prev">
+              <div class="prev-lbl">Live preview</div>
+              <div id="pvBar"><span id="pvName">Your brand</span><span id="pvBtn">Shop now</span></div>
+              <div id="pvBody"><div id="pvSwatch"></div><p>This is roughly how your colours will feel on the storefront.</p></div>
+            </div>
+          </div>
+
+          <div class="f">
+            <label>Style direction</label>
+            <div class="chips" data-single="style" data-label="Style">
+              <button type="button" class="chip" data-v="Minimal &amp; clean">Minimal &amp; clean</button>
+              <button type="button" class="chip" data-v="Luxury &amp; premium">Luxury &amp; premium</button>
+              <button type="button" class="chip" data-v="Bold &amp; colourful">Bold &amp; colourful</button>
+              <button type="button" class="chip" data-v="Natural / organic">Natural / organic</button>
+              <button type="button" class="chip" data-v="Playful / young">Playful / young</button>
+            </div>
+          </div>
+
+          <div class="nav"><button type="button" class="b-next" data-go="2">Continue →</button></div>
+        </section>
+
+        <!-- 2 — BUSINESS -->
+        <section class="sec" data-sec="2">
+          <div class="sec-ico">🏢</div>
+          <h2>Business details</h2>
+          <p class="sec-hint">Shown on your store's contact page, footer and legal pages.</p>
+
+          <div class="f">
+            <label for="legalName">Business / legal name <span class="opt">— optional</span></label>
+            <input type="text" id="legalName" data-label="Legal name" placeholder="e.g. Luxora SARL"/>
+          </div>
+          <div class="f">
+            <label for="address">Address <span class="opt">— optional</span></label>
+            <input type="text" id="address" data-label="Address" placeholder="Street, building, etc."/>
+          </div>
+          <div class="row2">
+            <div class="f"><label for="city">City</label><input type="text" id="city" data-label="City" placeholder="Casablanca"/></div>
+            <div class="f"><label for="country">Country</label><input type="text" id="country" data-label="Country" placeholder="Morocco"/></div>
+          </div>
+          <div class="row2">
+            <div class="f"><label for="phone">Support phone</label><input type="tel" id="phone" data-label="Support phone" placeholder="+212 6 12 34 56 78"/></div>
+            <div class="f"><label for="waNum">WhatsApp number</label><input type="tel" id="waNum" data-label="WhatsApp" placeholder="+212 6 12 34 56 78"/></div>
+          </div>
+          <div class="f">
+            <label for="email">Contact email</label>
+            <input type="email" id="email" data-label="Email" placeholder="contact@yourbrand.com"/>
+          </div>
+          <div class="f">
+            <label for="socials">Social media links <span class="opt">— optional</span></label>
+            <textarea id="socials" data-label="Socials" placeholder="Instagram: @yourbrand&#10;TikTok: @yourbrand&#10;Facebook: /yourbrand"></textarea>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="1">← Back</button>
+            <button type="button" class="b-next" data-go="3">Continue →</button>
+          </div>
+        </section>
+
+        <!-- 3 — STORE SETUP -->
+        <section class="sec" data-sec="3">
+          <div class="sec-ico">⚙️</div>
+          <h2>Store setup</h2>
+          <p class="sec-hint">How customers will pay and receive their orders.</p>
+
+          <div class="f">
+            <label>Store language(s)</label>
+            <div class="chips" data-multi="languages" data-label="Languages">
+              <button type="button" class="chip" data-v="English">English</button>
+              <button type="button" class="chip" data-v="French">French</button>
+              <button type="button" class="chip" data-v="Arabic">Arabic</button>
+              <button type="button" class="chip" data-v="Spanish">Spanish</button>
+            </div>
+          </div>
+          <div class="f">
+            <label>Currency</label>
+            <div class="chips" data-single="currency" data-label="Currency">
+              <button type="button" class="chip" data-v="MAD (Dirham)">MAD</button>
+              <button type="button" class="chip" data-v="USD">USD</button>
+              <button type="button" class="chip" data-v="EUR">EUR</button>
+              <button type="button" class="chip" data-v="GBP">GBP</button>
+            </div>
+          </div>
+          <div class="f">
+            <label>Payment methods</label>
+            <div class="chips" data-multi="payments" data-label="Payment methods">
+              <button type="button" class="chip" data-v="Cash on delivery">Cash on delivery</button>
+              <button type="button" class="chip" data-v="Credit card">Credit card</button>
+              <button type="button" class="chip" data-v="PayPal">PayPal</button>
+              <button type="button" class="chip" data-v="Bank transfer">Bank transfer</button>
+            </div>
+          </div>
+          <div class="f">
+            <label for="shipZones">Where do you ship?</label>
+            <input type="text" id="shipZones" data-label="Shipping zones" placeholder="e.g. All Morocco / Europe / Worldwide"/>
+          </div>
+          <div class="row2">
+            <div class="f"><label for="shipCost">Shipping cost</label><input type="text" id="shipCost" data-label="Shipping cost" placeholder="e.g. 30 MAD, free over 500"/></div>
+            <div class="f"><label for="returns">Return window</label><input type="text" id="returns" data-label="Returns" placeholder="e.g. 14 days"/></div>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="2">← Back</button>
+            <button type="button" class="b-next" data-go="4">Continue →</button>
+          </div>
+        </section>
+
+        <!-- 4 — PRODUCTS -->
+        <section class="sec" data-sec="4">
+          <div class="sec-ico">📦</div>
+          <h2>Your products</h2>
+          <p class="sec-hint">So we can structure your collections and product pages.</p>
+
+          <div class="f">
+            <label>How many products at launch?</label>
+            <div class="chips" data-single="prodCount" data-label="Product count">
+              <button type="button" class="chip" data-v="1–5">1–5</button>
+              <button type="button" class="chip" data-v="6–20">6–20</button>
+              <button type="button" class="chip" data-v="21–50">21–50</button>
+              <button type="button" class="chip" data-v="50+">50+</button>
+            </div>
+          </div>
+          <div class="f">
+            <label for="category">What do you sell?</label>
+            <input type="text" id="category" data-label="Category" placeholder="e.g. Skincare, watches, home decor"/>
+          </div>
+          <div class="f">
+            <label for="priceRange">Typical price range</label>
+            <input type="text" id="priceRange" data-label="Price range" placeholder="e.g. 150–600 MAD"/>
+          </div>
+          <div class="f">
+            <label>Where do products come from?</label>
+            <div class="chips" data-single="supplier" data-label="Supply">
+              <button type="button" class="chip" data-v="My own stock">My own stock</button>
+              <button type="button" class="chip" data-v="Local supplier">Local supplier</button>
+              <button type="button" class="chip" data-v="Dropshipping">Dropshipping</button>
+              <button type="button" class="chip" data-v="Digital products">Digital products</button>
+            </div>
+          </div>
+          <div class="f">
+            <label for="prodNotes">Product names / details <span class="opt">— optional</span></label>
+            <textarea id="prodNotes" data-label="Product details" placeholder="List your main products, or anything we should know about them."></textarea>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="3">← Back</button>
+            <button type="button" class="b-next" data-go="5">Continue →</button>
+          </div>
+        </section>
+
+        <!-- 5 — DESIGN DIRECTION -->
+        <section class="sec" data-sec="5">
+          <div class="sec-ico">✨</div>
+          <h2>Design direction</h2>
+          <p class="sec-hint">Examples help us match your taste on the first try.</p>
+
+          <div class="f">
+            <label for="refs">Websites you like <span class="opt">— optional</span></label>
+            <textarea id="refs" data-label="Reference sites" placeholder="Paste 1–3 links to stores whose look you like."></textarea>
+          </div>
+          <div class="f">
+            <label for="avoid">Anything to avoid? <span class="opt">— optional</span></label>
+            <textarea id="avoid" data-label="Avoid" placeholder="e.g. no dark backgrounds, no red, avoid stock photos"></textarea>
+          </div>
+          <div class="f">
+            <label>Homepage priority</label>
+            <div class="chips" data-single="priority" data-label="Homepage priority">
+              <button type="button" class="chip" data-v="Sell one hero product">One hero product</button>
+              <button type="button" class="chip" data-v="Show the full catalogue">Full catalogue</button>
+              <button type="button" class="chip" data-v="Build brand story">Brand story</button>
+            </div>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="4">← Back</button>
+            <button type="button" class="b-next" data-go="6">Continue →</button>
+          </div>
+        </section>
+
+        <!-- 6 — TRACKING -->
+        <section class="sec" data-sec="6">
+          <div class="sec-ico">📊</div>
+          <h2>Tracking &amp; tools</h2>
+          <p class="sec-hint">Leave blank if you don't have these yet — we can create them for you.</p>
+
+          <div class="f">
+            <label for="pixel">Meta Pixel ID <span class="opt">— optional</span></label>
+            <input type="text" id="pixel" data-label="Meta Pixel ID" placeholder="e.g. 1038098258910639"/>
+          </div>
+          <div class="f">
+            <label for="ga4">Google Analytics ID <span class="opt">— optional</span></label>
+            <input type="text" id="ga4" data-label="GA4 ID" placeholder="e.g. G-XXXXXXXXXX"/>
+          </div>
+          <div class="f">
+            <label>Add a WhatsApp chat button?</label>
+            <div class="chips" data-single="waBtn" data-label="WhatsApp button">
+              <button type="button" class="chip" data-v="Yes">Yes</button>
+              <button type="button" class="chip" data-v="No">No</button>
+            </div>
+          </div>
+          <div class="f">
+            <label>Interested in the AI chatbot?</label>
+            <div class="chips" data-single="chatbot" data-label="AI chatbot">
+              <button type="button" class="chip" data-v="Yes, add it">Yes, add it</button>
+              <button type="button" class="chip" data-v="Maybe later">Maybe later</button>
+              <button type="button" class="chip" data-v="No">No</button>
+            </div>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="5">← Back</button>
+            <button type="button" class="b-next" data-go="7">Continue →</button>
+          </div>
+        </section>
+
+        <!-- 7 — ASSETS + REVIEW -->
+        <section class="sec" data-sec="7">
+          <div class="sec-ico">🚀</div>
+          <h2>Assets &amp; send</h2>
+          <p class="sec-hint">One last thing, then we start building.</p>
+
+          <div class="callout">
+            <h3>📎 Send your files on WhatsApp</h3>
+            <p>After sending this brief, message us your files — it's the fastest way and keeps quality intact:</p>
+            <ul>
+              <li>Logo (PNG with transparent background if possible)</li>
+              <li>Product photos</li>
+              <li>Any brand guide or fonts you already have</li>
+            </ul>
+            <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="wa-btn">💬 Open WhatsApp</a>
+          </div>
+
+          <div class="f">
+            <label for="notes">Anything else we should know? <span class="opt">— optional</span></label>
+            <textarea id="notes" data-label="Extra notes" placeholder="Deadlines, specific features, competitors, anything at all."></textarea>
+          </div>
+
+          <div class="f">
+            <label>Quick review</label>
+            <div class="rev" id="rev"></div>
+          </div>
+
+          <div class="nav">
+            <button type="button" class="b-back" data-go="6">← Back</button>
+            <button type="submit" class="b-next" id="submitBtn">Send my brief →</button>
+          </div>
+          <div class="saved on" style="margin-top:14px">🔒 Only shared with the AmraniAds build team</div>
+        </section>
+
+      </form>
+      <div class="saved" id="savedTag">✓ Saved</div>
+      <div style="height:18px"></div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="done-wrap" id="doneWrap">
+      <div class="done-ic">✅</div>
+      <h2>Brief <span>received!</span></h2>
+      <p>Thanks — our build team has everything they need to start. We'll be in touch on WhatsApp if anything's missing.</p>
+      <a href="https://wa.me/212627716149" target="_blank" rel="noopener" class="wa-btn">💬 Send my logo &amp; photos</a>
+    </div>
+
+  </div>
+</div>
+
+<div class="foot">© 2025 AmraniAds — <a href="/">Back to home</a></div>
+<div id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var TOTAL = 7;
+  var KEY = 'amrani_brief_v1';
+  var cur = 1;
+
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+
+  /* ---------- client code (?c=base64) ---------- */
+  var client = { name:'', id:'', plan:'' };
+  try{
+    var raw = new URLSearchParams(location.search).get('c');
+    if(raw){
+      var cfg = JSON.parse(decodeURIComponent(escape(atob(raw.replace(/-/g,'+').replace(/_/g,'/')))));
+      client.name = cfg.n || cfg.name || '';
+      client.id   = cfg.id || '';
+      client.plan = cfg.p || cfg.plan || '';
+    }
+  }catch(e){ /* bad code — fall back to a generic brief */ }
+
+  if(client.name){
+    var hb = $('#helloBox');
+    hb.textContent = '👋 Welcome, ' + client.name;
+    hb.style.display = 'inline-flex';
+  }
+
+  /* ---------- toast ---------- */
+  var tEl = $('#toast'), tTimer;
+  function toast(m){
+    tEl.textContent = m; tEl.classList.add('show');
+    clearTimeout(tTimer); tTimer = setTimeout(function(){ tEl.classList.remove('show'); }, 2600);
+  }
+
+  /* ---------- step dots ---------- */
+  var dots = $('#dots');
+  for(var i=1;i<=TOTAL;i++){
+    var d = document.createElement('span');
+    d.className = 'dot'; d.dataset.i = i;
+    d.addEventListener('click', (function(n){ return function(){ if(n < cur) go(n); }; })(i));
+    dots.appendChild(d);
+  }
+
+  function go(n){
+    if(n < 1 || n > TOTAL) return;
+    cur = n;
+    $$('.sec').forEach(function(s){ s.classList.toggle('active', Number(s.dataset.sec) === n); });
+    $('#badge').textContent = 'Section ' + n + ' / ' + TOTAL;
+    $('#fill').style.width = (n / TOTAL * 100) + '%';
+    $$('.dot').forEach(function(d){
+      var i = Number(d.dataset.i);
+      d.classList.toggle('done', i < n);
+      d.classList.toggle('cur', i === n);
+    });
+    if(n === TOTAL) renderReview();
+    var c = $('.card');
+    window.scrollTo({ top: c.getBoundingClientRect().top + window.pageYOffset - 16, behavior:'smooth' });
+  }
+
+  $$('[data-go]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = Number(b.dataset.go);
+      // brand name is the only thing we insist on
+      if(t === 2 && !$('#brandName').value.trim()){
+        toast('⚠️ Please enter your brand name');
+        $('#brandName').focus();
+        return;
+      }
+      go(t);
+      save();
+    });
+  });
+
+  /* ---------- chips ---------- */
+  var chipState = {};
+  $$('.chips').forEach(function(grid){
+    var single = grid.dataset.single, multi = grid.dataset.multi;
+    var key = single || multi;
+    chipState[key] = single ? '' : [];
+    $$('.chip', grid).forEach(function(chip){
+      chip.addEventListener('click', function(){
+        if(single){
+          $$('.chip', grid).forEach(function(c){ c.classList.remove('on'); });
+          chip.classList.add('on');
+          chipState[key] = chip.dataset.v;
+        }else{
+          chip.classList.toggle('on');
+          chipState[key] = $$('.chip.on', grid).map(function(c){ return c.dataset.v; });
+        }
+        save();
+      });
+    });
+  });
+
+  /* ---------- colour pickers + live preview ---------- */
+  function syncPreview(){
+    var p = $('#c1').value, s = $('#c2').value, a = $('#c3').value;
+    var name = $('#brandName').value.trim() || 'Your brand';
+    $('#pvBar').style.background = s;
+    $('#pvName').style.color = '#fff';
+    $('#pvName').textContent = name;
+    $('#pvBtn').style.background = p;
+    $('#pvBtn').style.color = '#fff';
+    $('#pvSwatch').style.background = a;
+  }
+  [['c1','c1x'],['c2','c2x'],['c3','c3x']].forEach(function(pair){
+    var pick = $('#'+pair[0]), hex = $('#'+pair[1]);
+    pick.addEventListener('input', function(){ hex.value = pick.value.toUpperCase(); syncPreview(); save(); });
+    hex.addEventListener('input', function(){
+      var v = hex.value.trim();
+      if(/^#[0-9a-fA-F]{6}$/.test(v)){ pick.value = v; syncPreview(); save(); }
+    });
+  });
+  $('#brandName').addEventListener('input', syncPreview);
+  syncPreview();
+
+  /* ---------- autosave ---------- */
+  var savedTag = $('#savedTag'), saveTimer;
+  function collectRaw(){
+    var d = { _chips: chipState, _sec: cur, _f: {} };
+    $$('input[data-label], textarea[data-label]').forEach(function(el){ d._f[el.id] = el.value; });
+    return d;
+  }
+  function save(){
+    try{
+      localStorage.setItem(KEY, JSON.stringify(collectRaw()));
+      savedTag.classList.add('on');
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function(){ savedTag.classList.remove('on'); }, 1400);
+    }catch(e){}
+  }
+  function restore(){
+    var d;
+    try{ d = JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){ return; }
+    if(!d) return;
+    Object.keys(d._f || {}).forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.value = d._f[id];
+    });
+    Object.keys(d._chips || {}).forEach(function(key){
+      var grid = $('.chips[data-single="'+key+'"], .chips[data-multi="'+key+'"]');
+      if(!grid) return;
+      var val = d._chips[key];
+      var list = Array.isArray(val) ? val : (val ? [val] : []);
+      $$('.chip', grid).forEach(function(c){
+        if(list.indexOf(c.dataset.v) > -1){ c.classList.add('on'); }
+      });
+      chipState[key] = val;
+    });
+    ['c1','c2','c3'].forEach(function(id){
+      var hx = d._f[id+'x'];
+      if(hx && /^#[0-9a-fA-F]{6}$/.test(hx)) document.getElementById(id).value = hx;
+    });
+    syncPreview();
+    if(d._sec && d._sec > 1){ go(d._sec); toast('↩︎ Restored where you left off'); }
+  }
+  $$('input[data-label], textarea[data-label]').forEach(function(el){
+    el.addEventListener('input', function(){
+      clearTimeout(el.__t);
+      el.__t = setTimeout(save, 500);
+    });
+  });
+
+  /* ---------- build structured payload ---------- */
+  var MAP = [
+    { title:'🎨 Brand',        ids:['brandName','tagline','domain'], chips:[['domainStatus','Domain status'],['style','Style']], extra:[['c1x','Primary colour'],['c2x','Secondary colour'],['c3x','Accent colour']] },
+    { title:'🏢 Business',     ids:['legalName','address','city','country','phone','waNum','email','socials'], chips:[] },
+    { title:'⚙️ Store setup',  ids:['shipZones','shipCost','returns'], chips:[['languages','Languages'],['currency','Currency'],['payments','Payment methods']] },
+    { title:'📦 Products',     ids:['category','priceRange','prodNotes'], chips:[['prodCount','Product count'],['supplier','Supply']] },
+    { title:'✨ Design',        ids:['refs','avoid'], chips:[['priority','Homepage priority']] },
+    { title:'📊 Tracking',     ids:['pixel','ga4'], chips:[['waBtn','WhatsApp button'],['chatbot','AI chatbot']] },
+    { title:'📝 Notes',        ids:['notes'], chips:[] }
+  ];
+
+  function labelOf(id){
+    var el = document.getElementById(id);
+    return (el && el.dataset.label) || id;
+  }
+  function buildSections(){
+    return MAP.map(function(m){
+      var items = [];
+      (m.ids || []).forEach(function(id){
+        var el = document.getElementById(id);
+        if(el && el.value.trim()) items.push({ label: labelOf(id), value: el.value.trim() });
+      });
+      (m.extra || []).forEach(function(p){
+        var el = document.getElementById(p[0]);
+        if(el && el.value.trim()) items.push({ label: p[1], value: el.value.trim() });
+      });
+      (m.chips || []).forEach(function(p){
+        var v = chipState[p[0]];
+        var s = Array.isArray(v) ? v.join(', ') : (v || '');
+        if(s) items.push({ label: p[1], value: s });
+      });
+      return { title: m.title, items: items };
+    }).filter(function(s){ return s.items.length; });
+  }
+
+  function renderReview(){
+    var secs = buildSections(), box = $('#rev');
+    if(!secs.length){ box.innerHTML = '<div class="rev-empty">Nothing filled in yet.</div>'; return; }
+    box.innerHTML = secs.map(function(s){
+      return '<div class="rev-s"><h4>' + s.title + '</h4>' +
+        s.items.map(function(it){
+          var v = String(it.value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+          return '<div class="rev-i"><span class="k">' + it.label + '</span><span class="v">' + v + '</span></div>';
+        }).join('') + '</div>';
+    }).join('');
+  }
+
+  /* ---------- submit ---------- */
+  $('#briefForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var name = $('#brandName').value.trim();
+    if(!name){ toast('⚠️ Please enter your brand name'); go(1); $('#brandName').focus(); return; }
+
+    var btn = $('#submitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Sending...';
+
+    var payload = {
+      client: { name: client.name || name, id: client.id, plan: client.plan },
+      sections: buildSections()
+    };
+
+    var ok = false;
+    try{
+      var r = await fetch('/api/brief', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      ok = r.ok;
+    }catch(_){ ok = false; }
+
+    if(!ok){
+      btn.disabled = false;
+      btn.textContent = 'Send my brief →';
+      toast('⚠️ Could not send — please check your connection and retry');
+      return;
+    }
+
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    $('#formArea').style.display = 'none';
+    $('#doneWrap').classList.add('on');
+    window.scrollTo({ top: 0, behavior:'smooth' });
+  });
+
+  restore();
+  go(cur);
+})();
+</script>
+</body>
+</html>

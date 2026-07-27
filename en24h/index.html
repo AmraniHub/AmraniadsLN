@@ -331,6 +331,25 @@
       font-size:.75rem;font-weight:700;padding:6px 12px;border-radius:50px;margin-bottom:16px;
     }
 
+    /* live quote box */
+    .quote{
+      background:var(--g-tint-2);border:1.5px solid var(--g-tint);
+      border-radius:var(--r-md);padding:16px 18px;margin-bottom:20px;
+      animation:stepIn .35s var(--ease);
+    }
+    .quote-rows{margin-bottom:10px}
+    .quote-row{display:flex;justify-content:space-between;gap:12px;font-size:.84rem;color:var(--muted);padding:3px 0}
+    .quote-row b{color:var(--text);font-weight:700;white-space:nowrap}
+    .quote-total,.quote-dep,.quote-mo{
+      display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+      padding-top:10px;border-top:1px solid var(--g-tint);font-size:.88rem;
+    }
+    .quote-total span,.quote-dep span,.quote-mo span{color:var(--muted);font-weight:600}
+    .quote-total b{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.28rem;font-weight:800;color:var(--text)}
+    .quote-dep b{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;font-weight:800;color:var(--g-600)}
+    .quote-mo b{font-weight:800;color:var(--text)}
+    .quote-note{font-size:.73rem;color:var(--muted);margin-top:10px;line-height:1.5}
+
     .nav-row{display:flex;gap:10px}
     .btn-back{
       flex:0 0 auto;background:var(--surface);border:1.5px solid var(--border);color:var(--muted);
@@ -763,25 +782,25 @@
         <div class="step-hint">Pick everything you'd like a quote for — we'll confirm the final scope on the call</div>
         <div class="multi-hint">✓ You can select more than one</div>
         <div class="opt-grid" data-field="plan" data-multi="true">
-          <button type="button" class="opt-btn" data-value="Ready-to-launch Shopify store">
+          <button type="button" class="opt-btn" data-value="Ready-to-launch Shopify store" data-price="900">
             <span class="ico">🛍️</span>
             <span class="lbl">Ready-to-launch store<small>Custom store, fast theme, ready for ads</small></span>
             <span class="opt-price">900 MAD</span>
             <span class="check"></span>
           </button>
-          <button type="button" class="opt-btn" data-value="Premium custom store">
+          <button type="button" class="opt-btn" data-value="Premium custom store" data-price="1200">
             <span class="ico">✨</span>
             <span class="lbl">Premium custom store<small>Fully custom design & stronger branding</small></span>
             <span class="opt-price">1,200 MAD</span>
             <span class="check"></span>
           </button>
-          <button type="button" class="opt-btn" data-value="CRM connected to Shopify">
+          <button type="button" class="opt-btn" data-value="CRM connected to Shopify" data-price="1400" data-monthly="40">
             <span class="ico">📋</span>
             <span class="lbl">CRM for your store<small>Centralize leads, orders & confirmations</small></span>
             <span class="opt-price">1,400 MAD</span>
             <span class="check"></span>
           </button>
-          <button type="button" class="opt-btn" data-value="AI chatbot">
+          <button type="button" class="opt-btn" data-value="AI chatbot" data-price="800" data-monthly="120">
             <span class="ico">🤖</span>
             <span class="lbl">AI chatbot<small>Answers visitors & converts them 24/7</small></span>
             <span class="opt-price">800 MAD</span>
@@ -792,6 +811,22 @@
             <span class="lbl">Not sure yet — I need advice<small>We'll recommend the right setup on the call</small></span>
             <span class="check"></span>
           </button>
+        </div>
+        <div class="quote" id="quoteBox" hidden>
+          <div class="quote-rows" id="quoteRows"></div>
+          <div class="quote-total">
+            <span>Total</span>
+            <b id="quoteTotal">0 MAD</b>
+          </div>
+          <div class="quote-dep">
+            <span>To start (30% deposit)</span>
+            <b id="quoteDeposit">0 MAD</b>
+          </div>
+          <div class="quote-mo" id="quoteMonthlyRow" hidden>
+            <span>Then monthly</span>
+            <b id="quoteMonthly">0 MAD</b>
+          </div>
+          <p class="quote-note">Indicative — we confirm the final quote on your free call.</p>
         </div>
         <div class="nav-row">
           <button type="button" class="btn-back" data-back="3">← Back</button>
@@ -840,7 +875,7 @@
         <div class="stat-lbl">Client rating</div>
       </div>
       <div class="stat reveal reveal-d3">
-        <div class="stat-num" data-count="7" data-suffix="j/7">0</div>
+        <div class="stat-num" data-count="24" data-suffix="/7">0</div>
         <div class="stat-lbl">Support available</div>
       </div>
     </div>
@@ -1052,6 +1087,39 @@
   function getFbc(){const c=getCookie('_fbc');if(c)return c;const f=new URLSearchParams(location.search).get('fbclid');return f?'fb.1.'+Date.now()+'.'+f:undefined}
   function genEventId(){return'lead_shopify_intl_en_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
   function genPurchaseEventId(){return'purchase_shopify_intl_en_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)}
+  /* ---- Live quote: totals + 30% deposit ---- */
+  const MAD_PER_USD=10;
+  const fmtMad=n=>n.toLocaleString('en-US')+' MAD';
+  const fmtUsd=n=>'~$'+Math.round(n/MAD_PER_USD).toLocaleString('en-US');
+
+  function computeQuote(){
+    const grid=document.querySelector('.opt-grid[data-field="plan"]');
+    if(!grid) return {items:[],total:0,deposit:0,monthly:0};
+    const items=Array.from(grid.querySelectorAll('.opt-btn.selected'))
+      .filter(b=>b.dataset.price)
+      .map(b=>({name:b.dataset.value,price:Number(b.dataset.price)||0,monthly:Number(b.dataset.monthly)||0}));
+    const total=items.reduce((s,i)=>s+i.price,0);
+    const monthly=items.reduce((s,i)=>s+i.monthly,0);
+    return {items,total,deposit:Math.round(total*0.3),monthly};
+  }
+
+  function renderQuote(){
+    const q=computeQuote();
+    const box=document.getElementById('quoteBox');
+    if(!box) return q;
+    if(!q.items.length){box.hidden=true;return q}
+    box.hidden=false;
+    document.getElementById('quoteRows').innerHTML=q.items.map(i=>
+      '<div class="quote-row"><span>'+i.name+'</span><b>'+fmtMad(i.price)+'</b></div>'
+    ).join('');
+    document.getElementById('quoteTotal').textContent=fmtMad(q.total)+' ('+fmtUsd(q.total)+')';
+    document.getElementById('quoteDeposit').textContent=fmtMad(q.deposit)+' ('+fmtUsd(q.deposit)+')';
+    const moRow=document.getElementById('quoteMonthlyRow');
+    if(q.monthly>0){moRow.hidden=false;document.getElementById('quoteMonthly').textContent=fmtMad(q.monthly)+' ('+fmtUsd(q.monthly)+')/mo'}
+    else{moRow.hidden=true}
+    return q;
+  }
+
   const SENT_PHONES_KEY='amrani_shopify_intl_meta_sent_phones';
   function getSentPhones(){try{return JSON.parse(localStorage.getItem(SENT_PHONES_KEY)||'[]')}catch(_){return[]}}
   function markPhoneSent(phone,list){try{list.push(phone);localStorage.setItem(SENT_PHONES_KEY,JSON.stringify(list))}catch(_){}}
@@ -1148,6 +1216,7 @@
           const picked=Array.from(grid.querySelectorAll('.opt-btn.selected')).map(b=>b.dataset.value);
           state[field]=picked.join(' + ');
           if(nextBtn) nextBtn.disabled=picked.length===0;
+          if(field==='plan') renderQuote();
         }else{
           grid.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
           btn.classList.add('selected');
@@ -1193,7 +1262,12 @@
     const normalizedPhone=phone.replace(/\D/g,'');
     const sentPhones=getSentPhones();
     const isDuplicate=sentPhones.includes(normalizedPhone);
+    const quote=computeQuote();
     let notes='[EN] Niche: '+state.niche+' | Market: '+state.market+' | Existing store: '+state.existing+' | Wants: '+(state.plan||'—');
+    if(quote.total>0){
+      notes+=' | Total: '+quote.total+' MAD | Deposit 30%: '+quote.deposit+' MAD';
+      if(quote.monthly>0) notes+=' | Monthly: '+quote.monthly+' MAD';
+    }
     if(isDuplicate) notes='[REPEAT] '+notes;
 
     if(!isDuplicate){
@@ -1218,6 +1292,14 @@
           eventId,
           purchaseEventId,
           skipMetaEvents:isDuplicate,
+          pricing:quote.total>0?{
+            currency:'MAD',
+            items:quote.items.map(i=>({name:i.name,price:i.price,monthly:i.monthly})),
+            total:quote.total,
+            depositPct:30,
+            deposit:quote.deposit,
+            monthly:quote.monthly
+          }:null,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
