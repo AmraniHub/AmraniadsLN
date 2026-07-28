@@ -739,7 +739,7 @@
   <div class="funnel-card">
     <div class="funnel-head">
       <span class="funnel-head-label">Free project plan <span>· no card needed</span></span>
-      <span class="progress-pct" id="progressPct">Step 1 / 5</span>
+      <span class="progress-pct" id="progressPct">Step 1 / 4</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
@@ -778,22 +778,8 @@
         </div>
       </div>
 
-      <!-- STEP 3 — EXISTING STORE -->
+      <!-- STEP 3 — PLAN INTEREST -->
       <div class="step" data-step="3">
-        <div class="step-q">Do you already have a Shopify store?</div>
-        <div class="step-hint">There's no wrong answer — we adapt to both cases</div>
-        <div class="opt-grid" data-field="existing">
-          <button type="button" class="opt-btn" data-value="No, starting from scratch"><span class="ico">🆕</span><span class="lbl">No, starting from scratch</span><span class="check"></span></button>
-          <button type="button" class="opt-btn" data-value="Yes, I want to improve it"><span class="ico">🔄</span><span class="lbl">Yes, I want to improve it</span><span class="check"></span></button>
-        </div>
-        <div class="nav-row">
-          <button type="button" class="btn-back" data-back="2">← Back</button>
-          <button type="button" class="btn-next" id="next3" disabled>Next →</button>
-        </div>
-      </div>
-
-      <!-- STEP 4 — PLAN INTEREST -->
-      <div class="step" data-step="4">
         <div class="step-q">Which service are you interested in?</div>
         <div class="step-hint">Pick everything you'd like a quote for — we'll confirm the final scope on the call</div>
         <div class="multi-hint">🎁 Pick more than one and save up to 700 MAD</div>
@@ -849,26 +835,26 @@
           <p class="quote-note">Indicative — we confirm the final quote on your free call.</p>
         </div>
         <div class="nav-row">
-          <button type="button" class="btn-back" data-back="3">← Back</button>
-          <button type="button" class="btn-next" id="next4" disabled>Next →</button>
+          <button type="button" class="btn-back" data-back="2">← Back</button>
+          <button type="button" class="btn-next" id="next3" disabled>Next →</button>
         </div>
       </div>
 
-      <!-- STEP 5 — CONTACT -->
-      <div class="step" data-step="5">
+      <!-- STEP 4 — CONTACT -->
+      <div class="step" data-step="4">
         <div class="step-q">Almost done — how can we reach you?</div>
         <div class="step-hint">We'll contact you within 24h with a free action plan</div>
         <div class="field">
           <label for="fname">First name</label>
-          <input type="text" id="fname" name="name" placeholder="John, Emma, Michael..." required autocomplete="name"/>
+          <input type="text" id="fname" name="name" placeholder="Youssef, Salma, Mehdi..." required autocomplete="name"/>
         </div>
         <div class="field">
           <label for="fphone">Phone / WhatsApp</label>
-          <input type="tel" id="fphone" name="phone" placeholder="+1 234 567 8900" required autocomplete="tel"/>
-          <div class="field-note">Include the country code — e.g. +1, +44, +61</div>
+          <input type="tel" id="fphone" name="phone" placeholder="06 12 34 56 78" required autocomplete="tel" inputmode="tel"/>
+          <div class="field-note">Moroccan number — or add your country code if you're abroad (e.g. +33, +1)</div>
         </div>
         <div class="nav-row">
-          <button type="button" class="btn-back" data-back="4">← Back</button>
+          <button type="button" class="btn-back" data-back="3">← Back</button>
           <button type="submit" class="btn-next" id="submitBtn">Send my request →</button>
         </div>
         <p class="form-note">🔒 Your data is confidential — no spam, ever</p>
@@ -1100,7 +1086,7 @@
 <div id="toast"></div>
 
 <script>
-  const state={niche:'',market:'',existing:'',plan:''};
+  const state={niche:'',market:'',plan:''};
   const steps=document.querySelectorAll('.step');
   const totalSteps=steps.length;
 
@@ -1260,7 +1246,6 @@
   document.getElementById('next1').addEventListener('click',()=>goTo(2));
   document.getElementById('next2').addEventListener('click',()=>goTo(3));
   document.getElementById('next3').addEventListener('click',()=>goTo(4));
-  document.getElementById('next4').addEventListener('click',()=>goTo(5));
   document.querySelectorAll('[data-back]').forEach(btn=>{
     btn.addEventListener('click',()=>goTo(Number(btn.dataset.back)));
   });
@@ -1293,7 +1278,7 @@
     const sentPhones=getSentPhones();
     const isDuplicate=sentPhones.includes(normalizedPhone);
     const quote=computeQuote();
-    let notes='[EN] Niche: '+state.niche+' | Market: '+state.market+' | Existing store: '+state.existing+' | Wants: '+(state.plan||'—');
+    let notes='[EN] Niche: '+state.niche+' | Market: '+state.market+' | Wants: '+(state.plan||'—');
     if(quote.total>0){
       if(quote.saving>0) notes+=' | Subtotal: '+quote.subtotal+' MAD | Bundle saving: -'+quote.saving+' MAD';
       notes+=' | Total: '+quote.total+' MAD | Deposit 30%: '+quote.deposit+' MAD';
