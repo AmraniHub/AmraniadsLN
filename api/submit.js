@@ -154,6 +154,10 @@ module.exports = async function handler(req, res) {
       .join('\n');
     quoteBlock =
       `\n\n🧾 <b>Selected plans</b>\n${lines}` +
+      (Number(pricing.saving) > 0
+        ? `\n   Subtotal: ${Number(pricing.subtotal).toLocaleString('en-US')} ${cur}` +
+          `\n🎁 Bundle saving: <b>−${Number(pricing.saving).toLocaleString('en-US')} ${cur}</b>`
+        : '') +
       `\n💰 Total: <b>${money(pricing.total, cur)}</b>` +
       `\n🔐 Deposit ${pricing.depositPct || 30}%: <b>${money(pricing.deposit, cur)}</b>` +
       (Number(pricing.monthly) > 0 ? `\n🔁 Then monthly: <b>${money(pricing.monthly, cur)}</b>` : '');

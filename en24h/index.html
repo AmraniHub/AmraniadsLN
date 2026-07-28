@@ -349,6 +349,22 @@
     .quote-dep b{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;font-weight:800;color:var(--g-600)}
     .quote-mo b{font-weight:800;color:var(--text)}
     .quote-note{font-size:.73rem;color:var(--muted);margin-top:10px;line-height:1.5}
+    .quote-save{
+      display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+      padding-top:10px;border-top:1px solid var(--g-tint);font-size:.85rem;
+    }
+    .quote-save span{color:var(--g-700);font-weight:700}
+    .quote-save b{color:var(--g-600);font-weight:800}
+
+    /* bundle callout under the pricing heading */
+    .bundle-note{
+      display:inline-block;margin-top:16px;
+      background:var(--g-tint-2);border:1.5px solid var(--g-tint);
+      color:var(--g-700);font-size:.83rem;line-height:1.6;
+      padding:11px 18px;border-radius:50px;
+    }
+    .bundle-note b{color:var(--g-700);font-weight:800}
+    @media(max-width:600px){.bundle-note{border-radius:var(--r-md);font-size:.8rem}}
 
     .nav-row{display:flex;gap:10px}
     .btn-back{
@@ -695,15 +711,15 @@
   <div class="hero-grid"></div>
 
   <div class="hero-inner">
-    <div class="eyebrow reveal"><span class="pulse-dot"></span> Shopify experts · Available now</div>
+    <div class="eyebrow reveal"><span class="pulse-dot"></span> COD &amp; Dropshipping experts · Available now</div>
 
     <h1 class="reveal reveal-d1">
-      Your Shopify store,<br/><span class="grad">live in 24 hours</span>
+      Your COD or dropshipping store,<br/><span class="grad">live in 24 hours</span>
     </h1>
 
     <p class="hero-sub reveal reveal-d2">
-      Answer a few quick questions about your project and get a
-      <b>free action plan within 24h</b> — built by a team that has launched 150+ stores.
+      Built for Moroccan sellers — <b>cash on delivery</b> for the Morocco market,
+      or <b>dropshipping</b> to USA, Canada, France and Europe. Free action plan within 24h.
     </p>
 
     <div class="hero-cta-row reveal reveal-d3">
@@ -712,7 +728,7 @@
 
     <div class="chips reveal reveal-d4">
       <span class="chip"><span class="tick">✓</span> 2 minutes to answer</span>
-      <span class="chip"><span class="tick">✓</span> $0 diagnostic call</span>
+      <span class="chip"><span class="tick">✓</span> Free diagnostic call</span>
       <span class="chip"><span class="tick">✓</span> No commitment</span>
     </div>
   </div>
@@ -780,7 +796,7 @@
       <div class="step" data-step="4">
         <div class="step-q">Which service are you interested in?</div>
         <div class="step-hint">Pick everything you'd like a quote for — we'll confirm the final scope on the call</div>
-        <div class="multi-hint">✓ You can select more than one</div>
+        <div class="multi-hint">🎁 Pick more than one and save up to 700 MAD</div>
         <div class="opt-grid" data-field="plan" data-multi="true">
           <button type="button" class="opt-btn" data-value="Ready-to-launch Shopify store" data-price="900">
             <span class="ico">🛍️</span>
@@ -814,6 +830,10 @@
         </div>
         <div class="quote" id="quoteBox" hidden>
           <div class="quote-rows" id="quoteRows"></div>
+          <div class="quote-save" id="quoteSaveRow" hidden>
+            <span>🎁 Bundle saving</span>
+            <b id="quoteSave">0 MAD</b>
+          </div>
           <div class="quote-total">
             <span>Total</span>
             <b id="quoteTotal">0 MAD</b>
@@ -888,33 +908,33 @@
     <div class="section-head reveal">
       <span class="section-tag">What you get</span>
       <h2 class="section-title">Everything you need to <span class="grad">start selling</span></h2>
-      <p class="section-sub">Not just a theme — a complete, conversion-ready store wired up for paid traffic from day one.</p>
+      <p class="section-sub">Not just a theme — a complete store wired for real orders, whether you're delivering cash on delivery in Morocco or shipping worldwide.</p>
     </div>
     <div class="feat-grid">
       <div class="feat reveal">
+        <div class="feat-ico">💵</div>
+        <h3>COD-ready from day one</h3>
+        <p>Cash-on-delivery checkout built for Morocco: simplified order form, phone validation, and a confirmation flow so fewer orders get lost before delivery.</p>
+      </div>
+      <div class="feat reveal reveal-d1">
+        <div class="feat-ico">🌍</div>
+        <h3>Dropshipping-ready</h3>
+        <p>Selling to USA, Canada, France or Europe? Supplier products imported, currency and shipping zones set, fulfilment ready to run.</p>
+      </div>
+      <div class="feat reveal reveal-d2">
         <div class="feat-ico">⚡</div>
         <h3>Built in 24 hours</h3>
         <p>From our first call to a store ready to receive ad traffic — no waiting weeks for a developer.</p>
       </div>
-      <div class="feat reveal reveal-d1">
+      <div class="feat reveal reveal-d3">
         <div class="feat-ico">🎯</div>
         <h3>Ad tracking wired up</h3>
         <p>Meta Pixel, Conversions API and Google Analytics configured correctly from the start, so your campaigns can actually optimize.</p>
       </div>
-      <div class="feat reveal reveal-d2">
-        <div class="feat-ico">📱</div>
-        <h3>Mobile-first & fast</h3>
-        <p>Most of your traffic is mobile. Every store we build is optimized for speed and conversion on small screens.</p>
-      </div>
-      <div class="feat reveal reveal-d3">
-        <div class="feat-ico">🎨</div>
-        <h3>Premium branding</h3>
-        <p>Clean, trustworthy design that makes first-time visitors comfortable enough to buy from you.</p>
-      </div>
       <div class="feat reveal reveal-d4">
-        <div class="feat-ico">💳</div>
-        <h3>Payments & shipping</h3>
-        <p>Checkout, payment gateways and delivery options fully configured — ready for real orders.</p>
+        <div class="feat-ico">📱</div>
+        <h3>Mobile-first &amp; fast</h3>
+        <p>Most of your traffic is mobile. Every store we build is optimized for speed and conversion on small screens.</p>
       </div>
       <div class="feat reveal reveal-d4">
         <div class="feat-ico">🤝</div>
@@ -932,6 +952,9 @@
       <span class="section-tag">Pricing</span>
       <h2 class="section-title">Fixed prices, <span class="grad">no surprises</span></h2>
       <p class="section-sub">Payable in MAD or USD (1$ = 10 MAD) — you know the full cost before we start.</p>
+      <div class="bundle-note reveal">
+        🎁 <b>Combine and save:</b> pick 2 services and save <b>200 MAD</b> · 3 services save <b>400 MAD</b> · all 4 save <b>700 MAD</b>
+      </div>
     </div>
     <div class="pricing-grid">
       <div class="price-card reveal">
@@ -1091,15 +1114,20 @@
   const fmtMad=n=>n.toLocaleString('en-US')+' MAD';
   const fmtUsd=n=>'~$'+Math.round(n/MAD_PER_USD).toLocaleString('en-US');
 
+  // Bundle savings by number of paid services selected
+  const BUNDLE_SAVINGS={2:200,3:400,4:700};
+
   function computeQuote(){
     const grid=document.querySelector('.opt-grid[data-field="plan"]');
-    if(!grid) return {items:[],total:0,deposit:0,monthly:0};
+    if(!grid) return {items:[],subtotal:0,saving:0,total:0,deposit:0,monthly:0};
     const items=Array.from(grid.querySelectorAll('.opt-btn.selected'))
       .filter(b=>b.dataset.price)
       .map(b=>({name:b.dataset.value,price:Number(b.dataset.price)||0,monthly:Number(b.dataset.monthly)||0}));
-    const total=items.reduce((s,i)=>s+i.price,0);
+    const subtotal=items.reduce((s,i)=>s+i.price,0);
     const monthly=items.reduce((s,i)=>s+i.monthly,0);
-    return {items,total,deposit:Math.round(total*0.3),monthly};
+    const saving=BUNDLE_SAVINGS[items.length]||0;
+    const total=Math.max(0,subtotal-saving);
+    return {items,subtotal,saving,total,deposit:Math.round(total*0.3),monthly};
   }
 
   function renderQuote(){
@@ -1111,6 +1139,9 @@
     document.getElementById('quoteRows').innerHTML=q.items.map(i=>
       '<div class="quote-row"><span>'+i.name+'</span><b>'+fmtMad(i.price)+'</b></div>'
     ).join('');
+    const saveRow=document.getElementById('quoteSaveRow');
+    if(q.saving>0){saveRow.hidden=false;document.getElementById('quoteSave').textContent='− '+fmtMad(q.saving)}
+    else{saveRow.hidden=true}
     document.getElementById('quoteTotal').textContent=fmtMad(q.total)+' ('+fmtUsd(q.total)+')';
     document.getElementById('quoteDeposit').textContent=fmtMad(q.deposit)+' ('+fmtUsd(q.deposit)+')';
     const moRow=document.getElementById('quoteMonthlyRow');
@@ -1264,6 +1295,7 @@
     const quote=computeQuote();
     let notes='[EN] Niche: '+state.niche+' | Market: '+state.market+' | Existing store: '+state.existing+' | Wants: '+(state.plan||'—');
     if(quote.total>0){
+      if(quote.saving>0) notes+=' | Subtotal: '+quote.subtotal+' MAD | Bundle saving: -'+quote.saving+' MAD';
       notes+=' | Total: '+quote.total+' MAD | Deposit 30%: '+quote.deposit+' MAD';
       if(quote.monthly>0) notes+=' | Monthly: '+quote.monthly+' MAD';
     }
@@ -1299,6 +1331,8 @@
           pricing:quote.total>0?{
             currency:'MAD',
             items:quote.items.map(i=>({name:i.name,price:i.price,monthly:i.monthly})),
+            subtotal:quote.subtotal,
+            saving:quote.saving,
             total:quote.total,
             depositPct:30,
             deposit:quote.deposit,
