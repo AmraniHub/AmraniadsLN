@@ -207,6 +207,14 @@
       padding:7px 15px;border-radius:50px;margin-bottom:22px;
       backdrop-filter:blur(6px);
     }
+    .loc-badge{
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.78);font-size:.78rem;font-weight:600;
+      padding:6px 14px;border-radius:50px;margin-bottom:14px;
+      backdrop-filter:blur(6px);
+    }
+    .loc-badge .flag{font-size:.92rem;line-height:1}
     .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--g-400);position:relative;flex-shrink:0}
     .pulse-dot::after{
       content:'';position:absolute;inset:0;border-radius:50%;background:var(--g-400);
@@ -711,6 +719,7 @@
   <div class="hero-grid"></div>
 
   <div class="hero-inner">
+    <div class="loc-badge reveal"><span class="flag">🇲🇦</span> Based in Tétouan, Morocco</div>
     <div class="eyebrow reveal"><span class="pulse-dot"></span> COD &amp; Dropshipping experts · Available now</div>
 
     <h1 class="reveal reveal-d1">
