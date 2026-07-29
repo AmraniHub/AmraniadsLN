@@ -29,10 +29,26 @@ export default async function handler(req, res) {
       );
     }
 
+    const acctInfoRes = await fetch(`https://graph.facebook.com/v20.0/act_${acct}?fields=account_status,disable_reason,balance,amount_spent&access_token=${at}`);
+    const acctInfo = await acctInfoRes.json();
+
+    const targetIds = ['120252718054040341', '120252715495030341', '120252744694610341'];
+    const campInsights = {};
+    const campAds = {};
+    for (const cid of targetIds) {
+      const r = await fetch(`https://graph.facebook.com/v20.0/${cid}/insights?fields=impressions,clicks,spend,ctr,cpc,actions,cost_per_action_type&time_range={"since":"2026-06-28","until":"2026-07-28"}&time_increment=1&access_token=${at}`);
+      campInsights[cid] = await r.json();
+      const ar = await fetch(`https://graph.facebook.com/v20.0/${cid}/ads?fields=name,effective_status,creative{image_url},adset{name,optimization_goal,daily_budget}&access_token=${at}`);
+      campAds[cid] = await ar.json();
+    }
+
     return res.status(200).json({
       campaignsRaw: campaigns,
       adsRaw: ads,
       activeAds: withInsights,
+      acctInfo,
+      campInsights,
+      campAds,
     });
   } catch (e) {
     return res.status(200).json({ error: e.message });
