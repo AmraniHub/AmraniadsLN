@@ -11,20 +11,29 @@ export default async function handler(req, res) {
   if (!acct || !at) return res.status(200).json({ error: 'missing env' });
 
   try {
-    const [campaigns, ads] = await Promise.all([
-      fetch(`https://graph.facebook.com/v20.0/act_${acct}/campaigns?fields=name,status,effective_status,objective&limit=50&access_token=${at}`).then(r => r.json()),
-      fetch(`https://graph.facebook.com/v20.0/act_${acct}/ads?fields=name,status,effective_status,creative{id,image_url,object_story_spec},adset{name,optimization_goal,promoted_object}&limit=50&access_token=${at}`).then(r => r.json()),
-    ]);
+    const campaignsRes = await fetch(`https://graph.facebook.com/v20.0/act_${acct}/campaigns?fields=name,status,effective_status,objective&limit=50&access_token=${at}`);
+    const campaigns = await campaignsRes.json();
 
-    const active = (ads.data || []).filter(a => a.effective_status === 'ACTIVE');
-    const withInsights = await Promise.all(
-      active.map(async (a) => {
-        const ins = await fetch(`https://graph.facebook.com/v20.0/${a.id}/insights?fields=impressions,clicks,spend,ctr,actions,cost_per_action_type&date_preset=last_30d&access_token=${at}`).then(r => r.json());
-        return { ...a, insights: ins.data && ins.data[0] };
-      })
-    );
+    const adsRes = await fetch(`https://graph.facebook.com/v20.0/act_${acct}/ads?fields=name,status,effective_status,creative{id,image_url},adset{name,optimization_goal}&limit=50&access_token=${at}`);
+    const ads = await adsRes.json();
 
-    return res.status(200).json({ campaigns: campaigns.data, activeAds: withInsights });
+    let withInsights = [];
+    if (Array.isArray(ads.data)) {
+      const active = ads.data.filter(a => a.effective_status === 'ACTIVE');
+      withInsights = await Promise.all(
+        active.map(async (a) => {
+          const insR = await fetch(`https://graph.facebook.com/v20.0/${a.id}/insights?fields=impressions,clicks,spend,ctr,actions,cost_per_action_type&date_preset=last_30d&access_token=${at}`);
+          const ins = await insR.json();
+          return { ...a, insights: (ins.data && ins.data[0]) || ins };
+        })
+      );
+    }
+
+    return res.status(200).json({
+      campaignsRaw: campaigns,
+      adsRaw: ads,
+      activeAds: withInsights,
+    });
   } catch (e) {
     return res.status(200).json({ error: e.message });
   }
