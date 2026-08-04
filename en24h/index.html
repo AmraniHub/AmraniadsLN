@@ -221,13 +221,55 @@
     .section-title .grad{background:linear-gradient(120deg,var(--g-600),var(--g-500));-webkit-background-clip:text;background-clip:text;color:transparent}
     .section-sub{font-size:.95rem;color:var(--muted);line-height:1.75}
 
-    /* stats */
-    .stats-band{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:64px}
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:34px 0}
-    .stat{text-align:center;position:relative}
-    .stat:not(:last-child)::after{content:'';position:absolute;right:-9px;top:50%;transform:translateY(-50%);width:1px;height:38px;background:var(--border)}
-    .stat-num{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.5rem,3.6vw,2.05rem);font-weight:800;line-height:1;background:linear-gradient(135deg,var(--g-600),var(--g-400));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:5px}
-    .stat-lbl{font-size:.77rem;color:var(--muted);font-weight:600}
+    /* real stores we built — clickable proof */
+    .store-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .store-card{
+      display:flex;flex-direction:column;text-decoration:none;color:inherit;
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);
+      overflow:hidden;box-shadow:var(--shadow-sm);
+      transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+    }
+    .store-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:rgba(34,197,94,.4)}
+    .store-chrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#eef3f0;border-bottom:1px solid var(--border)}
+    .store-chrome i{
+      font-style:normal;font-size:.7rem;color:var(--muted);background:#fff;
+      border-radius:50px;padding:3px 10px;margin-left:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    }
+    .store-dot{width:8px;height:8px;border-radius:50%;background:#cfdad4;flex-shrink:0}
+    .store-shot{position:relative;aspect-ratio:16/11;overflow:hidden;background:linear-gradient(135deg,var(--c1),var(--c2))}
+    .store-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:1}
+    /* fallback only — sits behind the screenshot, visible if the image is missing */
+    .store-initial{
+      position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;
+      font-family:'Plus Jakarta Sans',sans-serif;font-size:2.6rem;font-weight:800;
+      color:rgba(255,255,255,.92);letter-spacing:.04em;
+    }
+    .store-meta{padding:16px 18px 4px;flex:1}
+    .store-meta h4{font-size:1rem;font-weight:800;margin-bottom:4px}
+    .store-meta p{font-size:.83rem;color:var(--muted);line-height:1.55;margin-bottom:10px}
+    .store-badge{display:inline-block;background:var(--g-tint);color:var(--g-700);font-size:.71rem;font-weight:800;padding:4px 11px;border-radius:50px}
+    .store-visit{
+      display:flex;align-items:center;justify-content:center;gap:7px;
+      margin:14px 18px 18px;padding:11px;border-radius:10px;
+      background:var(--d-800);color:#fff;font-size:.83rem;font-weight:700;
+      transition:background .25s var(--ease),gap .2s var(--ease);
+    }
+    .store-card:hover .store-visit{background:var(--g-600);gap:11px}
+    .store-note{
+      max-width:640px;margin:26px auto 0;text-align:center;font-size:.85rem;color:var(--muted);
+      background:var(--surface);border:1px dashed var(--border-2);border-radius:var(--r-md);padding:14px 18px;line-height:1.65;
+    }
+    .store-note b{color:var(--text);font-weight:700}
+    .share-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .share-btn,.share-wa{
+      display:inline-flex;align-items:center;gap:7px;font-family:inherit;font-size:.82rem;font-weight:700;
+      padding:10px 18px;border-radius:50px;cursor:pointer;text-decoration:none;
+      transition:transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+    }
+    .share-btn{background:var(--surface);border:1.5px solid var(--border-2);color:var(--text)}
+    .share-btn:hover{border-color:var(--g-500);color:var(--g-700);transform:translateY(-2px)}
+    .share-wa{background:var(--wa);border:none;color:#fff;box-shadow:0 6px 18px rgba(37,211,102,.28)}
+    .share-wa:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,211,102,.4)}
 
     /* included checklist — the core value justification */
     .inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:820px;margin:0 auto}
@@ -304,6 +346,12 @@
     .mobile-cta-bar{display:none}
 
     @media(max-width:860px){.inc-grid{grid-template-columns:1fr}}
+    @media(max-width:900px){
+      .store-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(max-width:640px){
+      .store-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+    }
     @media(max-width:860px){
       /* stack, and keep the illustration small so the form stays reachable */
       .hero-inner{grid-template-columns:1fr;text-align:center;gap:14px}
@@ -313,8 +361,6 @@
     }
     @media(max-width:760px){
       .hero{padding:44px 0 128px}
-      .stats{grid-template-columns:repeat(2,1fr);gap:26px 12px;padding:30px 0}
-      .stat:nth-child(2)::after{display:none}
       .how-grid::before{display:none}
     }
     @media(max-width:600px){
@@ -560,32 +606,76 @@
   </div>
 </div>
 
-<!-- STATS -->
-<div class="stats-band">
+<!-- REAL STORES WE BUILT — the clickable live URL is the proof; the screenshot
+     is decoration. Drop a screenshot at /assets/proof/<slug>.jpg to upgrade a
+     card; if the file is missing the gradient tile shows instead. -->
+<section class="section" id="stores" style="background:var(--bg-2)">
   <div class="wrap">
-    <div class="stats">
-      <div class="stat reveal">
-        <div class="stat-num" data-count="150" data-suffix="+">0</div>
-        <div class="stat-lbl">Stores launched</div>
-      </div>
-      <div class="stat reveal reveal-d1">
-        <div class="stat-num" data-count="48" data-suffix="h">0</div>
-        <div class="stat-lbl">Delivery time</div>
-      </div>
-      <div class="stat reveal reveal-d2">
-        <div class="stat-num" data-count="4.9" data-suffix="/5" data-decimals="1">0</div>
-        <div class="stat-lbl">Client rating</div>
-      </div>
-      <div class="stat reveal reveal-d3">
-        <div class="stat-num" data-count="7" data-suffix="/7">0</div>
-        <div class="stat-lbl">WhatsApp support</div>
-      </div>
+    <div class="section-head reveal">
+      <span class="section-tag">Our work</span>
+      <h2 class="section-title">Real stores, <span class="grad">really online</span></h2>
+      <p class="section-sub">Don't take our word for it — every store below is live right now. Click any one and browse it yourself.</p>
+    </div>
+
+    <div class="store-grid">
+      <a class="store-card reveal" href="https://concepteurbois.ma/" target="_blank" rel="noopener">
+        <div class="store-chrome"><span class="store-dot"></span><span class="store-dot"></span><span class="store-dot"></span><i>concepteurbois.ma</i></div>
+        <div class="store-shot" style="--c1:#8b5e34;--c2:#4a3728">
+          <img src="/assets/proof/concepteurbois.jpg" alt="Concepteur Bois store" loading="lazy" onerror="this.remove()"/>
+          <span class="store-initial">CB</span>
+        </div>
+        <div class="store-meta">
+          <h4>Concepteur Bois</h4>
+          <p>Custom wood furniture — kitchens, dressings, tables</p>
+          <span class="store-badge">🇲🇦 Morocco · prices in DH</span>
+        </div>
+        <span class="store-visit">Visit store →</span>
+      </a>
+
+      <a class="store-card reveal reveal-d1" href="https://www.brileox.com/" target="_blank" rel="noopener">
+        <div class="store-chrome"><span class="store-dot"></span><span class="store-dot"></span><span class="store-dot"></span><i>brileox.com</i></div>
+        <div class="store-shot" style="--c1:#1d4ed8;--c2:#0f766e">
+          <img src="/assets/proof/brileox.jpg" alt="Briléox store" loading="lazy" onerror="this.remove()"/>
+          <span class="store-initial">BX</span>
+        </div>
+        <div class="store-meta">
+          <h4>Briléox</h4>
+          <p>Car cleaning &amp; detailing products</p>
+          <span class="store-badge">🇫🇷 France / Europe · in €</span>
+        </div>
+        <span class="store-visit">Visit store →</span>
+      </a>
+
+      <a class="store-card reveal reveal-d2" href="https://trendimora.com/" target="_blank" rel="noopener">
+        <div class="store-chrome"><span class="store-dot"></span><span class="store-dot"></span><span class="store-dot"></span><i>trendimora.com</i></div>
+        <div class="store-shot" style="--c1:#0ea5e9;--c2:#155e75">
+          <img src="/assets/proof/trendimora.jpg" alt="Trendimora store" loading="lazy" onerror="this.remove()"/>
+          <span class="store-initial">TM</span>
+        </div>
+        <div class="store-meta">
+          <h4>Trendimora</h4>
+          <p>General dropshipping — home, tech, lifestyle</p>
+          <span class="store-badge">🌍 Worldwide · in $</span>
+        </div>
+        <span class="store-visit">Visit store →</span>
+      </a>
+    </div>
+
+    <p class="store-note reveal">
+      🇲🇦 Selling in Morocco or shipping abroad — <b>we've built both</b>.
+      These are live stores taking real orders, not mockups.
+    </p>
+
+    <!-- Shareable deep-link: send this straight to a doubtful prospect on WhatsApp -->
+    <div class="share-row reveal reveal-d1">
+      <button type="button" class="share-btn" id="shareStores">🔗 Copy link to this section</button>
+      <a class="share-wa" id="shareStoresWa" href="#" target="_blank" rel="noopener">💬 Send on WhatsApp</a>
     </div>
   </div>
-</div>
+</section>
 
 <!-- WHAT'S INCLUDED -->
-<section class="section">
+<section class="section" style="background:var(--bg-2)">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="section-tag">What's included</span>
@@ -793,30 +883,6 @@
     els.forEach(e=>io.observe(e));
   })();
 
-  /* animated counters */
-  (function(){
-    const nums=document.querySelectorAll('.stat-num[data-count]');
-    if(!nums.length) return;
-    function run(el){
-      const target=parseFloat(el.dataset.count);
-      const suffix=el.dataset.suffix||'';
-      const dec=parseInt(el.dataset.decimals||'0',10);
-      const dur=1400;const t0=performance.now();
-      function tick(now){
-        const p=Math.min((now-t0)/dur,1);
-        const eased=1-Math.pow(1-p,3);
-        el.textContent=(target*eased).toFixed(dec)+suffix;
-        if(p<1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }
-    if(!('IntersectionObserver' in window)){nums.forEach(n=>{n.textContent=n.dataset.count+(n.dataset.suffix||'')});return}
-    const io=new IntersectionObserver(function(entries){
-      entries.forEach(function(en){if(en.isIntersecting){run(en.target);io.unobserve(en.target)}});
-    },{threshold:.5});
-    nums.forEach(n=>io.observe(n));
-  })();
-
   /* auto-scroll into the form on load/refresh */
   window.addEventListener('load', function(){
     setTimeout(function(){
@@ -922,6 +988,23 @@
 
     window.location.href='/en24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0');
   });
+
+  /* share the "our work" section — for sending straight to a doubtful prospect */
+  (function(){
+    const btn=document.getElementById('shareStores');
+    const wa=document.getElementById('shareStoresWa');
+    if(!btn||!wa) return;
+    const link=location.origin+location.pathname.replace(/index\.html$/,'')+'#stores';
+    const msg='Here are real Shopify stores we built — all live, you can click and check them yourself:\n'+link;
+    wa.href='https://wa.me/?text='+encodeURIComponent(msg);
+    btn.addEventListener('click',function(){
+      navigator.clipboard.writeText(link).then(function(){
+        showToast('✅ Link copied — send it to your client');
+      }).catch(function(){
+        showToast('⚠️ Could not copy — link: '+link);
+      });
+    });
+  })();
 
   /* faq */
   document.querySelectorAll('.faq-q').forEach(btn=>{
