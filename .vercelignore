@@ -1,5 +1,7 @@
 Creatives/
-proof/
+# root-only: a bare "proof/" also matched assets/proof/ and stopped the
+# store screenshots on /en24h/ from deploying
+/proof/
 skills/
 rentalcars/assets/
 solyra-centre-hotfix/
