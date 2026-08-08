@@ -266,6 +266,45 @@
       .proc-steps{grid-template-columns:1fr}
       .footer-inner{grid-template-columns:1fr;gap:26px}
     }
+
+    /* ── Tarifs ─────────────────────────────────────────── */
+    .pricing{padding:88px 0;background:linear-gradient(180deg,#f7faf8 0%,var(--bg) 100%)}
+    .pr-toggle{display:inline-flex;gap:4px;padding:4px;margin:26px 0 34px;
+      background:#fff;border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow)}
+    .pr-tab{border:0;cursor:pointer;font:inherit;font-size:14px;font-weight:600;color:var(--muted);
+      padding:9px 20px;border-radius:999px;background:transparent;transition:.18s}
+    .pr-tab:hover{color:var(--dark)}
+    .pr-tab.is-on{background:var(--green);color:#fff}
+    .pr-save{font-size:11px;font-weight:800;letter-spacing:.02em;margin-left:6px;
+      padding:2px 7px;border-radius:999px;background:var(--gold);color:#fff}
+    .pr-tab.is-on .pr-save{background:rgba(255,255,255,.24)}
+
+    .pr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px}
+    .pr-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+      padding:22px 20px;box-shadow:var(--shadow);transition:transform .18s,box-shadow .18s}
+    .pr-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .pr-ico{font-size:24px;line-height:1;display:block;margin-bottom:12px}
+    .pr-card h4{font-size:16px;font-weight:700;color:var(--dark);margin:0 0 10px}
+    .pr-price{display:flex;align-items:baseline;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+    .pr-amt{font-size:26px;font-weight:800;color:var(--green-d);letter-spacing:-.02em}
+    .pr-per{font-size:13px;color:var(--muted)}
+    .pr-card p{font-size:14px;line-height:1.6;color:var(--muted);margin:0}
+
+    .pr-h3{margin:52px 0 4px;font-size:21px;font-weight:800;color:var(--dark)}
+    .pr-sub2{font-size:14.5px;color:var(--muted);margin:0 0 22px}
+    .pr-grid-once .pr-amt{color:var(--gold)}
+
+    .pr-foot{margin-top:40px;padding:26px 24px;background:#fff;border:1px solid var(--border);
+      border-radius:var(--radius);display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+    .pr-foot p{flex:1;min-width:260px;margin:0;font-size:14.5px;line-height:1.65;color:var(--muted)}
+    .pr-cta{white-space:nowrap}
+
+    @media(max-width:640px){
+      .pricing{padding:60px 0}
+      .pr-grid{grid-template-columns:1fr}
+      .pr-foot{flex-direction:column;align-items:stretch}
+      .pr-cta{text-align:center}
+    }
   </style>
 </head>
 <body>
@@ -281,6 +320,7 @@
       <a href="#services">Services</a>
       <a href="/portfolio/">Réalisations</a>
       <a href="#methode">Méthode</a>
+      <a href="#tarifs">Tarifs</a>
       <a href="#faq">FAQ</a>
       <a href="/24h/" class="nav-cta">Démarrer mon projet →</a>
     </div>
@@ -360,6 +400,87 @@
     <span class="tick"><b>Refonte Shopify</b><span class="tick-sep">•</span></span>
   </div>
 </div>
+
+<!-- TARIFS -->
+<div class="pricing" id="tarifs">
+  <div class="container">
+    <div class="sec-label">Abonnements & interventions</div>
+    <h2 class="sec-title">Ce que coûte <span class="gr">le suivi de votre site</span></h2>
+    <p class="sec-sub">La création de votre boutique est chiffrée sur mesure lors de l'appel. Ci-dessous, ce qui la fait tourner ensuite — sans engagement, activable ou résiliable service par service.</p>
+
+    <div class="pr-toggle" role="group" aria-label="Période de facturation">
+      <button type="button" class="pr-tab is-on" data-period="month">Mensuel</button>
+      <button type="button" class="pr-tab" data-period="year">Annuel <span class="pr-save">−19%</span></button>
+    </div>
+
+    <div class="pr-grid" id="pr-recurring"></div>
+
+    <h3 class="pr-h3">Créations & interventions ponctuelles</h3>
+    <p class="pr-sub2">Facturées une seule fois, sans abonnement.</p>
+    <div class="pr-grid pr-grid-once" id="pr-once"></div>
+
+    <div class="pr-foot">
+      <p>Chaque service s'active ou s'arrête indépendamment. Vous ne payez que ce qui tourne, et vous gardez la main : un service arrêté ne bloque jamais votre boutique ni vos commandes.</p>
+      <a href="/brief/" class="btn-primary pr-cta">Discuter de votre projet</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Prices live in one place so the two views can never disagree. `fee` is the
+   monthly rate; the annual figure is twelve months less the discount. */
+(function () {
+  const DISCOUNT = 0.19;
+  const RECURRING = [
+    ['🖥️', 'Hébergement & mise en ligne', 8, "Votre site en ligne, sauvegardé et surveillé, avec un nom de domaine relié et un certificat SSL actif."],
+    ['🛠️', 'Maintenance & évolutions', 10, "Corrections, mises à jour du thème et petites modifications de design au fil des mois."],
+    ['⚡', 'Optimisations continues', 2, "Ajustements réguliers de la vitesse, des formulaires et du parcours d'achat pour éviter que les performances se dégradent."],
+    ['✍️', 'Contenu IA (articles SEO)', 14, "Publication régulière d'articles optimisés pour la recherche, sans rédaction manuelle de votre côté."],
+    ['🎨', 'Licence du thème', 2, "Utilisation et mises à jour du thème développé pour votre boutique."],
+    ['🤖', 'Assistant IA', 12, "Un agent qui répond aux visiteurs 24h/24 et enregistre les demandes reçues hors horaires."],
+    ['📇', 'CRM', 13, "Tous vos contacts au même endroit, chaque demande suivie jusqu'à sa conclusion."],
+    ['🏷️', 'Sans marque', 5, "Retire la mention « Conçu par amraniads.com » du pied de page de votre site."]
+  ];
+  const ONCE = [
+    ['🛒', 'Création de boutique Shopify', 90, "Boutique complète installée et configurée : thème, pages, paiement et livraison, prête à recevoir vos produits."],
+    ['💻', 'Création de site web', 130, "Site sur mesure développé et mis en ligne — vitrine, pages de vente ou site d'entreprise."],
+    ['📇', 'Installation CRM', 140, "Mise en place complète, import de vos contacts existants et prise en main."],
+    ['🤖', 'Installation Assistant IA', 80, "Configuration de l'agent sur votre catalogue et vos réponses types."],
+    ['✍️', 'Installation Contenu IA', 40, "Paramétrage des thématiques, du ton et du rythme de publication."],
+    ['🔍', 'Optimisation SEO', 20, "Titres, descriptions et structure revus pour que vos pages soient correctement lues par les moteurs."],
+    ['⚡', 'Optimisation PageSpeed', 15, "Intervention ciblée sur le temps de chargement mobile, mesurée avant et après."]
+  ];
+
+  const money = (n) => `${Number(n).toFixed(2).replace(/\.00$/, '')} $`;
+  const yearly = (fee) => Math.round(fee * 12 * (1 - DISCOUNT) * 100) / 100;
+
+  const card = ([icon, name, fee, desc], once) => `
+    <div class="pr-card">
+      <span class="pr-ico">${icon}</span>
+      <h4>${name}</h4>
+      <div class="pr-price">
+        ${once
+          ? `<span class="pr-amt">${money(fee)}</span><span class="pr-per">une seule fois</span>`
+          : `<span class="pr-amt" data-month="${money(fee)}" data-year="${money(yearly(fee))}">${money(fee)}</span>
+             <span class="pr-per" data-month="/ mois" data-year="/ an">/ mois</span>`}
+      </div>
+      <p>${desc}</p>
+    </div>`;
+
+  document.getElementById('pr-recurring').innerHTML = RECURRING.map((s) => card(s, false)).join('');
+  document.getElementById('pr-once').innerHTML = ONCE.map((s) => card(s, true)).join('');
+
+  document.querySelectorAll('.pr-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const period = tab.dataset.period;
+      document.querySelectorAll('.pr-tab').forEach((t) => t.classList.toggle('is-on', t === tab));
+      document.querySelectorAll('#pr-recurring [data-month]').forEach((el) => {
+        el.textContent = el.dataset[period === 'year' ? 'year' : 'month'];
+      });
+    });
+  });
+})();
+</script>
 
 <!-- SERVICES -->
 <div class="niches" id="services">
@@ -605,6 +726,7 @@
       <h4>Navigation</h4>
       <a href="#services">Services</a>
       <a href="#methode">Méthode</a>
+      <a href="#tarifs">Tarifs</a>
       <a href="#resultats">Résultats</a>
       <a href="#faq">FAQ</a>
     </div>
