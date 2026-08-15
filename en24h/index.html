@@ -179,6 +179,7 @@
     .field input::placeholder{color:#93a69d;font-weight:400}
     .field input:hover{border-color:#b9d2c6}
     .field input:focus{border-color:var(--g-500);box-shadow:0 0 0 4px rgba(34,197,94,.16),inset 0 1px 2px rgba(6,26,18,.03)}
+    .field input.invalid,.phone-wrap.invalid{border-color:#ef4444;box-shadow:0 0 0 4px rgba(239,68,68,.14)}
     .field-note{font-size:.76rem;color:var(--muted);margin-top:7px}
 
     /* Arabic sub-labels — Moroccan visitors read these faster than the English */
@@ -418,6 +419,25 @@
       .testi{padding:30px 20px}
       .price-single{padding:28px 22px}
       body{padding-bottom:78px}
+
+      /* ── phone ergonomics: bigger targets, thumb-friendly next button ── */
+      .step-q{font-size:1.16rem}
+      /* inputs tall enough to tap comfortably; 16px font stops iOS zoom-on-focus */
+      .field{margin-bottom:20px}
+      .field label{font-size:.88rem;margin-bottom:9px}
+      .field input{padding:17px 16px;font-size:16px;min-height:56px}
+      .phone-wrap input{min-height:54px}
+      .phone-flag{font-size:.95rem;padding:0 14px}
+      /* answer rows: taller, roomier, clearer press feedback */
+      .opt-grid{gap:11px}
+      .opt-btn{padding:16px 15px;min-height:64px;font-size:.97rem}
+      .opt-btn .ico{width:42px;height:42px;font-size:1.22rem}
+      .opt-btn:active{transform:scale(.985);background:var(--g-tint)}
+      .opt-btn .check{width:24px;height:24px}
+      /* the next/submit button sits low and spans the card so the thumb finds it */
+      .nav-row{gap:9px;margin-top:6px}
+      .btn-next{padding:18px 20px;font-size:1.02rem;min-height:58px}
+      .btn-back{padding:18px 16px;min-height:58px;font-size:.9rem}
       .mobile-cta-bar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:300;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(6,26,18,.1)}
       .mobile-cta-bar a{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;background:linear-gradient(135deg,var(--g-500),var(--g-600));color:#fff;font-family:inherit;font-weight:800;font-size:.94rem;padding:14px;border-radius:var(--r-sm);text-decoration:none;box-shadow:0 8px 22px rgba(34,197,94,.32)}
       #toast{bottom:90px}
@@ -433,7 +453,7 @@
 <body>
 
 <div class="announce announce-promo">
-  🔥 <b>500 DH instead of 900 DH</b><span class="sep">·</span>Offer ends Wednesday<span class="sep">·</span><span class="ar-inline">العرض صالح حتى الأربعاء</span>
+  🔥 <b>500 DH instead of 900 DH</b><span class="sep">·</span>Offer ends Wednesday<span class="sep">·</span><span class="ar-inline">العرض ساري حتى يوم الأربعاء</span>
 </div>
 
 <nav class="nav">
@@ -581,30 +601,53 @@
 
     <form id="funnelForm" novalidate>
 
-      <!-- STEP 1 — WHAT -->
+      <!-- STEP 1 — CONTACT (asked first so the number is captured early) -->
       <div class="step active" data-step="1">
-        <div class="step-q">What do you want to sell?<span class="ar">شنو بغيتي تبيع؟</span></div>
+        <div class="step-q">Where should we send your plan?<span class="ar">أين نرسل لك الخطة؟</span></div>
+        <div class="step-hint">We reply on WhatsApp within 24h — free, no commitment</div>
+
+        <div class="recap">
+          <div class="promo-flag">
+            🔥 <b>Offer ends Wednesday</b> — save 400 DH
+            <span class="ar">العرض ساري حتى يوم الأربعاء — وفّر 400 درهم</span>
+          </div>
+          <div class="recap-row"><span>Shopify COD store</span><b id="recapName">Complete build</b></div>
+          <div class="recap-row"><span>Delivery</span><b>48 hours</b></div>
+          <div class="recap-row recap-total"><span>Price</span><b id="recapPrice"><s>900</s> 500 MAD</b></div>
+          <p class="recap-note">
+            You pay nothing now. We send your plan first — you decide after.
+            <span class="ar">لن تدفع شيئاً الآن. نرسل لك الخطة أولاً — ثم تقرّر أنت.</span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label for="fname">First name<span class="req">*</span> <span class="ar" style="display:inline;margin:0">— الاسم</span></label>
+          <input type="text" id="fname" name="name" placeholder="Youssef, Salma, Mehdi..." required autocomplete="given-name"/>
+        </div>
+        <div class="field">
+          <label for="fphone">Phone / WhatsApp<span class="req">*</span> <span class="ar" style="display:inline;margin:0">— رقم الواتساب</span></label>
+          <div class="phone-wrap">
+            <span class="phone-flag"><span class="fl">🇲🇦</span> +212</span>
+            <input type="tel" id="fphone" name="phone" placeholder="6 12 34 56 78" required autocomplete="tel" inputmode="numeric"/>
+          </div>
+          <div class="field-note">Moroccan number — if you're abroad, type your full number starting with + (e.g. +33…)</div>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn-next" id="next1">Continue →</button>
+        </div>
+        <p class="form-note">🔒 Your number stays private — no spam, ever</p>
+      </div>
+
+      <!-- STEP 2 — WHAT -->
+      <div class="step" data-step="2">
+        <div class="step-q">What do you want to sell?<span class="ar">ماذا تريد أن تبيع؟</span></div>
         <div class="step-hint">So we structure your products and collections the right way</div>
         <div class="opt-grid" data-field="niche">
           <button type="button" class="opt-btn" data-value="Cosmetics / beauty"><span class="ico">💄</span><span class="lbl">Cosmetics &amp; beauty<span class="ar">مستحضرات التجميل</span></span><span class="check"></span></button>
           <button type="button" class="opt-btn" data-value="Fashion / accessories"><span class="ico">👜</span><span class="lbl">Fashion &amp; accessories<span class="ar">الأزياء والإكسسوارات</span></span><span class="check"></span></button>
           <button type="button" class="opt-btn" data-value="Home / gadgets"><span class="ico">🏠</span><span class="lbl">Home &amp; gadgets<span class="ar">المنزل والأجهزة</span></span><span class="check"></span></button>
           <button type="button" class="opt-btn" data-value="Health / supplements"><span class="ico">💪</span><span class="lbl">Health &amp; supplements<span class="ar">الصحة والمكملات</span></span><span class="check"></span></button>
-          <button type="button" class="opt-btn" data-value="Other / not decided yet"><span class="ico">🤔</span><span class="lbl">Something else<span class="ar">شي حاجة أخرى — أو مازال ما قررتش</span></span><span class="check"></span></button>
-        </div>
-        <div class="nav-row">
-          <button type="button" class="btn-next" id="next1" disabled>Continue →</button>
-        </div>
-      </div>
-
-      <!-- STEP 2 — WHERE -->
-      <div class="step" data-step="2">
-        <div class="step-q">Where will you sell?<span class="ar">فين غادي تبيع؟</span></div>
-        <div class="step-hint">This sets your currency, language and delivery setup</div>
-        <div class="opt-grid" data-field="market">
-          <button type="button" class="opt-btn" data-value="Morocco (COD)"><span class="ico">🇲🇦</span><span class="lbl">Morocco — cash on delivery<span class="ar">المغرب — الدفع عند الاستلام</span></span><span class="check"></span></button>
-          <button type="button" class="opt-btn" data-value="Abroad (dropshipping)"><span class="ico">🌍</span><span class="lbl">Abroad — France, Europe, USA<span class="ar">الخارج — فرنسا، أوروبا، أمريكا</span></span><span class="check"></span></button>
-          <button type="button" class="opt-btn" data-value="Both"><span class="ico">🚀</span><span class="lbl">Both<span class="ar">بجوج</span></span><span class="check"></span></button>
+          <button type="button" class="opt-btn" data-value="Other / not decided yet"><span class="ico">🤔</span><span class="lbl">Something else<span class="ar">شيء آخر — أو لم أقرّر بعد</span></span><span class="check"></span></button>
         </div>
         <div class="nav-row">
           <button type="button" class="btn-back" data-back="1">← Back</button>
@@ -612,40 +655,18 @@
         </div>
       </div>
 
-      <!-- STEP 3 — CONTACT -->
+      <!-- STEP 3 — WHERE -->
       <div class="step" data-step="3">
-        <div class="step-q">Where should we send your plan?<span class="ar">فين نصيفطو ليك الخطة؟</span></div>
-        <div class="step-hint">We reply on WhatsApp within 24h with your free store plan</div>
-
-        <div class="recap">
-          <div class="promo-flag">
-            🔥 <b>Offer ends Wednesday</b> — save 400 DH
-            <span class="ar">العرض صالح حتى الأربعاء — ربح 400 درهم</span>
-          </div>
-          <div class="recap-row"><span>Shopify COD store</span><b id="recapName">Complete build</b></div>
-          <div class="recap-row"><span>Delivery</span><b>48 hours</b></div>
-          <div class="recap-row recap-total"><span>Price</span><b id="recapPrice"><s>900</s> 500 MAD</b></div>
-          <p class="recap-note">
-            You pay nothing now. We send your plan first — you decide after.
-            <span class="ar">ما غاديش تخلص دابا. كنصيفطو ليك الخطة الأول — ونتا تقرر من بعد.</span>
-          </p>
-        </div>
-
-        <div class="field">
-          <label for="fname">First name<span class="req">*</span> <span class="ar" style="display:inline;margin:0">— السمية</span></label>
-          <input type="text" id="fname" name="name" placeholder="Youssef, Salma, Mehdi..." required autocomplete="name"/>
-        </div>
-        <div class="field">
-          <label for="fphone">Phone / WhatsApp<span class="req">*</span> <span class="ar" style="display:inline;margin:0">— رقم الواتساب</span></label>
-          <div class="phone-wrap">
-            <span class="phone-flag"><span class="fl">🇲🇦</span> +212</span>
-            <input type="tel" id="fphone" name="phone" placeholder="6 12 34 56 78" required autocomplete="tel" inputmode="tel"/>
-          </div>
-          <div class="field-note">Moroccan number — if you're abroad, type your full number starting with + (e.g. +33…)</div>
+        <div class="step-q">Where will you sell?<span class="ar">أين ستبيع؟</span></div>
+        <div class="step-hint">This sets your currency, language and delivery setup</div>
+        <div class="opt-grid" data-field="market">
+          <button type="button" class="opt-btn" data-value="Morocco (COD)"><span class="ico">🇲🇦</span><span class="lbl">Morocco — cash on delivery<span class="ar">المغرب — الدفع عند الاستلام</span></span><span class="check"></span></button>
+          <button type="button" class="opt-btn" data-value="Abroad (dropshipping)"><span class="ico">🌍</span><span class="lbl">Abroad — France, Europe, USA<span class="ar">الخارج — فرنسا، أوروبا، أمريكا</span></span><span class="check"></span></button>
+          <button type="button" class="opt-btn" data-value="Both"><span class="ico">🚀</span><span class="lbl">Both<span class="ar">كلاهما</span></span><span class="check"></span></button>
         </div>
         <div class="nav-row">
           <button type="button" class="btn-back" data-back="2">← Back</button>
-          <button type="submit" class="btn-next" id="submitBtn">Send my free plan →</button>
+          <button type="submit" class="btn-next" id="submitBtn" disabled>Send my free plan →</button>
         </div>
         <p class="form-note">🔒 Your number stays private — no spam, ever</p>
       </div>
@@ -764,7 +785,7 @@
 
       <div class="promo-flag promo-flag-lg">
         🔥 <b>Offer ends Wednesday</b>
-        <span class="ar">العرض صالح حتى الأربعاء فقط</span>
+        <span class="ar">العرض ساري حتى يوم الأربعاء فقط</span>
       </div>
 
       <a href="#funnelTop" class="price-cta">Get my store →</a>
@@ -777,7 +798,7 @@
       </ul>
       <p class="price-value-note">
         A developer charges 3,000–6,000 DH for the same build. You pay 500 DH this week.
-        <span class="ar">المطور كياخد 3.000–6.000 درهم على نفس الخدمة. نتا غادي تخلص 500 درهم هاد الأسبوع.</span>
+        <span class="ar">يتقاضى المطوّر 3.000–6.000 درهم مقابل نفس العمل. أنت تدفع 500 درهم هذا الأسبوع.</span>
       </p>
     </div>
 
@@ -991,10 +1012,44 @@
     });
   });
 
-  document.getElementById('next1').addEventListener('click',()=>goTo(2));
+  /* Step 1 is the contact step — validate before letting them move on, and
+     surface the error on the offending field instead of only in a toast. */
+  function validateContact(){
+    const nameEl=document.getElementById('fname');
+    const phoneEl=document.getElementById('fphone');
+    const name=nameEl.value.trim();
+    const digits=phoneEl.value.replace(/\D/g,'');
+    nameEl.classList.remove('invalid');
+    document.querySelector('.phone-wrap').classList.remove('invalid');
+
+    if(!name){
+      nameEl.classList.add('invalid');
+      nameEl.focus();
+      showToast('⚠️ Please enter your first name');
+      return false;
+    }
+    if(digits.length<8){
+      document.querySelector('.phone-wrap').classList.add('invalid');
+      phoneEl.focus();
+      showToast('⚠️ Please enter a valid phone number');
+      return false;
+    }
+    return true;
+  }
+
+  document.getElementById('next1').addEventListener('click',function(){
+    if(validateContact()) goTo(2);
+  });
   document.getElementById('next2').addEventListener('click',()=>goTo(3));
   document.querySelectorAll('[data-back]').forEach(btn=>{
     btn.addEventListener('click',()=>goTo(Number(btn.dataset.back)));
+  });
+  // clear the error state as soon as they start fixing it
+  ['fname','fphone'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){
+      this.classList.remove('invalid');
+      const w=this.closest('.phone-wrap'); if(w) w.classList.remove('invalid');
+    });
   });
 
   /* submit */
@@ -1029,6 +1084,11 @@
              +' | Deposit '+DEPOSIT_PCT+'%: '+DEPOSIT+' MAD';
     if(isDuplicate) notes='[REPEAT] '+notes;
 
+    // personalised store-brief link — shown on the success page and sent to Telegram
+    const briefCfg={n:name,id:normalizedPhone,p:OFFER_NAME};
+    const briefCode=btoa(unescape(encodeURIComponent(JSON.stringify(briefCfg))));
+    const briefUrl=location.origin+'/brief/?c='+encodeURIComponent(briefCode);
+
     if(!isDuplicate){
       if(typeof fbq!=='undefined'){
         fbq('track','Lead',{content_name:'Shopify Store International (EN)',value:0},{eventID:eventId});
@@ -1061,6 +1121,7 @@
             deposit:DEPOSIT,
             monthly:0
           },
+          briefUrl,
           pixelId:'1038098258910639',
           userAgent:navigator.userAgent,
           eventSourceUrl:location.href,
@@ -1070,7 +1131,7 @@
       });
     }catch(_){}
 
-    window.location.href='/en24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0');
+    window.location.href='/en24h/success.html?eid='+encodeURIComponent(eventId)+'&peid='+encodeURIComponent(purchaseEventId)+'&dup='+(isDuplicate?'1':'0')+'&bc='+encodeURIComponent(briefCode);
   });
 
   /* share the "our work" section — for sending straight to a doubtful prospect */
