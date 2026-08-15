@@ -74,6 +74,13 @@
     }
     .announce b{color:var(--g-700);font-weight:800}
     .announce .sep{opacity:.35;margin:0 7px}
+    /* promo variant — warm tone so the deadline reads as urgent, not decorative */
+    .announce-promo{
+      background:linear-gradient(90deg,#fff4ed,#ffe4d3 45%,#fff4ed);
+      border-bottom:1px solid #fed7aa;color:#7c2d12;
+    }
+    .announce-promo b{color:#9a3412}
+    .ar-inline{direction:rtl;unicode-bidi:isolate}
 
     /* nav */
     .nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
@@ -212,6 +219,7 @@
     .recap-row b{font-weight:800}
     .recap-total{border-top:1px solid var(--g-tint);margin-top:8px;padding-top:9px}
     .recap-total b{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.2rem;color:var(--g-600)}
+    .recap-total b s{font-size:.92rem;font-weight:700;color:var(--muted);margin-right:5px;text-decoration-color:#e0483c;text-decoration-thickness:2px}
     .recap-note{font-size:.72rem;color:var(--muted);margin-top:8px;line-height:1.5}
 
     /* sections */
@@ -288,8 +296,40 @@
     .price-desc{font-size:.88rem;color:var(--muted);line-height:1.65;margin-bottom:22px}
     .price-amount{font-family:'Plus Jakarta Sans',sans-serif;font-size:3rem;font-weight:800;line-height:1;color:var(--g-600)}
     .price-cur{font-size:1.1rem;font-weight:700;color:var(--muted)}
-    .price-deposit{font-size:.85rem;color:var(--muted);margin-top:10px;margin-bottom:24px}
+    .price-deposit{font-size:.85rem;color:var(--muted);margin-top:10px;margin-bottom:18px}
     .price-deposit b{color:var(--text);font-weight:700}
+
+    /* promo pricing */
+    .price-was{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+    .price-was s{font-size:1.25rem;font-weight:700;color:var(--muted);text-decoration-color:#e0483c;text-decoration-thickness:2.5px}
+    .price-save{background:#fee2e2;color:#b91c1c;font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:50px;white-space:nowrap}
+    .price-ribbon{
+      position:absolute;top:16px;right:-34px;transform:rotate(38deg);
+      background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;
+      font-size:.72rem;font-weight:800;letter-spacing:.06em;padding:6px 40px;
+      box-shadow:0 3px 12px rgba(185,28,28,.4);
+    }
+    /* countdown / deadline flag — used in the form recap and the price card */
+    .promo-flag{
+      display:flex;flex-direction:column;align-items:center;gap:2px;
+      background:#fff4ed;border:1.5px solid #fed7aa;color:#9a3412;
+      font-size:.78rem;font-weight:600;line-height:1.5;
+      padding:9px 14px;border-radius:var(--r-sm);margin-bottom:14px;text-align:center;
+    }
+    .promo-flag b{font-weight:800}
+    .promo-flag .ar{color:#9a3412;opacity:.85;font-size:.78rem;margin:0}
+    .promo-flag-lg{margin:0 0 18px;font-size:.85rem;padding:11px 16px}
+
+    /* value stack under the price */
+    .price-value{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid var(--border);text-align:left}
+    .price-value li{position:relative;padding-left:26px;font-size:.85rem;color:var(--text);line-height:1.55;margin-bottom:9px}
+    .price-value li:last-child{margin-bottom:0}
+    .price-value li::before{content:'✓';position:absolute;left:0;top:0;color:var(--g-600);font-weight:800}
+    .price-value-note{
+      margin-top:16px;padding-top:14px;border-top:1px dashed var(--border-2);
+      font-size:.8rem;color:var(--muted);line-height:1.6;
+    }
+    .price-value-note .ar{margin-top:4px;font-size:.8rem}
     .price-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,var(--g-500),var(--g-600));color:#fff;font-family:inherit;font-weight:800;font-size:1rem;padding:16px;border-radius:var(--r-sm);text-decoration:none;box-shadow:var(--shadow-glow);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
     .price-cta:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(34,197,94,.42)}
     .addons{max-width:460px;margin:20px auto 0;text-align:center;font-size:.83rem;color:var(--muted);line-height:1.7;background:var(--surface);border:1px dashed var(--border-2);border-radius:var(--r-md);padding:16px 18px}
@@ -392,8 +432,8 @@
 </head>
 <body>
 
-<div class="announce">
-  🇲🇦 <b>150+ Shopify stores launched</b><span class="sep">·</span>⭐ 4.9/5 average rating<span class="sep">·</span>✓ Ready in 48h
+<div class="announce announce-promo">
+  🔥 <b>500 DH instead of 900 DH</b><span class="sep">·</span>Offer ends Wednesday<span class="sep">·</span><span class="ar-inline">العرض صالح حتى الأربعاء</span>
 </div>
 
 <nav class="nav">
@@ -578,10 +618,17 @@
         <div class="step-hint">We reply on WhatsApp within 24h with your free store plan</div>
 
         <div class="recap">
+          <div class="promo-flag">
+            🔥 <b>Offer ends Wednesday</b> — save 400 DH
+            <span class="ar">العرض صالح حتى الأربعاء — ربح 400 درهم</span>
+          </div>
           <div class="recap-row"><span>Shopify COD store</span><b id="recapName">Complete build</b></div>
           <div class="recap-row"><span>Delivery</span><b>48 hours</b></div>
-          <div class="recap-row recap-total"><span>Price</span><b id="recapPrice">900 MAD</b></div>
-          <p class="recap-note">You pay nothing now. We send your plan first — you decide after.</p>
+          <div class="recap-row recap-total"><span>Price</span><b id="recapPrice"><s>900</s> 500 MAD</b></div>
+          <p class="recap-note">
+            You pay nothing now. We send your plan first — you decide after.
+            <span class="ar">ما غاديش تخلص دابا. كنصيفطو ليك الخطة الأول — ونتا تقرر من بعد.</span>
+          </p>
         </div>
 
         <div class="field">
@@ -706,12 +753,32 @@
     </div>
 
     <div class="price-single reveal">
+      <span class="price-ribbon">−44%</span>
       <span class="price-badge">Complete store</span>
       <div class="price-name">Shopify COD Store</div>
       <div class="price-desc">Everything on this page — built, configured and delivered ready to take orders in 48 hours.</div>
-      <div class="price-amount">900 <span class="price-cur">MAD</span></div>
-      <div class="price-deposit">One-time payment · <b>270 MAD</b> to start, the rest on delivery</div>
+
+      <div class="price-was"><s>900 MAD</s> <span class="price-save">You save 400 MAD</span></div>
+      <div class="price-amount">500 <span class="price-cur">MAD</span></div>
+      <div class="price-deposit">One-time payment · <b>150 MAD</b> to start, the rest on delivery</div>
+
+      <div class="promo-flag promo-flag-lg">
+        🔥 <b>Offer ends Wednesday</b>
+        <span class="ar">العرض صالح حتى الأربعاء فقط</span>
+      </div>
+
       <a href="#funnelTop" class="price-cta">Get my store →</a>
+
+      <ul class="price-value">
+        <li>Complete store, not a template — built around your products</li>
+        <li>Cash-on-delivery checkout made for Morocco</li>
+        <li>Meta Pixel &amp; tracking installed so your ads can optimise</li>
+        <li>Live in 48 hours, with WhatsApp support</li>
+      </ul>
+      <p class="price-value-note">
+        A developer charges 3,000–6,000 DH for the same build. You pay 500 DH this week.
+        <span class="ar">المطور كياخد 3.000–6.000 درهم على نفس الخدمة. نتا غادي تخلص 500 درهم هاد الأسبوع.</span>
+      </p>
     </div>
 
     <div class="addons reveal reveal-d1">
@@ -840,9 +907,11 @@
 
 <script>
   /* ── Offer config — change the price in ONE place ───────────── */
-  const PRICE       = 900;          // MAD
+  const OLD_PRICE   = 900;          // MAD — shown struck through
+  const PRICE       = 500;          // MAD — promo price
   const DEPOSIT_PCT = 30;
   const DEPOSIT     = Math.round(PRICE * DEPOSIT_PCT / 100);
+  const SAVING      = OLD_PRICE - PRICE;
   const OFFER_NAME  = 'Shopify COD Store';
 
   const state={niche:'',market:''};
@@ -861,7 +930,8 @@
   // keep the recap + progress label honest even if steps change
   document.getElementById('progressPct').textContent='Step 1 / '+totalSteps;
   document.getElementById('progressFill').style.width=(100/totalSteps)+'%';
-  document.getElementById('recapPrice').textContent=PRICE.toLocaleString('en-US')+' MAD';
+  document.getElementById('recapPrice').innerHTML=
+    '<s>'+OLD_PRICE.toLocaleString('en-US')+'</s> '+PRICE.toLocaleString('en-US')+' MAD';
 
   function hideMobileCta(){const b=document.querySelector('.mobile-cta-bar');if(b)b.style.display='none'}
 
@@ -955,7 +1025,8 @@
     const isDuplicate=sentPhones.includes(normalizedPhone);
 
     let notes='[EN] Sells: '+(state.niche||'—')+' | Market: '+(state.market||'—')
-             +' | Offer: '+OFFER_NAME+' '+PRICE+' MAD | Deposit '+DEPOSIT_PCT+'%: '+DEPOSIT+' MAD';
+             +' | Offer: '+OFFER_NAME+' '+OLD_PRICE+'→'+PRICE+' MAD (promo, save '+SAVING+')'
+             +' | Deposit '+DEPOSIT_PCT+'%: '+DEPOSIT+' MAD';
     if(isDuplicate) notes='[REPEAT] '+notes;
 
     if(!isDuplicate){
@@ -982,9 +1053,9 @@
           skipMetaEvents:isDuplicate,
           pricing:{
             currency:'MAD',
-            items:[{name:OFFER_NAME,price:PRICE,monthly:0}],
-            subtotal:PRICE,
-            saving:0,
+            items:[{name:OFFER_NAME+' (promo)',price:OLD_PRICE,monthly:0}],
+            subtotal:OLD_PRICE,
+            saving:SAVING,
             total:PRICE,
             depositPct:DEPOSIT_PCT,
             deposit:DEPOSIT,
