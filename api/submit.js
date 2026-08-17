@@ -33,7 +33,6 @@ module.exports = async function handler(req, res) {
     purchaseEventId,
     skipMetaEvents,
     pricing,
-    briefUrl,
     pixelId: clientPixelId,
     userAgent,
     eventSourceUrl,
@@ -189,7 +188,6 @@ module.exports = async function handler(req, res) {
         `📱 Phone: <code>${phone || '—'}</code>\n` +
         `📝 Details: ${notes || '—'}` +
         quoteBlock +
-        (briefUrl ? `\n🧾 Brief link: ${briefUrl}` : '') +
         `\n🕐 ${now}`
       : `🌍🛍️ <b>NOUVEAU LEAD — Boutique Shopify (International)</b>\n\n` +
         `👤 Prénom: ${name || '—'}\n` +
@@ -197,7 +195,6 @@ module.exports = async function handler(req, res) {
         `📱 Téléphone: <code>${phone || '—'}</code>\n` +
         `📝 Détails: ${notes || '—'}` +
         quoteBlock +
-        (briefUrl ? `\n🧾 Lien du brief: ${briefUrl}` : '') +
         `\n🕐 ${now}`)
     : `🆕 <b>طلب جديد — ${source}</b>\n\n` +
       `👤 الاسم: ${name}\n` +

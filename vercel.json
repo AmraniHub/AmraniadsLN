@@ -1,9 +1,7 @@
 {
   "version": 2,
   "redirects": [
-    { "source": "/rentalcar", "destination": "/rentalcars", "permanent": true },
-    { "source": "/rentalcar/(.*)", "destination": "/rentalcars/$1", "permanent": true },
-    { "source": "/ar", "destination": "/shopify", "permanent": true },
-    { "source": "/ar/(.*)", "destination": "/shopify/$1", "permanent": true }
+    { "source": "/rentalcar", "destination": "/", "permanent": true },
+    { "source": "/rentalcar/(.*)", "destination": "/", "permanent": true }
   ]
 }
