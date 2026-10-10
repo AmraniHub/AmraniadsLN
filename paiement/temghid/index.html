@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paiement AMR-2026-TMG-001 - Amraniads</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#5d6672;
+    --line:#e3e7ec; --accent:#0f6b4f; --accent-ink:#ffffff;
+    --warn:#b4541a; --warn-bg:#fdf3ec;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --bg:#0e1116; --card:#161b22; --ink:#e8ecf1; --muted:#9aa5b1;
+      --line:#262d36; --accent:#2ea47c; --accent-ink:#06130e;
+      --warn:#e59b6b; --warn-bg:#2a1d13;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1116; --card:#161b22; --ink:#e8ecf1; --muted:#9aa5b1;
+    --line:#262d36; --accent:#2ea47c; --accent-ink:#06130e;
+    --warn:#e59b6b; --warn-bg:#2a1d13;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px; margin:0 auto; padding:24px 16px 56px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px; margin-bottom:16px}
+  .top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+  .brand{font-weight:700; font-size:19px; letter-spacing:-.01em}
+  .brand small{display:block; font-weight:400; font-size:13px; color:var(--muted); letter-spacing:0}
+  .meta{text-align:right; font-size:13px; color:var(--muted)}
+  .meta b{color:var(--ink); display:block; font-size:14px}
+  h1{font-size:15px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin:0 0 4px; font-weight:600}
+  .amount{font-size:40px; font-weight:700; letter-spacing:-.02em; margin:2px 0 2px}
+  .amount span{font-size:19px; color:var(--muted); font-weight:600; margin-left:4px}
+  .for{color:var(--muted); font-size:14px; margin:0}
+  table{width:100%; border-collapse:collapse; margin-top:6px}
+  td{padding:13px 0; border-bottom:1px solid var(--line); vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .l{font-weight:600}
+  .d{color:var(--muted); font-size:13.5px; margin-top:3px}
+  .num{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600; padding-left:14px}
+  .tot{display:flex; justify-content:space-between; align-items:baseline; padding-top:15px; margin-top:4px; border-top:2px solid var(--ink)}
+  .tot b{font-size:21px; font-variant-numeric:tabular-nums}
+  h2{font-size:14px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin:0 0 14px; font-weight:600}
+  h3{font-size:15px; margin:0 0 10px}
+  .kv{display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-bottom:1px solid var(--line); font-size:14.5px}
+  .kv:last-child{border-bottom:0}
+  .kv span{color:var(--muted); flex:0 0 auto}
+  .kv b{text-align:right; font-weight:600; word-break:break-word}
+  .rib{font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:15px; letter-spacing:.02em}
+  .copy{appearance:none; border:1px solid var(--line); background:transparent; color:var(--accent);
+        font:inherit; font-size:13px; font-weight:600; padding:5px 11px; border-radius:7px; cursor:pointer; margin-top:9px}
+  .copy:hover{border-color:var(--accent)}
+  .btn{display:block; text-align:center; background:var(--accent); color:var(--accent-ink);
+       text-decoration:none; font-weight:650; padding:15px 18px; border-radius:11px; margin-top:18px}
+  .todo{color:var(--warn); font-weight:600}
+  .todo-box{background:var(--warn-bg); color:var(--warn); border-radius:9px; padding:11px 13px; font-size:13.5px; margin:16px 0 0}
+  .note{color:var(--muted); font-size:13.5px; margin:14px 0 0}
+  footer{color:var(--muted); font-size:12.5px; text-align:center; margin-top:26px; line-height:1.7}
+  @media print{ body{background:#fff} .btn,.copy{display:none} .card{border-color:#ccc} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="card">
+    <div class="top">
+      <div class="brand">Amraniads<small>Création et croissance de boutiques en ligne</small></div>
+      <div class="meta"><b>AMR-2026-TMG-001</b>2026-10-10</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h1>Montant dû</h1>
+    <div class="amount">700,00<span>MAD</span></div>
+    <p class="for">Temghid — Casablanca</p>
+    <table><tr><td><div class="l">Configuration SEO — temghid.ma</div><div class="d">Fils d'Ariane, contenus de collections, FAQ structurée, méta-descriptions</div></td><td class="num">400,00</td></tr><tr><td><div class="l">Solde antérieur</div><div class="d">Reliquat des prestations précédentes</div></td><td class="num">300,00</td></tr></table>
+    <div class="tot"><span>Total</span><b>700,00 MAD</b></div>
+  </div>
+
+  <div class="card">
+    <h2>Règlement par virement bancaire</h2>
+    <div class="pay">
+      <div class="kv"><span>Bénéficiaire</span><b><span class="todo">à compléter</span></b></div>
+      <div class="kv"><span>Banque</span><b><span class="todo">à compléter</span></b></div>
+      <div class="kv"><span>RIB</span><b class="rib" id="rib"><span class="todo">à compléter</span></b></div>
+      
+      <button class="copy" id="copy" type="button">Copier le RIB</button>
+    </div>
+    
+    <p class="todo-box">Ajoutez votre numéro WhatsApp dans payment-request.json pour afficher ici un bouton de confirmation.</p>
+    
+  </div>
+
+  <footer>
+    Merci de préciser <b>AMR-2026-TMG-001</b> en motif du virement.<br>
+    Page privée, non indexée — destinée uniquement à Temghid.
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var b = document.getElementById('copy'), r = document.getElementById('rib');
+    if (!b || !r) return;
+    b.addEventListener('click', function () {
+      var digits = (r.textContent || '').replace(/\s+/g, '');
+      if (!digits) return;
+      var done = function () { b.textContent = 'RIB copié'; setTimeout(function () { b.textContent = 'Copier le RIB'; }, 2200); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(digits).then(done, function () { b.textContent = 'Copie impossible'; });
+      } else {
+        // Older mobile browsers: select the text so a long-press copy works.
+        var rng = document.createRange(); rng.selectNodeContents(r);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rng);
+        b.textContent = 'Sélectionné — copiez';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
