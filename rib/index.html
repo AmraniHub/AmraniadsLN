@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coordonnées bancaires — Amraniads</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#15181d; --muted:#5d6672;
+    --line:#e3e7ec; --accent:#0f6b4f; --accent-ink:#ffffff;
+    --warn:#b4541a; --warn-bg:#fdf3ec;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --bg:#0e1116; --card:#161b22; --ink:#e8ecf1; --muted:#9aa5b1;
+      --line:#262d36; --accent:#2ea47c; --accent-ink:#06130e;
+      --warn:#e59b6b; --warn-bg:#2a1d13;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1116; --card:#161b22; --ink:#e8ecf1; --muted:#9aa5b1;
+    --line:#262d36; --accent:#2ea47c; --accent-ink:#06130e;
+    --warn:#e59b6b; --warn-bg:#2a1d13;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px; margin:0 auto; padding:24px 16px 56px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px; margin-bottom:16px}
+  .top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+  .brand{font-weight:700; font-size:19px; letter-spacing:-.01em}
+  .brand small{display:block; font-weight:400; font-size:13px; color:var(--muted); letter-spacing:0}
+  .meta{text-align:right; font-size:13px; color:var(--muted)}
+  .meta b{color:var(--ink); display:block; font-size:14px}
+  h1{font-size:15px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin:0 0 4px; font-weight:600}
+  .amount{font-size:40px; font-weight:700; letter-spacing:-.02em; margin:2px 0}
+  .amount span{font-size:19px; color:var(--muted); font-weight:600; margin-left:4px}
+  .for{color:var(--muted); font-size:14px; margin:0}
+  table{width:100%; border-collapse:collapse; margin-top:6px}
+  td{padding:13px 0; border-bottom:1px solid var(--line); vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  .l{font-weight:600}
+  .d{color:var(--muted); font-size:13.5px; margin-top:3px}
+  .num{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600; padding-left:14px}
+  .tot{display:flex; justify-content:space-between; align-items:baseline; padding-top:15px; margin-top:4px; border-top:2px solid var(--ink)}
+  .tot b{font-size:21px; font-variant-numeric:tabular-nums}
+  h2{font-size:14px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin:0 0 14px; font-weight:600}
+  .kv{display:flex; justify-content:space-between; gap:14px; padding:9px 0; font-size:14.5px}
+  .kv span{color:var(--muted); flex:0 0 auto}
+  .kv b{text-align:right; font-weight:600; word-break:break-word}
+  .acct{border-top:1px solid var(--line); padding:13px 0 4px}
+  .acct-h{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
+  .acct-h span{font-size:12.5px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.06em}
+  .acct-h em{font-style:normal; font-size:12.5px; color:var(--muted)}
+  .acct-v{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px}
+  .rib{font-variant-numeric:tabular-nums; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+       font-size:15.5px; letter-spacing:.02em; word-break:break-all}
+  .copy{appearance:none; border:1px solid var(--line); background:transparent; color:var(--accent);
+        font:inherit; font-size:13px; font-weight:600; padding:6px 13px; border-radius:7px; cursor:pointer; flex:0 0 auto}
+  .copy:hover{border-color:var(--accent)}
+  .copy.ok{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+  .qr{text-align:center; margin-top:20px; padding-top:18px; border-top:1px solid var(--line)}
+  .qr img{width:min(320px,70vw); height:auto; background:#fff; padding:12px; border-radius:12px}
+  .btn{display:block; text-align:center; background:var(--accent); color:var(--accent-ink);
+       text-decoration:none; font-weight:650; padding:15px 18px; border-radius:11px; margin-top:18px}
+  .todo{color:var(--warn); font-weight:600}
+  .todo-box{background:var(--warn-bg); color:var(--warn); border-radius:9px; padding:11px 13px; font-size:13.5px; margin:16px 0 0}
+  .note{color:var(--muted); font-size:13.5px; margin:12px 0 0}
+  footer{color:var(--muted); font-size:12.5px; text-align:center; margin-top:26px; line-height:1.7}
+  @media print{ body{background:#fff} .btn,.copy{display:none} .card{border-color:#ccc} }
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card"><div class="top"><div class="brand">Amraniads<small>Création et croissance de boutiques en ligne</small></div><div class="meta"><b>Coordonnées bancaires</b></div></div></div><div class="card"><h2>Virement bancaire</h2><div class="kv"><span>Bénéficiaire</span><b>MONSIEUR ABDELALI EL AMRANI</b></div><div class="kv"><span>Banque</span><b>CIH BANK</b></div><div class="acct"><div class="acct-h"><span>Numéro de compte</span><em>format court</em></div><div class="acct-v"><b class="rib" data-copy="2385504211008600">2385504211008600</b><button class="copy" type="button" data-for="2385504211008600">Copier</button></div></div><div class="acct"><div class="acct-h"><span>RIB complet</span><em>24 chiffres — virement au Maroc</em></div><div class="acct-v"><b class="rib" data-copy="230720238550421100860015">230 720 2385504211008600 15</b><button class="copy" type="button" data-for="230720238550421100860015">Copier</button></div></div><div class="acct"><div class="acct-h"><span>IBAN</span><em>virement depuis l'étranger</em></div><div class="acct-v"><b class="rib" data-copy="MA64230720238550421100860015">MA64 2307 2023 8550 4211 0086 0015</b><button class="copy" type="button" data-for="MA64230720238550421100860015">Copier</button></div></div><div class="acct"><div class="acct-h"><span>Code SWIFT / BIC</span><em>avec l'IBAN, depuis l'étranger</em></div><div class="acct-v"><b class="rib" data-copy="CIHMMAMC">CIHMMAMC</b><button class="copy" type="button" data-for="CIHMMAMC">Copier</button></div></div><p class="todo-box">QR à ajouter : enregistrez l'image dans billing/ et indiquez son nom dans payment-request.json (bank.qr_file).</p><p class="todo-box">Ajoutez votre numéro WhatsApp dans payment-request.json pour afficher ici un bouton de confirmation.</p></div><footer>Merci d'indiquer votre nom ou votre numéro de facture en motif du virement.<br>Page privée, non indexée.</footer>
+</div>
+<script>
+  /* One handler for every Copier button. The value copied is the button's own
+     data-for, never scraped from the rendered text, so spacing and line breaks
+     in the display can never end up in someone's banking app. */
+  (function () {
+    document.querySelectorAll('button.copy[data-for]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var v = b.getAttribute('data-for') || '';
+        if (!v) return;
+        var ok = function () {
+          var old = b.textContent;
+          b.textContent = 'Copié'; b.classList.add('ok');
+          setTimeout(function () { b.textContent = old; b.classList.remove('ok'); }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(v).then(ok, function () { fallback(); });
+        } else { fallback(); }
+        function fallback() {
+          /* Older mobile browsers, and any page not served over https: select
+             the number so a long-press copy still works. */
+          var el = b.parentNode.querySelector('[data-copy]');
+          if (!el) { b.textContent = 'Copie impossible'; return; }
+          var rng = document.createRange(); rng.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rng);
+          b.textContent = 'Sélectionné — copiez';
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
